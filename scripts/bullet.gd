@@ -34,8 +34,8 @@ func _process(delta):
 
 
 func _on_body_entered(body: Node2D):
-	var health_node: Health = body.get_node("Health")
-	var team_node: Team = body.get_node("Team")
+	var health_node: Health = body.get_node_or_null("Health")
+	var team_node: Team = body.get_node_or_null("Team")
 	if health_node != null:
 		if team_node != null and team_node.team == team:
 			return
