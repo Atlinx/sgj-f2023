@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://booa6u2jw1mxr"]
+
+[ext_resource type="Script" path="res://scripts/death_fx.gd" id="1_67kdg"]
+[ext_resource type="Texture2D" uid="uid://d12dfsl6wteg2" path="res://icon.svg" id="2_efsyv"]
+
+[sub_resource type="Curve" id="Curve_hh5d5"]
+_data = [Vector2(0.533482, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -5.25001, 0.0, 0, 0]
+point_count = 2
+
+[node name="DeathFx" type="Node2D" node_paths=PackedStringArray("fx_nodes")]
+script = ExtResource("1_67kdg")
+fx_nodes = [NodePath("ExplodeParticles")]
+
+[node name="ExplodeParticles" type="CPUParticles2D" parent="."]
+emitting = false
+one_shot = true
+speed_scale = 2.0
+explosiveness = 1.0
+texture = ExtResource("2_efsyv")
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 376.57
+initial_velocity_max = 376.57
+damping_min = 500.0
+damping_max = 500.0
+scale_amount_curve = SubResource("Curve_hh5d5")

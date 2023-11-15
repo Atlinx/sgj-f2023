@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=3 uid="uid://ci276fgn23rcd"]
+
+[ext_resource type="PackedScene" uid="uid://cmfu0ybbkg7tn" path="res://scenes/bullet.tscn" id="1_gbrce"]
+[ext_resource type="PackedScene" uid="uid://d2lulf6teg15y" path="res://scenes/dropped_bullet.tscn" id="2_6ehoh"]
+[ext_resource type="Script" path="res://scripts/player_bullet_dropper.gd" id="3_7uj5k"]
+[ext_resource type="PackedScene" uid="uid://booa6u2jw1mxr" path="res://scenes/death_fx.tscn" id="3_qny05"]
+
+[node name="PlayerBullet" instance=ExtResource("1_gbrce")]
+lifetime = 0.5
+
+[node name="DeathFx" parent="." index="2" instance=ExtResource("3_qny05")]
+
+[node name="PlayerBulletDropper" type="Node2D" parent="." index="3" node_paths=PackedStringArray("bullet", "item")]
+script = ExtResource("3_7uj5k")
+bullet = NodePath("..")
+item = NodePath("DroppedBullet")
+
+[node name="DroppedBullet" parent="PlayerBulletDropper" index="0" instance=ExtResource("2_6ehoh")]
+
+[connection signal="death" from="." to="DeathFx" method="on_death"]

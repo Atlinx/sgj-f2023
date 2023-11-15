@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://d2lulf6teg15y"]
+
+[ext_resource type="Script" path="res://scripts/dropped_item.gd" id="1_7uop2"]
+[ext_resource type="Texture2D" uid="uid://d12dfsl6wteg2" path="res://icon.svg" id="1_mo35q"]
+[ext_resource type="PackedScene" uid="uid://booa6u2jw1mxr" path="res://scenes/death_fx.tscn" id="3_rqfup"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_j6s7h"]
+radius = 29.1548
+
+[node name="DroppedBullet" type="Area2D" node_paths=PackedStringArray("collision_shape") groups=["dropped_item"]]
+script = ExtResource("1_7uop2")
+collision_shape = NodePath("CollisionShape2D")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0.305882, 0.619608, 0.184314, 1)
+scale = Vector2(0.445829, 0.445829)
+texture = ExtResource("1_mo35q")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_j6s7h")
+
+[node name="Bullet" type="Node" parent="."]
+
+[node name="DeathFx" parent="." instance=ExtResource("3_rqfup")]
+
+[connection signal="collected" from="." to="DeathFx" method="on_death"]

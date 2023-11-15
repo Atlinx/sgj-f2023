@@ -1,0 +1,38 @@
+[gd_scene load_steps=6 format=3 uid="uid://cf363is1q737y"]
+
+[ext_resource type="Texture2D" uid="uid://d12dfsl6wteg2" path="res://icon.svg" id="1_2o7kd"]
+[ext_resource type="PackedScene" uid="uid://ci8yj0nmd1i13" path="res://scenes/player.tscn" id="1_l1gen"]
+[ext_resource type="PackedScene" uid="uid://cdpn5s43qjbwg" path="res://scenes/enemy.tscn" id="3_ojb2m"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_sq3jj"]
+texture = ExtResource("1_2o7kd")
+texture_region_size = Vector2i(128, 128)
+use_texture_padding = false
+0:0/0 = 0
+0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/0/physics_layer_0/angular_velocity = 0.0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)
+
+[sub_resource type="TileSet" id="TileSet_d150o"]
+tile_size = Vector2i(128, 128)
+physics_layer_0/collision_layer = 1
+sources/0 = SubResource("TileSetAtlasSource_sq3jj")
+
+[node name="Main" type="Node"]
+
+[node name="World" type="Node2D" parent="."]
+
+[node name="Player" parent="World" instance=ExtResource("1_l1gen")]
+
+[node name="Background" type="Sprite2D" parent="World"]
+self_modulate = Color(0.596078, 0.596078, 0.596078, 1)
+position = Vector2(187, 81)
+texture = ExtResource("1_2o7kd")
+
+[node name="Enemy" parent="World" instance=ExtResource("3_ojb2m")]
+position = Vector2(-229, 118)
+
+[node name="Level" type="TileMap" parent="World" groups=["wall"]]
+tile_set = SubResource("TileSet_d150o")
+format = 2
+layer_0/tile_data = PackedInt32Array(-131068, 0, 0, -65532, 0, 0, 4, 0, 0, 65540, 0, 0, 131076, 0, 0, 196612, 0, 0, 262147, 0, 0, 262146, 0, 0, 327682, 0, 0, 327681, 0, 0, 327680, 0, 0, 393215, 0, 0, 393214, 0, 0, 393213, 0, 0, 393212, 0, 0, 393211, 0, 0, 393210, 0, 0, 327674, 0, 0, 327673, 0, 0, 262136, 0, 0, 262135, 0, 0, 196599, 0, 0, 131063, 0, 0, 131062, 0, 0, 65526, 0, 0, -10, 0, 0, -65546, 0, 0, -65545, 0, 0, -131081, 0, 0, -196617, 0, 0, -196616, 0, 0, -262152, 0, 0, -262151, 0, 0, -327687, 0, 0, -327686, 0, 0, -327685, 0, 0, -393221, 0, 0, -393220, 0, 0, -393219, 0, 0, -458754, 0, 0, -458753, 0, 0, -524288, 0, 0, -458751, 0, 0, -458750, 0, 0, -458749, 0, 0, -393212, 0, 0, -327676, 0, 0, -327675, 0, 0, -262139, 0, 0, -196603, 0, 0, -196604, 0, 0)

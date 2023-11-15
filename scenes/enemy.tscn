@@ -1,0 +1,42 @@
+[gd_scene load_steps=7 format=3 uid="uid://cdpn5s43qjbwg"]
+
+[ext_resource type="Texture2D" uid="uid://d12dfsl6wteg2" path="res://icon.svg" id="1_v1ikc"]
+[ext_resource type="Script" path="res://scripts/health.gd" id="2_jg8ob"]
+[ext_resource type="Script" path="res://scripts/team.gd" id="3_uwcyq"]
+[ext_resource type="PackedScene" uid="uid://booa6u2jw1mxr" path="res://scenes/death_fx.tscn" id="4_r37rl"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7ygxj"]
+radius = 63.0317
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_h8j63"]
+radius = 643.896
+
+[node name="Enemy" type="CharacterBody2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(1, 0.0901961, 0.0901961, 1)
+texture = ExtResource("1_v1ikc")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_7ygxj")
+
+[node name="Health" type="Node" parent="."]
+script = ExtResource("2_jg8ob")
+
+[node name="Team" type="Node" parent="."]
+script = ExtResource("3_uwcyq")
+team = 1
+
+[node name="AI" type="Node" parent="."]
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="AI"]
+
+[node name="DetectionArea2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea2D"]
+shape = SubResource("CircleShape2D_h8j63")
+debug_color = Color(0.701961, 0, 0, 0.419608)
+
+[node name="DeathFx" parent="." instance=ExtResource("4_r37rl")]
+
+[connection signal="death" from="Health" to="DeathFx" method="on_death"]
