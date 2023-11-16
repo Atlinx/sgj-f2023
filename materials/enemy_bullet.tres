@@ -3,5 +3,6 @@
 [ext_resource type="Shader" path="res://materials/shaders/bullet.gdshader" id="1_hulu1"]
 
 [resource]
+resource_local_to_scene = true
 shader = ExtResource("1_hulu1")
-shader_parameter/bullet_color = Color(0, 0.741176, 0.129412, 1)
+shader_parameter/bullet_color = Color(1, 0, 0, 1)

@@ -1,4 +1,4 @@
-extends Area2D
+extends CharacterBody2D
 class_name Bullet
 
 
@@ -16,24 +16,25 @@ var _direction: Vector2
 var _life_timer: float = 0
 
 
-func _ready():
-	body_entered.connect(_on_body_entered)
-
-
 func construct(_bullet_owner: Node, initial_position: Vector2, direction: Vector2):
 	bullet_owner = _bullet_owner
+	add_collision_exception_with(_bullet_owner)
 	global_position = initial_position
 	_direction = direction
 
 
-func _process(delta):
-	position += _direction * speed * delta
+func _physics_process(delta):
+	var collision: KinematicCollision2D = move_and_collide(_direction * speed * delta)
+	if collision != null:
+		_on_collision(collision)
+	
 	_life_timer += delta
 	if _life_timer > lifetime:
 		_on_death(false)
 
 
-func _on_body_entered(body: Node2D):
+func _on_collision(collision: KinematicCollision2D):
+	var body = collision.get_collider()
 	if body.is_in_group("hitbox"):
 		body = body.get_parent()
 	var health_node: Health = body.get_node_or_null("Health")
@@ -42,9 +43,10 @@ func _on_body_entered(body: Node2D):
 		if team_node != null and team_node.team == team:
 			return
 		health_node.damage(damage)
+		global_position = collision.get_position()
 		_on_death(true)
-		return
 	elif body.is_in_group("wall"):
+		global_position = collision.get_position()
 		_on_death(false)
 
 

@@ -1,18 +1,22 @@
-[gd_scene load_steps=4 format=3 uid="uid://cmfu0ybbkg7tn"]
+[gd_scene load_steps=5 format=3 uid="uid://cmfu0ybbkg7tn"]
 
 [ext_resource type="Script" path="res://scripts/bullet.gd" id="1_d106i"]
-[ext_resource type="Texture2D" uid="uid://d12dfsl6wteg2" path="res://icon.svg" id="2_xiq2m"]
+[ext_resource type="Material" uid="uid://y0wbs6mn8hsb" path="res://materials/enemy_bullet.tres" id="2_ew4f6"]
+[ext_resource type="Texture2D" uid="uid://c05kv56i0tvmq" path="res://sprites/bullet.png" id="2_mdj1s"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_iygpb"]
-radius = 32.0
+radius = 6.0
 
-[node name="Bullet" type="Area2D"]
+[node name="Bullet" type="CharacterBody2D"]
+collision_mask = 17
+motion_mode = 1
 script = ExtResource("1_d106i")
+speed = 512.0
+lifetime = 0.5
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-modulate = Color(0.278431, 1, 0, 1)
-scale = Vector2(0.445829, 0.445829)
-texture = ExtResource("2_xiq2m")
+material = ExtResource("2_ew4f6")
+texture = ExtResource("2_mdj1s")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_iygpb")

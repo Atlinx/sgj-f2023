@@ -1,0 +1,8 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://duq16u675oqot"]
+
+[ext_resource type="Shader" path="res://materials/shaders/bullet.gdshader" id="1_gbkwd"]
+
+[resource]
+resource_local_to_scene = true
+shader = ExtResource("1_gbkwd")
+shader_parameter/bullet_color = Color(0.0784314, 1, 0, 1)
