@@ -34,6 +34,8 @@ func _process(delta):
 
 
 func _on_body_entered(body: Node2D):
+	if body.is_in_group("hitbox"):
+		body = body.get_parent()
 	var health_node: Health = body.get_node_or_null("Health")
 	var team_node: Team = body.get_node_or_null("Team")
 	if health_node != null:

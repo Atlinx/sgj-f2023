@@ -1,24 +1,25 @@
-[gd_scene load_steps=7 format=3 uid="uid://cdpn5s43qjbwg"]
+[gd_scene load_steps=8 format=3 uid="uid://cdpn5s43qjbwg"]
 
-[ext_resource type="Texture2D" uid="uid://d12dfsl6wteg2" path="res://icon.svg" id="1_v1ikc"]
+[ext_resource type="Texture2D" uid="uid://g1bx6y7c5y75" path="res://sprites/slime.png" id="1_hx314"]
 [ext_resource type="Script" path="res://scripts/health.gd" id="2_jg8ob"]
 [ext_resource type="Script" path="res://scripts/team.gd" id="3_uwcyq"]
 [ext_resource type="PackedScene" uid="uid://booa6u2jw1mxr" path="res://scenes/death_fx.tscn" id="4_r37rl"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_7ygxj"]
-radius = 63.0317
-
 [sub_resource type="CircleShape2D" id="CircleShape2D_h8j63"]
-radius = 643.896
+radius = 81.0247
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_78gqk"]
+radius = 4.0
+height = 10.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_n4oyw"]
+radius = 8.0
 
 [node name="Enemy" type="CharacterBody2D"]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 modulate = Color(1, 0.0901961, 0.0901961, 1)
-texture = ExtResource("1_v1ikc")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_7ygxj")
+texture = ExtResource("1_hx314")
 
 [node name="Health" type="Node" parent="."]
 script = ExtResource("2_jg8ob")
@@ -38,5 +39,15 @@ shape = SubResource("CircleShape2D_h8j63")
 debug_color = Color(0.701961, 0, 0, 0.419608)
 
 [node name="DeathFx" parent="." instance=ExtResource("4_r37rl")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 4)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_78gqk")
+
+[node name="Hitbox" type="Area2D" parent="." groups=["hitbox"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("CircleShape2D_n4oyw")
 
 [connection signal="death" from="Health" to="DeathFx" method="on_death"]
