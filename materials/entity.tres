@@ -1,0 +1,8 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://b3lay02jy3il3"]
+
+[ext_resource type="Shader" path="res://materials/shaders/entity.gdshader" id="1_wafmi"]
+
+[resource]
+shader = ExtResource("1_wafmi")
+shader_parameter/flash_amount = null
+shader_parameter/flash_color = Vector4(1, 1, 1, 1)
