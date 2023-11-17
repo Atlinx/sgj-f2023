@@ -60,6 +60,10 @@ p1_fire={
 2d_physics/layer_4="lava"
 2d_physics/layer_5="wall"
 
+[navigation]
+
+2d/default_cell_size=16
+
 [physics]
 
 3d/default_gravity=0.0
