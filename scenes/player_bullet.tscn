@@ -22,4 +22,7 @@ item = NodePath("DroppedBullet")
 
 [node name="DroppedBullet" parent="PlayerBulletDropper" index="0" instance=ExtResource("2_6ehoh")]
 
+[node name="Glow" parent="." index="4"]
+self_modulate = Color(0.0784314, 1, 0, 1)
+
 [connection signal="death" from="." to="DeathFx" method="on_death"]

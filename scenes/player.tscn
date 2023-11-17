@@ -1,12 +1,22 @@
-[gd_scene load_steps=11 format=3 uid="uid://ci8yj0nmd1i13"]
+[gd_scene load_steps=18 format=3 uid="uid://ci8yj0nmd1i13"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_co7fm"]
+[ext_resource type="Shader" path="res://materials/shaders/entity.gdshader" id="1_rgjpx"]
 [ext_resource type="PackedScene" uid="uid://ci276fgn23rcd" path="res://scenes/player_bullet.tscn" id="2_age5k"]
 [ext_resource type="Texture2D" uid="uid://cee6d7cbam6pj" path="res://sprites/player.png" id="3_78r3x"]
 [ext_resource type="Script" path="res://scripts/health.gd" id="3_f1j7r"]
+[ext_resource type="Script" path="res://scenes/player_camera.gd" id="4_bfbgh"]
 [ext_resource type="Script" path="res://scripts/team.gd" id="4_s4p3p"]
 [ext_resource type="PackedScene" uid="uid://booa6u2jw1mxr" path="res://scenes/death_fx.tscn" id="6_0krtd"]
 [ext_resource type="Script" path="res://scripts/item_collector.gd" id="7_6gi8v"]
+[ext_resource type="Texture2D" uid="uid://chb2gw0u5bwmx" path="res://sprites/shadow.png" id="8_ab6rs"]
+[ext_resource type="Script" path="res://scripts/hitbox.gd" id="8_hbfkr"]
+[ext_resource type="Script" path="res://scenes/hit_fx.gd" id="12_tdb30"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jki3l"]
+shader = ExtResource("1_rgjpx")
+shader_parameter/flash_amount = 0.0
+shader_parameter/flash_color = Color(1, 1, 1, 1)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0rqyo"]
 radius = 2.0
@@ -18,13 +28,19 @@ radius = 16.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_u7yjf"]
 radius = 8.0
 
+[sub_resource type="Curve" id="Curve_k2jw1"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -2.40338, 0.0, 0, 0]
+point_count = 2
+
 [node name="Player" type="CharacterBody2D"]
-collision_mask = 17
+collision_layer = 32
+collision_mask = 16
 script = ExtResource("1_co7fm")
 bullet_prefab = ExtResource("2_age5k")
 speed = 128.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_jki3l")
 position = Vector2(0, -5)
 texture = ExtResource("3_78r3x")
 region_rect = Rect2(208, 0, 16, 16)
@@ -33,11 +49,16 @@ region_rect = Rect2(208, 0, 16, 16)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_0rqyo")
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("player")]
 zoom = Vector2(2, 2)
+position_smoothing_enabled = true
+script = ExtResource("4_bfbgh")
+player = NodePath("..")
 
 [node name="Health" type="Node" parent="."]
 script = ExtResource("3_f1j7r")
+health = 10
+max_health = 10
 
 [node name="Team" type="Node" parent="."]
 script = ExtResource("4_s4p3p")
@@ -57,9 +78,24 @@ debug_color = Color(0.121569, 0.701961, 0, 0.419608)
 
 [node name="Hitbox" type="Area2D" parent="." groups=["hitbox"]]
 position = Vector2(0, -5)
+script = ExtResource("8_hbfkr")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 shape = SubResource("CircleShape2D_u7yjf")
 
-[connection signal="death" from="Health" to="DeathFx" method="_on_health_death"]
+[node name="Shadow" type="Sprite2D" parent="."]
+self_modulate = Color(0, 0, 0, 0.494118)
+z_index = -3
+z_as_relative = false
+position = Vector2(0, 3)
+scale = Vector2(0.6, 0.666667)
+texture = ExtResource("8_ab6rs")
+
+[node name="HitFx" type="Node" parent="." node_paths=PackedStringArray("health", "sprites")]
+script = ExtResource("12_tdb30")
+health = NodePath("../Health")
+sprites = [NodePath("../Sprite2D")]
+flash_curve = SubResource("Curve_k2jw1")
+flash_duration = 0.5
+
 [connection signal="death" from="Health" to="DeathFx" method="on_death"]

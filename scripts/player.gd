@@ -8,7 +8,7 @@ class_name Player
 
 
 func _process(delta):
-	if has_shot and Input.is_action_pressed("p1_fire"):
+	if has_shot and Input.is_action_just_pressed("p1_fire"):
 		var bullet_inst: Bullet = bullet_prefab.instantiate()
 		get_parent().add_child(bullet_inst)
 		var direction = (get_global_mouse_position() - global_position).normalized()

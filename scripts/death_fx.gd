@@ -5,13 +5,16 @@ extends Node2D
 @export var lifetime: float = 5
 
 var _timer: float = 0
-
+var _dying: bool = false
 
 func _ready():
 	set_process(false)
 
 
 func on_death():
+	if _dying:
+		return
+	_dying = true
 	reparent(get_parent().get_parent())
 	set_process(true)
 	for fx_node in fx_nodes:

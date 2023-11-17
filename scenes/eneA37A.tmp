@@ -9,9 +9,8 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_h8j63"]
 radius = 81.0247
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_78gqk"]
-radius = 4.0
-height = 10.0
+[sub_resource type="CircleShape2D" id="CircleShape2D_0vhpe"]
+radius = 3.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_n4oyw"]
 radius = 8.0
@@ -39,8 +38,7 @@ debug_color = Color(0.701961, 0, 0, 0.419608)
 [node name="DeathFx" parent="." instance=ExtResource("4_r37rl")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-rotation = 1.5708
-shape = SubResource("CapsuleShape2D_78gqk")
+shape = SubResource("CircleShape2D_0vhpe")
 
 [node name="Hitbox" type="Area2D" parent="." groups=["hitbox"]]
 position = Vector2(0, -4)
@@ -50,7 +48,6 @@ collision_layer = 2
 shape = SubResource("CircleShape2D_n4oyw")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
-path_postprocessing = 1
 debug_enabled = true
 
 [node name="AIMovement" type="Node" parent="." node_paths=PackedStringArray("entity_body", "detection_area", "navigation_agent")]

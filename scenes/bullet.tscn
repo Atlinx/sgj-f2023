@@ -1,14 +1,15 @@
-[gd_scene load_steps=5 format=3 uid="uid://cmfu0ybbkg7tn"]
+[gd_scene load_steps=6 format=3 uid="uid://cmfu0ybbkg7tn"]
 
 [ext_resource type="Script" path="res://scripts/bullet.gd" id="1_d106i"]
 [ext_resource type="Material" uid="uid://y0wbs6mn8hsb" path="res://materials/enemy_bullet.tres" id="2_ew4f6"]
 [ext_resource type="Texture2D" uid="uid://c05kv56i0tvmq" path="res://sprites/bullet.png" id="2_mdj1s"]
+[ext_resource type="Texture2D" uid="uid://ddkd5dp5f6mrs" path="res://sprites/glow.png" id="4_171u2"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_iygpb"]
 radius = 6.0
 
 [node name="Bullet" type="CharacterBody2D"]
-collision_mask = 17
+collision_mask = 18
 motion_mode = 1
 script = ExtResource("1_d106i")
 speed = 512.0
@@ -20,3 +21,9 @@ texture = ExtResource("2_mdj1s")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_iygpb")
+
+[node name="Glow" type="Sprite2D" parent="."]
+self_modulate = Color(0.894118, 0.231373, 0.266667, 1)
+z_index = -2
+scale = Vector2(0.05, 0.05)
+texture = ExtResource("4_171u2")

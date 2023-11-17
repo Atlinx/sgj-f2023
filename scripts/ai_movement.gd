@@ -29,11 +29,12 @@ func _process(delta):
 	if _player != null:
 		_update_position_timer += delta
 		if _update_position_timer > update_position_interval:
-			navigation_agent.target_position = _player.position
+			navigation_agent.target_position = _player.global_position
 			_update_position_timer -= update_position_interval
 
 
 func _physics_process(delta):
-	var dir = entity_body.to_local(navigation_agent.get_next_path_position()).normalized()
-	entity_body.velocity = dir * speed
-	entity_body.move_and_slide()
+	if not navigation_agent.is_navigation_finished():
+		var dir = entity_body.to_local(navigation_agent.get_next_path_position()).normalized()
+		entity_body.velocity = dir * speed
+		entity_body.move_and_slide()

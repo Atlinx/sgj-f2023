@@ -10,15 +10,18 @@ signal death()
 @export var team: Team.TeamType
 
 var damaged_entity: bool = false
-var bullet_owner: Node
+var entity_owner: Node
 
 var _direction: Vector2
 var _life_timer: float = 0
 
 
-func construct(_bullet_owner: Node, initial_position: Vector2, direction: Vector2):
-	bullet_owner = _bullet_owner
-	add_collision_exception_with(_bullet_owner)
+func construct(_entity_owner: Node, initial_position: Vector2, direction: Vector2):
+	entity_owner = _entity_owner
+	var owner_team_node = entity_owner.get_node_or_null("Team")
+	if owner_team_node != null:
+		team = owner_team_node.team
+	add_collision_exception_with(_entity_owner)
 	global_position = initial_position
 	_direction = direction
 
@@ -36,18 +39,22 @@ func _physics_process(delta):
 func _on_collision(collision: KinematicCollision2D):
 	var body = collision.get_collider()
 	if body.is_in_group("hitbox"):
-		body = body.get_parent()
+		_on_hitbox_hit(body.get_parent())
+	elif body.is_in_group("wall"):
+		global_position = collision.get_position()
+		_on_death(false)
+
+
+func _on_hitbox_hit(body: Node2D):
 	var health_node: Health = body.get_node_or_null("Health")
 	var team_node: Team = body.get_node_or_null("Team")
 	if health_node != null:
 		if team_node != null and team_node.team == team:
 			return
 		health_node.damage(damage)
-		global_position = collision.get_position()
 		_on_death(true)
-	elif body.is_in_group("wall"):
-		global_position = collision.get_position()
-		_on_death(false)
+	else:
+		printerr("Expected health to exist on entity with hitbox")
 
 
 func _on_death(_damaged_entity: bool):
