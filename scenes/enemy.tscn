@@ -50,7 +50,6 @@ collision_layer = 2
 shape = SubResource("CircleShape2D_n4oyw")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
-path_postprocessing = 1
 debug_enabled = true
 
 [node name="AIMovement" type="Node" parent="." node_paths=PackedStringArray("entity_body", "detection_area", "navigation_agent")]
