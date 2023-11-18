@@ -1,14 +1,14 @@
 [gd_scene load_steps=22 format=3 uid="uid://rc0ykgromevk"]
 
-[ext_resource type="Script" path="res://scenes/player_2.gd" id="1_xasu4"]
-[ext_resource type="PackedScene" uid="uid://ci276fgn23rcd" path="res://scenes/player_bullet.tscn" id="2_2id8a"]
+[ext_resource type="Script" path="res://scripts/player_2.gd" id="1_nw5xn"]
+[ext_resource type="PackedScene" uid="uid://cdn5gldmb67qi" path="res://scenes/player_bullet_2.tscn" id="2_3ybyl"]
 [ext_resource type="Shader" path="res://materials/shaders/entity.gdshader" id="3_ylmmo"]
 [ext_resource type="Texture2D" uid="uid://cee6d7cbam6pj" path="res://sprites/player.png" id="4_slgnu"]
-[ext_resource type="Script" path="res://scenes/player_2_camera2D.gd" id="4_u43gf"]
+[ext_resource type="Script" path="res://scripts/player_2_camera2D.gd" id="5_a55g1"]
 [ext_resource type="Script" path="res://scripts/health.gd" id="6_qpkvb"]
 [ext_resource type="Script" path="res://scripts/team.gd" id="7_46ial"]
+[ext_resource type="Script" path="res://scenes/player2_item_collector.gd" id="8_57n8k"]
 [ext_resource type="PackedScene" uid="uid://booa6u2jw1mxr" path="res://scenes/death_fx.tscn" id="8_b7xq2"]
-[ext_resource type="Script" path="res://scripts/item_collector.gd" id="9_7oqy6"]
 [ext_resource type="Script" path="res://scripts/hitbox.gd" id="10_dc07e"]
 [ext_resource type="Texture2D" uid="uid://chb2gw0u5bwmx" path="res://sprites/shadow.png" id="11_krxay"]
 [ext_resource type="Script" path="res://scripts/hit_fx.gd" id="12_qbu56"]
@@ -39,13 +39,14 @@ point_count = 2
 [node name="Player2" type="CharacterBody2D" node_paths=PackedStringArray("fire_sound", "player_animation_tree")]
 collision_layer = 32
 collision_mask = 16
-script = ExtResource("1_xasu4")
+script = ExtResource("1_nw5xn")
 fire_sound = NodePath("FireSound")
-bullet_prefab = ExtResource("2_2id8a")
+bullet_prefab = ExtResource("2_3ybyl")
+speed = 128.0
 player_animation_tree = NodePath("AnimationTree")
 
 [node name="Visuals" type="Node2D" parent="."]
-position = Vector2(0, -0.0526421)
+position = Vector2(0, -0.00127496)
 
 [node name="Sprite2D" type="Sprite2D" parent="Visuals"]
 material = SubResource("ShaderMaterial_jki3l")
@@ -60,13 +61,13 @@ shape = SubResource("CapsuleShape2D_0rqyo")
 [node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("player")]
 zoom = Vector2(2, 2)
 position_smoothing_enabled = true
-script = ExtResource("4_u43gf")
+script = ExtResource("5_a55g1")
 player = NodePath("..")
 
 [node name="Health" type="Node" parent="."]
 script = ExtResource("6_qpkvb")
 health = 10000
-max_health = 5
+max_health = 10000
 
 [node name="Team" type="Node" parent="."]
 script = ExtResource("7_46ial")
@@ -75,7 +76,7 @@ script = ExtResource("7_46ial")
 fx_nodes = [null]
 
 [node name="ItemCollector" type="Node2D" parent="." node_paths=PackedStringArray("player", "collector_area")]
-script = ExtResource("9_7oqy6")
+script = ExtResource("8_57n8k")
 player = NodePath("..")
 collector_area = NodePath("Area2D")
 

@@ -1,6 +1,5 @@
-[gd_scene load_steps=5 format=3 uid="uid://bcnh7qo1bytbp"]
+[gd_scene load_steps=4 format=3 uid="uid://bcnh7qo1bytbp"]
 
-[ext_resource type="PackedScene" uid="uid://cmfu0ybbkg7tn" path="res://scenes/bullet.tscn" id="1_80urs"]
 [ext_resource type="Shader" path="res://materials/shaders/bullet.gdshader" id="2_f736a"]
 [ext_resource type="PackedScene" uid="uid://booa6u2jw1mxr" path="res://scenes/death_fx.tscn" id="3_u0fan"]
 
@@ -9,7 +8,7 @@ resource_local_to_scene = true
 shader = ExtResource("2_f736a")
 shader_parameter/bullet_color = Color(1, 0, 0, 1)
 
-[node name="EnemyBullet" instance=ExtResource("1_80urs")]
+[node name="EnemyBullet"]
 speed = 128.0
 team = 1
 
