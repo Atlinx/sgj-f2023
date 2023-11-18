@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://cdpn5s43qjbwg"]
+[gd_scene load_steps=17 format=3 uid="uid://cdpn5s43qjbwg"]
 
 [ext_resource type="Texture2D" uid="uid://g1bx6y7c5y75" path="res://sprites/slime.png" id="1_hx314"]
 [ext_resource type="Script" path="res://scripts/health.gd" id="2_jg8ob"]
@@ -9,6 +9,9 @@
 [ext_resource type="Texture2D" uid="uid://chb2gw0u5bwmx" path="res://sprites/shadow.png" id="6_dd0s1"]
 [ext_resource type="Texture2D" uid="uid://ddkd5dp5f6mrs" path="res://sprites/glow.png" id="7_5qlwr"]
 [ext_resource type="Script" path="res://scripts/damage_box.gd" id="8_rc48p"]
+[ext_resource type="AnimationLibrary" uid="uid://c37cmbh7l1rgo" path="res://animations/entity_anim_lib.tres" id="10_u3v1d"]
+[ext_resource type="AnimationNodeStateMachine" uid="uid://q81ouwttk58h" path="res://animations/entity_anim_tree.tres" id="10_yfn4j"]
+[ext_resource type="Script" path="res://scripts/entity_animation_tree.gd" id="11_ysmxa"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_h8j63"]
 radius = 81.0247
@@ -22,10 +25,13 @@ radius = 8.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_08h8o"]
 radius = 8.0
 
-[node name="Enemy" type="CharacterBody2D"]
+[node name="Slime" type="CharacterBody2D"]
 collision_mask = 17
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Visuals" type="Node2D" parent="."]
+position = Vector2(0, -0.0456252)
+
+[node name="Sprite2D" type="Sprite2D" parent="Visuals"]
 position = Vector2(0, -4)
 texture = ExtResource("1_hx314")
 
@@ -60,11 +66,12 @@ shape = SubResource("CircleShape2D_n4oyw")
 path_desired_distance = 2.0
 target_desired_distance = 2.0
 
-[node name="AIMovement" type="Node" parent="." node_paths=PackedStringArray("entity_body", "detection_area", "navigation_agent")]
+[node name="AIMovement" type="Node" parent="." node_paths=PackedStringArray("entity_body", "detection_area", "navigation_agent", "animation_tree")]
 script = ExtResource("5_mdci3")
 entity_body = NodePath("..")
 detection_area = NodePath("../DetectionArea2D")
 navigation_agent = NodePath("../NavigationAgent2D")
+animation_tree = NodePath("../AnimationTree")
 
 [node name="Shadow" type="Sprite2D" parent="."]
 self_modulate = Color(0, 0, 0, 0.494118)
@@ -90,5 +97,16 @@ damage_interval = 0.2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DamageBox"]
 shape = SubResource("CircleShape2D_08h8o")
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = ExtResource("10_yfn4j")
+anim_player = NodePath("../AnimationPlayer")
+active = true
+script = ExtResource("11_ysmxa")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"entity_anim_lib": ExtResource("10_u3v1d")
+}
 
 [connection signal="death" from="Health" to="DeathFx" method="on_death"]

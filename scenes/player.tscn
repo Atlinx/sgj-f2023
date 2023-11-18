@@ -1,20 +1,20 @@
-[gd_scene load_steps=29 format=3 uid="uid://ci8yj0nmd1i13"]
+[gd_scene load_steps=21 format=3 uid="uid://ci8yj0nmd1i13"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_co7fm"]
 [ext_resource type="Shader" path="res://materials/shaders/entity.gdshader" id="1_rgjpx"]
 [ext_resource type="PackedScene" uid="uid://ci276fgn23rcd" path="res://scenes/player_bullet.tscn" id="2_age5k"]
 [ext_resource type="Texture2D" uid="uid://cee6d7cbam6pj" path="res://sprites/player.png" id="3_78r3x"]
 [ext_resource type="Script" path="res://scripts/health.gd" id="3_f1j7r"]
-[ext_resource type="Script" path="res://scenes/player_camera.gd" id="4_bfbgh"]
 [ext_resource type="Script" path="res://scripts/team.gd" id="4_s4p3p"]
+[ext_resource type="Script" path="res://scripts/player_camera.gd" id="5_2hbsy"]
 [ext_resource type="PackedScene" uid="uid://booa6u2jw1mxr" path="res://scenes/death_fx.tscn" id="6_0krtd"]
 [ext_resource type="Script" path="res://scripts/item_collector.gd" id="7_6gi8v"]
 [ext_resource type="Texture2D" uid="uid://chb2gw0u5bwmx" path="res://sprites/shadow.png" id="8_ab6rs"]
 [ext_resource type="Script" path="res://scripts/hitbox.gd" id="8_hbfkr"]
-[ext_resource type="Script" path="res://scenes/hit_fx.gd" id="12_tdb30"]
-[ext_resource type="Animation" uid="uid://bj4bunsn2flk6" path="res://animations/walk.res" id="13_mfkpd"]
-[ext_resource type="Animation" uid="uid://cy1g15u1r6pqp" path="res://animations/idle.res" id="14_yfqmp"]
-[ext_resource type="Script" path="res://scenes/player_animation_tree.gd" id="15_s1jjo"]
+[ext_resource type="Script" path="res://scripts/hit_fx.gd" id="12_k3mkd"]
+[ext_resource type="AnimationLibrary" uid="uid://c37cmbh7l1rgo" path="res://animations/entity_anim_lib.tres" id="13_1lex4"]
+[ext_resource type="AnimationNodeStateMachine" uid="uid://q81ouwttk58h" path="res://animations/entity_anim_tree.tres" id="14_5pjci"]
+[ext_resource type="Script" path="res://scripts/entity_animation_tree.gd" id="14_148l1"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jki3l"]
 shader = ExtResource("1_rgjpx")
@@ -35,63 +35,6 @@ radius = 8.0
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -2.40338, 0.0, 0, 0]
 point_count = 2
 
-[sub_resource type="Animation" id="Animation_gxq8c"]
-length = 0.001
-tracks/0/type = "bezier"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
-}
-tracks/1/type = "bezier"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:position:y")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(-4, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_e81wu"]
-_data = {
-"RESET": SubResource("Animation_gxq8c"),
-"idle": ExtResource("14_yfqmp"),
-"walk": ExtResource("13_mfkpd")
-}
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_prf0l"]
-animation = &"idle"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_uq5qo"]
-animation = &"walk"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_c7g43"]
-advance_mode = 2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ijpv1"]
-advance_mode = 2
-advance_expression = "walking"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_6q5kl"]
-advance_mode = 2
-advance_expression = "not walking"
-
-[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_nqk6j"]
-states/Start/position = Vector2(203.5, 90.5)
-states/idle/node = SubResource("AnimationNodeAnimation_prf0l")
-states/idle/position = Vector2(501.25, 146)
-states/walk/node = SubResource("AnimationNodeAnimation_uq5qo")
-states/walk/position = Vector2(506.5, 51)
-transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_c7g43"), "idle", "walk", SubResource("AnimationNodeStateMachineTransition_ijpv1"), "walk", "idle", SubResource("AnimationNodeStateMachineTransition_6q5kl")]
-
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("player_animation_tree")]
 collision_layer = 32
 collision_mask = 16
@@ -100,9 +43,12 @@ bullet_prefab = ExtResource("2_age5k")
 speed = 128.0
 player_animation_tree = NodePath("AnimationTree")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Visuals" type="Node2D" parent="."]
+position = Vector2(0, -0.00444982)
+
+[node name="Sprite2D" type="Sprite2D" parent="Visuals"]
 material = SubResource("ShaderMaterial_jki3l")
-position = Vector2(0, -4.00548)
+position = Vector2(0, -4)
 texture = ExtResource("3_78r3x")
 region_rect = Rect2(208, 0, 16, 16)
 
@@ -113,7 +59,7 @@ shape = SubResource("CapsuleShape2D_0rqyo")
 [node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("player")]
 zoom = Vector2(2, 2)
 position_smoothing_enabled = true
-script = ExtResource("4_bfbgh")
+script = ExtResource("5_2hbsy")
 player = NodePath("..")
 
 [node name="Health" type="Node" parent="."]
@@ -153,21 +99,21 @@ scale = Vector2(0.6, 0.666667)
 texture = ExtResource("8_ab6rs")
 
 [node name="HitFx" type="Node" parent="." node_paths=PackedStringArray("health", "sprites")]
-script = ExtResource("12_tdb30")
+script = ExtResource("12_k3mkd")
 health = NodePath("../Health")
-sprites = [NodePath("../Sprite2D")]
+sprites = [NodePath("../Visuals/Sprite2D")]
 flash_curve = SubResource("Curve_k2jw1")
 flash_duration = 0.5
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_e81wu")
+"entity_anim_lib": ExtResource("13_1lex4")
 }
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
-tree_root = SubResource("AnimationNodeStateMachine_nqk6j")
+tree_root = ExtResource("14_5pjci")
 anim_player = NodePath("../AnimationPlayer")
 active = true
-script = ExtResource("15_s1jjo")
+script = ExtResource("14_148l1")
 
 [connection signal="death" from="Health" to="DeathFx" method="on_death"]

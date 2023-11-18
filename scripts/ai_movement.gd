@@ -5,6 +5,7 @@ extends Node
 @export var navigation_agent: NavigationAgent2D
 @export var speed: float = 64
 @export var update_position_interval: float = 1
+@export var animation_tree: AnimationTree
 
 var _update_position_timer: float = 0
 var _player: Node2D
@@ -34,6 +35,8 @@ func _process(delta):
 
 
 func _physics_process(delta):
+	print("animation_tree.walking: %s" % animation_tree.walking)
+	animation_tree.walking = not navigation_agent.is_navigation_finished()
 	if not navigation_agent.is_navigation_finished():
 		var dir = entity_body.to_local(navigation_agent.get_next_path_position()).normalized()
 		entity_body.velocity = dir * speed
