@@ -7,6 +7,7 @@ extends Node2D
 var _timer: float = 0
 var _dying: bool = false
 
+
 func _ready():
 	set_process(false)
 
