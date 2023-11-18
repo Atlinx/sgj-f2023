@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://cdpn5s43qjbwg"]
+[gd_scene load_steps=18 format=3 uid="uid://cdpn5s43qjbwg"]
 
 [ext_resource type="Texture2D" uid="uid://g1bx6y7c5y75" path="res://sprites/slime.png" id="1_hx314"]
 [ext_resource type="Script" path="res://scripts/health.gd" id="2_jg8ob"]
@@ -8,7 +8,7 @@
 [ext_resource type="Script" path="res://scripts/ai_movement.gd" id="5_mdci3"]
 [ext_resource type="Texture2D" uid="uid://chb2gw0u5bwmx" path="res://sprites/shadow.png" id="6_dd0s1"]
 [ext_resource type="Texture2D" uid="uid://ddkd5dp5f6mrs" path="res://sprites/glow.png" id="7_5qlwr"]
-[ext_resource type="PackedScene" uid="uid://btp7yvej8wme4" path="res://scenes/enemy_bullet.tscn" id="7_aljrs"]
+[ext_resource type="PackedScene" path="res://scenes/enemy_bullet.tscn" id="7_gs87n"]
 [ext_resource type="Script" path="res://scripts/damage_box.gd" id="8_rc48p"]
 [ext_resource type="AnimationLibrary" uid="uid://c37cmbh7l1rgo" path="res://animations/entity_anim_lib.tres" id="10_u3v1d"]
 [ext_resource type="AnimationNodeStateMachine" uid="uid://q81ouwttk58h" path="res://animations/entity_anim_tree.tres" id="10_yfn4j"]
@@ -30,7 +30,7 @@ radius = 8.0
 collision_mask = 17
 
 [node name="Visuals" type="Node2D" parent="."]
-position = Vector2(0, -0.0456252)
+position = Vector2(0, -0.923834)
 
 [node name="Sprite2D" type="Sprite2D" parent="Visuals"]
 position = Vector2(0, -4)
@@ -72,6 +72,7 @@ script = ExtResource("5_mdci3")
 entity_body = NodePath("..")
 detection_area = NodePath("../DetectionArea2D")
 navigation_agent = NodePath("../NavigationAgent2D")
+bullet_prefab = ExtResource("7_gs87n")
 animation_tree = NodePath("../AnimationTree")
 
 [node name="Shadow" type="Sprite2D" parent="."]
