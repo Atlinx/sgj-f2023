@@ -1,5 +1,5 @@
 extends CharacterBody2D
-class_name Player_1
+class_name Player_2
 
 @export var fire_sound : AudioStreamPlayer
 @export var bullet_prefab: PackedScene
@@ -9,7 +9,7 @@ class_name Player_1
 
 
 func _process(delta):
-	if has_shot and Input.is_action_just_pressed("p1_fire"):
+	if has_shot and Input.is_action_just_pressed("P2_fire"):
 		var bullet_inst: Bullet = bullet_prefab.instantiate()
 		get_tree().get_root().add_child(bullet_inst)
 		var direction = (get_global_mouse_position() - global_position).normalized()
@@ -21,7 +21,7 @@ func _process(delta):
 func _physics_process(delta):
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
-	var direction = Input.get_vector("p1_left", "p1_right", "p1_up", "p1_down")
+	var direction = Input.get_vector("P2_left", "P2_right", "P2_up", "P2_down")
 	velocity = direction * speed
 
 	player_animation_tree.walking = direction != Vector2.ZERO

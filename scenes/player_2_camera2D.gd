@@ -1,7 +1,7 @@
 extends Camera2D
 
 
-@export var player: Player_1
+@export var player: Player_2
 @export var lerp_speed: float = 10
 
 
@@ -12,3 +12,6 @@ func _ready():
 func _process(delta):
 	if player != null:
 		global_position = lerp(self.global_position, player.global_position, clampf(lerp_speed * delta, 0, 1))
+
+
+

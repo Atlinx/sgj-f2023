@@ -1,7 +1,7 @@
 extends Node2D
 
 
-@export var player: Player
+@export var player: Player_2
 @export var collector_area: Area2D
 
 

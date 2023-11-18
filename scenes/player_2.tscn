@@ -1,24 +1,24 @@
-[gd_scene load_steps=22 format=3 uid="uid://ci8yj0nmd1i13"]
+[gd_scene load_steps=22 format=3 uid="uid://rc0ykgromevk"]
 
-[ext_resource type="Script" path="res://scripts/player.gd" id="1_co7fm"]
-[ext_resource type="Shader" path="res://materials/shaders/entity.gdshader" id="1_rgjpx"]
-[ext_resource type="PackedScene" uid="uid://ci276fgn23rcd" path="res://scenes/player_bullet.tscn" id="2_age5k"]
-[ext_resource type="Texture2D" uid="uid://cee6d7cbam6pj" path="res://sprites/player.png" id="3_78r3x"]
-[ext_resource type="Script" path="res://scripts/health.gd" id="3_f1j7r"]
-[ext_resource type="Script" path="res://scripts/team.gd" id="4_s4p3p"]
-[ext_resource type="Script" path="res://scripts/player_camera.gd" id="5_2hbsy"]
-[ext_resource type="PackedScene" uid="uid://booa6u2jw1mxr" path="res://scenes/death_fx.tscn" id="6_0krtd"]
-[ext_resource type="Script" path="res://scripts/item_collector.gd" id="7_6gi8v"]
-[ext_resource type="Texture2D" uid="uid://chb2gw0u5bwmx" path="res://sprites/shadow.png" id="8_ab6rs"]
-[ext_resource type="Script" path="res://scripts/hitbox.gd" id="8_hbfkr"]
-[ext_resource type="Script" path="res://scripts/hit_fx.gd" id="12_k3mkd"]
-[ext_resource type="AnimationLibrary" uid="uid://c37cmbh7l1rgo" path="res://animations/entity_anim_lib.tres" id="13_1lex4"]
-[ext_resource type="AnimationNodeStateMachine" uid="uid://q81ouwttk58h" path="res://animations/entity_anim_tree.tres" id="14_5pjci"]
-[ext_resource type="Script" path="res://scripts/entity_animation_tree.gd" id="14_148l1"]
-[ext_resource type="AudioStream" uid="uid://yvuw5bxumh15" path="res://scenes/37161__volivieri__soccer-stomp-edited.wav" id="16_kgfux"]
+[ext_resource type="Script" path="res://scenes/player_2.gd" id="1_xasu4"]
+[ext_resource type="PackedScene" uid="uid://ci276fgn23rcd" path="res://scenes/player_bullet.tscn" id="2_2id8a"]
+[ext_resource type="Shader" path="res://materials/shaders/entity.gdshader" id="3_ylmmo"]
+[ext_resource type="Texture2D" uid="uid://cee6d7cbam6pj" path="res://sprites/player.png" id="4_slgnu"]
+[ext_resource type="Script" path="res://scenes/player_2_camera2D.gd" id="4_u43gf"]
+[ext_resource type="Script" path="res://scripts/health.gd" id="6_qpkvb"]
+[ext_resource type="Script" path="res://scripts/team.gd" id="7_46ial"]
+[ext_resource type="PackedScene" uid="uid://booa6u2jw1mxr" path="res://scenes/death_fx.tscn" id="8_b7xq2"]
+[ext_resource type="Script" path="res://scripts/item_collector.gd" id="9_7oqy6"]
+[ext_resource type="Script" path="res://scripts/hitbox.gd" id="10_dc07e"]
+[ext_resource type="Texture2D" uid="uid://chb2gw0u5bwmx" path="res://sprites/shadow.png" id="11_krxay"]
+[ext_resource type="Script" path="res://scripts/hit_fx.gd" id="12_qbu56"]
+[ext_resource type="AnimationLibrary" uid="uid://c37cmbh7l1rgo" path="res://animations/entity_anim_lib.tres" id="13_a1blu"]
+[ext_resource type="AnimationNodeStateMachine" uid="uid://q81ouwttk58h" path="res://animations/entity_anim_tree.tres" id="14_j48lb"]
+[ext_resource type="Script" path="res://scripts/entity_animation_tree.gd" id="15_tjmpu"]
+[ext_resource type="AudioStream" uid="uid://yvuw5bxumh15" path="res://scenes/37161__volivieri__soccer-stomp-edited.wav" id="16_3kdjj"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jki3l"]
-shader = ExtResource("1_rgjpx")
+shader = ExtResource("3_ylmmo")
 shader_parameter/flash_amount = 0.0
 shader_parameter/flash_color = Color(1, 1, 1, 1)
 
@@ -36,22 +36,21 @@ radius = 8.0
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -2.40338, 0.0, 0, 0]
 point_count = 2
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("fire_sound", "player_animation_tree")]
+[node name="Player2" type="CharacterBody2D" node_paths=PackedStringArray("fire_sound", "player_animation_tree")]
 collision_layer = 32
 collision_mask = 16
-script = ExtResource("1_co7fm")
+script = ExtResource("1_xasu4")
 fire_sound = NodePath("FireSound")
-bullet_prefab = ExtResource("2_age5k")
-speed = 128.0
+bullet_prefab = ExtResource("2_2id8a")
 player_animation_tree = NodePath("AnimationTree")
 
 [node name="Visuals" type="Node2D" parent="."]
-position = Vector2(0, -0.987726)
+position = Vector2(0, -0.0526421)
 
 [node name="Sprite2D" type="Sprite2D" parent="Visuals"]
 material = SubResource("ShaderMaterial_jki3l")
 position = Vector2(0, -4)
-texture = ExtResource("3_78r3x")
+texture = ExtResource("4_slgnu")
 region_rect = Rect2(208, 0, 16, 16)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -61,21 +60,22 @@ shape = SubResource("CapsuleShape2D_0rqyo")
 [node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("player")]
 zoom = Vector2(2, 2)
 position_smoothing_enabled = true
-script = ExtResource("5_2hbsy")
+script = ExtResource("4_u43gf")
 player = NodePath("..")
 
 [node name="Health" type="Node" parent="."]
-script = ExtResource("3_f1j7r")
+script = ExtResource("6_qpkvb")
 health = 10000
 max_health = 5
 
 [node name="Team" type="Node" parent="."]
-script = ExtResource("4_s4p3p")
+script = ExtResource("7_46ial")
 
-[node name="DeathFx" parent="." instance=ExtResource("6_0krtd")]
+[node name="DeathFx" parent="." node_paths=PackedStringArray("fx_nodes") instance=ExtResource("8_b7xq2")]
+fx_nodes = [null]
 
 [node name="ItemCollector" type="Node2D" parent="." node_paths=PackedStringArray("player", "collector_area")]
-script = ExtResource("7_6gi8v")
+script = ExtResource("9_7oqy6")
 player = NodePath("..")
 collector_area = NodePath("Area2D")
 
@@ -87,7 +87,7 @@ debug_color = Color(0.121569, 0.701961, 0, 0.419608)
 
 [node name="Hitbox" type="Area2D" parent="." groups=["hitbox"]]
 position = Vector2(0, -5)
-script = ExtResource("8_hbfkr")
+script = ExtResource("10_dc07e")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 shape = SubResource("CircleShape2D_u7yjf")
@@ -98,10 +98,10 @@ z_index = -3
 z_as_relative = false
 position = Vector2(0, 3)
 scale = Vector2(0.6, 0.666667)
-texture = ExtResource("8_ab6rs")
+texture = ExtResource("11_krxay")
 
 [node name="HitFx" type="Node" parent="." node_paths=PackedStringArray("health", "sprites")]
-script = ExtResource("12_k3mkd")
+script = ExtResource("12_qbu56")
 health = NodePath("../Health")
 sprites = [NodePath("../Visuals/Sprite2D")]
 flash_curve = SubResource("Curve_k2jw1")
@@ -109,16 +109,16 @@ flash_duration = 0.5
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"entity_anim_lib": ExtResource("13_1lex4")
+"entity_anim_lib": ExtResource("13_a1blu")
 }
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
-tree_root = ExtResource("14_5pjci")
+tree_root = ExtResource("14_j48lb")
 anim_player = NodePath("../AnimationPlayer")
 active = true
-script = ExtResource("14_148l1")
+script = ExtResource("15_tjmpu")
 
 [node name="FireSound" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("16_kgfux")
+stream = ExtResource("16_3kdjj")
 
-[connection signal="death" from="Health" to="DeathFx" method="on_death"]
+[connection signal="death" from="Health" to="DeathFx" method="on_death" flags=18]

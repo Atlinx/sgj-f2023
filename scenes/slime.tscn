@@ -8,7 +8,7 @@
 [ext_resource type="Script" path="res://scripts/ai_movement.gd" id="5_mdci3"]
 [ext_resource type="Texture2D" uid="uid://chb2gw0u5bwmx" path="res://sprites/shadow.png" id="6_dd0s1"]
 [ext_resource type="Texture2D" uid="uid://ddkd5dp5f6mrs" path="res://sprites/glow.png" id="7_5qlwr"]
-[ext_resource type="PackedScene" uid="uid://btp7yvej8wme4" path="res://scenes/enemy_bullet.tscn" id="7_gs87n"]
+[ext_resource type="PackedScene" uid="uid://bcnh7qo1bytbp" path="res://scenes/enemy_bullet.tscn" id="7_gs87n"]
 [ext_resource type="Script" path="res://scripts/damage_box.gd" id="8_rc48p"]
 [ext_resource type="AnimationLibrary" uid="uid://c37cmbh7l1rgo" path="res://animations/entity_anim_lib.tres" id="10_u3v1d"]
 [ext_resource type="AnimationNodeStateMachine" uid="uid://q81ouwttk58h" path="res://animations/entity_anim_tree.tres" id="10_yfn4j"]
@@ -30,7 +30,7 @@ radius = 8.0
 collision_mask = 17
 
 [node name="Visuals" type="Node2D" parent="."]
-position = Vector2(0, -0.229513)
+position = Vector2(0, -0.0283533)
 
 [node name="Sprite2D" type="Sprite2D" parent="Visuals"]
 position = Vector2(0, -4)
