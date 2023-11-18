@@ -1,7 +1,7 @@
 extends CharacterBody2D
 class_name Player
 
-
+@export var fire_sound : AudioStreamPlayer
 @export var bullet_prefab: PackedScene
 @export var speed: float = 300.0
 @export var has_shot: bool = true
@@ -14,6 +14,7 @@ func _process(delta):
 		var direction = (get_global_mouse_position() - global_position).normalized()
 		bullet_inst.construct(self, global_position, direction)
 		has_shot = false
+		fire_sound.play() 
 
 
 func _physics_process(delta):

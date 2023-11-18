@@ -5,6 +5,9 @@ extends Node
 @export var navigation_agent: NavigationAgent2D
 @export var speed: float = 64
 @export var update_position_interval: float = 1
+@export var bullet_prefab: PackedScene
+@export var fire_interval = 1
+var _fire_timer: float = 0
 
 var _update_position_timer: float = 0
 var _player: Node2D
@@ -31,6 +34,14 @@ func _process(delta):
 		if _update_position_timer > update_position_interval:
 			navigation_agent.target_position = _player.global_position
 			_update_position_timer -= update_position_interval
+		if _fire_timer <= 0:
+			var bullet_inst: Bullet = bullet_prefab.instantiate()
+			get_parent().add_child(bullet_inst)
+			var direction = (_player.global_position - entity_body.global_position).normalized()
+			bullet_inst.construct(entity_body, entity_body.global_position, direction)
+			_fire_timer = fire_interval
+		else:
+			_fire_timer -= delta
 
 
 func _physics_process(delta):

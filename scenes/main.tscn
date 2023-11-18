@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://cf363is1q737y"]
+[gd_scene load_steps=9 format=3 uid="uid://cf363is1q737y"]
 
 [ext_resource type="PackedScene" uid="uid://ci8yj0nmd1i13" path="res://scenes/player.tscn" id="1_l1gen"]
 [ext_resource type="Script" path="res://scripts/level.gd" id="2_dek5y"]
@@ -7,6 +7,7 @@
 [ext_resource type="TileSet" uid="uid://da4oraw1aomg7" path="res://sprites/tiles.tres" id="4_n3wi7"]
 [ext_resource type="Texture2D" uid="uid://b1coun74gy26l" path="res://sprites/giant_slime.png" id="5_6ugq8"]
 [ext_resource type="Script" path="res://scripts/enemy_spawner.gd" id="6_t8xrf"]
+[ext_resource type="AudioStream" uid="uid://dy58atrg72ubh" path="res://scenes/Background Music 2.mp3" id="8_jpg50"]
 
 [node name="Main" type="Node"]
 
@@ -32,13 +33,18 @@ script = ExtResource("2_dek5y")
 [node name="Slime" parent="World/Level" instance=ExtResource("3_ojb2m")]
 position = Vector2(47, 27)
 
-[node name="Sprite2D" type="Sprite2D" parent="World/Level"]
+[node name="Sprite2D" type="Sprite2D" parent="World/Level" node_paths=PackedStringArray("tile_map")]
 position = Vector2(61, -16)
 texture = ExtResource("5_6ugq8")
 script = ExtResource("6_t8xrf")
 enemy_prefabs = Array[PackedScene]([ExtResource("3_ojb2m")])
 enemy_amount = Vector2i(1, 1)
 spawn_interval = Vector2i(3, 3)
+tile_map = NodePath("..")
 
 [node name="GameManager" type="Node" parent="."]
 script = ExtResource("4_0g5c8")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_jpg50")
+autoplay = true

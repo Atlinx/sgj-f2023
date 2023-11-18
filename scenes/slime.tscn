@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://cdpn5s43qjbwg"]
+[gd_scene load_steps=15 format=3 uid="uid://cdpn5s43qjbwg"]
 
 [ext_resource type="Texture2D" uid="uid://g1bx6y7c5y75" path="res://sprites/slime.png" id="1_hx314"]
 [ext_resource type="Script" path="res://scripts/health.gd" id="2_jg8ob"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" path="res://scripts/ai_movement.gd" id="5_mdci3"]
 [ext_resource type="Texture2D" uid="uid://chb2gw0u5bwmx" path="res://sprites/shadow.png" id="6_dd0s1"]
 [ext_resource type="Texture2D" uid="uid://ddkd5dp5f6mrs" path="res://sprites/glow.png" id="7_5qlwr"]
+[ext_resource type="PackedScene" uid="uid://btp7yvej8wme4" path="res://scenes/enemy_bullet.tscn" id="7_aljrs"]
 [ext_resource type="Script" path="res://scripts/damage_box.gd" id="8_rc48p"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_h8j63"]
@@ -65,6 +66,7 @@ script = ExtResource("5_mdci3")
 entity_body = NodePath("..")
 detection_area = NodePath("../DetectionArea2D")
 navigation_agent = NodePath("../NavigationAgent2D")
+bullet_prefab = ExtResource("7_aljrs")
 
 [node name="Shadow" type="Sprite2D" parent="."]
 self_modulate = Color(0, 0, 0, 0.494118)
