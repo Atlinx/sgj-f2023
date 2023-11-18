@@ -1,18 +1,20 @@
-[gd_scene load_steps=19 format=3 uid="uid://ci8yj0nmd1i13"]
+[gd_scene load_steps=21 format=3 uid="uid://ci8yj0nmd1i13"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_co7fm"]
 [ext_resource type="Shader" path="res://materials/shaders/entity.gdshader" id="1_rgjpx"]
 [ext_resource type="PackedScene" uid="uid://ci276fgn23rcd" path="res://scenes/player_bullet.tscn" id="2_age5k"]
 [ext_resource type="Texture2D" uid="uid://cee6d7cbam6pj" path="res://sprites/player.png" id="3_78r3x"]
 [ext_resource type="Script" path="res://scripts/health.gd" id="3_f1j7r"]
-[ext_resource type="Script" path="res://scenes/player_camera.gd" id="4_bfbgh"]
 [ext_resource type="Script" path="res://scripts/team.gd" id="4_s4p3p"]
+[ext_resource type="Script" path="res://scripts/player_camera.gd" id="5_2hbsy"]
 [ext_resource type="PackedScene" uid="uid://booa6u2jw1mxr" path="res://scenes/death_fx.tscn" id="6_0krtd"]
 [ext_resource type="Script" path="res://scripts/item_collector.gd" id="7_6gi8v"]
 [ext_resource type="Texture2D" uid="uid://chb2gw0u5bwmx" path="res://sprites/shadow.png" id="8_ab6rs"]
 [ext_resource type="Script" path="res://scripts/hitbox.gd" id="8_hbfkr"]
-[ext_resource type="Script" path="res://scenes/hit_fx.gd" id="12_tdb30"]
-[ext_resource type="AudioStream" uid="uid://yvuw5bxumh15" path="res://scenes/37161__volivieri__soccer-stomp-edited.wav" id="13_naion"]
+[ext_resource type="Script" path="res://scripts/hit_fx.gd" id="12_k3mkd"]
+[ext_resource type="AnimationLibrary" uid="uid://c37cmbh7l1rgo" path="res://animations/entity_anim_lib.tres" id="13_1lex4"]
+[ext_resource type="AnimationNodeStateMachine" uid="uid://q81ouwttk58h" path="res://animations/entity_anim_tree.tres" id="14_5pjci"]
+[ext_resource type="Script" path="res://scripts/entity_animation_tree.gd" id="14_148l1"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jki3l"]
 shader = ExtResource("1_rgjpx")
@@ -33,17 +35,21 @@ radius = 8.0
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -2.40338, 0.0, 0, 0]
 point_count = 2
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("fire_sound")]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("player_animation_tree")]
 collision_layer = 32
 collision_mask = 16
 script = ExtResource("1_co7fm")
 fire_sound = NodePath("AudioStreamPlayer")
 bullet_prefab = ExtResource("2_age5k")
 speed = 128.0
+player_animation_tree = NodePath("AnimationTree")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Visuals" type="Node2D" parent="."]
+position = Vector2(0, -0.00444982)
+
+[node name="Sprite2D" type="Sprite2D" parent="Visuals"]
 material = SubResource("ShaderMaterial_jki3l")
-position = Vector2(0, -5)
+position = Vector2(0, -4)
 texture = ExtResource("3_78r3x")
 region_rect = Rect2(208, 0, 16, 16)
 
@@ -54,7 +60,7 @@ shape = SubResource("CapsuleShape2D_0rqyo")
 [node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("player")]
 zoom = Vector2(2, 2)
 position_smoothing_enabled = true
-script = ExtResource("4_bfbgh")
+script = ExtResource("5_2hbsy")
 player = NodePath("..")
 
 [node name="Health" type="Node" parent="."]
@@ -94,13 +100,21 @@ scale = Vector2(0.6, 0.666667)
 texture = ExtResource("8_ab6rs")
 
 [node name="HitFx" type="Node" parent="." node_paths=PackedStringArray("health", "sprites")]
-script = ExtResource("12_tdb30")
+script = ExtResource("12_k3mkd")
 health = NodePath("../Health")
-sprites = [NodePath("../Sprite2D")]
+sprites = [NodePath("../Visuals/Sprite2D")]
 flash_curve = SubResource("Curve_k2jw1")
 flash_duration = 0.5
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("13_naion")
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"entity_anim_lib": ExtResource("13_1lex4")
+}
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = ExtResource("14_5pjci")
+anim_player = NodePath("../AnimationPlayer")
+active = true
+script = ExtResource("14_148l1")
 
 [connection signal="death" from="Health" to="DeathFx" method="on_death"]
