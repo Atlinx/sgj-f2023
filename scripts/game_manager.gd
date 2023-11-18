@@ -2,11 +2,23 @@ extends Node
 class_name GameManager
 
 
-# Called when the node enters the scene tree for the first time.
+@export var score: int = 0
+@export var score_label: Label
+
+
 func _ready():
-	pass # Replace with function body.
+	on_score_update()
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
+func on_enemy_death():
+	score += 1
+	on_score_update()
+
+
+func on_score_update():
+	score_label.text = "SCORE: %s" % score
+
+
 func _process(delta):
-	pass
+	if Input.is_key_pressed(KEY_BACKSPACE):
+		get_tree().reload_current_scene()

@@ -9,12 +9,13 @@ extends Node
 @export var fire_interval = 1
 @export var animation_tree: AnimationTree
 
-var _fire_timer: float = 0
+var _fire_timer: float
 
 var _update_position_timer: float = 0
 var _player: Node2D
 
 func _ready():
+	_fire_timer = fire_interval
 	detection_area.body_entered.connect(_on_body_entered)
 	detection_area.body_exited.connect(_on_body_exited)
 

@@ -13,7 +13,6 @@ collision_mask = 18
 motion_mode = 1
 script = ExtResource("1_d106i")
 speed = 512.0
-lifetime = 0.5
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 material = ExtResource("2_ew4f6")
