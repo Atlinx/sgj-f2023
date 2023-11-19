@@ -10,7 +10,6 @@ enum ItemType {
 	PLAYERBULLET2,
 }
 
-
 @export var collision_shape: CollisionShape2D
 @export var enabled: bool = false:
 	set(value):

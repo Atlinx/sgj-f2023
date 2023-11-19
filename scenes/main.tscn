@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://cf363is1q737y"]
+[gd_scene load_steps=13 format=3 uid="uid://cf363is1q737y"]
 
 [ext_resource type="PackedScene" uid="uid://ci8yj0nmd1i13" path="res://scenes/player_1.tscn" id="1_l1gen"]
 [ext_resource type="Script" path="res://scripts/level.gd" id="2_dek5y"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://rc0ykgromevk" path="res://scenes/player_2.tscn" id="4_8wt28"]
 [ext_resource type="TileSet" uid="uid://da4oraw1aomg7" path="res://sprites/tiles.tres" id="4_n3wi7"]
 [ext_resource type="Script" path="res://scripts/enemy_spawner.gd" id="6_t8xrf"]
+[ext_resource type="PackedScene" uid="uid://cla2s372j5opq" path="res://scenes/special_slime_1.tscn" id="7_i230r"]
 [ext_resource type="AudioStream" uid="uid://dy58atrg72ubh" path="res://scenes/Background Music 2.mp3" id="8_jpg50"]
 [ext_resource type="FontFile" uid="uid://bif30ky26map1" path="res://sprites/Minecraft.ttf" id="8_tqedg"]
 
@@ -51,6 +52,7 @@ score_label = NodePath("../UI/Control/MarginContainer/VBoxContainer/ScoreLabel")
 
 [node name="EnemySpawner" type="Node" parent="." node_paths=PackedStringArray("tile_map", "game_manager")]
 script = ExtResource("6_t8xrf")
+special_slime = Array[PackedScene]([ExtResource("7_i230r")])
 enemy_prefabs = Array[PackedScene]([ExtResource("3_ojb2m")])
 spawn_interval = Vector2i(5, 10)
 tile_map = NodePath("../World/Level")

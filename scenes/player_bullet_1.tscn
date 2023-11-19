@@ -4,7 +4,7 @@
 [ext_resource type="Material" uid="uid://duq16u675oqot" path="res://materials/player_bullet.tres" id="2_gedcc"]
 [ext_resource type="PackedScene" uid="uid://booa6u2jw1mxr" path="res://scenes/death_fx.tscn" id="3_beytr"]
 [ext_resource type="Script" path="res://scripts/player_bullet_dropper.gd" id="4_de04x"]
-[ext_resource type="PackedScene" uid="uid://d2lulf6teg15y" path="res://scenes/dropped_bullet_1.tscn" id="5_mvuns"]
+[ext_resource type="PackedScene" uid="uid://d2lulf6teg15y" path="res://scenes/dropped_bullet.tscn" id="5_mvuns"]
 
 [node name="PlayerBullet1" instance=ExtResource("1_fmi7r")]
 

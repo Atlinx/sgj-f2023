@@ -8,10 +8,8 @@ signal death()
 @export var speed: float = 1500
 @export var lifetime: float = 5
 @export var team: Team.TeamType
-
 var damaged_entity: bool = false
 var entity_owner: Node
-
 var _direction: Vector2
 var _life_timer: float = 0
 
@@ -34,7 +32,6 @@ func _physics_process(delta):
 	_life_timer += delta
 	if _life_timer > lifetime:
 		_on_death(false)
-
 
 func _on_collision(collision: KinematicCollision2D):
 	var body = collision.get_collider()

@@ -1,5 +1,6 @@
 extends Node
 
+@export var special_slime: Array[PackedScene]
 @export var enemy_prefabs: Array[PackedScene]
 @export var enemy_amount = Vector2i(1, 5)
 @export var spawn_interval = Vector2i(3, 5)
@@ -38,15 +39,25 @@ func _process(delta):
 		var enemy_count = randi_range(enemy_amount.x, enemy_amount.y)
 
 		var random_cells = _get_random_cells(enemy_count)
+		# normal slime
 		for i in range(enemy_count):
 			var enemy_index = randi() % enemy_prefabs.size()
-			var enemy = enemy_prefabs[enemy_index]
+			var enemy = enemy_prefabs[enemy_index] 
 			var enemy_inst: Node2D = enemy.instantiate()
-
 			enemy_inst.global_position = tile_map.to_global(tile_map.map_to_local(random_cells[i]))
 			add_child(enemy_inst)
 			var enemy_health = enemy_inst.get_node("Health")
 			enemy_health.death.connect(_on_enemy_death)
+		# special slime 1
+		for i in range(enemy_count):
+			var special_slime_1_index = randi() % special_slime.size()
+			var special_slime_1 = special_slime[special_slime_1_index] 
+			var special_slime_1_inst: Node2D = special_slime_1.instantiate()
+
+			special_slime_1_inst.global_position = tile_map.to_global(tile_map.map_to_local(random_cells[i]))
+			add_child(special_slime_1_inst)
+			var special_slime_1_health = special_slime_1_inst.get_node("Health")
+			special_slime_1_health.death.connect(_on_enemy_death)
 
 	else:
 		_spawn_timer -= delta
