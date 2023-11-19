@@ -6,7 +6,7 @@
 [node name="SpecialSlime1" instance=ExtResource("1_0kj5y")]
 
 [node name="Visuals" parent="." index="0"]
-position = Vector2(0, -0.00352833)
+position = Vector2(0, -0.967272)
 
 [node name="Sprite2D" parent="Visuals" index="0"]
 scale = Vector2(1.5, 1.5)
