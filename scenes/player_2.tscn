@@ -7,7 +7,6 @@
 [ext_resource type="Script" path="res://scripts/player_2_camera2D.gd" id="5_a55g1"]
 [ext_resource type="Script" path="res://scripts/health.gd" id="6_qpkvb"]
 [ext_resource type="Script" path="res://scripts/team.gd" id="7_46ial"]
-[ext_resource type="Script" path="res://scenes/player2_item_collector.gd" id="8_57n8k"]
 [ext_resource type="PackedScene" uid="uid://booa6u2jw1mxr" path="res://scenes/death_fx.tscn" id="8_b7xq2"]
 [ext_resource type="Script" path="res://scripts/hitbox.gd" id="10_dc07e"]
 [ext_resource type="Texture2D" uid="uid://chb2gw0u5bwmx" path="res://sprites/shadow.png" id="11_krxay"]
@@ -26,6 +25,26 @@ shader_parameter/flash_color = Color(1, 1, 1, 1)
 radius = 2.0
 height = 12.0
 
+[sub_resource type="GDScript" id="GDScript_enyis"]
+script/source = "extends Node2D
+
+
+@export var player: Player_2
+@export var collector_area: Area2D
+
+
+func _ready():
+	collector_area.area_entered.connect(_on_collector_area_entered)
+
+
+func _on_collector_area_entered(area: Area2D):
+	if area.is_in_group(\"dropped_item\"):
+		var dropped_item :DroppedItem = area
+		if dropped_item.item_type == DroppedItem.ItemType.PLAYERBULLET2:
+			player.has_shot = true
+		dropped_item.collect()
+"
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_euncd"]
 radius = 16.0
 
@@ -42,11 +61,10 @@ collision_mask = 16
 script = ExtResource("1_nw5xn")
 fire_sound = NodePath("FireSound")
 bullet_prefab = ExtResource("2_3ybyl")
-speed = 128.0
 player_animation_tree = NodePath("AnimationTree")
 
 [node name="Visuals" type="Node2D" parent="."]
-position = Vector2(0, -0.00127496)
+position = Vector2(0, -9.79058e-05)
 
 [node name="Sprite2D" type="Sprite2D" parent="Visuals"]
 material = SubResource("ShaderMaterial_jki3l")
@@ -76,7 +94,7 @@ script = ExtResource("7_46ial")
 fx_nodes = [null]
 
 [node name="ItemCollector" type="Node2D" parent="." node_paths=PackedStringArray("player", "collector_area")]
-script = ExtResource("8_57n8k")
+script = SubResource("GDScript_enyis")
 player = NodePath("..")
 collector_area = NodePath("Area2D")
 

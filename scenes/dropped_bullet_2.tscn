@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=3 uid="uid://cpil1fsw5oc1d"]
+
+[ext_resource type="PackedScene" uid="uid://d2lulf6teg15y" path="res://scenes/dropped_bullet_1.tscn" id="1_0nx6s"]
+[ext_resource type="Shader" path="res://materials/shaders/bullet.gdshader" id="2_i8xxa"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xqrxl"]
+resource_local_to_scene = true
+shader = ExtResource("2_i8xxa")
+shader_parameter/bullet_color = Color(0.0784314, 1, 0, 1)
+
+[node name="DroppedBullet2" instance=ExtResource("1_0nx6s")]
+
+[node name="Sprite2D" parent="." index="0"]
+material = SubResource("ShaderMaterial_xqrxl")

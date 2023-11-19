@@ -2,15 +2,15 @@
 
 [ext_resource type="Script" path="res://scripts/player_1.gd" id="1_gjuxm"]
 [ext_resource type="Shader" path="res://materials/shaders/entity.gdshader" id="1_rgjpx"]
-[ext_resource type="PackedScene" uid="uid://ci276fgn23rcd" path="res://scenes/player_bullet_1.tscn" id="2_uqby2"]
+[ext_resource type="PackedScene" uid="uid://d2q5d2pewpcii" path="res://scenes/player_bullet_1.tscn" id="2_uqby2"]
 [ext_resource type="Texture2D" uid="uid://cee6d7cbam6pj" path="res://sprites/player.png" id="3_78r3x"]
 [ext_resource type="Script" path="res://scripts/health.gd" id="3_f1j7r"]
 [ext_resource type="Script" path="res://scripts/team.gd" id="4_s4p3p"]
 [ext_resource type="Script" path="res://scripts/player_camera.gd" id="5_2hbsy"]
 [ext_resource type="PackedScene" uid="uid://booa6u2jw1mxr" path="res://scenes/death_fx.tscn" id="6_0krtd"]
-[ext_resource type="Script" path="res://scripts/item_collector.gd" id="7_6gi8v"]
 [ext_resource type="Texture2D" uid="uid://chb2gw0u5bwmx" path="res://sprites/shadow.png" id="8_ab6rs"]
 [ext_resource type="Script" path="res://scripts/hitbox.gd" id="8_hbfkr"]
+[ext_resource type="Script" path="res://scripts/player1_item_collector.gd" id="9_86ick"]
 [ext_resource type="Script" path="res://scripts/hit_fx.gd" id="12_k3mkd"]
 [ext_resource type="AnimationLibrary" uid="uid://c37cmbh7l1rgo" path="res://animations/entity_anim_lib.tres" id="13_1lex4"]
 [ext_resource type="AnimationNodeStateMachine" uid="uid://q81ouwttk58h" path="res://animations/entity_anim_tree.tres" id="14_5pjci"]
@@ -46,7 +46,7 @@ speed = 128.0
 player_animation_tree = NodePath("AnimationTree")
 
 [node name="Visuals" type="Node2D" parent="."]
-position = Vector2(0, -0.587726)
+position = Vector2(0, -0.000664381)
 
 [node name="Sprite2D" type="Sprite2D" parent="Visuals"]
 material = SubResource("ShaderMaterial_jki3l")
@@ -75,7 +75,7 @@ script = ExtResource("4_s4p3p")
 [node name="DeathFx" parent="." instance=ExtResource("6_0krtd")]
 
 [node name="ItemCollector" type="Node2D" parent="." node_paths=PackedStringArray("player", "collector_area")]
-script = ExtResource("7_6gi8v")
+script = ExtResource("9_86ick")
 player = NodePath("..")
 collector_area = NodePath("Area2D")
 

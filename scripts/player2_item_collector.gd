@@ -10,8 +10,11 @@ func _ready():
 
 
 func _on_collector_area_entered(area: Area2D):
+	print("Collector area entered!")
 	if area.is_in_group("dropped_item"):
-		var dropped_item = area
-		if dropped_item.item_type == DroppedItem.ItemType.PlAYERBULLET1:
+		var dropped_item: DroppedItem = area
+		print("Dropped item type:", dropped_item.item_type)
+		if dropped_item.item_type == DroppedItem.ItemType.PLAYERBULLET2:
+			print("Setting player.has_shot to true")
 			player.has_shot = true
 		dropped_item.collect()
