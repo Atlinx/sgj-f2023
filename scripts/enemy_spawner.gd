@@ -37,27 +37,28 @@ func _process(delta):
 	if _spawn_timer <= 0:
 		_spawn_timer = randf_range(spawn_interval.x, spawn_interval.y)
 		var enemy_count = randi_range(enemy_amount.x, enemy_amount.y)
-
-		var random_cells = _get_random_cells(enemy_count)
-		# normal slime
+	
+	# normal slime
+		var random_cells_normal = _get_random_cells(enemy_count)
 		for i in range(enemy_count):
 			var enemy_index = randi() % enemy_prefabs.size()
-			var enemy = enemy_prefabs[enemy_index] 
+			var enemy = enemy_prefabs[enemy_index]
 			var enemy_inst: Node2D = enemy.instantiate()
-			enemy_inst.global_position = tile_map.to_global(tile_map.map_to_local(random_cells[i]))
+			enemy_inst.global_position = tile_map.to_global(tile_map.map_to_local(random_cells_normal[i]))
 			add_child(enemy_inst)
 			var enemy_health = enemy_inst.get_node("Health")
 			enemy_health.death.connect(_on_enemy_death)
-		# special slime 1
-#		for i in range(enemy_count):
-#			var special_slime_1_index = randi() % special_slime.size()
-#			var special_slime_1 = special_slime[special_slime_1_index] 
-#			var special_slime_1_inst: Node2D = special_slime_1.instantiate()
-#
-#			special_slime_1_inst.global_position = tile_map.to_global(tile_map.map_to_local(random_cells[i]))
-#			add_child(special_slime_1_inst)
-#			var special_slime_1_health = special_slime_1_inst.get_node("Health")
-#			special_slime_1_health.death.connect(_on_enemy_death)
+		
+	# special slime
+		var random_cells_special = _get_random_cells(enemy_count)
+		for i in range(enemy_count):
+			var special_slime_index = randi() % special_slime.size()
+			var special_slime_enemy = special_slime[special_slime_index]
+			var special_slime_inst: Node2D = special_slime_enemy.instantiate()
+			special_slime_inst.global_position = tile_map.to_global(tile_map.map_to_local(random_cells_special[i]))
+			add_child(special_slime_inst)
+			var special_slime_health = special_slime_inst.get_node("Health")
+			special_slime_health.death.connect(_on_enemy_death)
 
 	else:
 		_spawn_timer -= delta

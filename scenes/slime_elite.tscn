@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://dwlywww2be5u1"]
+
+[ext_resource type="PackedScene" uid="uid://cdpn5s43qjbwg" path="res://scenes/slime.tscn" id="1_0qhsq"]
+
+[node name="SlimeElite" instance=ExtResource("1_0qhsq")]
+
+[node name="Visuals" parent="." index="0"]
+position = Vector2(0, -0.0122353)

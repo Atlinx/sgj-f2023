@@ -4,7 +4,6 @@
 [ext_resource type="PackedScene" uid="uid://cdn5gldmb67qi" path="res://scenes/player_bullet_2.tscn" id="2_3ybyl"]
 [ext_resource type="Shader" path="res://materials/shaders/entity.gdshader" id="3_ylmmo"]
 [ext_resource type="Texture2D" uid="uid://cee6d7cbam6pj" path="res://sprites/player.png" id="4_slgnu"]
-[ext_resource type="Script" path="res://scripts/player_2_camera2D.gd" id="5_a55g1"]
 [ext_resource type="Script" path="res://scripts/health.gd" id="6_qpkvb"]
 [ext_resource type="Script" path="res://scripts/team.gd" id="7_46ial"]
 [ext_resource type="PackedScene" uid="uid://booa6u2jw1mxr" path="res://scenes/death_fx.tscn" id="8_b7xq2"]
@@ -24,6 +23,26 @@ shader_parameter/flash_color = Color(1, 1, 1, 1)
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0rqyo"]
 radius = 2.0
 height = 12.0
+
+[sub_resource type="GDScript" id="GDScript_fg2p3"]
+script/source = "extends Camera2D
+
+
+@export var player: Player_2
+@export var lerp_speed: float = 10
+
+
+func _ready():
+	call_deferred(\"reparent\", get_parent().get_parent())
+
+
+func _process(delta):
+	if player != null:
+		global_position = lerp(self.global_position, player.global_position, clampf(lerp_speed * delta, 0, 1))
+
+
+
+"
 
 [sub_resource type="GDScript" id="GDScript_enyis"]
 script/source = "extends Node2D
@@ -55,7 +74,7 @@ radius = 8.0
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -2.40338, 0.0, 0, 0]
 point_count = 2
 
-[node name="Player2" type="CharacterBody2D" node_paths=PackedStringArray("fire_sound", "player_animation_tree")]
+[node name="Player2" type="CharacterBody2D" node_paths=PackedStringArray("fire_sound", "player_animation_tree") groups=["Player2"]]
 collision_layer = 32
 collision_mask = 16
 script = ExtResource("1_nw5xn")
@@ -64,7 +83,7 @@ bullet_prefab = ExtResource("2_3ybyl")
 player_animation_tree = NodePath("AnimationTree")
 
 [node name="Visuals" type="Node2D" parent="."]
-position = Vector2(0, -0.983599)
+position = Vector2(0, -0.91765)
 
 [node name="Sprite2D" type="Sprite2D" parent="Visuals"]
 material = SubResource("ShaderMaterial_jki3l")
@@ -79,7 +98,7 @@ shape = SubResource("CapsuleShape2D_0rqyo")
 [node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("player")]
 zoom = Vector2(2, 2)
 position_smoothing_enabled = true
-script = ExtResource("5_a55g1")
+script = SubResource("GDScript_fg2p3")
 player = NodePath("..")
 
 [node name="Health" type="Node" parent="."]
