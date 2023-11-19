@@ -14,4 +14,4 @@ func _on_collector_area_entered(area: Area2D):
 		var dropped_item :DroppedItem = area
 		if dropped_item.item_type == DroppedItem.ItemType.PlAYERBULLET1:
 			player.has_shot = true
-		dropped_item.collect()
+			dropped_item.collect()

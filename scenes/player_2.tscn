@@ -64,7 +64,7 @@ bullet_prefab = ExtResource("2_3ybyl")
 player_animation_tree = NodePath("AnimationTree")
 
 [node name="Visuals" type="Node2D" parent="."]
-position = Vector2(0, -9.79058e-05)
+position = Vector2(0, -0.000875011)
 
 [node name="Sprite2D" type="Sprite2D" parent="Visuals"]
 material = SubResource("ShaderMaterial_jki3l")
