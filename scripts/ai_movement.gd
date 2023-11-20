@@ -9,6 +9,7 @@ extends Node
 @export var fire_interval = 1
 @export var animation_tree: AnimationTree
 
+
 var _fire_timer: float
 
 var _update_position_timer: float = 0
@@ -32,6 +33,7 @@ func _on_body_exited(body: Node2D):
 
 
 func _process(delta):
+
 	if _player != null:
 		_update_position_timer += delta
 		if _update_position_timer > update_position_interval:
