@@ -1,12 +1,13 @@
-[gd_scene load_steps=12 format=3 uid="uid://cf363is1q737y"]
+[gd_scene load_steps=13 format=3 uid="uid://cf363is1q737y"]
 
-[ext_resource type="Script" path="res://scenes/main.gd" id="1_8vkiw"]
+[ext_resource type="Script" path="res://main.gd" id="1_1qqng"]
 [ext_resource type="Script" path="res://scripts/level.gd" id="2_dek5y"]
 [ext_resource type="PackedScene" uid="uid://cdpn5s43qjbwg" path="res://scenes/slime.tscn" id="3_ojb2m"]
 [ext_resource type="Script" path="res://scripts/game_manager.gd" id="4_0g5c8"]
 [ext_resource type="TileSet" uid="uid://da4oraw1aomg7" path="res://sprites/tiles.tres" id="4_n3wi7"]
 [ext_resource type="PackedScene" uid="uid://b4lwo6irvtgtq" path="res://scenes/special_slime_1.tscn" id="6_f03vk"]
-[ext_resource type="Script" path="res://scripts/enemy_spawner.gd" id="6_t8xrf"]
+[ext_resource type="Script" path="res://scripts/Slime_spawner.gd" id="6_uack1"]
+[ext_resource type="Script" path="res://scripts/IntialEnemyCreater.gd" id="8_iccj2"]
 [ext_resource type="AudioStream" uid="uid://dy58atrg72ubh" path="res://scenes/Background Music 2.mp3" id="8_jpg50"]
 [ext_resource type="FontFile" uid="uid://bif30ky26map1" path="res://sprites/Minecraft.ttf" id="8_tqedg"]
 
@@ -23,7 +24,7 @@ outline_size = 8
 outline_color = Color(0, 0, 0, 1)
 
 [node name="Main" type="Node"]
-script = ExtResource("1_8vkiw")
+script = ExtResource("1_1qqng")
 
 [node name="LevelSlime" type="Node2D" parent="."]
 
@@ -89,14 +90,22 @@ script = ExtResource("2_dek5y")
 script = ExtResource("4_0g5c8")
 score_label = NodePath("../UI/Control/MarginContainer/VBoxContainer/ScoreLabel")
 
-[node name="EnemySpawner" type="Node" parent="." node_paths=PackedStringArray("tile_map", "game_manager")]
-script = ExtResource("6_t8xrf")
+[node name="SlimeSpawner" type="Node" parent="." node_paths=PackedStringArray("tile_map", "game_manager")]
+script = ExtResource("6_uack1")
 special_slime = Array[PackedScene]([ExtResource("6_f03vk")])
 enemy_prefabs = Array[PackedScene]([ExtResource("3_ojb2m")])
 enemy_amount = Vector2i(1, 1)
 spawn_interval = Vector2i(5, 10)
 tile_map = NodePath("../World/Level")
 game_manager = NodePath("../GameManager")
+intial_enemy_amount = 100
+
+[node name="IntialEnemyCreater" type="Node" parent="." node_paths=PackedStringArray("tile_map", "game_manager")]
+script = ExtResource("8_iccj2")
+enemy_prefabs = Array[PackedScene]([ExtResource("3_ojb2m"), ExtResource("3_ojb2m")])
+tile_map = NodePath("../World/Level")
+game_manager = NodePath("../GameManager")
+intial_enemy_amount = 10000
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("8_jpg50")

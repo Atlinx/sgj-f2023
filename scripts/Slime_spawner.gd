@@ -14,7 +14,6 @@ var _spawnable_cells: Array[Vector2i] = []
 
 const WALL_TERRAIN_ID: int = 0
 
-
 func _ready():
 	for cell in tile_map.get_used_cells(0):
 		var tile_data = tile_map.get_cell_tile_data(0, cell)
@@ -35,9 +34,8 @@ func _get_random_cells(amount: int) -> Array[Vector2i]:
 	return valid_cells
 
 
-
 func _process(delta):
-	
+
 	if _spawn_timer <= 0:
 		_spawn_timer = randf_range(spawn_interval.x, spawn_interval.y)
 		var enemy_count = randi_range(enemy_amount.x, enemy_amount.y)

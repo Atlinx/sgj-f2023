@@ -26,11 +26,11 @@ radius = 8.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_08h8o"]
 radius = 8.0
 
-[node name="Slime" type="CharacterBody2D"]
+[node name="Slime" type="CharacterBody2D" groups=["enemy"]]
 collision_mask = 17
 
 [node name="Visuals" type="Node2D" parent="."]
-position = Vector2(0, -0.743226)
+position = Vector2(0, -0.985714)
 
 [node name="Sprite2D" type="Sprite2D" parent="Visuals"]
 position = Vector2(0, -4)
