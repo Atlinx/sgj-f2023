@@ -105,7 +105,7 @@ script = ExtResource("8_iccj2")
 enemy_prefabs = Array[PackedScene]([ExtResource("3_ojb2m"), ExtResource("3_ojb2m")])
 tile_map = NodePath("../World/Level")
 game_manager = NodePath("../GameManager")
-intial_enemy_amount = 10000
+intial_enemy_amount = 100
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("8_jpg50")
