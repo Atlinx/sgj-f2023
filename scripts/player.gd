@@ -1,5 +1,7 @@
 extends CharacterBody2D
-class_name Player_1
+class_name Player
+
+
 
 @export var fire_sound : AudioStreamPlayer
 @export var my_bullet_prefab: PackedScene

@@ -45,11 +45,5 @@ func _process(delta):
 			var enemy_health = enemy_inst.get_node("Health")
 			enemy_health.death.connect(_on_enemy_death)
 		has_executed_code = true
-	var scene_instances = get_tree().get_nodes_in_group("enemy")
 
-	# 获取实例数量
-	var instance_count = scene_instances.size()
-
-	# 打印实例数量
-	print("enemyScene instances: ", instance_count)
 
