@@ -41,12 +41,12 @@ collision_layer = 32
 collision_mask = 16
 script = ExtResource("1_co7fm")
 fire_sound = NodePath("FireSound")
-bullet_prefab = ExtResource("2_age5k")
+my_bullet_prefab = ExtResource("2_age5k")
 speed = 128.0
 player_animation_tree = NodePath("AnimationTree")
 
 [node name="Visuals" type="Node2D" parent="."]
-position = Vector2(0, -0.999245)
+position = Vector2(0, -0.873164)
 
 [node name="Sprite2D" type="Sprite2D" parent="Visuals"]
 material = SubResource("ShaderMaterial_jki3l")
@@ -66,8 +66,8 @@ player = NodePath("..")
 
 [node name="Health" type="Node" parent="."]
 script = ExtResource("3_f1j7r")
-health = 5
-max_health = 5
+health = 10000
+max_health = 10000
 
 [node name="Team" type="Node" parent="."]
 script = ExtResource("4_s4p3p")

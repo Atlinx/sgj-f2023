@@ -1,7 +1,7 @@
 extends Camera2D
 
 
-@export var player: Player
+@export var player: Player_1
 @export var lerp_speed: float = 10
 
 

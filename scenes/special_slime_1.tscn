@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://b4lwo6irvtgtq"]
+
+[ext_resource type="PackedScene" uid="uid://cdpn5s43qjbwg" path="res://scenes/slime.tscn" id="1_0kj5y"]
+[ext_resource type="Script" path="res://scripts/special_slime_hitbox.gd" id="2_7a5d3"]
+
+[node name="SpecialSlime1" instance=ExtResource("1_0kj5y")]
+
+[node name="Visuals" parent="." index="0"]
+position = Vector2(0, -0.0164588)
+
+[node name="Sprite2D" parent="Visuals" index="0"]
+scale = Vector2(1.5, 1.5)
+
+[node name="CollisionShape2D" parent="DetectionArea2D" index="0"]
+position = Vector2(1, 0)
+
+[node name="Hitbox" parent="." index="6"]
+script = ExtResource("2_7a5d3")

@@ -6,7 +6,8 @@ signal collected
 
 
 enum ItemType {
-	BULLET
+	PLAYERBULLET1,
+	PLAYERBULLET2,
 }
 
 
