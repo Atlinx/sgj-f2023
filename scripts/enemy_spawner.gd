@@ -50,15 +50,15 @@ func _process(delta):
 			enemy_health.death.connect(_on_enemy_death)
 		
 	# special slime
-		var random_cells_special = _get_random_cells(enemy_count)
-		for i in range(enemy_count):
-			var special_slime_index = randi() % special_slime.size()
-			var special_slime_enemy = special_slime[special_slime_index]
-			var special_slime_inst: Node2D = special_slime_enemy.instantiate()
-			special_slime_inst.global_position = tile_map.to_global(tile_map.map_to_local(random_cells_special[i]))
-			add_child(special_slime_inst)
-			var special_slime_health = special_slime_inst.get_node("Health")
-			special_slime_health.death.connect(_on_enemy_death)
+#		var random_cells_special = _get_random_cells(enemy_count)
+#		for i in range(enemy_count):
+#			var special_slime_index = randi() % special_slime.size()
+#			var special_slime_enemy = special_slime[special_slime_index]
+#			var special_slime_inst: Node2D = special_slime_enemy.instantiate()
+#			special_slime_inst.global_position = tile_map.to_global(tile_map.map_to_local(random_cells_special[i]))
+#			add_child(special_slime_inst)
+#			var special_slime_health = special_slime_inst.get_node("Health")
+#			special_slime_health.death.connect(_on_enemy_death)
 
 	else:
 		_spawn_timer -= delta

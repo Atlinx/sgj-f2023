@@ -24,6 +24,45 @@ outline_color = Color(0, 0, 0, 1)
 
 [node name="Main" type="Node"]
 
+[node name="Slime" parent="." instance=ExtResource("3_ojb2m")]
+position = Vector2(-36, -122)
+
+[node name="Slime2" parent="." instance=ExtResource("3_ojb2m")]
+position = Vector2(-45, -18)
+
+[node name="Slime3" parent="." instance=ExtResource("3_ojb2m")]
+position = Vector2(-36, 101)
+
+[node name="Slime4" parent="." instance=ExtResource("3_ojb2m")]
+position = Vector2(-117, 1)
+
+[node name="Slime8" parent="." instance=ExtResource("3_ojb2m")]
+position = Vector2(19, -73)
+
+[node name="Slime9" parent="." instance=ExtResource("3_ojb2m")]
+position = Vector2(47, -3)
+
+[node name="Slime10" parent="." instance=ExtResource("3_ojb2m")]
+position = Vector2(24, 43)
+
+[node name="Slime11" parent="." instance=ExtResource("3_ojb2m")]
+position = Vector2(24, 124)
+
+[node name="Slime12" parent="." instance=ExtResource("3_ojb2m")]
+position = Vector2(-120, 75)
+
+[node name="Slime13" parent="." instance=ExtResource("3_ojb2m")]
+position = Vector2(26, -138)
+
+[node name="Slime5" parent="." instance=ExtResource("3_ojb2m")]
+position = Vector2(-35, 16)
+
+[node name="Slime6" parent="." instance=ExtResource("3_ojb2m")]
+position = Vector2(-94, -90)
+
+[node name="Slime7" parent="." instance=ExtResource("3_ojb2m")]
+position = Vector2(-95, 120)
+
 [node name="World" type="Node2D" parent="."]
 
 [node name="Level" type="TileMap" parent="World" groups=["wall"]]
@@ -42,6 +81,7 @@ layer_1/tile_data = PackedInt32Array()
 script = ExtResource("2_dek5y")
 
 [node name="Player" parent="World/Level" instance=ExtResource("1_l1gen")]
+position = Vector2(274, -12)
 
 [node name="GameManager" type="Node" parent="." node_paths=PackedStringArray("score_label")]
 script = ExtResource("4_0g5c8")
@@ -51,7 +91,7 @@ score_label = NodePath("../UI/Control/MarginContainer/VBoxContainer/ScoreLabel")
 script = ExtResource("6_t8xrf")
 special_slime = Array[PackedScene]([ExtResource("6_f03vk")])
 enemy_prefabs = Array[PackedScene]([ExtResource("3_ojb2m")])
-enemy_amount = Vector2i(1, 2)
+enemy_amount = Vector2i(1, 1)
 spawn_interval = Vector2i(5, 10)
 tile_map = NodePath("../World/Level")
 game_manager = NodePath("../GameManager")
