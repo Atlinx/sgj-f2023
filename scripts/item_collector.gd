@@ -15,6 +15,6 @@ func _on_collector_area_entered(area: Area2D):
 		if dropped_item.item_type == DroppedItem.ItemType.PLAYERBULLET1:
 			player.has_shot = true
 			dropped_item.collect()
-		else:
+		elif dropped_item.item_type == DroppedItem.ItemType.PLAYERBULLET2:
 			player.has_teammate_bullet = true
 			dropped_item.collect()

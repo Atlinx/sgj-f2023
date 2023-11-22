@@ -7,10 +7,23 @@ class_name Player_1
 @export var speed: float = 300.0
 @export var has_shot: bool = true
 @export var player_animation_tree: AnimationTree
+@export var initial_position:Vector2 = Vector2(0,0)
 var has_teammate_bullet : bool = false
-var in_hand : String = "mybullet"
+var in_hand : String = "my_bullet"
+
+@rpc("authority","call_local")
+
+func _enter_tree() ->void:
+	set_multiplayer_authority(name.to_int())
+
+
+func _ready():
+	position = initial_position
 
 func _process(delta):
+	
+	if not is_multiplayer_authority():
+		return
 	
 	if Input.is_key_pressed(KEY_1):
 		in_hand = "my_bullet"
