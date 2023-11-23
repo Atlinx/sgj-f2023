@@ -52,7 +52,7 @@ speed = 128.0
 player_animation_tree = NodePath("AnimationTree")
 
 [node name="Visuals" type="Node2D" parent="."]
-position = Vector2(0, -0.938447)
+position = Vector2(0, -0.276533)
 
 [node name="Sprite2D" type="Sprite2D" parent="Visuals"]
 material = SubResource("ShaderMaterial_jki3l")

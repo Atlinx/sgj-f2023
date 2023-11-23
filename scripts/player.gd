@@ -13,16 +13,20 @@ class_name Player
 var has_teammate_bullet : bool = false
 var in_hand : String = "my_bullet"
 
-@rpc("authority","call_local")
+
+
 
 
 func _ready():
 	$MultiplayerSynchronizer.set_multiplayer_authority(str(name).to_int())
+	
+
 
 func _process(delta):
 	
 	if $MultiplayerSynchronizer.get_multiplayer_authority() == multiplayer.get_unique_id():
 		return
+	
 	
 	if Input.is_key_pressed(KEY_1):
 		in_hand = "my_bullet"
@@ -31,12 +35,8 @@ func _process(delta):
 	
 	if has_shot and Input.is_action_just_pressed("p1_fire"):
 		if in_hand == "my_bullet":
-			var my_bullet_inst: Bullet = my_bullet_prefab.instantiate()
-			get_tree().get_root().add_child(my_bullet_inst)
-			var direction = (get_global_mouse_position() - global_position).normalized()
-			my_bullet_inst.construct(self, global_position, direction)
-			has_shot = false
-			fire_sound.play()
+			fire.rpc()
+
 	if has_teammate_bullet and Input.is_action_just_pressed("p1_fire"):
 		if in_hand == "teammate_bullet":
 			var teammate_bullet_inst: Bullet = teammate_bullet_prefab.instantiate()
@@ -45,7 +45,15 @@ func _process(delta):
 			teammate_bullet_inst.construct(self, global_position, direction)
 			has_teammate_bullet = false
 			fire_sound.play()
-
+			
+@rpc("any_peer","call_local")
+func fire():
+	var my_bullet_inst: Bullet = my_bullet_prefab.instantiate()
+	get_tree().get_root().add_child(my_bullet_inst)
+	var direction = (get_global_mouse_position() - global_position).normalized()
+	my_bullet_inst.construct(self, global_position, direction)
+	has_shot = false
+	fire_sound.play()
 
 
 func _physics_process(delta):
@@ -57,3 +65,4 @@ func _physics_process(delta):
 	player_animation_tree.walking = direction != Vector2.ZERO
 
 	move_and_slide()
+

@@ -1,6 +1,6 @@
 extends Control
 
-@export var Address = "204.48.28.159"
+@export var Address = "127.0.0.1"
 @export var port = 8910
 var peer
 
@@ -26,8 +26,8 @@ func peer_connected(id):
 # this get called on the server and clients
 func peer_disconnected(id):
 	print("Player Disconnected " + str(id))
-	GameManager.Players.erase(id)
-	var players = get_tree().get_nodes_in_group("Player")
+	GameManager.players.erase(id)
+	var players = get_tree().get_nodes_in_group("player")
 	for i in players:
 		if i.name == str(id):
 			i.queue_free()
@@ -42,16 +42,16 @@ func connection_failed():
 
 @rpc("any_peer")
 func SendPlayerInformation(name, id):
-	if !GameManager.Players.has(id):
-		GameManager.Players[id] ={
+	if !GameManager.players.has(id):
+		GameManager.players[id] ={
 			"name" : name,
 			"id" : id,
 			"score": 0
 		}
 	
 	if multiplayer.is_server():
-		for i in GameManager.Players:
-			SendPlayerInformation.rpc(GameManager.Players[i].name, i)
+		for i in GameManager.players:
+			SendPlayerInformation.rpc(GameManager.players[i].name, i)
 
 @rpc("any_peer","call_local")
 func StartGame():

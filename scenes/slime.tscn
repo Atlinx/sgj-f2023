@@ -47,7 +47,7 @@ radius = 8.0
 collision_mask = 17
 
 [node name="Visuals" type="Node2D" parent="." node_paths=PackedStringArray("slimehealthbar", "health")]
-position = Vector2(0, -0.867681)
+position = Vector2(0, -0.990062)
 script = SubResource("GDScript_6g00e")
 slimehealthbar = NodePath("SlimeHealthBar")
 health = NodePath("../Health")
@@ -57,6 +57,7 @@ position = Vector2(0, -4)
 texture = ExtResource("1_hx314")
 
 [node name="SlimeHealthBar" type="TextureProgressBar" parent="Visuals"]
+visible = false
 modulate = Color(0.980392, 0.141176, 0.0156863, 1)
 offset_left = -19.0
 offset_top = -22.0557
