@@ -50,10 +50,9 @@ fire_sound = NodePath("FireSound")
 my_bullet_prefab = ExtResource("2_age5k")
 speed = 128.0
 player_animation_tree = NodePath("AnimationTree")
-initial_position = Vector2(-500, 2.08165e-12)
 
 [node name="Visuals" type="Node2D" parent="."]
-position = Vector2(0, -0.99985)
+position = Vector2(0, -0.938447)
 
 [node name="Sprite2D" type="Sprite2D" parent="Visuals"]
 material = SubResource("ShaderMaterial_jki3l")

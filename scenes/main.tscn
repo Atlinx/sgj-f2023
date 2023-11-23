@@ -1,7 +1,8 @@
-[gd_scene load_steps=14 format=3 uid="uid://cf363is1q737y"]
+[gd_scene load_steps=15 format=3 uid="uid://cf363is1q737y"]
 
-[ext_resource type="Script" path="res://main.gd" id="1_1qqng"]
+[ext_resource type="Script" path="res://scenes/scene_manager.gd" id="1_041gn"]
 [ext_resource type="Script" path="res://scripts/level.gd" id="2_dek5y"]
+[ext_resource type="PackedScene" uid="uid://ci8yj0nmd1i13" path="res://scenes/player.tscn" id="2_wtq3t"]
 [ext_resource type="PackedScene" uid="uid://cdpn5s43qjbwg" path="res://scenes/slime.tscn" id="3_ojb2m"]
 [ext_resource type="Script" path="res://scripts/game_manager.gd" id="4_0g5c8"]
 [ext_resource type="TileSet" uid="uid://da4oraw1aomg7" path="res://sprites/tiles.tres" id="4_n3wi7"]
@@ -10,7 +11,24 @@
 [ext_resource type="Script" path="res://scripts/IntialEnemyCreater.gd" id="8_iccj2"]
 [ext_resource type="AudioStream" uid="uid://dy58atrg72ubh" path="res://scenes/Background Music 2.mp3" id="8_jpg50"]
 [ext_resource type="FontFile" uid="uid://bif30ky26map1" path="res://sprites/Minecraft.ttf" id="8_tqedg"]
-[ext_resource type="Script" path="res://scenes/UI.gd" id="10_fj48k"]
+
+[sub_resource type="GDScript" id="GDScript_ebanc"]
+script/source = "extends CanvasLayer
+#
+#
+##var player : Player
+##var health = 0
+##var value 
+##
+##func _ready():
+##	player = get_tree().get_first_node_in_group(\"player\")
+##	health = player.get_node(\"Health\")
+##	health.healthchanged.connect(_update)
+##	_update()
+##
+##func _update():
+##	value = health.health * 100 / health.max_health 
+"
 
 [sub_resource type="LabelSettings" id="LabelSettings_mjsav"]
 font = ExtResource("8_tqedg")
@@ -25,7 +43,8 @@ outline_size = 8
 outline_color = Color(0, 0, 0, 1)
 
 [node name="Main" type="Node"]
-script = ExtResource("1_1qqng")
+script = ExtResource("1_041gn")
+PlayerScene = ExtResource("2_wtq3t")
 
 [node name="LevelSlime" type="Node2D" parent="."]
 
@@ -85,11 +104,8 @@ layer_1/z_index = 0
 layer_1/tile_data = PackedInt32Array()
 script = ExtResource("2_dek5y")
 
-[node name="Players" type="Node" parent="World/Level"]
-
-[node name="GameManager" type="Node" parent="." node_paths=PackedStringArray("score_label")]
+[node name="GameManager" type="Node" parent="."]
 script = ExtResource("4_0g5c8")
-score_label = NodePath("../UI/Scroe/MarginContainer/VBoxContainer/ScoreLabel")
 
 [node name="SlimeSpawner" type="Node" parent="." node_paths=PackedStringArray("tile_map", "game_manager")]
 script = ExtResource("6_uack1")
@@ -111,7 +127,7 @@ game_manager = NodePath("../GameManager")
 stream = ExtResource("8_jpg50")
 
 [node name="UI" type="CanvasLayer" parent="."]
-script = ExtResource("10_fj48k")
+script = SubResource("GDScript_ebanc")
 
 [node name="Scroe" type="Control" parent="UI"]
 layout_mode = 3
@@ -146,32 +162,6 @@ layout_mode = 2
 text = "Backspace to Restart"
 label_settings = SubResource("LabelSettings_xkd5t")
 
-[node name="HostJoin" type="Control" parent="UI"]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="Host" type="Button" parent="UI/HostJoin"]
-layout_mode = 0
-offset_left = 228.0
-offset_top = 36.0
-offset_right = 271.0
-offset_bottom = 67.0
-text = "host"
-
-[node name="Join" type="Button" parent="UI/HostJoin"]
-layout_mode = 0
-offset_left = 302.0
-offset_top = 34.0
-offset_right = 395.0
-offset_bottom = 71.0
-text = "join"
-
-[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="UI/HostJoin"]
-_spawnable_scenes = PackedStringArray("res://scenes/player.tscn")
-spawn_path = NodePath("../../../World/Level/Players")
-
 [node name="HealthBar" type="Control" parent="UI"]
 layout_mode = 3
 anchors_preset = 0
@@ -188,5 +178,8 @@ step = 0.01
 value = 100.0
 tint_under = Color(0.992157, 0.984314, 0.984314, 1)
 
-[connection signal="button_down" from="UI/HostJoin/Host" to="." method="_on_host_button_down"]
-[connection signal="button_down" from="UI/HostJoin/Join" to="." method="_on_join_button_down"]
+[node name="SpawnLocations" type="Node2D" parent="."]
+
+[node name="0" type="Node2D" parent="SpawnLocations" groups=["PlayerSpawnPoint"]]
+
+[node name="1" type="Node2D" parent="SpawnLocations" groups=["PlayerSpawnPoint"]]

@@ -1,6 +1,5 @@
 [gd_scene load_steps=19 format=3 uid="uid://cdpn5s43qjbwg"]
 
-[ext_resource type="Script" path="res://scenes/enemy_health_bar.gd" id="1_dpdfc"]
 [ext_resource type="Texture2D" uid="uid://g1bx6y7c5y75" path="res://sprites/slime.png" id="1_hx314"]
 [ext_resource type="Script" path="res://scripts/health.gd" id="2_jg8ob"]
 [ext_resource type="Script" path="res://scripts/team.gd" id="3_uwcyq"]
@@ -14,6 +13,23 @@
 [ext_resource type="AnimationLibrary" uid="uid://c37cmbh7l1rgo" path="res://animations/entity_anim_lib.tres" id="10_u3v1d"]
 [ext_resource type="AnimationNodeStateMachine" uid="uid://q81ouwttk58h" path="res://animations/entity_anim_tree.tres" id="10_yfn4j"]
 [ext_resource type="Script" path="res://scripts/entity_animation_tree.gd" id="11_ysmxa"]
+
+[sub_resource type="GDScript" id="GDScript_6g00e"]
+script/source = "extends Node2D
+
+
+@export var slimehealthbar: TextureProgressBar
+@export var health : Health
+var value 
+
+func _ready():
+
+	health.healthchanged.connect(_update)
+	_update()
+	
+func _update():
+	value = health.health * 100 / health.max_health 
+"
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_h8j63"]
 radius = 256.0
@@ -31,8 +47,8 @@ radius = 8.0
 collision_mask = 17
 
 [node name="Visuals" type="Node2D" parent="." node_paths=PackedStringArray("slimehealthbar", "health")]
-position = Vector2(0, -0.21997)
-script = ExtResource("1_dpdfc")
+position = Vector2(0, -0.867681)
+script = SubResource("GDScript_6g00e")
 slimehealthbar = NodePath("SlimeHealthBar")
 health = NodePath("../Health")
 
