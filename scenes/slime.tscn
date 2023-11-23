@@ -1,5 +1,6 @@
-[gd_scene load_steps=18 format=3 uid="uid://cdpn5s43qjbwg"]
+[gd_scene load_steps=19 format=3 uid="uid://cdpn5s43qjbwg"]
 
+[ext_resource type="Script" path="res://scenes/enemy_health_bar.gd" id="1_dpdfc"]
 [ext_resource type="Texture2D" uid="uid://g1bx6y7c5y75" path="res://sprites/slime.png" id="1_hx314"]
 [ext_resource type="Script" path="res://scripts/health.gd" id="2_jg8ob"]
 [ext_resource type="Script" path="res://scripts/team.gd" id="3_uwcyq"]
@@ -29,15 +30,38 @@ radius = 8.0
 [node name="Slime" type="CharacterBody2D" groups=["enemy"]]
 collision_mask = 17
 
-[node name="Visuals" type="Node2D" parent="."]
-position = Vector2(0, -0.0113169)
+[node name="Visuals" type="Node2D" parent="." node_paths=PackedStringArray("slimehealthbar", "health")]
+position = Vector2(0, -0.21997)
+script = ExtResource("1_dpdfc")
+slimehealthbar = NodePath("SlimeHealthBar")
+health = NodePath("../Health")
 
 [node name="Sprite2D" type="Sprite2D" parent="Visuals"]
 position = Vector2(0, -4)
 texture = ExtResource("1_hx314")
 
+[node name="SlimeHealthBar" type="TextureProgressBar" parent="Visuals"]
+modulate = Color(0.980392, 0.141176, 0.0156863, 1)
+offset_left = -19.0
+offset_top = -22.0557
+offset_right = 25.0
+offset_bottom = -9.05568
+value = 100.0
+
+[node name="Label" type="Label" parent="Visuals/SlimeHealthBar"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="ColorRect" type="ColorRect" parent="Visuals/SlimeHealthBar"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 9.0
+
 [node name="Health" type="Node" parent="."]
 script = ExtResource("2_jg8ob")
+health = 2
+max_health = 2
 
 [node name="Team" type="Node" parent="."]
 script = ExtResource("3_uwcyq")

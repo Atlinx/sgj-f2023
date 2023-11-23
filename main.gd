@@ -22,8 +22,6 @@ func add_player(id:int) -> void:
 	player.name = str(id)
 	players.add_child(player)
 	
-	
-	
 func _on_peer_connected(id:int) -> void:
 	print("has player connect, ID:",id)
 	add_player(id)
