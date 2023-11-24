@@ -1,5 +1,6 @@
-[gd_scene load_steps=19 format=3 uid="uid://cdpn5s43qjbwg"]
+[gd_scene load_steps=20 format=3 uid="uid://cdpn5s43qjbwg"]
 
+[ext_resource type="Script" path="res://scripts/healthbar.gd" id="1_bgety"]
 [ext_resource type="Texture2D" uid="uid://g1bx6y7c5y75" path="res://sprites/slime.png" id="1_hx314"]
 [ext_resource type="Script" path="res://scripts/health.gd" id="2_jg8ob"]
 [ext_resource type="Script" path="res://scripts/team.gd" id="3_uwcyq"]
@@ -46,34 +47,26 @@ radius = 8.0
 [node name="Slime" type="CharacterBody2D" groups=["enemy"]]
 collision_mask = 17
 
+[node name="SlimeHealthBar" type="ProgressBar" parent="." node_paths=PackedStringArray("health")]
+self_modulate = Color(0.984314, 0.0196078, 0.0196078, 1)
+offset_left = -10.0
+offset_top = -13.0
+offset_right = 12.0
+offset_bottom = -9.0
+value = 100.0
+show_percentage = false
+script = ExtResource("1_bgety")
+health = NodePath("../Health")
+
 [node name="Visuals" type="Node2D" parent="." node_paths=PackedStringArray("slimehealthbar", "health")]
-position = Vector2(0, -0.990062)
+position = Vector2(0, -0.00555679)
 script = SubResource("GDScript_6g00e")
-slimehealthbar = NodePath("SlimeHealthBar")
+slimehealthbar = NodePath("")
 health = NodePath("../Health")
 
 [node name="Sprite2D" type="Sprite2D" parent="Visuals"]
 position = Vector2(0, -4)
 texture = ExtResource("1_hx314")
-
-[node name="SlimeHealthBar" type="TextureProgressBar" parent="Visuals"]
-visible = false
-modulate = Color(0.980392, 0.141176, 0.0156863, 1)
-offset_left = -19.0
-offset_top = -22.0557
-offset_right = 25.0
-offset_bottom = -9.05568
-value = 100.0
-
-[node name="Label" type="Label" parent="Visuals/SlimeHealthBar"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
-
-[node name="ColorRect" type="ColorRect" parent="Visuals/SlimeHealthBar"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 9.0
 
 [node name="Health" type="Node" parent="."]
 script = ExtResource("2_jg8ob")
@@ -85,6 +78,7 @@ script = ExtResource("3_uwcyq")
 team = 1
 
 [node name="DetectionArea2D" type="Area2D" parent="."]
+visible = false
 collision_mask = 33
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea2D"]
@@ -153,4 +147,5 @@ libraries = {
 "entity_anim_lib": ExtResource("10_u3v1d")
 }
 
+[connection signal="value_changed" from="SlimeHealthBar" to="SlimeHealthBar" method="_on_value_changed"]
 [connection signal="death" from="Health" to="DeathFx" method="on_death"]

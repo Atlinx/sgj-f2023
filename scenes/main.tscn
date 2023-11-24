@@ -1,6 +1,5 @@
 [gd_scene load_steps=15 format=3 uid="uid://cf363is1q737y"]
 
-[ext_resource type="Script" path="res://scenes/scene_manager.gd" id="1_041gn"]
 [ext_resource type="Script" path="res://scripts/level.gd" id="2_dek5y"]
 [ext_resource type="PackedScene" uid="uid://ci8yj0nmd1i13" path="res://scenes/player.tscn" id="2_wtq3t"]
 [ext_resource type="PackedScene" uid="uid://cdpn5s43qjbwg" path="res://scenes/slime.tscn" id="3_ojb2m"]
@@ -11,6 +10,30 @@
 [ext_resource type="Script" path="res://scripts/IntialEnemyCreater.gd" id="8_iccj2"]
 [ext_resource type="AudioStream" uid="uid://dy58atrg72ubh" path="res://scenes/Background Music 2.mp3" id="8_jpg50"]
 [ext_resource type="FontFile" uid="uid://bif30ky26map1" path="res://sprites/Minecraft.ttf" id="8_tqedg"]
+
+[sub_resource type="GDScript" id="GDScript_v2ul6"]
+script/source = "extends Node
+
+@export var PlayerScene : PackedScene
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	var index = 0
+	for i in GameManager.players:
+		var currentPlayer = PlayerScene.instantiate()
+		currentPlayer.name = str(GameManager.players[i].id)
+		add_child(currentPlayer)
+		for spawn in get_tree().get_nodes_in_group(\"PlayerSpawnPoint\"):
+			if spawn.name == str(index):
+				currentPlayer.global_position = spawn.global_position
+		index += 1
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	pass
+"
 
 [sub_resource type="GDScript" id="GDScript_ebanc"]
 script/source = "extends CanvasLayer
@@ -42,8 +65,8 @@ font_color = Color(0.745098, 0.745098, 0.745098, 1)
 outline_size = 8
 outline_color = Color(0, 0, 0, 1)
 
-[node name="Main" type="Node"]
-script = ExtResource("1_041gn")
+[node name="MultiplayerMain" type="Node"]
+script = SubResource("GDScript_v2ul6")
 PlayerScene = ExtResource("2_wtq3t")
 
 [node name="LevelSlime" type="Node2D" parent="."]

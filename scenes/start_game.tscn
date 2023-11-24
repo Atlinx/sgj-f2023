@@ -1,0 +1,25 @@
+[gd_scene load_steps=2 format=3 uid="uid://ckltg3g3le8p7"]
+
+[ext_resource type="Script" path="res://start_game.gd" id="1_v6abb"]
+
+[node name="StartGame" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_v6abb")
+
+[node name="SinglePlayer" type="Button" parent="."]
+offset_left = 344.0
+offset_top = -4.0
+offset_right = 630.0
+offset_bottom = 179.0
+text = "single player"
+
+[node name="Multiplayer" type="Button" parent="."]
+offset_left = 370.0
+offset_top = 334.0
+offset_right = 652.0
+offset_bottom = 491.0
+text = "multiplayer"
+
+[connection signal="button_down" from="SinglePlayer" to="." method="_on_single_player_button_down"]
+[connection signal="button_down" from="Multiplayer" to="." method="_on_multiplayer_button_down"]

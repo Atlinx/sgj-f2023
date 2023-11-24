@@ -9,6 +9,7 @@ class_name Player
 @export var speed: float = 300.0
 @export var has_shot: bool = true
 @export var player_animation_tree: AnimationTree
+@export var mulitiplayer_synchronizer : MultiplayerSynchronizer
 
 var has_teammate_bullet : bool = false
 var in_hand : String = "my_bullet"
@@ -18,13 +19,13 @@ var in_hand : String = "my_bullet"
 
 
 func _ready():
-	$MultiplayerSynchronizer.set_multiplayer_authority(str(name).to_int())
+	mulitiplayer_synchronizer.set_multiplayer_authority(str(name).to_int())
 	
 
 
 func _process(delta):
 	
-	if $MultiplayerSynchronizer.get_multiplayer_authority() == multiplayer.get_unique_id():
+	if mulitiplayer_synchronizer.get_multiplayer_authority() == multiplayer.get_unique_id():
 		return
 	
 	
