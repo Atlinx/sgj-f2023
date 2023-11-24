@@ -4,7 +4,6 @@ extends Node2D
 @export var player: Player
 @export var collector_area: Area2D
 
-
 func _ready():
 	collector_area.area_entered.connect(_on_collector_area_entered)
 

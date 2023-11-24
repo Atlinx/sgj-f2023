@@ -10,6 +10,7 @@ class_name Player
 @export var has_shot: bool = true
 @export var player_animation_tree: AnimationTree
 @export var mulitiplayer_synchronizer : MultiplayerSynchronizer
+@export var has_my_shot_color : ColorRect
 
 var has_teammate_bullet : bool = false
 var in_hand : String = "my_bullet"
@@ -20,7 +21,6 @@ var in_hand : String = "my_bullet"
 
 func _ready():
 	mulitiplayer_synchronizer.set_multiplayer_authority(str(name).to_int())
-	
 
 
 func _process(delta):
@@ -28,6 +28,8 @@ func _process(delta):
 	if mulitiplayer_synchronizer.get_multiplayer_authority() == multiplayer.get_unique_id():
 		return
 	
+	if has_shot:
+		has_my_shot_color.show()
 	
 	if Input.is_key_pressed(KEY_1):
 		in_hand = "my_bullet"
@@ -54,6 +56,7 @@ func fire():
 	var direction = (get_global_mouse_position() - global_position).normalized()
 	my_bullet_inst.construct(self, global_position, direction)
 	has_shot = false
+	has_my_shot_color.hide()
 	fire_sound.play()
 
 

@@ -1,10 +1,11 @@
-[gd_scene load_steps=23 format=3 uid="uid://ci8yj0nmd1i13"]
+[gd_scene load_steps=24 format=3 uid="uid://ci8yj0nmd1i13"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_co7fm"]
 [ext_resource type="Shader" path="res://materials/shaders/entity.gdshader" id="1_rgjpx"]
 [ext_resource type="PackedScene" uid="uid://ci276fgn23rcd" path="res://scenes/player_bullet.tscn" id="2_age5k"]
 [ext_resource type="Texture2D" uid="uid://cee6d7cbam6pj" path="res://sprites/player.png" id="3_78r3x"]
 [ext_resource type="Script" path="res://scripts/health.gd" id="3_f1j7r"]
+[ext_resource type="Script" path="res://scripts/healthbar.gd" id="3_grg05"]
 [ext_resource type="Script" path="res://scripts/team.gd" id="4_s4p3p"]
 [ext_resource type="Script" path="res://scripts/player_camera.gd" id="5_2hbsy"]
 [ext_resource type="PackedScene" uid="uid://booa6u2jw1mxr" path="res://scenes/death_fx.tscn" id="6_0krtd"]
@@ -46,7 +47,7 @@ properties/1/spawn = true
 properties/1/sync = true
 properties/1/watch = false
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("fire_sound", "player_animation_tree", "mulitiplayer_synchronizer")]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("fire_sound", "player_animation_tree", "mulitiplayer_synchronizer", "has_my_shot_color")]
 collision_layer = 32
 collision_mask = 16
 script = ExtResource("1_co7fm")
@@ -55,9 +56,21 @@ my_bullet_prefab = ExtResource("2_age5k")
 speed = 128.0
 player_animation_tree = NodePath("AnimationTree")
 mulitiplayer_synchronizer = NodePath("MultiplayerSynchronizer")
+has_my_shot_color = NodePath("ColorRect")
+
+[node name="SlimeHealthBar" type="ProgressBar" parent="." node_paths=PackedStringArray("health")]
+self_modulate = Color(0.984314, 0.0196078, 0.0196078, 1)
+offset_left = -11.0
+offset_top = -16.0
+offset_right = 11.0
+offset_bottom = -12.0
+value = 100.0
+show_percentage = false
+script = ExtResource("3_grg05")
+health = NodePath("../Health")
 
 [node name="Visuals" type="Node2D" parent="."]
-position = Vector2(0, -0.0227469)
+position = Vector2(0, -0.0349168)
 
 [node name="Sprite2D" type="Sprite2D" parent="Visuals"]
 material = SubResource("ShaderMaterial_jki3l")
@@ -77,8 +90,8 @@ player = NodePath("..")
 
 [node name="Health" type="Node" parent="."]
 script = ExtResource("3_f1j7r")
-health = 10000
-max_health = 10000
+health = 100
+max_health = 100
 
 [node name="Team" type="Node" parent="."]
 script = ExtResource("4_s4p3p")
@@ -136,4 +149,12 @@ stream = ExtResource("16_kgfux")
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_1chmr")
 
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -10.0
+offset_top = -19.0
+offset_right = -8.0
+offset_bottom = -17.0
+color = Color(0.207843, 0.988235, 0.0196078, 1)
+
+[connection signal="value_changed" from="SlimeHealthBar" to="SlimeHealthBar" method="_on_value_changed"]
 [connection signal="death" from="Health" to="DeathFx" method="on_death"]

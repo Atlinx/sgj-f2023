@@ -8,6 +8,7 @@ anchors_preset = 0
 script = ExtResource("1_v6abb")
 
 [node name="SinglePlayer" type="Button" parent="."]
+layout_mode = 0
 offset_left = 344.0
 offset_top = -4.0
 offset_right = 630.0
@@ -15,6 +16,7 @@ offset_bottom = 179.0
 text = "single player"
 
 [node name="Multiplayer" type="Button" parent="."]
+layout_mode = 0
 offset_left = 370.0
 offset_top = 334.0
 offset_right = 652.0
