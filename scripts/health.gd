@@ -16,6 +16,7 @@ func _ready():
 	health = max_health
 
 
+
 func damage(amount: int):
 	health -= amount
 	damaged.emit(amount)

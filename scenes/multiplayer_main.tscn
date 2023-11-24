@@ -69,47 +69,6 @@ outline_color = Color(0, 0, 0, 1)
 script = SubResource("GDScript_v2ul6")
 PlayerScene = ExtResource("2_wtq3t")
 
-[node name="LevelSlime" type="Node2D" parent="."]
-
-[node name="Slime3" parent="LevelSlime" instance=ExtResource("3_ojb2m")]
-position = Vector2(-36, 101)
-
-[node name="Slime2" parent="LevelSlime" instance=ExtResource("3_ojb2m")]
-position = Vector2(-45, -18)
-
-[node name="Slime" parent="LevelSlime" instance=ExtResource("3_ojb2m")]
-position = Vector2(-36, -122)
-
-[node name="Slime4" parent="LevelSlime" instance=ExtResource("3_ojb2m")]
-position = Vector2(-117, 1)
-
-[node name="Slime8" parent="LevelSlime" instance=ExtResource("3_ojb2m")]
-position = Vector2(19, -73)
-
-[node name="Slime9" parent="LevelSlime" instance=ExtResource("3_ojb2m")]
-position = Vector2(47, -3)
-
-[node name="Slime10" parent="LevelSlime" instance=ExtResource("3_ojb2m")]
-position = Vector2(24, 43)
-
-[node name="Slime11" parent="LevelSlime" instance=ExtResource("3_ojb2m")]
-position = Vector2(24, 124)
-
-[node name="Slime12" parent="LevelSlime" instance=ExtResource("3_ojb2m")]
-position = Vector2(-120, 75)
-
-[node name="Slime13" parent="LevelSlime" instance=ExtResource("3_ojb2m")]
-position = Vector2(26, -138)
-
-[node name="Slime5" parent="LevelSlime" instance=ExtResource("3_ojb2m")]
-position = Vector2(-35, 16)
-
-[node name="Slime6" parent="LevelSlime" instance=ExtResource("3_ojb2m")]
-position = Vector2(-94, -90)
-
-[node name="Slime7" parent="LevelSlime" instance=ExtResource("3_ojb2m")]
-position = Vector2(-95, 120)
-
 [node name="World" type="Node2D" parent="."]
 
 [node name="Level" type="TileMap" parent="World" groups=["wall"]]

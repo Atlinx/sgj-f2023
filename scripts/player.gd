@@ -1,8 +1,9 @@
 extends CharacterBody2D
 class_name Player
 
-
-
+@export var health: Health 
+@export var self_heal_interval : float = 0
+@export var self_heal : int = 0
 @export var fire_sound : AudioStreamPlayer
 @export var my_bullet_prefab: PackedScene
 @export var teammate_bullet_prefab: PackedScene
@@ -14,13 +15,14 @@ class_name Player
 
 var has_teammate_bullet : bool = false
 var in_hand : String = "my_bullet"
-
+var time_since_last_self_heal : float = 0
 
 
 
 
 func _ready():
 	mulitiplayer_synchronizer.set_multiplayer_authority(str(name).to_int())
+
 
 
 func _process(delta):
@@ -30,6 +32,13 @@ func _process(delta):
 	
 	if has_shot:
 		has_my_shot_color.show()
+		
+	if time_since_last_self_heal >= self_heal_interval:
+		health.health += self_heal
+		time_since_last_self_heal = 0
+		print("111")
+	else:
+		time_since_last_self_heal += delta
 	
 	if Input.is_key_pressed(KEY_1):
 		in_hand = "my_bullet"
