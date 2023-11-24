@@ -14,7 +14,7 @@ func _process(delta):
 
 
 func _on_single_player_button_down():
-	var scene = load("res://scenes/main.tscn").instantiate()
+	var scene = load("res://scenes/single_player_main.tscn").instantiate()
 	get_tree().root.add_child(scene)
 	self.hide()
 
