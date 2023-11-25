@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://csntnfh6j6y2r"]
+
+[ext_resource type="Script" path="res://scenes/slot.gd" id="1_wotnd"]
+[ext_resource type="Texture2D" uid="uid://cicnhdd0fp4nn" path="res://sprites/inventorySlot.png" id="2_ita8l"]
+
+[node name="Slot" type="Panel"]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(20, 20)
+script = ExtResource("1_wotnd")
+
+[node name="BackGround" type="Sprite2D" parent="."]
+texture = ExtResource("2_ita8l")
+centered = false
+vframes = 2
+
+[node name="Item" type="Sprite2D" parent="."]

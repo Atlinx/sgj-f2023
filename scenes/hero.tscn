@@ -55,7 +55,7 @@ properties/1/spawn = true
 properties/1/sync = true
 properties/1/watch = false
 
-[node name="Hero" type="CharacterBody2D" node_paths=PackedStringArray("health", "player_animation_tree", "mulitiplayer_synchronizer")]
+[node name="Hero" type="CharacterBody2D" node_paths=PackedStringArray("health", "player_animation_tree", "mulitiplayer_synchronizer") groups=["player"]]
 position = Vector2(-485, 22)
 collision_layer = 32
 collision_mask = 16
@@ -66,8 +66,8 @@ self_heal = 50
 player_animation_tree = NodePath("AnimationTree")
 mulitiplayer_synchronizer = NodePath("MultiplayerSynchronizer")
 
-[node name="SlimeHealthBar" type="ProgressBar" parent="."]
-self_modulate = Color(0.984314, 0.0196078, 0.0196078, 1)
+[node name="SlimeHealthBar" type="ProgressBar" parent="." node_paths=PackedStringArray("health")]
+self_modulate = Color(0.0705882, 0.984314, 0.0196078, 1)
 offset_left = -11.0
 offset_top = -16.0
 offset_right = 11.0
@@ -75,9 +75,10 @@ offset_bottom = -12.0
 value = 100.0
 show_percentage = false
 script = ExtResource("2_0lx5u")
+health = NodePath("../Health")
 
 [node name="Visuals" type="Node2D" parent="."]
-position = Vector2(0, -0.999596)
+position = Vector2(0, -0.059425)
 
 [node name="Sprite2D" type="Sprite2D" parent="Visuals"]
 material = SubResource("ShaderMaterial_jki3l")
@@ -105,9 +106,12 @@ script = ExtResource("7_rlgqx")
 [node name="DeathFx" parent="." node_paths=PackedStringArray("fx_nodes") instance=ExtResource("8_5piuf")]
 fx_nodes = [null]
 
-[node name="ItemCollector" type="Node2D" parent="."]
+[node name="ItemCollector" type="Node2D" parent="." node_paths=PackedStringArray("health", "player", "collector_area")]
 visible = false
 script = ExtResource("9_lu1ob")
+health = NodePath("../Health")
+player = NodePath("..")
+collector_area = NodePath("Area2D")
 
 [node name="Area2D" type="Area2D" parent="ItemCollector"]
 

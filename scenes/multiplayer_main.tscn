@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://cf363is1q737y"]
+[gd_scene load_steps=13 format=3 uid="uid://cf363is1q737y"]
 
 [ext_resource type="PackedScene" uid="uid://ci8yj0nmd1i13" path="res://scenes/shooter.tscn" id="1_0n7om"]
 [ext_resource type="Script" path="res://scripts/level.gd" id="2_dek5y"]
@@ -9,7 +9,7 @@
 [ext_resource type="Script" path="res://scripts/Slime_spawner.gd" id="6_uack1"]
 [ext_resource type="Script" path="res://scripts/IntialEnemyCreater.gd" id="8_iccj2"]
 [ext_resource type="AudioStream" uid="uid://dy58atrg72ubh" path="res://scenes/Background Music 2.mp3" id="8_jpg50"]
-[ext_resource type="FontFile" uid="uid://bif30ky26map1" path="res://sprites/Minecraft.ttf" id="8_tqedg"]
+[ext_resource type="PackedScene" uid="uid://cgokel7vn646l" path="res://scenes/inventory.tscn" id="10_8d5tp"]
 
 [sub_resource type="GDScript" id="GDScript_v2ul6"]
 script/source = "extends Node
@@ -45,27 +45,16 @@ script/source = "extends CanvasLayer
 @export var label : Label
 
 func _ready():
-	health.healthchanged.connect(_update)
-	_update()
+	health.healthchanged.connect(_health_update)
+	_health_update()
 
-func _update():
+func _health_update():
 	health_bar.value = health.health * 100 / health.max_health 
 	label.text = str(health.health) +\"/\"+ str(health.max_health)
 	
-	
+func _skill_update():
+	pass
 "
-
-[sub_resource type="LabelSettings" id="LabelSettings_mjsav"]
-font = ExtResource("8_tqedg")
-font_size = 32
-outline_size = 16
-outline_color = Color(0, 0, 0, 1)
-
-[sub_resource type="LabelSettings" id="LabelSettings_xkd5t"]
-font = ExtResource("8_tqedg")
-font_color = Color(0.745098, 0.745098, 0.745098, 1)
-outline_size = 8
-outline_color = Color(0, 0, 0, 1)
 
 [node name="MultiplayerMain" type="Node"]
 script = SubResource("GDScript_v2ul6")
@@ -113,67 +102,41 @@ autoplay = true
 
 [node name="UI" type="CanvasLayer" parent="." node_paths=PackedStringArray("health_bar", "label")]
 script = SubResource("GDScript_ebanc")
-health_bar = NodePath("HealthUI/HealthBarUI")
-label = NodePath("HealthUI/Label")
+health_bar = NodePath("")
+label = NodePath("")
 
-[node name="Scroe" type="Control" parent="UI"]
-visible = false
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="MarginContainer" type="MarginContainer" parent="UI/Scroe"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/margin_left = 32
-theme_override_constants/margin_top = 32
-theme_override_constants/margin_right = 32
-theme_override_constants/margin_bottom = 32
-
-[node name="VBoxContainer" type="VBoxContainer" parent="UI/Scroe/MarginContainer"]
-layout_mode = 2
-
-[node name="ScoreLabel" type="Label" parent="UI/Scroe/MarginContainer/VBoxContainer"]
-layout_mode = 2
-text = "SCORE: 5"
-label_settings = SubResource("LabelSettings_mjsav")
-
-[node name="Label" type="Label" parent="UI/Scroe/MarginContainer/VBoxContainer"]
-layout_mode = 2
-text = "Backspace to Restart"
-label_settings = SubResource("LabelSettings_xkd5t")
+[node name="Skill" parent="UI" instance=ExtResource("10_8d5tp")]
+offset_left = 6.0
+offset_top = 26.0
+offset_right = 6.0
+offset_bottom = 26.0
 
 [node name="HealthUI" type="Control" parent="UI"]
 self_modulate = Color(0.27451, 0.992157, 0.0313726, 1)
 layout_mode = 3
 anchors_preset = 0
+offset_left = -5.0
+offset_top = -4.0
 offset_right = 40.0
-offset_bottom = 40.0
+offset_bottom = 16.0
+
+[node name="HealthShow" type="Label" parent="UI/HealthUI"]
+layout_mode = 0
+offset_left = 118.0
+offset_top = 21.0
+offset_right = 162.0
+offset_bottom = 47.0
+text = "HP:"
 
 [node name="HealthBarUI" type="ProgressBar" parent="UI/HealthUI"]
 self_modulate = Color(0.0156863, 0.972549, 0.0196078, 1)
 layout_mode = 0
-offset_left = 28.0
-offset_top = 22.0
-offset_right = 301.0
-offset_bottom = 53.0
+offset_left = 19.0
+offset_top = 18.0
+offset_right = 292.0
+offset_bottom = 49.0
 value = 100.0
 show_percentage = false
-
-[node name="Label" type="Label" parent="UI/HealthUI"]
-layout_mode = 0
-offset_left = 127.0
-offset_top = 26.0
-offset_right = 168.0
-offset_bottom = 55.0
-text = "HP:"
 
 [node name="SpawnLocations" type="Node2D" parent="."]
 

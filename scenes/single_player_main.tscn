@@ -1,15 +1,18 @@
 [gd_scene load_steps=3 format=3 uid="uid://4t16hws81g83"]
 
 [ext_resource type="PackedScene" uid="uid://cf363is1q737y" path="res://scenes/multiplayer_main.tscn" id="1_6onl5"]
-[ext_resource type="PackedScene" uid="uid://ci8yj0nmd1i13" path="res://scenes/shooter.tscn" id="2_jsfbf"]
+[ext_resource type="PackedScene" uid="uid://ci8yj0nmd1i13" path="res://scenes/shooter.tscn" id="2_6qp50"]
 
 [node name="SinglePlayerMain" instance=ExtResource("1_6onl5")]
 
-[node name="Shooter" parent="World/Level" index="0" instance=ExtResource("2_jsfbf")]
-position = Vector2(-502, 13)
+[node name="Shooter" parent="World/Level" index="0" instance=ExtResource("2_6qp50")]
 
 [node name="IntialEnemyCreater" parent="." index="3"]
 intial_enemy_amount = 100
+
+[node name="UI" parent="." index="5" node_paths=PackedStringArray("health_bar", "label")]
+health_bar = NodePath("HealthUI/HealthBarUI")
+label = NodePath("HealthUI/HealthShow")
 
 [node name="SpawnLocations" parent="." index="6"]
 visible = false

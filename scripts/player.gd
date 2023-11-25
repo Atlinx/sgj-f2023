@@ -13,6 +13,7 @@ class_name Player
 @export var mulitiplayer_synchronizer : MultiplayerSynchronizer
 @export var has_my_shot_color : ColorRect
 
+
 var has_teammate_bullet : bool = false
 var in_hand : String = "my_bullet"
 var time_since_last_self_heal : float = 0
@@ -34,9 +35,8 @@ func _process(delta):
 		has_my_shot_color.show()
 		
 	if time_since_last_self_heal >= self_heal_interval:
-		health.health += self_heal
+		health.heal(self_heal)
 		time_since_last_self_heal = 0
-		print("111")
 	else:
 		time_since_last_self_heal += delta
 	

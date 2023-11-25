@@ -16,7 +16,7 @@
 [ext_resource type="Script" path="res://scripts/entity_animation_tree.gd" id="11_ysmxa"]
 [ext_resource type="Script" path="res://scripts/dropped_item.gd" id="15_pppg5"]
 [ext_resource type="Shader" path="res://materials/shaders/bullet.gdshader" id="16_cs8bx"]
-[ext_resource type="Texture2D" uid="uid://ds8oe1j4v5amr" path="res://scenes/heart.png" id="17_11pwo"]
+[ext_resource type="Texture2D" uid="uid://ds8oe1j4v5amr" path="res://sprites/heart.png" id="17_11pwo"]
 
 [sub_resource type="GDScript" id="GDScript_6g00e"]
 script/source = "extends Node2D
