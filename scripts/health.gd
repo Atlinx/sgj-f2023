@@ -29,6 +29,8 @@ func damage(amount: int):
 func heal(amount: int):
 	health += amount
 	healed.emit(amount)
-	healthchanged.emit()
 	if health > max_health:
 		health = max_health
+	healthchanged.emit()
+
+

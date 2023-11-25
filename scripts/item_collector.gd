@@ -18,5 +18,5 @@ func _on_collector_area_entered(area: Area2D):
 			player.has_teammate_bullet = true
 			dropped_item.collect()
 		if dropped_item.item_type == DroppedItem.ItemType.HEART:
-			health.health += 5
+			health.heal(5)
 			dropped_item.collect()

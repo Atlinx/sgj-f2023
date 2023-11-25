@@ -37,20 +37,22 @@ func _process(delta):
 
 [sub_resource type="GDScript" id="GDScript_ebanc"]
 script/source = "extends CanvasLayer
-#
-#
-##var player : Player
-##var health = 0
-##var value 
-##
-##func _ready():
-##	player = get_tree().get_first_node_in_group(\"player\")
-##	health = player.get_node(\"Health\")
-##	health.healthchanged.connect(_update)
-##	_update()
-##
-##func _update():
-##	value = health.health * 100 / health.max_health 
+
+
+@onready var player = get_tree().get_first_node_in_group(\"player\")
+@onready var health = player.get_node(\"Health\")
+@export var health_bar : ProgressBar
+@export var label : Label
+
+func _ready():
+	health.healthchanged.connect(_update)
+	_update()
+
+func _update():
+	health_bar.value = health.health * 100 / health.max_health 
+	label.text = str(health.health) +\"/\"+ str(health.max_health)
+	
+	
 "
 
 [sub_resource type="LabelSettings" id="LabelSettings_mjsav"]
@@ -109,10 +111,13 @@ game_manager = NodePath("../GameManager")
 stream = ExtResource("8_jpg50")
 autoplay = true
 
-[node name="UI" type="CanvasLayer" parent="."]
+[node name="UI" type="CanvasLayer" parent="." node_paths=PackedStringArray("health_bar", "label")]
 script = SubResource("GDScript_ebanc")
+health_bar = NodePath("HealthUI/HealthBarUI")
+label = NodePath("HealthUI/Label")
 
 [node name="Scroe" type="Control" parent="UI"]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -145,21 +150,30 @@ layout_mode = 2
 text = "Backspace to Restart"
 label_settings = SubResource("LabelSettings_xkd5t")
 
-[node name="HealthBar" type="Control" parent="UI"]
+[node name="HealthUI" type="Control" parent="UI"]
+self_modulate = Color(0.27451, 0.992157, 0.0313726, 1)
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="HealthUnder" type="TextureProgressBar" parent="UI/HealthBar"]
+[node name="HealthBarUI" type="ProgressBar" parent="UI/HealthUI"]
+self_modulate = Color(0.0156863, 0.972549, 0.0196078, 1)
 layout_mode = 0
-offset_left = 261.0
-offset_top = 26.0
+offset_left = 28.0
+offset_top = 22.0
 offset_right = 301.0
-offset_bottom = 66.0
-step = 0.01
+offset_bottom = 53.0
 value = 100.0
-tint_under = Color(0.992157, 0.984314, 0.984314, 1)
+show_percentage = false
+
+[node name="Label" type="Label" parent="UI/HealthUI"]
+layout_mode = 0
+offset_left = 127.0
+offset_top = 26.0
+offset_right = 168.0
+offset_bottom = 55.0
+text = "HP:"
 
 [node name="SpawnLocations" type="Node2D" parent="."]
 
