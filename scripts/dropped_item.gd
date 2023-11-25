@@ -22,7 +22,7 @@ enum ItemType {
 @export var item_type: ItemType
 
 
-func _update_enabled(value):
+func _update_enabled(_value):
 	visible = enabled
 	collision_shape.disabled = not enabled
 

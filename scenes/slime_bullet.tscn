@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://bqepnybxfjapc"]
+
+[ext_resource type="PackedScene" uid="uid://cmfu0ybbkg7tn" path="res://scenes/bullet.tscn" id="1_hgevk"]
+[ext_resource type="Shader" path="res://materials/shaders/bullet.gdshader" id="2_t1cg4"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pgv15"]
+resource_local_to_scene = true
+shader = ExtResource("2_t1cg4")
+shader_parameter/bullet_color = Color(1, 0, 0, 1)
+
+[node name="SlimeBullet" instance=ExtResource("1_hgevk")]
+damage = 10
+speed = 200.0
+team = 1
+
+[node name="Sprite2D" parent="." index="0"]
+material = SubResource("ShaderMaterial_pgv15")

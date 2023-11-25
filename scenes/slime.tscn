@@ -9,7 +9,7 @@
 [ext_resource type="Script" path="res://scripts/ai_movement.gd" id="5_mdci3"]
 [ext_resource type="Texture2D" uid="uid://chb2gw0u5bwmx" path="res://sprites/shadow.png" id="6_dd0s1"]
 [ext_resource type="Texture2D" uid="uid://ddkd5dp5f6mrs" path="res://sprites/glow.png" id="7_5qlwr"]
-[ext_resource type="PackedScene" uid="uid://bcnh7qo1bytbp" path="res://scenes/enemy_bullet.tscn" id="7_gs87n"]
+[ext_resource type="PackedScene" uid="uid://bqepnybxfjapc" path="res://scenes/slime_bullet.tscn" id="8_joj1c"]
 [ext_resource type="Script" path="res://scripts/damage_box.gd" id="8_rc48p"]
 [ext_resource type="AnimationLibrary" uid="uid://c37cmbh7l1rgo" path="res://animations/entity_anim_lib.tres" id="10_u3v1d"]
 [ext_resource type="AnimationNodeStateMachine" uid="uid://q81ouwttk58h" path="res://animations/entity_anim_tree.tres" id="10_yfn4j"]
@@ -70,7 +70,7 @@ script = ExtResource("1_bgety")
 health = NodePath("../Health")
 
 [node name="Visuals" type="Node2D" parent="." node_paths=PackedStringArray("health")]
-position = Vector2(0, -0.920661)
+position = Vector2(0, -0.983042)
 script = SubResource("GDScript_6g00e")
 health = NodePath("../Health")
 
@@ -80,15 +80,15 @@ texture = ExtResource("1_hx314")
 
 [node name="Health" type="Node" parent="."]
 script = ExtResource("2_jg8ob")
-health = 2
-max_health = 2
+health = 50
+max_health = 50
 
 [node name="Team" type="Node" parent="."]
 script = ExtResource("3_uwcyq")
 team = 1
 
 [node name="DetectionArea2D" type="Area2D" parent="."]
-visible = false
+scale = Vector2(2, 2)
 collision_mask = 33
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea2D"]
@@ -118,7 +118,8 @@ script = ExtResource("5_mdci3")
 entity_body = NodePath("..")
 detection_area = NodePath("../DetectionArea2D")
 navigation_agent = NodePath("../NavigationAgent2D")
-bullet_prefab = ExtResource("7_gs87n")
+bullet_prefab = ExtResource("8_joj1c")
+fire_interval = 2
 animation_tree = NodePath("../AnimationTree")
 dropped_heart = NodePath("../DroppedItem")
 

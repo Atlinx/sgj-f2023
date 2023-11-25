@@ -21,7 +21,7 @@ func _ready():
 	health.damaged.connect(_on_damaged)
 
 
-func _on_damaged(amount: int):
+func _on_damaged(_amount: int):
 	_flash_timer = flash_duration
 
 

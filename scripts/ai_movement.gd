@@ -48,7 +48,7 @@ func _process(delta):
 			_fire_timer -= delta
 
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	animation_tree.walking = not navigation_agent.is_navigation_finished()
 	if not navigation_agent.is_navigation_finished():
 		var dir = entity_body.to_local(navigation_agent.get_next_path_position()).normalized()

@@ -32,7 +32,7 @@ func _on_enemy_death():
 	
 
 
-func _process(delta):
+func _process(_delta):
 	# 获取 "MySceneGroup" 组的所有实例
 	if has_executed_code == false:
 		var cells_intial = _get_random_cells(intial_enemy_amount)

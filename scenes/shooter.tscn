@@ -73,7 +73,7 @@ script = ExtResource("3_grg05")
 health = NodePath("../Health")
 
 [node name="Visuals" type="Node2D" parent="."]
-position = Vector2(0, -0.976321)
+position = Vector2(0, -0.999994)
 
 [node name="Sprite2D" type="Sprite2D" parent="Visuals"]
 material = SubResource("ShaderMaterial_jki3l")
@@ -93,8 +93,8 @@ player = NodePath("..")
 
 [node name="Health" type="Node" parent="."]
 script = ExtResource("3_f1j7r")
-health = 50
-max_health = 50
+health = 100
+max_health = 100
 
 [node name="Team" type="Node" parent="."]
 script = ExtResource("4_s4p3p")
