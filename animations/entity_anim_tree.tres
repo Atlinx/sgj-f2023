@@ -20,7 +20,8 @@ advance_expression = "not walking"
 [resource]
 states/Start/position = Vector2(203.5, 90.5)
 states/idle/node = SubResource("AnimationNodeAnimation_prf0l")
-states/idle/position = Vector2(501.25, 146)
+states/idle/position = Vector2(506.453, 147.921)
 states/walk/node = SubResource("AnimationNodeAnimation_uq5qo")
-states/walk/position = Vector2(506.5, 51)
+states/walk/position = Vector2(646, 149.461)
 transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_c7g43"), "idle", "walk", SubResource("AnimationNodeStateMachineTransition_ijpv1"), "walk", "idle", SubResource("AnimationNodeStateMachineTransition_6q5kl")]
+graph_offset = Vector2(97.7001, -14.7732)

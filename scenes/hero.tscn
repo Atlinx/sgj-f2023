@@ -1,0 +1,169 @@
+[gd_scene load_steps=26 format=3 uid="uid://fcltcmlr1x4q"]
+
+[ext_resource type="Script" path="res://scripts/hero.gd" id="1_3em0b"]
+[ext_resource type="Script" path="res://scripts/healthbar.gd" id="2_0lx5u"]
+[ext_resource type="Shader" path="res://materials/shaders/entity.gdshader" id="3_5mpf0"]
+[ext_resource type="Texture2D" uid="uid://cee6d7cbam6pj" path="res://sprites/player.png" id="4_7rcgy"]
+[ext_resource type="Script" path="res://scripts/player_camera.gd" id="5_fjoon"]
+[ext_resource type="Script" path="res://scripts/health.gd" id="6_1ojsw"]
+[ext_resource type="Script" path="res://scripts/team.gd" id="7_rlgqx"]
+[ext_resource type="PackedScene" uid="uid://booa6u2jw1mxr" path="res://scenes/death_fx.tscn" id="8_5piuf"]
+[ext_resource type="Script" path="res://scripts/item_collector.gd" id="9_lu1ob"]
+[ext_resource type="Script" path="res://scripts/hitbox.gd" id="10_8qotc"]
+[ext_resource type="Texture2D" uid="uid://chb2gw0u5bwmx" path="res://sprites/shadow.png" id="11_1s3fk"]
+[ext_resource type="Script" path="res://scripts/hit_fx.gd" id="12_qhybd"]
+[ext_resource type="AnimationLibrary" uid="uid://c37cmbh7l1rgo" path="res://animations/entity_anim_lib.tres" id="13_3r6kl"]
+[ext_resource type="AnimationNodeStateMachine" uid="uid://q81ouwttk58h" path="res://animations/entity_anim_tree.tres" id="14_to0vj"]
+[ext_resource type="Script" path="res://scripts/entity_animation_tree.gd" id="15_peqsa"]
+[ext_resource type="AudioStream" uid="uid://yvuw5bxumh15" path="res://scenes/37161__volivieri__soccer-stomp-edited.wav" id="16_v7r4y"]
+[ext_resource type="PackedScene" uid="uid://di45hf0lq0e23" path="res://sword.tscn" id="17_nw041"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jki3l"]
+shader = ExtResource("3_5mpf0")
+shader_parameter/flash_amount = 0.0
+shader_parameter/flash_color = Color(1, 1, 1, 1)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0rqyo"]
+radius = 2.0
+height = 12.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_euncd"]
+radius = 16.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_u7yjf"]
+radius = 8.0
+
+[sub_resource type="Curve" id="Curve_k2jw1"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -2.40338, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Animation" id="Animation_qx7yn"]
+length = 0.001
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qo17c"]
+_data = {
+"RESET": SubResource("Animation_qx7yn")
+}
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_1chmr"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/sync = true
+properties/0/watch = false
+properties/1/path = NodePath(".:has_shot")
+properties/1/spawn = true
+properties/1/sync = true
+properties/1/watch = false
+
+[node name="Hero" type="CharacterBody2D" node_paths=PackedStringArray("health", "player_animation_tree", "mulitiplayer_synchronizer")]
+position = Vector2(-485, 22)
+collision_layer = 32
+collision_mask = 16
+script = ExtResource("1_3em0b")
+health = NodePath("Health")
+self_heal_interval = 10.0
+self_heal = 50
+player_animation_tree = NodePath("AnimationTree")
+mulitiplayer_synchronizer = NodePath("MultiplayerSynchronizer")
+
+[node name="SlimeHealthBar" type="ProgressBar" parent="."]
+self_modulate = Color(0.984314, 0.0196078, 0.0196078, 1)
+offset_left = -11.0
+offset_top = -16.0
+offset_right = 11.0
+offset_bottom = -12.0
+value = 100.0
+show_percentage = false
+script = ExtResource("2_0lx5u")
+
+[node name="Visuals" type="Node2D" parent="."]
+position = Vector2(0, -0.999596)
+
+[node name="Sprite2D" type="Sprite2D" parent="Visuals"]
+material = SubResource("ShaderMaterial_jki3l")
+position = Vector2(0, -3.99713)
+texture = ExtResource("4_7rcgy")
+region_rect = Rect2(208, 0, 16, 16)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_0rqyo")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(2, 2)
+position_smoothing_enabled = true
+script = ExtResource("5_fjoon")
+
+[node name="Health" type="Node" parent="."]
+script = ExtResource("6_1ojsw")
+health = 100
+max_health = 100
+
+[node name="Team" type="Node" parent="."]
+script = ExtResource("7_rlgqx")
+
+[node name="DeathFx" parent="." node_paths=PackedStringArray("fx_nodes") instance=ExtResource("8_5piuf")]
+fx_nodes = [null]
+
+[node name="ItemCollector" type="Node2D" parent="."]
+visible = false
+script = ExtResource("9_lu1ob")
+
+[node name="Area2D" type="Area2D" parent="ItemCollector"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ItemCollector/Area2D"]
+shape = SubResource("CircleShape2D_euncd")
+debug_color = Color(0.121569, 0.701961, 0, 0.419608)
+
+[node name="Hitbox" type="Area2D" parent="." groups=["hitbox"]]
+position = Vector2(0, -5)
+script = ExtResource("10_8qotc")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("CircleShape2D_u7yjf")
+
+[node name="Shadow" type="Sprite2D" parent="."]
+self_modulate = Color(0, 0, 0, 0.494118)
+z_index = -3
+z_as_relative = false
+position = Vector2(0, 3)
+scale = Vector2(0.6, 0.666667)
+texture = ExtResource("11_1s3fk")
+
+[node name="HitFx" type="Node" parent="." node_paths=PackedStringArray("sprites")]
+script = ExtResource("12_qhybd")
+sprites = [null]
+flash_curve = SubResource("Curve_k2jw1")
+flash_duration = 0.5
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_qo17c"),
+"entity_anim_lib": ExtResource("13_3r6kl")
+}
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = ExtResource("14_to0vj")
+anim_player = NodePath("../AnimationPlayer")
+active = true
+script = ExtResource("15_peqsa")
+
+[node name="FireSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("16_v7r4y")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_1chmr")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -10.0
+offset_top = -19.0
+offset_right = -8.0
+offset_bottom = -17.0
+color = Color(0.207843, 0.988235, 0.0196078, 1)
+
+[node name="Weapon" type="Node2D" parent="."]
+position = Vector2(-5, -4)
+
+[node name="Sword" parent="Weapon" instance=ExtResource("17_nw041")]
+
+[connection signal="death" from="Health" to="DeathFx" method="on_death" flags=18]
