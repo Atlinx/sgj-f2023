@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://ci8yj0nmd1i13"]
+[gd_scene load_steps=24 format=3 uid="uid://ci8yj0nmd1i13"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_co7fm"]
 [ext_resource type="Shader" path="res://materials/shaders/entity.gdshader" id="1_rgjpx"]
@@ -17,7 +17,6 @@
 [ext_resource type="AnimationNodeStateMachine" uid="uid://q81ouwttk58h" path="res://animations/entity_anim_tree.tres" id="14_5pjci"]
 [ext_resource type="Script" path="res://scripts/entity_animation_tree.gd" id="14_148l1"]
 [ext_resource type="AudioStream" uid="uid://yvuw5bxumh15" path="res://scenes/37161__volivieri__soccer-stomp-edited.wav" id="16_kgfux"]
-[ext_resource type="PackedScene" uid="uid://di45hf0lq0e23" path="res://scenes/sword.tscn" id="18_rhbq7"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jki3l"]
 shader = ExtResource("1_rgjpx")
@@ -74,7 +73,7 @@ script = ExtResource("3_grg05")
 health = NodePath("../Health")
 
 [node name="Visuals" type="Node2D" parent="."]
-position = Vector2(0, -0.999517)
+position = Vector2(0, -0.976321)
 
 [node name="Sprite2D" type="Sprite2D" parent="Visuals"]
 material = SubResource("ShaderMaterial_jki3l")
@@ -160,7 +159,5 @@ offset_top = -19.0
 offset_right = -8.0
 offset_bottom = -17.0
 color = Color(0.207843, 0.988235, 0.0196078, 1)
-
-[node name="Sword" parent="." instance=ExtResource("18_rhbq7")]
 
 [connection signal="death" from="Health" to="DeathFx" method="on_death"]
