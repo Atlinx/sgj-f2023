@@ -6,13 +6,10 @@
 [node name="SinglePlayerMain" instance=ExtResource("1_6onl5")]
 
 [node name="Shooter" parent="World/Level" index="0" instance=ExtResource("2_6qp50")]
+position = Vector2(-469, 25)
 
 [node name="IntialEnemyCreater" parent="." index="3"]
 intial_enemy_amount = 100
-
-[node name="UI" parent="." index="5" node_paths=PackedStringArray("health_bar", "label")]
-health_bar = NodePath("HealthUI/HealthBarUI")
-label = NodePath("HealthUI/HealthShow")
 
 [node name="SpawnLocations" parent="." index="6"]
 visible = false
