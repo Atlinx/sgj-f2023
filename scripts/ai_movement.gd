@@ -8,7 +8,7 @@ extends Node
 @export var bullet_prefab: PackedScene
 @export var fire_interval = 1
 @export var animation_tree: AnimationTree
-@export var dropped_heart : PackedScene
+@export var dropped_heart : DroppedItem
 
 var _fire_timer: float
 
@@ -19,7 +19,7 @@ func _ready():
 	_fire_timer = fire_interval
 	detection_area.body_entered.connect(_on_body_entered)
 	detection_area.body_exited.connect(_on_body_exited)
-
+	dropped_heart.visible = false
 
 func _on_body_entered(body: Node2D):
 	var team = body.get_node_or_null("Team")
@@ -57,4 +57,7 @@ func _physics_process(delta):
 
 
 func _on_health_death():
-	pass
+	var root = get_tree().get_root()
+	dropped_heart.call_deferred("reparent",root)
+	dropped_heart.enabled = true
+

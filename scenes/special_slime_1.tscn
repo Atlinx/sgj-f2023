@@ -1,12 +1,18 @@
-[gd_scene load_steps=3 format=3 uid="uid://b4lwo6irvtgtq"]
+[gd_scene load_steps=5 format=3 uid="uid://b4lwo6irvtgtq"]
 
 [ext_resource type="PackedScene" uid="uid://cdpn5s43qjbwg" path="res://scenes/slime.tscn" id="1_0kj5y"]
 [ext_resource type="Script" path="res://scripts/special_slime_hitbox.gd" id="2_7a5d3"]
+[ext_resource type="Shader" path="res://materials/shaders/bullet.gdshader" id="3_nos8g"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8mx4b"]
+resource_local_to_scene = true
+shader = ExtResource("3_nos8g")
+shader_parameter/bullet_color = Color(0.0784314, 1, 0, 1)
 
 [node name="SpecialSlime1" instance=ExtResource("1_0kj5y")]
 
-[node name="Visuals" parent="." index="0"]
-position = Vector2(0, -0.184208)
+[node name="Visuals" parent="." index="1"]
+position = Vector2(0, -0.951056)
 
 [node name="Sprite2D" parent="Visuals" index="0"]
 scale = Vector2(1.5, 1.5)
@@ -14,5 +20,13 @@ scale = Vector2(1.5, 1.5)
 [node name="CollisionShape2D" parent="DetectionArea2D" index="0"]
 position = Vector2(1, 0)
 
-[node name="Hitbox" parent="." index="6"]
+[node name="Hitbox" parent="." index="7"]
 script = ExtResource("2_7a5d3")
+
+[node name="AIMovement" parent="." index="9"]
+speed = 64.0
+update_position_interval = 1.0
+fire_interval = 1
+
+[node name="Sprite2D" parent="DroppedItem" index="0"]
+material = SubResource("ShaderMaterial_8mx4b")
