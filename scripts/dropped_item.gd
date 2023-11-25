@@ -8,6 +8,7 @@ signal collected
 enum ItemType {
 	PLAYERBULLET1,
 	PLAYERBULLET2,
+	HEART
 }
 
 
@@ -33,3 +34,5 @@ func _ready():
 func collect():
 	collected.emit()
 	queue_free()
+
+

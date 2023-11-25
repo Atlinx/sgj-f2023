@@ -8,6 +8,7 @@ extends Node
 @export var bullet_prefab: PackedScene
 @export var fire_interval = 1
 @export var animation_tree: AnimationTree
+@export var dropped_heart : PackedScene
 
 var _fire_timer: float
 
@@ -53,3 +54,7 @@ func _physics_process(delta):
 		var dir = entity_body.to_local(navigation_agent.get_next_path_position()).normalized()
 		entity_body.velocity = dir * speed
 		entity_body.move_and_slide()
+
+
+func _on_health_death():
+	pass

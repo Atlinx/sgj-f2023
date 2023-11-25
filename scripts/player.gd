@@ -1,7 +1,7 @@
 extends CharacterBody2D
 class_name Player
 
-@export var health: Health 
+@export var health: Health
 @export var self_heal_interval : float = 0
 @export var self_heal : int = 0
 @export var fire_sound : AudioStreamPlayer

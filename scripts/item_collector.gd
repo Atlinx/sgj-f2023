@@ -1,6 +1,6 @@
 extends Node2D
 
-
+@export var health : Health
 @export var player: Player
 @export var collector_area: Area2D
 
@@ -16,4 +16,7 @@ func _on_collector_area_entered(area: Area2D):
 			dropped_item.collect()
 		elif dropped_item.item_type == DroppedItem.ItemType.PLAYERBULLET2:
 			player.has_teammate_bullet = true
+			dropped_item.collect()
+		if dropped_item.item_type == DroppedItem.ItemType.HEART:
+			health.health += 5
 			dropped_item.collect()
