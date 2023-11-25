@@ -6,7 +6,7 @@
 [node name="SinglePlayerMain" instance=ExtResource("1_6onl5")]
 
 [node name="Player" parent="World/Level" index="0" instance=ExtResource("2_jsfbf")]
-position = Vector2(-485, 22)
+position = Vector2(-502, 13)
 
 [node name="IntialEnemyCreater" parent="." index="3"]
 intial_enemy_amount = 100

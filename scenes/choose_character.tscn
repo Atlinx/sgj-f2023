@@ -1,0 +1,27 @@
+[gd_scene load_steps=2 format=3 uid="uid://bdf3mfqwl5eul"]
+
+[ext_resource type="Script" path="res://choose_character.gd" id="1_y01i2"]
+
+[node name="ChooseCharacter" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_y01i2")
+
+[node name="Shooter" type="Button" parent="."]
+layout_mode = 0
+offset_left = 344.0
+offset_top = -4.0
+offset_right = 630.0
+offset_bottom = 179.0
+text = "Shooter"
+
+[node name="Hero" type="Button" parent="."]
+layout_mode = 0
+offset_left = 370.0
+offset_top = 334.0
+offset_right = 652.0
+offset_bottom = 491.0
+text = "Hero"
+
+[connection signal="button_down" from="Shooter" to="." method="_on_single_player_button_down"]
+[connection signal="button_down" from="Hero" to="." method="_on_multiplayer_button_down"]

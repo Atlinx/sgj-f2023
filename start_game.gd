@@ -21,5 +21,6 @@ func _on_single_player_button_down():
 
 func _on_multiplayer_button_down():
 	var scene = load("res://scenes/multiplayer.tscn").instantiate()
+
 	get_tree().root.add_child(scene)
 	self.hide()
