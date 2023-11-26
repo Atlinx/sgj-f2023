@@ -1,0 +1,65 @@
+[gd_scene load_steps=4 format=3 uid="uid://4t16hws81g83"]
+
+[ext_resource type="PackedScene" uid="uid://cf363is1q737y" path="res://scenes/multiplayer_main.tscn" id="1_uqf4f"]
+[ext_resource type="PackedScene" uid="uid://fcltcmlr1x4q" path="res://scenes/hero.tscn" id="2_iqlyp"]
+[ext_resource type="PackedScene" uid="uid://ci8yj0nmd1i13" path="res://scenes/shooter.tscn" id="3_mnaik"]
+
+[node name="SinglePlayerMain" instance=ExtResource("1_uqf4f")]
+script = null
+
+[node name="World" parent="." index="0"]
+top_level = true
+
+[node name="Hero" parent="World/Level" index="0" instance=ExtResource("2_iqlyp")]
+position = Vector2(-474, -16)
+
+[node name="Shooter" parent="World/Level" index="1" instance=ExtResource("3_mnaik")]
+position = Vector2(-469, 36)
+
+[node name="Control" type="Control" parent="UI" index="0"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GridContainer" type="GridContainer" parent="UI/Control" index="0"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+columns = 2
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="UI/Control/GridContainer" index="0"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="UI/Control/GridContainer/SubViewportContainer" index="0"]
+handle_input_locally = false
+size = Vector2i(574, 648)
+render_target_update_mode = 4
+
+[node name="SubViewportContainer2" type="SubViewportContainer" parent="UI/Control/GridContainer" index="1"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="UI/Control/GridContainer/SubViewportContainer2" index="0"]
+handle_input_locally = false
+size = Vector2i(574, 648)
+render_target_update_mode = 4
+
+[node name="SlimeSpawner" parent="." index="3"]
+enemy_amount = Vector2i(2, 2)
+
+[node name="IntialEnemyCreater" parent="." index="4"]
+intial_enemy_amount = 150
+
+[node name="SpawnLocations" parent="." index="6"]
+visible = false

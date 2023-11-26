@@ -115,6 +115,12 @@ game_manager = NodePath("../GameManager")
 stream = ExtResource("8_jpg50")
 autoplay = true
 
+[node name="SpawnLocations" type="Node2D" parent="."]
+
+[node name="0" type="Node2D" parent="SpawnLocations" groups=["PlayerSpawnPoint"]]
+
+[node name="1" type="Node2D" parent="SpawnLocations" groups=["PlayerSpawnPoint"]]
+
 [node name="UI" type="CanvasLayer" parent="." node_paths=PackedStringArray("health_bar_1", "label_1", "health_bar_2", "label_2")]
 script = SubResource("GDScript_ebanc")
 health_bar_1 = NodePath("HealthUI/HealthBarUI")
@@ -181,9 +187,3 @@ offset_right = 292.0
 offset_bottom = 49.0
 value = 100.0
 show_percentage = false
-
-[node name="SpawnLocations" type="Node2D" parent="."]
-
-[node name="0" type="Node2D" parent="SpawnLocations" groups=["PlayerSpawnPoint"]]
-
-[node name="1" type="Node2D" parent="SpawnLocations" groups=["PlayerSpawnPoint"]]
