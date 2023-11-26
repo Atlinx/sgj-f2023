@@ -2,14 +2,15 @@
 
 [ext_resource type="Script" path="res://scripts/hero.gd" id="1_3em0b"]
 [ext_resource type="Script" path="res://scripts/healthbar.gd" id="2_0lx5u"]
+[ext_resource type="PackedScene" uid="uid://ci276fgn23rcd" path="res://scenes/player_bullet.tscn" id="2_xvfdh"]
 [ext_resource type="Shader" path="res://materials/shaders/entity.gdshader" id="3_5mpf0"]
 [ext_resource type="Texture2D" uid="uid://cee6d7cbam6pj" path="res://sprites/player.png" id="4_7rcgy"]
-[ext_resource type="Script" path="res://scenes/hero_camera2d.gd" id="5_uoebt"]
+[ext_resource type="Script" path="res://scripts/player_camera.gd" id="5_kqgjr"]
 [ext_resource type="Script" path="res://scripts/health.gd" id="6_1ojsw"]
 [ext_resource type="Script" path="res://scripts/team.gd" id="7_rlgqx"]
 [ext_resource type="PackedScene" uid="uid://booa6u2jw1mxr" path="res://scenes/death_fx.tscn" id="8_5piuf"]
-[ext_resource type="Script" path="res://scripts/item_collector.gd" id="9_lu1ob"]
 [ext_resource type="Script" path="res://scripts/hitbox.gd" id="10_8qotc"]
+[ext_resource type="Script" path="res://scenes/heroitemcollector.gd" id="10_rqwr4"]
 [ext_resource type="Texture2D" uid="uid://chb2gw0u5bwmx" path="res://sprites/shadow.png" id="11_1s3fk"]
 [ext_resource type="Script" path="res://scripts/hit_fx.gd" id="12_qhybd"]
 [ext_resource type="AnimationLibrary" uid="uid://c37cmbh7l1rgo" path="res://animations/entity_anim_lib.tres" id="13_3r6kl"]
@@ -45,17 +46,7 @@ _data = {
 "RESET": SubResource("Animation_qx7yn")
 }
 
-[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_1chmr"]
-properties/0/path = NodePath(".:position")
-properties/0/spawn = true
-properties/0/sync = true
-properties/0/watch = false
-properties/1/path = NodePath(".:has_shot")
-properties/1/spawn = true
-properties/1/sync = true
-properties/1/watch = false
-
-[node name="Hero" type="CharacterBody2D" node_paths=PackedStringArray("health", "player_animation_tree", "mulitiplayer_synchronizer", "has_teammate_bullet_color") groups=["player2"]]
+[node name="Hero" type="CharacterBody2D" node_paths=PackedStringArray("health", "fire_sound", "player_animation_tree", "has_teammate_bullet_color") groups=["player2"]]
 position = Vector2(-485, 22)
 collision_layer = 32
 collision_mask = 16
@@ -63,8 +54,9 @@ script = ExtResource("1_3em0b")
 health = NodePath("Health")
 self_heal_interval = 10.0
 self_heal = 50
+fire_sound = NodePath("FireSound")
+teammate_bullet_prefab = ExtResource("2_xvfdh")
 player_animation_tree = NodePath("AnimationTree")
-mulitiplayer_synchronizer = NodePath("MultiplayerSynchronizer")
 has_teammate_bullet_color = NodePath("ColorRect")
 
 [node name="SlimeHealthBar" type="ProgressBar" parent="." node_paths=PackedStringArray("health")]
@@ -79,7 +71,7 @@ script = ExtResource("2_0lx5u")
 health = NodePath("../Health")
 
 [node name="Visuals" type="Node2D" parent="."]
-position = Vector2(0, -0.033728)
+position = Vector2(0, -0.0172899)
 
 [node name="Sprite2D" type="Sprite2D" parent="Visuals"]
 material = SubResource("ShaderMaterial_jki3l")
@@ -92,10 +84,9 @@ rotation = 1.5708
 shape = SubResource("CapsuleShape2D_0rqyo")
 
 [node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("player")]
-enabled = false
 zoom = Vector2(2, 2)
 position_smoothing_enabled = true
-script = ExtResource("5_uoebt")
+script = ExtResource("5_kqgjr")
 player = NodePath("..")
 
 [node name="Health" type="Node" parent="."]
@@ -111,7 +102,7 @@ fx_nodes = [null]
 
 [node name="ItemCollector" type="Node2D" parent="." node_paths=PackedStringArray("health", "player", "collector_area")]
 visible = false
-script = ExtResource("9_lu1ob")
+script = ExtResource("10_rqwr4")
 health = NodePath("../Health")
 player = NodePath("..")
 collector_area = NodePath("Area2D")
@@ -158,9 +149,6 @@ script = ExtResource("15_peqsa")
 
 [node name="FireSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("16_v7r4y")
-
-[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
-replication_config = SubResource("SceneReplicationConfig_1chmr")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 offset_left = -10.0

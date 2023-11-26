@@ -30,8 +30,8 @@ size_flags_vertical = 3
 stretch = true
 
 [node name="Player1Viewport" type="SubViewport" parent="SplitScreen/GridContainer/SubViewportContainer"]
-transparent_bg = true
-size = Vector2i(574, 648)
+handle_input_locally = false
+size = Vector2i(2, 2)
 render_target_update_mode = 4
 
 [node name="Level1" parent="SplitScreen/GridContainer/SubViewportContainer/Player1Viewport" instance=ExtResource("1_oxki8")]
@@ -45,9 +45,8 @@ size_flags_vertical = 3
 stretch = true
 
 [node name="Player2Viewport" type="SubViewport" parent="SplitScreen/GridContainer/SubViewportContainer2"]
-transparent_bg = true
 handle_input_locally = false
-size = Vector2i(574, 648)
+size = Vector2i(2, 2)
 render_target_update_mode = 4
 
 [node name="Camera2D" type="Camera2D" parent="SplitScreen/GridContainer/SubViewportContainer2"]

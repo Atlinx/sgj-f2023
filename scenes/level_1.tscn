@@ -151,11 +151,11 @@ layer_1/z_index = 0
 layer_1/tile_data = PackedInt32Array()
 script = ExtResource("6_e6x4p")
 
-[node name="Shooter" parent="World/Level" instance=ExtResource("7_3pekr")]
-position = Vector2(-470, 56)
-
 [node name="Hero" parent="World/Level" instance=ExtResource("8_kojmd")]
 position = Vector2(-474, -16)
+
+[node name="Shooter" parent="World/Level" instance=ExtResource("7_3pekr")]
+position = Vector2(-470, 56)
 
 [node name="GameManager" type="Node" parent="."]
 script = ExtResource("9_tdvt1")

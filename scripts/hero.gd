@@ -5,30 +5,25 @@ class_name hero
 @export var self_heal_interval : float = 0
 @export var self_heal : int = 0
 @export var fire_sound : AudioStreamPlayer
-@export var my_bullet_prefab: PackedScene
 @export var teammate_bullet_prefab: PackedScene
 @export var speed: float = 300.0
-@export var has_shot: bool = true
 @export var player_animation_tree: AnimationTree
-@export var mulitiplayer_synchronizer : MultiplayerSynchronizer
 @export var has_teammate_bullet_color : ColorRect
 
 var has_teammate_bullet : bool = false
 var in_hand : String = "my_bullet"
 var time_since_last_self_heal : float = 0
 
-
-
-
 func _ready():
-	mulitiplayer_synchronizer.set_multiplayer_authority(str(name).to_int())
+	has_teammate_bullet_color.hide()
 
 
 
 func _process(delta):
 	
-	if mulitiplayer_synchronizer.get_multiplayer_authority() == multiplayer.get_unique_id():
-		return
+	if has_teammate_bullet  and Input.is_action_just_pressed("p2_fire"):
+		fire()
+		has_teammate_bullet_color.hide()
 	
 	if has_teammate_bullet:
 		has_teammate_bullet_color.show()
@@ -36,11 +31,17 @@ func _process(delta):
 	if time_since_last_self_heal >= self_heal_interval:
 		health.health += self_heal
 		time_since_last_self_heal = 0
-		print("111")
 	else:
 		time_since_last_self_heal += delta
 
-
+func fire():
+	var teammate_bullet_inst: Bullet = teammate_bullet_prefab.instantiate()
+	get_tree().get_root().add_child(teammate_bullet_inst)
+	var direction = (get_global_mouse_position() - global_position).normalized()
+	teammate_bullet_inst.construct(self, global_position, direction)
+	has_teammate_bullet = false
+	has_teammate_bullet_color.hide()
+	fire_sound.play()
 
 
 func _physics_process(delta):

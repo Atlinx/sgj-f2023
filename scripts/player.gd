@@ -21,15 +21,10 @@ var time_since_last_self_heal : float = 0
 
 
 
-func _ready():
-	mulitiplayer_synchronizer.set_multiplayer_authority(str(name).to_int())
-
 
 
 func _process(delta):
-	
-	if mulitiplayer_synchronizer.get_multiplayer_authority() == multiplayer.get_unique_id():
-		return
+
 	
 	if has_shot:
 		has_my_shot_color.show()
@@ -40,14 +35,10 @@ func _process(delta):
 	else:
 		time_since_last_self_heal += delta
 	
-	if Input.is_key_pressed(KEY_1):
-		in_hand = "my_bullet"
-	if Input.is_key_pressed(KEY_2):
-		in_hand = "teammate_bullet"
 	
 	if has_shot and Input.is_action_just_pressed("p1_fire"):
 		if in_hand == "my_bullet":
-			fire.rpc()
+			fire()
 
 	if has_teammate_bullet and Input.is_action_just_pressed("p1_fire"):
 		if in_hand == "teammate_bullet":
@@ -58,7 +49,7 @@ func _process(delta):
 			has_teammate_bullet = false
 			fire_sound.play()
 			
-@rpc("any_peer","call_local")
+
 func fire():
 	var my_bullet_inst: Bullet = my_bullet_prefab.instantiate()
 	get_tree().get_root().add_child(my_bullet_inst)
