@@ -1,13 +1,8 @@
 extends Node
+class_name GameManager
 
 
-@export var player_1_viewport : Viewport
-@export var player_2_viewport : Viewport
 
-
-#	score_label.text = "SCORE: %s" % score
-func _ready():
-	player_1_viewport = player_2_viewport
 
 
 func _process(_delta):
