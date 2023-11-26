@@ -1,12 +1,17 @@
-[gd_scene load_steps=3 format=3 uid="uid://4t16hws81g83"]
+[gd_scene load_steps=4 format=3 uid="uid://4t16hws81g83"]
 
 [ext_resource type="PackedScene" uid="uid://cf363is1q737y" path="res://scenes/multiplayer_main.tscn" id="1_6onl5"]
 [ext_resource type="PackedScene" uid="uid://ci8yj0nmd1i13" path="res://scenes/shooter.tscn" id="2_6qp50"]
+[ext_resource type="PackedScene" uid="uid://fcltcmlr1x4q" path="res://scenes/hero.tscn" id="2_x8qu2"]
 
 [node name="SinglePlayerMain" instance=ExtResource("1_6onl5")]
+script = null
 
-[node name="Shooter" parent="World/Level" index="0" instance=ExtResource("2_6qp50")]
-position = Vector2(-469, 25)
+[node name="Hero" parent="World/Level" index="0" instance=ExtResource("2_x8qu2")]
+position = Vector2(-474, -16)
+
+[node name="Shooter" parent="World/Level" index="1" instance=ExtResource("2_6qp50")]
+position = Vector2(-469, 36)
 
 [node name="SlimeSpawner" parent="." index="2"]
 enemy_amount = Vector2i(2, 2)

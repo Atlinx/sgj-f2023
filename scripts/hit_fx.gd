@@ -12,7 +12,7 @@ var _flash_timer: float = 0
 func _ready():
 	var shared_material: Material
 	for sprite in sprites:
-		if sprite.material != null:	
+		if sprite.material != null:
 			shared_material = sprite.material
 	shared_material = shared_material.duplicate()
 	for sprite in sprites:

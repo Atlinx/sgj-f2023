@@ -46,7 +46,7 @@ func _process(delta):
 func _physics_process(delta):
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
-	var direction = Input.get_vector("p1_left", "p1_right", "p1_up", "p1_down")
+	var direction = Input.get_vector("p2_left", "p2_right", "p2_up", "p2_down")
 	velocity = direction * speed
 
 	player_animation_tree.walking = direction != Vector2.ZERO
