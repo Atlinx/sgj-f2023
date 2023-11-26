@@ -12,7 +12,7 @@ extends Control
 	},
 	"2" : { 
 		viewport = $GridContainer/SubViewportContainer2/Player2Viewport,
-		camera =$GridContainer/SubViewportContainer2/Camera2D,
+		camera =$GridContainer/SubViewportContainer2/Player2Viewport/Camera2D,
 		player =$GridContainer/SubViewportContainer/Player1Viewport/Level1/World/Level/Hero
 
 	}

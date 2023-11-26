@@ -7,7 +7,6 @@ extends Node
 @export var tile_map: TileMap
 @export var game_manager: GameManager
 @export var start_spawn_delay: float = 5
-@export var intial_enemy_amount : int = 0
 
 var _spawn_timer: float = 0
 var _spawnable_cells: Array[Vector2i] = []
@@ -39,7 +38,7 @@ func _process(delta):
 	if _spawn_timer <= 0:
 		_spawn_timer = randf_range(spawn_interval.x, spawn_interval.y)
 		var enemy_count = randi_range(enemy_amount.x, enemy_amount.y)
-	
+
 	# normal slime
 		var random_cells_normal = _get_random_cells(enemy_count)
 		for i in range(enemy_count):
@@ -50,7 +49,7 @@ func _process(delta):
 			add_child(enemy_inst)
 			var enemy_health = enemy_inst.get_node("Health")
 			enemy_health.death.connect(_on_enemy_death)
-		
+
 	else:
 		_spawn_timer -= delta
 

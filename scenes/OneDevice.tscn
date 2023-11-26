@@ -1,7 +1,44 @@
-[gd_scene load_steps=3 format=3 uid="uid://4t16hws81g83"]
+[gd_scene load_steps=5 format=3 uid="uid://4t16hws81g83"]
 
 [ext_resource type="Script" path="res://scenes/SplitScreen.gd" id="1_nca4c"]
 [ext_resource type="PackedScene" uid="uid://bb3i3r7einpnp" path="res://scenes/level_1.tscn" id="1_oxki8"]
+[ext_resource type="PackedScene" uid="uid://cgokel7vn646l" path="res://scenes/inventory.tscn" id="3_acuek"]
+
+[sub_resource type="GDScript" id="GDScript_acf85"]
+script/source = "extends CanvasLayer
+
+
+@onready var player_1 = get_tree().get_first_node_in_group(\"player1\")
+@onready var health_1 = player_1.get_node(\"Health\")
+@export var health_bar_1 : ProgressBar
+@export var label_1 : Label
+
+@onready var player_2 = get_tree().get_first_node_in_group(\"player2\")
+@onready var health_2 = player_2.get_node(\"Health\")
+@export var health_bar_2 : ProgressBar
+@export var label_2 : Label
+
+
+
+func _ready():
+	health_1.healthchanged.connect(_health_update)
+	
+	health_2.healthchanged.connect(_health_update)
+	_health_update()
+	
+
+func _health_update():
+	if is_instance_valid(health_1):
+		health_bar_1.value = health_1.health * 100 / health_1.max_health 
+		label_1.text = str(health_1.health) +\"/\"+ str(health_1.max_health)
+	
+	if is_instance_valid(health_2):
+		health_bar_2.value = health_2.health * 100 / health_2.max_health 
+		label_2.text = str(health_2.health) +\"/\"+ str(health_2.max_health)
+	
+func _skill_update():
+	pass
+"
 
 [node name="SinglePlayerMain" type="Node"]
 
@@ -31,7 +68,7 @@ stretch = true
 
 [node name="Player1Viewport" type="SubViewport" parent="SplitScreen/GridContainer/SubViewportContainer"]
 handle_input_locally = false
-size = Vector2i(2, 2)
+size = Vector2i(574, 648)
 render_target_update_mode = 4
 
 [node name="Level1" parent="SplitScreen/GridContainer/SubViewportContainer/Player1Viewport" instance=ExtResource("1_oxki8")]
@@ -46,7 +83,75 @@ stretch = true
 
 [node name="Player2Viewport" type="SubViewport" parent="SplitScreen/GridContainer/SubViewportContainer2"]
 handle_input_locally = false
-size = Vector2i(2, 2)
+size = Vector2i(574, 648)
 render_target_update_mode = 4
 
-[node name="Camera2D" type="Camera2D" parent="SplitScreen/GridContainer/SubViewportContainer2"]
+[node name="Camera2D" type="Camera2D" parent="SplitScreen/GridContainer/SubViewportContainer2/Player2Viewport"]
+position = Vector2(578, 0)
+
+[node name="UI" type="CanvasLayer" parent="." node_paths=PackedStringArray("health_bar_1", "label_1", "health_bar_2", "label_2")]
+script = SubResource("GDScript_acf85")
+health_bar_1 = NodePath("HealthUI/HealthBarUI")
+label_1 = NodePath("HealthUI/HealthShow")
+health_bar_2 = NodePath("HealthUI2/HealthBarUI")
+label_2 = NodePath("HealthUI2/HealthShow")
+
+[node name="Skill" parent="UI" instance=ExtResource("3_acuek")]
+offset_left = 6.0
+offset_top = 26.0
+offset_right = 6.0
+offset_bottom = 26.0
+
+[node name="HealthUI" type="Control" parent="UI"]
+self_modulate = Color(0.27451, 0.992157, 0.0313726, 1)
+layout_mode = 3
+anchors_preset = 0
+offset_left = -5.0
+offset_top = -4.0
+offset_right = 40.0
+offset_bottom = 16.0
+
+[node name="HealthShow" type="Label" parent="UI/HealthUI"]
+layout_mode = 0
+offset_left = 118.0
+offset_top = 21.0
+offset_right = 162.0
+offset_bottom = 47.0
+text = "P1  HP:"
+
+[node name="HealthBarUI" type="ProgressBar" parent="UI/HealthUI"]
+self_modulate = Color(0.0156863, 0.972549, 0.0196078, 1)
+layout_mode = 0
+offset_left = 19.0
+offset_top = 18.0
+offset_right = 292.0
+offset_bottom = 49.0
+value = 100.0
+show_percentage = false
+
+[node name="HealthUI2" type="Control" parent="UI"]
+self_modulate = Color(0.27451, 0.992157, 0.0313726, 1)
+layout_mode = 3
+anchors_preset = 0
+offset_left = 818.0
+offset_top = -2.0
+offset_right = 863.0
+offset_bottom = 18.0
+
+[node name="HealthShow" type="Label" parent="UI/HealthUI2"]
+layout_mode = 0
+offset_left = 118.0
+offset_top = 21.0
+offset_right = 172.0
+offset_bottom = 47.0
+text = "P2  HP:"
+
+[node name="HealthBarUI" type="ProgressBar" parent="UI/HealthUI2"]
+self_modulate = Color(0.0156863, 0.972549, 0.0196078, 1)
+layout_mode = 0
+offset_left = 19.0
+offset_top = 18.0
+offset_right = 292.0
+offset_bottom = 49.0
+value = 100.0
+show_percentage = false

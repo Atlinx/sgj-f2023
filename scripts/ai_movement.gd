@@ -40,7 +40,7 @@ func _process(delta):
 			_update_position_timer -= update_position_interval
 		if _fire_timer <= 0:
 			var bullet_inst: Bullet = bullet_prefab.instantiate()
-			get_tree().get_root().add_child(bullet_inst)
+			get_tree().get_first_node_in_group("level").add_child(bullet_inst)
 			var direction = (_player.global_position - entity_body.global_position).normalized()
 			bullet_inst.construct(entity_body, entity_body.global_position, direction)
 			_fire_timer = fire_interval

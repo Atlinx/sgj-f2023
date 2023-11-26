@@ -52,7 +52,7 @@ func _process(delta):
 
 func fire():
 	var my_bullet_inst: Bullet = my_bullet_prefab.instantiate()
-	get_tree().get_root().add_child(my_bullet_inst)
+	get_tree().get_first_node_in_group("level").add_child(my_bullet_inst)
 	var direction = (get_global_mouse_position() - global_position).normalized()
 	my_bullet_inst.construct(self, global_position, direction)
 	has_shot = false

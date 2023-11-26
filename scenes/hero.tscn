@@ -71,7 +71,7 @@ script = ExtResource("2_0lx5u")
 health = NodePath("../Health")
 
 [node name="Visuals" type="Node2D" parent="."]
-position = Vector2(0, -0.0172899)
+position = Vector2(0, -1)
 
 [node name="Sprite2D" type="Sprite2D" parent="Visuals"]
 material = SubResource("ShaderMaterial_jki3l")
@@ -84,6 +84,7 @@ rotation = 1.5708
 shape = SubResource("CapsuleShape2D_0rqyo")
 
 [node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("player")]
+enabled = false
 zoom = Vector2(2, 2)
 position_smoothing_enabled = true
 script = ExtResource("5_kqgjr")

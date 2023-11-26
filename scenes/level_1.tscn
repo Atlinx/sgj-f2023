@@ -1,8 +1,7 @@
-[gd_scene load_steps=13 format=3 uid="uid://bb3i3r7einpnp"]
+[gd_scene load_steps=10 format=3 uid="uid://bb3i3r7einpnp"]
 
 [ext_resource type="Script" path="res://scripts/IntialEnemyCreater.gd" id="1_26omq"]
 [ext_resource type="PackedScene" uid="uid://cdpn5s43qjbwg" path="res://scenes/slime.tscn" id="2_okusv"]
-[ext_resource type="PackedScene" uid="uid://cgokel7vn646l" path="res://scenes/inventory.tscn" id="3_80ls1"]
 [ext_resource type="AudioStream" uid="uid://dy58atrg72ubh" path="res://scenes/Background Music 2.mp3" id="4_lk5i1"]
 [ext_resource type="TileSet" uid="uid://da4oraw1aomg7" path="res://sprites/tiles.tres" id="5_51yim"]
 [ext_resource type="Script" path="res://scripts/level.gd" id="6_e6x4p"]
@@ -10,45 +9,8 @@
 [ext_resource type="PackedScene" uid="uid://fcltcmlr1x4q" path="res://scenes/hero.tscn" id="8_kojmd"]
 [ext_resource type="Script" path="res://scripts/game_manager.gd" id="9_tdvt1"]
 [ext_resource type="Script" path="res://scripts/Slime_spawner.gd" id="10_unoas"]
-[ext_resource type="PackedScene" uid="uid://b4lwo6irvtgtq" path="res://scenes/special_slime_1.tscn" id="11_sn5m4"]
 
-[sub_resource type="GDScript" id="GDScript_ebanc"]
-script/source = "extends CanvasLayer
-
-
-@onready var player_1 = get_tree().get_first_node_in_group(\"player1\")
-@onready var health_1 = player_1.get_node(\"Health\")
-@export var health_bar_1 : ProgressBar
-@export var label_1 : Label
-
-@onready var player_2 = get_tree().get_first_node_in_group(\"player2\")
-@onready var health_2 = player_2.get_node(\"Health\")
-@export var health_bar_2 : ProgressBar
-@export var label_2 : Label
-
-
-
-func _ready():
-	health_1.healthchanged.connect(_health_update)
-	
-	health_2.healthchanged.connect(_health_update)
-	_health_update()
-	
-
-func _health_update():
-	if is_instance_valid(health_1):
-		health_bar_1.value = health_1.health * 100 / health_1.max_health 
-		label_1.text = str(health_1.health) +\"/\"+ str(health_1.max_health)
-	
-	if is_instance_valid(health_2):
-		health_bar_2.value = health_2.health * 100 / health_2.max_health 
-		label_2.text = str(health_2.health) +\"/\"+ str(health_2.max_health)
-	
-func _skill_update():
-	pass
-"
-
-[node name="Level1" type="Node"]
+[node name="Level1" type="Node" groups=["level"]]
 
 [node name="IntialEnemyCreater" type="Node" parent="." node_paths=PackedStringArray("tile_map", "game_manager")]
 script = ExtResource("1_26omq")
@@ -56,73 +18,6 @@ enemy_prefabs = Array[PackedScene]([ExtResource("2_okusv"), ExtResource("2_okusv
 tile_map = NodePath("../World/Level")
 game_manager = NodePath("../GameManager")
 intial_enemy_amount = 150
-
-[node name="UI" type="CanvasLayer" parent="." node_paths=PackedStringArray("health_bar_1", "label_1", "health_bar_2", "label_2")]
-script = SubResource("GDScript_ebanc")
-health_bar_1 = NodePath("HealthUI/HealthBarUI")
-label_1 = NodePath("HealthUI/HealthShow")
-health_bar_2 = NodePath("HealthUI2/HealthBarUI")
-label_2 = NodePath("HealthUI2/HealthShow")
-
-[node name="Skill" parent="UI" instance=ExtResource("3_80ls1")]
-offset_left = 6.0
-offset_top = 26.0
-offset_right = 6.0
-offset_bottom = 26.0
-
-[node name="HealthUI" type="Control" parent="UI"]
-self_modulate = Color(0.27451, 0.992157, 0.0313726, 1)
-layout_mode = 3
-anchors_preset = 0
-offset_left = -5.0
-offset_top = -4.0
-offset_right = 40.0
-offset_bottom = 16.0
-
-[node name="HealthShow" type="Label" parent="UI/HealthUI"]
-layout_mode = 0
-offset_left = 118.0
-offset_top = 21.0
-offset_right = 162.0
-offset_bottom = 47.0
-text = "P1  HP:"
-
-[node name="HealthBarUI" type="ProgressBar" parent="UI/HealthUI"]
-self_modulate = Color(0.0156863, 0.972549, 0.0196078, 1)
-layout_mode = 0
-offset_left = 19.0
-offset_top = 18.0
-offset_right = 292.0
-offset_bottom = 49.0
-value = 100.0
-show_percentage = false
-
-[node name="HealthUI2" type="Control" parent="UI"]
-self_modulate = Color(0.27451, 0.992157, 0.0313726, 1)
-layout_mode = 3
-anchors_preset = 0
-offset_left = 818.0
-offset_top = -2.0
-offset_right = 863.0
-offset_bottom = 18.0
-
-[node name="HealthShow" type="Label" parent="UI/HealthUI2"]
-layout_mode = 0
-offset_left = 118.0
-offset_top = 21.0
-offset_right = 172.0
-offset_bottom = 47.0
-text = "P2  HP:"
-
-[node name="HealthBarUI" type="ProgressBar" parent="UI/HealthUI2"]
-self_modulate = Color(0.0156863, 0.972549, 0.0196078, 1)
-layout_mode = 0
-offset_left = 19.0
-offset_top = 18.0
-offset_right = 292.0
-offset_bottom = 49.0
-value = 100.0
-show_percentage = false
 
 [node name="SpawnLocations" type="Node2D" parent="."]
 visible = false
@@ -162,10 +57,6 @@ script = ExtResource("9_tdvt1")
 
 [node name="SlimeSpawner" type="Node" parent="." node_paths=PackedStringArray("tile_map", "game_manager")]
 script = ExtResource("10_unoas")
-special_slime = Array[PackedScene]([ExtResource("11_sn5m4")])
 enemy_prefabs = Array[PackedScene]([ExtResource("2_okusv")])
-enemy_amount = Vector2i(2, 2)
-spawn_interval = Vector2i(5, 10)
 tile_map = NodePath("../World/Level")
 game_manager = NodePath("../GameManager")
-intial_enemy_amount = 100
