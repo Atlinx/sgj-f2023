@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://scripts/healthbar.gd" id="2_0lx5u"]
 [ext_resource type="Shader" path="res://materials/shaders/entity.gdshader" id="3_5mpf0"]
 [ext_resource type="Texture2D" uid="uid://cee6d7cbam6pj" path="res://sprites/player.png" id="4_7rcgy"]
-[ext_resource type="Script" path="res://scripts/player_camera.gd" id="5_fjoon"]
+[ext_resource type="Script" path="res://scenes/hero_camera2d.gd" id="5_uoebt"]
 [ext_resource type="Script" path="res://scripts/health.gd" id="6_1ojsw"]
 [ext_resource type="Script" path="res://scripts/team.gd" id="7_rlgqx"]
 [ext_resource type="PackedScene" uid="uid://booa6u2jw1mxr" path="res://scenes/death_fx.tscn" id="8_5piuf"]
@@ -79,7 +79,7 @@ script = ExtResource("2_0lx5u")
 health = NodePath("../Health")
 
 [node name="Visuals" type="Node2D" parent="."]
-position = Vector2(0, -0.0306675)
+position = Vector2(0, -0.972262)
 
 [node name="Sprite2D" type="Sprite2D" parent="Visuals"]
 material = SubResource("ShaderMaterial_jki3l")
@@ -91,10 +91,11 @@ region_rect = Rect2(208, 0, 16, 16)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_0rqyo")
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("player")]
 zoom = Vector2(2, 2)
 position_smoothing_enabled = true
-script = ExtResource("5_fjoon")
+script = ExtResource("5_uoebt")
+player = NodePath("..")
 
 [node name="Health" type="Node" parent="."]
 script = ExtResource("6_1ojsw")
