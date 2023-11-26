@@ -70,7 +70,7 @@ script = ExtResource("1_bgety")
 health = NodePath("../Health")
 
 [node name="Visuals" type="Node2D" parent="." node_paths=PackedStringArray("health")]
-position = Vector2(0, -0.30108)
+position = Vector2(0, -0.165403)
 script = SubResource("GDScript_6g00e")
 health = NodePath("../Health")
 

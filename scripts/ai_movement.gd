@@ -57,7 +57,7 @@ func _physics_process(_delta):
 
 
 func _on_health_death():
-	var root = get_tree().get_root()
+	var root = get_tree().get_first_node_in_group("level")
 	dropped_heart.call_deferred("reparent",root)
 	dropped_heart.enabled = true
 
