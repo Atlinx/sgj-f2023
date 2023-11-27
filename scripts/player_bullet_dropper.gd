@@ -12,7 +12,8 @@ func _ready():
 
 func _on_bullet_death():
 	if bullet.damaged_entity:
-		bullet.entity_owner.has_shot = true
+		if bullet.entity_owner.is_in_group("shooter"):
+			bullet.entity_owner.has_shot = true
 	else:
 		var grand_parent = get_parent().get_parent()
 		item.call_deferred("reparent",grand_parent)

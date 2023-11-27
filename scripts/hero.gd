@@ -23,7 +23,6 @@ func _process(delta):
 	
 	if has_teammate_bullet  and Input.is_action_just_pressed("p2_fire"):
 		fire()
-		has_teammate_bullet_color.hide()
 	
 	if has_teammate_bullet:
 		has_teammate_bullet_color.show()
@@ -35,10 +34,7 @@ func _process(delta):
 		time_since_last_self_heal += delta
 
 func fire():
-	var teammate_bullet_inst: Bullet = teammate_bullet_prefab.instantiate()
-	get_tree().get_root().add_child(teammate_bullet_inst)
-	var direction = (get_global_mouse_position() - global_position).normalized()
-	teammate_bullet_inst.construct(self, global_position, direction)
+	get_parent().get_node("Shooter").has_shot = true
 	has_teammate_bullet = false
 	has_teammate_bullet_color.hide()
 	fire_sound.play()

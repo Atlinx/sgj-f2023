@@ -12,13 +12,6 @@
 
 [node name="Level1" type="Node" groups=["level"]]
 
-[node name="IntialEnemyCreater" type="Node" parent="." node_paths=PackedStringArray("tile_map", "game_manager")]
-script = ExtResource("1_26omq")
-enemy_prefabs = Array[PackedScene]([ExtResource("2_okusv"), ExtResource("2_okusv")])
-tile_map = NodePath("../World/Level")
-game_manager = NodePath("../GameManager")
-intial_enemy_amount = 150
-
 [node name="SpawnLocations" type="Node2D" parent="."]
 visible = false
 
@@ -28,6 +21,7 @@ visible = false
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_lk5i1")
+autoplay = true
 
 [node name="World" type="Node2D" parent="."]
 
@@ -51,6 +45,12 @@ position = Vector2(-474, -16)
 
 [node name="Shooter" parent="World/Level" instance=ExtResource("7_3pekr")]
 position = Vector2(-470, 56)
+
+[node name="IntialEnemyCreater" type="Node" parent="." node_paths=PackedStringArray("tile_map", "game_manager")]
+script = ExtResource("1_26omq")
+enemy_prefabs = Array[PackedScene]([ExtResource("2_okusv"), ExtResource("2_okusv")])
+tile_map = NodePath("../World/Level")
+game_manager = NodePath("../GameManager")
 
 [node name="GameManager" type="Node" parent="."]
 script = ExtResource("9_tdvt1")

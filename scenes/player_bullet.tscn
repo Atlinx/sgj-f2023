@@ -11,6 +11,7 @@ scale = Vector2(0.75, 0.75)
 damage = 25
 
 [node name="Sprite2D" parent="." index="0"]
+self_modulate = Color(0.145098, 0.992157, 0.0235294, 1)
 material = ExtResource("2_bc2y2")
 region_rect = Rect2(208, 32, 16, 16)
 
