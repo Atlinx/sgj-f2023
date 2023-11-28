@@ -9,7 +9,7 @@
 [ext_resource type="Script" path="res://scripts/ai_movement.gd" id="5_mdci3"]
 [ext_resource type="Texture2D" uid="uid://chb2gw0u5bwmx" path="res://sprites/shadow.png" id="6_dd0s1"]
 [ext_resource type="Texture2D" uid="uid://ddkd5dp5f6mrs" path="res://sprites/glow.png" id="7_5qlwr"]
-[ext_resource type="PackedScene" uid="uid://bqepnybxfjapc" path="res://scenes/slime_bullet.tscn" id="8_joj1c"]
+[ext_resource type="PackedScene" uid="uid://speau1r0vvfs" path="res://scenes/slime_bullet.tscn" id="8_joj1c"]
 [ext_resource type="Script" path="res://scripts/damage_box.gd" id="8_rc48p"]
 [ext_resource type="AnimationLibrary" uid="uid://c37cmbh7l1rgo" path="res://animations/entity_anim_lib.tres" id="10_u3v1d"]
 [ext_resource type="AnimationNodeStateMachine" uid="uid://q81ouwttk58h" path="res://animations/entity_anim_tree.tres" id="10_yfn4j"]
@@ -53,7 +53,7 @@ script = ExtResource("1_bgety")
 health = NodePath("../Health")
 
 [node name="Visuals" type="Node2D" parent="."]
-position = Vector2(0, -0.0300695)
+position = Vector2(0, -0.00258296)
 
 [node name="Sprite2D" type="Sprite2D" parent="Visuals"]
 position = Vector2(0, -4)
@@ -61,8 +61,8 @@ texture = ExtResource("1_hx314")
 
 [node name="Health" type="Node" parent="."]
 script = ExtResource("2_jg8ob")
-health = 50
-max_health = 50
+health = 25
+max_health = 25
 
 [node name="Team" type="Node" parent="."]
 script = ExtResource("3_uwcyq")
