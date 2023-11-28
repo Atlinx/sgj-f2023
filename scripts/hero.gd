@@ -43,11 +43,8 @@ func _process(delta):
 			fire_timer = fire_interval
 			sword_instance = sword.instantiate()
 			add_child(sword_instance)
-			print("addchild")
 			await get_tree().create_timer(3).timeout
-			print("timeout")
 			sword_instance.queue_free()
-			print("free")
 
 	
 	if has_teammate_bullet:
@@ -64,8 +61,7 @@ func fire():
 	get_tree().get_first_node_in_group("level").add_child(teammate_bullet_inst)
 	var traget_position = get_tree().get_first_node_in_group("shooter").global_position
 	var direction = ( traget_position - global_position).normalized()
-	var shooter = get_tree().get_first_node_in_group("shooter")
-	teammate_bullet_inst.construct(shooter, global_position, direction)
+	teammate_bullet_inst.construct(self, global_position, direction)
 	has_teammate_bullet = false
 	has_teammate_bullet_color.hide()
 	fire_sound.play()

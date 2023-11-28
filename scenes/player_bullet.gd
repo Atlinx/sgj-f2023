@@ -24,7 +24,10 @@ func construct(_entity_owner: Node, initial_position: Vector2, direction: Vector
 	add_collision_exception_with(_entity_owner)
 	global_position = initial_position
 	_direction = direction
-
+	var shooter = get_tree().get_first_node_in_group("shooter")
+	if entity_owner != shooter:
+		set_collision_mask_value(2,false)
+		set_collision_layer_value(1,false)
 
 func _physics_process(delta):
 	var collision: KinematicCollision2D = move_and_collide(_direction * speed * delta)
@@ -35,13 +38,7 @@ func _physics_process(delta):
 	if _life_timer > lifetime:
 		_on_death(false)
 
-#func _process(delta):
-#	if self.owner != Shooter:
-#		collision_layer = 1 
-#		collision_mask = 5 | 2
-#	else: 
-#		collision_layer = 1 
-#		collision_mask = 5 | 2
+
 
 
 
