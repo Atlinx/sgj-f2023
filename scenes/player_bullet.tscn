@@ -2,14 +2,14 @@
 
 [ext_resource type="PackedScene" uid="uid://cmfu0ybbkg7tn" path="res://scenes/bullet.tscn" id="1_gbrce"]
 [ext_resource type="PackedScene" uid="uid://d2lulf6teg15y" path="res://scenes/dropped_item.tscn" id="2_6ehoh"]
+[ext_resource type="Script" path="res://scripts/player_bullet.gd" id="2_52ntb"]
 [ext_resource type="Material" uid="uid://duq16u675oqot" path="res://materials/player_bullet.tres" id="2_bc2y2"]
-[ext_resource type="Script" path="res://scenes/player_bullet.gd" id="2_x0wid"]
 [ext_resource type="Script" path="res://scripts/player_bullet_dropper.gd" id="3_7uj5k"]
 [ext_resource type="PackedScene" uid="uid://booa6u2jw1mxr" path="res://scenes/death_fx.tscn" id="3_qny05"]
 
 [node name="PlayerBullet" instance=ExtResource("1_gbrce")]
 scale = Vector2(0.75, 0.75)
-script = ExtResource("2_x0wid")
+script = ExtResource("2_52ntb")
 damage = 25
 
 [node name="Sprite2D" parent="." index="0"]

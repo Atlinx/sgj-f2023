@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://4t16hws81g83"]
 
-[ext_resource type="Script" path="res://scenes/SplitScreen.gd" id="1_nca4c"]
+[ext_resource type="Script" path="res://scripts/SplitScreen.gd" id="1_kjhmp"]
 [ext_resource type="PackedScene" uid="uid://bb3i3r7einpnp" path="res://scenes/level_1.tscn" id="1_oxki8"]
 [ext_resource type="PackedScene" uid="uid://cgokel7vn646l" path="res://scenes/inventory.tscn" id="3_acuek"]
 
@@ -49,7 +49,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_nca4c")
+script = ExtResource("1_kjhmp")
 
 [node name="GridContainer" type="GridContainer" parent="SplitScreen"]
 layout_mode = 1

@@ -10,8 +10,8 @@
 [ext_resource type="Script" path="res://scripts/team.gd" id="7_rlgqx"]
 [ext_resource type="PackedScene" uid="uid://booa6u2jw1mxr" path="res://scenes/death_fx.tscn" id="8_5piuf"]
 [ext_resource type="Script" path="res://scripts/hitbox.gd" id="10_8qotc"]
-[ext_resource type="Script" path="res://scenes/heroitemcollector.gd" id="10_rqwr4"]
 [ext_resource type="Texture2D" uid="uid://chb2gw0u5bwmx" path="res://sprites/shadow.png" id="11_1s3fk"]
+[ext_resource type="Script" path="res://scripts/heroitemcollector.gd" id="11_s2fay"]
 [ext_resource type="Script" path="res://scripts/hit_fx.gd" id="12_qhybd"]
 [ext_resource type="AnimationLibrary" uid="uid://c37cmbh7l1rgo" path="res://animations/entity_anim_lib.tres" id="13_3r6kl"]
 [ext_resource type="AnimationNodeStateMachine" uid="uid://q81ouwttk58h" path="res://animations/entity_anim_tree.tres" id="14_to0vj"]
@@ -107,7 +107,7 @@ fx_nodes = [null]
 
 [node name="ItemCollector" type="Node2D" parent="." node_paths=PackedStringArray("health", "player", "collector_area")]
 visible = false
-script = ExtResource("10_rqwr4")
+script = ExtResource("11_s2fay")
 health = NodePath("../Health")
 player = NodePath("..")
 collector_area = NodePath("Area2D")
