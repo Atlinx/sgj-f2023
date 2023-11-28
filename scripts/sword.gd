@@ -5,6 +5,9 @@ extends CharacterBody2D
 @export var team: Team.TeamType
 
 
+
+
+
 func _on_collision(collision: KinematicCollision2D):
 	var body = collision.get_collider()
 	if body.is_in_group("hitbox"):

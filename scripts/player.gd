@@ -1,5 +1,5 @@
 extends CharacterBody2D
-class_name Player
+class_name Shooter
 
 @export var health: Health
 @export var self_heal_interval : float = 0
@@ -10,7 +10,6 @@ class_name Player
 @export var speed: float = 300.0
 @export var has_shot: bool = true
 @export var player_animation_tree: AnimationTree
-@export var mulitiplayer_synchronizer : MultiplayerSynchronizer
 @export var has_my_shot_color : ColorRect
 
 
@@ -42,7 +41,7 @@ func _process(delta):
 
 	if has_teammate_bullet and Input.is_action_just_pressed("p1_fire"):
 		if in_hand == "teammate_bullet":
-			var teammate_bullet_inst: Bullet = teammate_bullet_prefab.instantiate()
+			var teammate_bullet_inst: PlayerBullet = teammate_bullet_prefab.instantiate()
 			get_tree().get_root().add_child(teammate_bullet_inst)
 			var direction = (get_global_mouse_position() - global_position).normalized()
 			teammate_bullet_inst.construct(self, global_position, direction)
@@ -51,7 +50,7 @@ func _process(delta):
 			
 
 func fire():
-	var my_bullet_inst: Bullet = my_bullet_prefab.instantiate()
+	var my_bullet_inst: PlayerBullet = my_bullet_prefab.instantiate()
 	get_tree().get_first_node_in_group("level").add_child(my_bullet_inst)
 	var direction = (get_global_mouse_position() - global_position).normalized()
 	my_bullet_inst.construct(self, global_position, direction)

@@ -1,7 +1,7 @@
 extends Node2D
 
 
-@export var bullet: Bullet
+@export var bullet: PlayerBullet
 @export var item: DroppedItem
 
 
@@ -12,8 +12,9 @@ func _ready():
 
 func _on_bullet_death():
 	if bullet.damaged_entity:
-		if bullet.entity_owner.is_in_group("shooter"):
+		if bullet.entity_owner.is_in_group("player"):
 			bullet.entity_owner.has_shot = true
+		else: print("had free")
 	else:
 		var grand_parent = get_parent().get_parent()
 		item.call_deferred("reparent",grand_parent)

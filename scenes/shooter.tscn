@@ -37,7 +37,7 @@ radius = 8.0
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -2.40338, 0.0, 0, 0]
 point_count = 2
 
-[node name="Shooter" type="CharacterBody2D" node_paths=PackedStringArray("health", "fire_sound", "player_animation_tree", "has_my_shot_color") groups=["player1", "shooter"]]
+[node name="Shooter" type="CharacterBody2D" node_paths=PackedStringArray("health", "fire_sound", "player_animation_tree", "has_my_shot_color") groups=["player", "player1", "shooter"]]
 collision_layer = 32
 collision_mask = 16
 script = ExtResource("1_co7fm")
@@ -62,7 +62,7 @@ script = ExtResource("3_grg05")
 health = NodePath("../Health")
 
 [node name="Visuals" type="Node2D" parent="."]
-position = Vector2(0, -0.988907)
+position = Vector2(0, -0.0278669)
 
 [node name="Sprite2D" type="Sprite2D" parent="Visuals"]
 material = SubResource("ShaderMaterial_jki3l")

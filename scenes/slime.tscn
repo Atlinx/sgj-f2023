@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://cdpn5s43qjbwg"]
+[gd_scene load_steps=24 format=3 uid="uid://cdpn5s43qjbwg"]
 
 [ext_resource type="Script" path="res://scripts/healthbar.gd" id="1_bgety"]
 [ext_resource type="Texture2D" uid="uid://g1bx6y7c5y75" path="res://sprites/slime.png" id="1_hx314"]
@@ -17,23 +17,6 @@
 [ext_resource type="Script" path="res://scripts/dropped_item.gd" id="15_pppg5"]
 [ext_resource type="Shader" path="res://materials/shaders/bullet.gdshader" id="16_cs8bx"]
 [ext_resource type="Texture2D" uid="uid://ds8oe1j4v5amr" path="res://sprites/heart.png" id="17_11pwo"]
-
-[sub_resource type="GDScript" id="GDScript_6g00e"]
-script/source = "extends Node2D
-
-
-@export var slimehealthbar: TextureProgressBar
-@export var health : Health
-var value 
-
-func _ready():
-
-	health.healthchanged.connect(_update)
-	_update()
-	
-func _update():
-	value = health.health * 100 / health.max_health 
-"
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_h8j63"]
 radius = 256.0
@@ -69,10 +52,8 @@ show_percentage = false
 script = ExtResource("1_bgety")
 health = NodePath("../Health")
 
-[node name="Visuals" type="Node2D" parent="." node_paths=PackedStringArray("health")]
-position = Vector2(0, -0.165403)
-script = SubResource("GDScript_6g00e")
-health = NodePath("../Health")
+[node name="Visuals" type="Node2D" parent="."]
+position = Vector2(0, -0.0300695)
 
 [node name="Sprite2D" type="Sprite2D" parent="Visuals"]
 position = Vector2(0, -4)
@@ -141,6 +122,7 @@ texture = ExtResource("7_5qlwr")
 position = Vector2(0, -4)
 collision_layer = 0
 script = ExtResource("8_rc48p")
+damage = 20
 team = 1
 entity_owner = NodePath("..")
 damage_interval = 0.2
@@ -173,7 +155,7 @@ texture = ExtResource("17_11pwo")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DroppedItem"]
 shape = SubResource("CircleShape2D_j6s7h")
 
-[node name="Bullet" type="Node" parent="DroppedItem"]
+[node name="Bullet" type="Node" parent="DroppedItem" groups=["enemy"]]
 
 [node name="DeathFx" parent="DroppedItem" instance=ExtResource("4_r37rl")]
 

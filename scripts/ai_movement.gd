@@ -33,7 +33,7 @@ func _on_body_exited(body: Node2D):
 
 
 func _process(delta):
-	if _player != null:
+	if is_instance_valid(_player):
 		_update_position_timer += delta
 		if _update_position_timer > update_position_interval:
 			navigation_agent.target_position = _player.global_position

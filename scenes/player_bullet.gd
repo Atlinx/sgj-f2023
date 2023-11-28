@@ -1,5 +1,5 @@
 extends CharacterBody2D
-class_name Bullet
+class_name PlayerBullet
 
 
 signal death()
@@ -35,7 +35,13 @@ func _physics_process(delta):
 	if _life_timer > lifetime:
 		_on_death(false)
 
-
+#func _process(delta):
+#	if self.owner != Shooter:
+#		collision_layer = 1 
+#		collision_mask = 5 | 2
+#	else: 
+#		collision_layer = 1 
+#		collision_mask = 5 | 2
 
 
 

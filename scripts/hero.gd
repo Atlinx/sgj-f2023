@@ -9,6 +9,14 @@ class_name hero
 @export var speed: float = 300.0
 @export var player_animation_tree: AnimationTree
 @export var has_teammate_bullet_color : ColorRect
+@export var sword : PackedScene
+@export var fire_interval = 0
+@export var cd_color : ColorRect
+
+var fire_timer = 0
+var sword_instance
+@export var rotation_speed: float = 360.0 # 旋转速度（每秒度数）
+@export var total_rotation: float = 360.0 # 总旋转角度
 
 var has_teammate_bullet : bool = false
 var in_hand : String = "my_bullet"
@@ -16,13 +24,31 @@ var time_since_last_self_heal : float = 0
 
 func _ready():
 	has_teammate_bullet_color.hide()
-
+	cd_color.hide()
 
 
 func _process(delta):
-	
-	if has_teammate_bullet  and Input.is_action_just_pressed("p2_fire"):
-		fire()
+
+	if fire_timer > 0:
+		cd_color.hide()
+		fire_timer -= delta
+	else:
+		cd_color.show()
+
+
+	if Input.is_action_just_pressed("p2_fire"):
+		if has_teammate_bullet:
+			fire()
+		elif fire_timer <= 0:
+			fire_timer = fire_interval
+			sword_instance = sword.instantiate()
+			add_child(sword_instance)
+			print("addchild")
+			await get_tree().create_timer(3).timeout
+			print("timeout")
+			sword_instance.queue_free()
+			print("free")
+
 	
 	if has_teammate_bullet:
 		has_teammate_bullet_color.show()
@@ -34,7 +60,12 @@ func _process(delta):
 		time_since_last_self_heal += delta
 
 func fire():
-	get_parent().get_node("Shooter").has_shot = true
+	var teammate_bullet_inst: PlayerBullet = teammate_bullet_prefab.instantiate()
+	get_tree().get_first_node_in_group("level").add_child(teammate_bullet_inst)
+	var traget_position = get_tree().get_first_node_in_group("shooter").global_position
+	var direction = ( traget_position - global_position).normalized()
+	var shooter = get_tree().get_first_node_in_group("shooter")
+	teammate_bullet_inst.construct(shooter, global_position, direction)
 	has_teammate_bullet = false
 	has_teammate_bullet_color.hide()
 	fire_sound.play()
