@@ -1,10 +1,12 @@
-[gd_scene load_steps=26 format=3 uid="uid://fcltcmlr1x4q"]
+[gd_scene load_steps=27 format=3 uid="uid://fcltcmlr1x4q"]
 
 [ext_resource type="Script" path="res://scripts/hero.gd" id="1_3em0b"]
 [ext_resource type="Script" path="res://scripts/healthbar.gd" id="2_0lx5u"]
 [ext_resource type="PackedScene" uid="uid://ci276fgn23rcd" path="res://scenes/player_bullet.tscn" id="2_xvfdh"]
 [ext_resource type="Shader" path="res://materials/shaders/entity.gdshader" id="3_5mpf0"]
+[ext_resource type="PackedScene" uid="uid://di45hf0lq0e23" path="res://scenes/right_sword.tscn" id="3_dqtxn"]
 [ext_resource type="Texture2D" uid="uid://cee6d7cbam6pj" path="res://sprites/player.png" id="4_7rcgy"]
+[ext_resource type="PackedScene" uid="uid://b7u1tpdioefes" path="res://scenes/left_sword.tscn" id="4_eeae6"]
 [ext_resource type="Script" path="res://scripts/player_camera.gd" id="5_kqgjr"]
 [ext_resource type="Script" path="res://scripts/health.gd" id="6_1ojsw"]
 [ext_resource type="Script" path="res://scripts/team.gd" id="7_rlgqx"]
@@ -17,7 +19,6 @@
 [ext_resource type="AnimationNodeStateMachine" uid="uid://q81ouwttk58h" path="res://animations/entity_anim_tree.tres" id="14_to0vj"]
 [ext_resource type="Script" path="res://scripts/entity_animation_tree.gd" id="15_peqsa"]
 [ext_resource type="AudioStream" uid="uid://yvuw5bxumh15" path="res://scenes/37161__volivieri__soccer-stomp-edited.wav" id="16_v7r4y"]
-[ext_resource type="PackedScene" uid="uid://di45hf0lq0e23" path="res://scenes/sword.tscn" id="17_nw041"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jki3l"]
 shader = ExtResource("3_5mpf0")
@@ -58,9 +59,10 @@ fire_sound = NodePath("FireSound")
 teammate_bullet_prefab = ExtResource("2_xvfdh")
 player_animation_tree = NodePath("AnimationTree")
 has_teammate_bullet_color = NodePath("BulletColorRect")
-sword = ExtResource("17_nw041")
+right_sword = ExtResource("3_dqtxn")
 fire_interval = 1
 cd_color = NodePath("CDColorRect2")
+left_sword = ExtResource("4_eeae6")
 rotation_speed = 720.0
 
 [node name="SlimeHealthBar" type="ProgressBar" parent="." node_paths=PackedStringArray("health")]
@@ -75,7 +77,7 @@ script = ExtResource("2_0lx5u")
 health = NodePath("../Health")
 
 [node name="Visuals" type="Node2D" parent="."]
-position = Vector2(0, -0.0677131)
+position = Vector2(0, -0.952955)
 
 [node name="Sprite2D" type="Sprite2D" parent="Visuals"]
 material = SubResource("ShaderMaterial_jki3l")

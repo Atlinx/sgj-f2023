@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://b7u1tpdioefes"]
+
+[ext_resource type="PackedScene" uid="uid://di45hf0lq0e23" path="res://scenes/right_sword.tscn" id="1_bqrac"]
+
+[node name="LeftSword" instance=ExtResource("1_bqrac")]
+
+[node name="Sprite2D" parent="." index="0"]
+position = Vector2(-5, -3.5)
+
+[node name="CollsionShape" parent="." index="1"]
+position = Vector2(-5.25, -5.75)
+
+[node name="AnimationPlayer" parent="." index="2"]
+autoplay = "left_sword"

@@ -39,7 +39,7 @@ func fire():
 	get_tree().get_first_node_in_group("level").add_child(my_bullet_inst)
 	var mouse_position = get_global_mouse_position()
 	var player_to_mouse = (mouse_position - global_position).normalized()
-	var spawn_offset = player_to_mouse * 2  # 根据需要调整偏移距离
+	var spawn_offset = player_to_mouse * 5  # 根据需要调整偏移距离
 	var initial_position = global_position + spawn_offset
 	my_bullet_inst.construct(self, initial_position, player_to_mouse)
 	has_shot = false
