@@ -43,7 +43,7 @@ func _process(delta):
 			fire_timer = fire_interval
 			sword_instance = sword.instantiate()
 			add_child(sword_instance)
-			await get_tree().create_timer(3).timeout
+			await get_tree().create_timer(0.5).timeout
 			sword_instance.queue_free()
 
 	

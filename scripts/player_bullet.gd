@@ -1,7 +1,6 @@
 extends CharacterBody2D
 class_name PlayerBullet
 
-
 signal death()
 
 @export var damage: int = 1
@@ -28,6 +27,8 @@ func construct(_entity_owner: Node, initial_position: Vector2, direction: Vector
 	if entity_owner != shooter:
 		set_collision_mask_value(2,false)
 		set_collision_layer_value(1,false)
+		add_to_group("PassingBullet")
+
 
 func _physics_process(delta):
 	var collision: KinematicCollision2D = move_and_collide(_direction * speed * delta)
@@ -37,18 +38,21 @@ func _physics_process(delta):
 	_life_timer += delta
 	if _life_timer > lifetime:
 		_on_death(false)
-
+		
 
 
 
 
 func _on_collision(collision: KinematicCollision2D):
 	var body = collision.get_collider()
+	print(body)
 	if body.is_in_group("hitbox"):
+		print("hitbox")
 		_on_hitbox_hit(body.get_parent())
 	elif body.is_in_group("wall"):
 		global_position = collision.get_position()
 		_on_death(false)
+		print("wall")
 
 
 func _on_hitbox_hit(body: Node2D):
@@ -67,3 +71,5 @@ func _on_death(_damaged_entity: bool):
 	damaged_entity = _damaged_entity
 	death.emit()
 	queue_free()
+
+

@@ -59,7 +59,7 @@ teammate_bullet_prefab = ExtResource("2_xvfdh")
 player_animation_tree = NodePath("AnimationTree")
 has_teammate_bullet_color = NodePath("BulletColorRect")
 sword = ExtResource("17_nw041")
-fire_interval = 6
+fire_interval = 1
 cd_color = NodePath("CDColorRect2")
 rotation_speed = 720.0
 
@@ -75,7 +75,7 @@ script = ExtResource("2_0lx5u")
 health = NodePath("../Health")
 
 [node name="Visuals" type="Node2D" parent="."]
-position = Vector2(0, -0.999638)
+position = Vector2(0, -0.0677131)
 
 [node name="Sprite2D" type="Sprite2D" parent="Visuals"]
 material = SubResource("ShaderMaterial_jki3l")

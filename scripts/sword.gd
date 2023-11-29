@@ -3,7 +3,7 @@ extends CharacterBody2D
 
 @export var damage: int = 1
 @export var team: Team.TeamType
-
+@export var animation_player : AnimationPlayer
 
 
 

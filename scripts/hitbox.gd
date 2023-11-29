@@ -8,3 +8,4 @@ func _ready():
 func _on_body_entered(body: Node2D):
 	if body.has_method("_on_hitbox_hit"):
 		body._on_hitbox_hit(get_parent())
+

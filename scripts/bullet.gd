@@ -53,6 +53,7 @@ func _on_hitbox_hit(body: Node2D):
 	var team_node: Team = body.get_node_or_null("Team")
 	if health_node != null:
 		if team_node != null and team_node.team == team:
+			add_collision_exception_with(body)
 			return
 		health_node.damage(damage)
 		_on_death(true)

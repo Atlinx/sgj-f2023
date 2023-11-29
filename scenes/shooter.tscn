@@ -37,7 +37,7 @@ radius = 8.0
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -2.40338, 0.0, 0, 0]
 point_count = 2
 
-[node name="Shooter" type="CharacterBody2D" node_paths=PackedStringArray("health", "fire_sound", "player_animation_tree", "has_my_shot_color") groups=["player", "player1", "shooter"]]
+[node name="Shooter" type="CharacterBody2D" node_paths=PackedStringArray("health", "fire_sound", "player_animation_tree", "has_my_shot_color", "item_collector") groups=["player", "player1", "shooter"]]
 collision_layer = 32
 collision_mask = 16
 script = ExtResource("1_co7fm")
@@ -49,6 +49,7 @@ my_bullet_prefab = ExtResource("2_age5k")
 speed = 128.0
 player_animation_tree = NodePath("AnimationTree")
 has_my_shot_color = NodePath("ColorRect")
+item_collector = NodePath("ItemCollector")
 
 [node name="SlimeHealthBar" type="ProgressBar" parent="." node_paths=PackedStringArray("health")]
 self_modulate = Color(0.290196, 0.980392, 0.027451, 1)
@@ -62,7 +63,7 @@ script = ExtResource("3_grg05")
 health = NodePath("../Health")
 
 [node name="Visuals" type="Node2D" parent="."]
-position = Vector2(0, -0.912827)
+position = Vector2(0, -0.934813)
 
 [node name="Sprite2D" type="Sprite2D" parent="Visuals"]
 material = SubResource("ShaderMaterial_jki3l")
@@ -99,6 +100,8 @@ player = NodePath("..")
 collector_area = NodePath("Area2D")
 
 [node name="Area2D" type="Area2D" parent="ItemCollector"]
+collision_layer = 513
+collision_mask = 513
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ItemCollector/Area2D"]
 shape = SubResource("CircleShape2D_euncd")
