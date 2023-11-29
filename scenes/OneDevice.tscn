@@ -22,7 +22,6 @@ script/source = "extends CanvasLayer
 
 func _ready():
 	health_1.healthchanged.connect(_health_update)
-	
 	health_2.healthchanged.connect(_health_update)
 	_health_update()
 	
@@ -35,7 +34,8 @@ func _health_update():
 	if is_instance_valid(health_2):
 		health_bar_2.value = health_2.health * 100 / health_2.max_health 
 		label_2.text = str(health_2.health) +\"/\"+ str(health_2.max_health)
-	
+
+
 func _skill_update():
 	pass
 "

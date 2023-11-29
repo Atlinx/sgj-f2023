@@ -18,7 +18,9 @@ var right_sword_instance
 var left_sword_instance
 @export var rotation_speed: float = 360.0 # 旋转速度（每秒度数）
 @export var total_rotation: float = 360.0 # 总旋转角度
-
+@export var revive_timer : float
+signal revive(revive_timer)
+var deadth : bool = false
 var has_teammate_bullet : bool = false
 var in_hand : String = "my_bullet"
 var time_since_last_self_heal : float = 0
@@ -35,6 +37,7 @@ func _process(delta):
 		fire_timer -= delta
 	else:
 		cd_color.show()
+
 
 
 	if Input.is_action_just_pressed("p2_right_fire"):
@@ -89,3 +92,10 @@ func _physics_process(delta):
 	player_animation_tree.walking = direction != Vector2.ZERO
 
 	move_and_slide()
+
+
+
+
+
+func _on_health_death():
+	revive.emit(revive_timer)

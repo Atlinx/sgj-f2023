@@ -50,6 +50,7 @@ speed = 128.0
 player_animation_tree = NodePath("AnimationTree")
 has_my_shot_color = NodePath("ColorRect")
 item_collector = NodePath("ItemCollector")
+revive_timer = 3.0
 
 [node name="SlimeHealthBar" type="ProgressBar" parent="." node_paths=PackedStringArray("health")]
 self_modulate = Color(0.290196, 0.980392, 0.027451, 1)
@@ -63,7 +64,7 @@ script = ExtResource("3_grg05")
 health = NodePath("../Health")
 
 [node name="Visuals" type="Node2D" parent="."]
-position = Vector2(0, -0.808473)
+position = Vector2(0, -0.00176839)
 
 [node name="Sprite2D" type="Sprite2D" parent="Visuals"]
 material = SubResource("ShaderMaterial_jki3l")

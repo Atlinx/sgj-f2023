@@ -13,11 +13,12 @@
 [node name="Level1" type="Node" groups=["level"]]
 
 [node name="SpawnLocations" type="Node2D" parent="."]
-visible = false
 
 [node name="0" type="Node2D" parent="SpawnLocations" groups=["PlayerSpawnPoint"]]
+position = Vector2(-371, 22)
 
 [node name="1" type="Node2D" parent="SpawnLocations" groups=["PlayerSpawnPoint"]]
+position = Vector2(-382, 84)
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_lk5i1")
@@ -53,8 +54,9 @@ tile_map = NodePath("../World/Level")
 game_manager = NodePath("../GameManager")
 intial_enemy_amount = 100
 
-[node name="GameManager" type="Node" parent="."]
+[node name="GameManager" type="Node" parent="." node_paths=PackedStringArray("spawn_location_1")]
 script = ExtResource("9_tdvt1")
+spawn_location_1 = NodePath("../SpawnLocations/0")
 
 [node name="SlimeSpawner" type="Node" parent="." node_paths=PackedStringArray("tile_map", "game_manager")]
 script = ExtResource("10_unoas")

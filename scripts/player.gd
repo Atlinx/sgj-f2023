@@ -11,7 +11,7 @@ class_name Shooter
 @export var player_animation_tree: AnimationTree
 @export var has_my_shot_color : ColorRect
 @export var item_collector : Node2D
-
+@export var revive_timer : float
 
 var has_teammate_bullet : bool = false
 var time_since_last_self_heal : float = 0

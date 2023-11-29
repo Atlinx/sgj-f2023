@@ -77,7 +77,7 @@ script = ExtResource("2_0lx5u")
 health = NodePath("../Health")
 
 [node name="Visuals" type="Node2D" parent="."]
-position = Vector2(0, -0.952955)
+position = Vector2(0, -0.972967)
 
 [node name="Sprite2D" type="Sprite2D" parent="Visuals"]
 material = SubResource("ShaderMaterial_jki3l")
@@ -171,4 +171,5 @@ offset_right = -5.0
 offset_bottom = -17.0
 color = Color(0.92549, 0.988235, 0.0196078, 1)
 
+[connection signal="death" from="Health" to="." method="_on_health_death"]
 [connection signal="death" from="Health" to="DeathFx" method="on_death" flags=18]
