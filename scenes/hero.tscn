@@ -1,8 +1,9 @@
-[gd_scene load_steps=27 format=3 uid="uid://fcltcmlr1x4q"]
+[gd_scene load_steps=28 format=3 uid="uid://fcltcmlr1x4q"]
 
 [ext_resource type="Script" path="res://scripts/hero.gd" id="1_3em0b"]
 [ext_resource type="Script" path="res://scripts/healthbar.gd" id="2_0lx5u"]
 [ext_resource type="PackedScene" uid="uid://ci276fgn23rcd" path="res://scenes/player_bullet.tscn" id="2_xvfdh"]
+[ext_resource type="PackedScene" uid="uid://d2lulf6teg15y" path="res://scenes/dropped_item.tscn" id="2_yywug"]
 [ext_resource type="Shader" path="res://materials/shaders/entity.gdshader" id="3_5mpf0"]
 [ext_resource type="PackedScene" uid="uid://di45hf0lq0e23" path="res://scenes/right_sword.tscn" id="3_dqtxn"]
 [ext_resource type="Texture2D" uid="uid://cee6d7cbam6pj" path="res://sprites/player.png" id="4_7rcgy"]
@@ -52,6 +53,7 @@ position = Vector2(-485, 22)
 collision_layer = 32
 collision_mask = 16
 script = ExtResource("1_3em0b")
+dropped_bullet = ExtResource("2_yywug")
 fire_sound = NodePath("FireSound")
 teammate_bullet_prefab = ExtResource("2_xvfdh")
 player_animation_tree = NodePath("AnimationTree")
@@ -75,7 +77,7 @@ script = ExtResource("2_0lx5u")
 health = NodePath("../Health")
 
 [node name="Visuals" type="Node2D" parent="."]
-position = Vector2(0, -0.920292)
+position = Vector2(0, -0.970424)
 
 [node name="Sprite2D" type="Sprite2D" parent="Visuals"]
 material = SubResource("ShaderMaterial_jki3l")
@@ -98,8 +100,6 @@ player = NodePath("..")
 script = ExtResource("6_1ojsw")
 self_heal_interval = 1.0
 self_heal = 1
-health = 350
-max_health = 350
 
 [node name="Team" type="Node" parent="."]
 script = ExtResource("7_rlgqx")
@@ -110,7 +110,7 @@ fx_nodes = [null]
 [node name="ItemCollector" type="Node2D" parent="." node_paths=PackedStringArray("health", "player", "collector_area")]
 visible = false
 script = ExtResource("11_s2fay")
-health = NodePath("../Health")
+health = NodePath("")
 player = NodePath("..")
 collector_area = NodePath("Area2D")
 
@@ -171,5 +171,5 @@ offset_right = -5.0
 offset_bottom = -17.0
 color = Color(0.92549, 0.988235, 0.0196078, 1)
 
-[connection signal="death" from="Health" to="." method="_on_health_death"]
-[connection signal="death" from="Health" to="DeathFx" method="on_death" flags=18]
+[connection signal="death" from="Health" to="DeathFx" method="on_death"]
+[connection signal="death_position" from="Health" to="." method="_on_health_death_position"]

@@ -8,9 +8,9 @@ var time_since_last_self_heal : float = 0
 
 
 
-
+signal death_position(death_position)
 signal revive
-signal death()
+signal death
 signal damaged(amount: int)
 signal healed(amount: int)
 signal healthchanged
@@ -36,11 +36,13 @@ func damage(amount: int):
 	damaged.emit(amount)
 	healthchanged.emit()
 	if health <= 0:
+		death.emit()
 		if get_parent().is_in_group("player"):
+			death_position.emit(get_parent().global_position)
 			get_parent().global_position = Vector2(10000,10000)
 		else:
 			get_parent().queue_free()
-		death.emit()
+
 
 func heal(amount: int):
 	health += amount

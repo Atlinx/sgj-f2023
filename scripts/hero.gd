@@ -1,7 +1,7 @@
 extends CharacterBody2D
 class_name hero
 
-
+@export var dropped_bullet : PackedScene
 @export var fire_sound : AudioStreamPlayer
 @export var teammate_bullet_prefab: PackedScene
 @export var speed: float = 300.0
@@ -23,12 +23,15 @@ var has_teammate_bullet : bool = false
 var in_hand : String = "my_bullet"
 var time_since_last_self_heal : float = 0
 
-func _ready():
-	has_teammate_bullet_color.hide()
-	cd_color.hide()
 
 
 func _process(delta):
+
+
+	if has_teammate_bullet:
+		has_teammate_bullet_color.show()
+	else:
+		has_teammate_bullet_color.hide()
 
 	if fire_timer > 0:
 		cd_color.hide()
@@ -36,27 +39,26 @@ func _process(delta):
 	else:
 		cd_color.show()
 
+	if Input.is_action_just_pressed("pass_bullet"):
+		if has_teammate_bullet:
+			fire()
 
 
 	if Input.is_action_just_pressed("p2_right_fire"):
-			if has_teammate_bullet:
-				fire()
-			elif fire_timer <= 0:
-				fire_timer = fire_interval
-				right_sword_instance = right_sword.instantiate()
-				add_child(right_sword_instance)
-				await get_tree().create_timer(0.5).timeout
-				right_sword_instance.queue_free()
+		if fire_timer <= 0:
+			fire_timer = fire_interval
+			right_sword_instance = right_sword.instantiate()
+			add_child(right_sword_instance)
+			await get_tree().create_timer(0.5).timeout
+			right_sword_instance.queue_free()
 
 	if Input.is_action_just_pressed("p2_left_fire"): 
-			if has_teammate_bullet:
-				fire()
-			elif fire_timer <= 0:
-				fire_timer = fire_interval
-				left_sword_instance = left_sword.instantiate()
-				add_child(left_sword_instance)
-				await get_tree().create_timer(0.5).timeout
-				left_sword_instance.queue_free()
+		if fire_timer <= 0:
+			fire_timer = fire_interval
+			left_sword_instance = left_sword.instantiate()
+			add_child(left_sword_instance)
+			await get_tree().create_timer(0.5).timeout
+			left_sword_instance.queue_free()
 
 
 
@@ -89,7 +91,16 @@ func _physics_process(delta):
 
 
 
+func _deferred_bullet_addition(bullet_instance, death_position):
+	bullet_instance.global_position = death_position
+	bullet_instance.enabled = true
+	var level = get_tree().get_first_node_in_group("level")
+	level.add_child(bullet_instance)
 
 
-func _on_health_death():
+func _on_health_death_position(death_position):
+	if has_teammate_bullet == true:
+		has_teammate_bullet = false
+		var bullet_instance = dropped_bullet.instantiate()
+		call_deferred("_deferred_bullet_addition", bullet_instance, death_position)
 	revive.emit(revive_timer)

@@ -64,3 +64,6 @@ enemy_prefabs = Array[PackedScene]([ExtResource("2_okusv")])
 enemy_amount = Vector2i(1, 1)
 tile_map = NodePath("../World/Level")
 game_manager = NodePath("../GameManager")
+
+[node name="Slime" parent="." instance=ExtResource("2_okusv")]
+position = Vector2(110, 252)

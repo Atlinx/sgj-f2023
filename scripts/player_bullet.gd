@@ -48,7 +48,6 @@ func _physics_process(delta):
 
 func _on_collision(collision: KinematicCollision2D):
 	var body = collision.get_collider()
-	print(body)
 	if body.is_in_group("hitbox"):
 		print("hitbox")
 		_on_hitbox_hit(body.get_parent())
