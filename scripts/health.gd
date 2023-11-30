@@ -2,6 +2,14 @@ extends Node
 class_name Health
 
 
+var time_since_last_self_heal : float = 0
+@export var self_heal_interval : float = 0
+@export var self_heal : int = 0
+
+
+
+
+signal revive
 signal death()
 signal damaged(amount: int)
 signal healed(amount: int)
@@ -14,7 +22,14 @@ signal healthchanged
 func _ready():
 	health = max_health
 
+func _process(delta):
 
+	if health > 0:
+		if time_since_last_self_heal >= self_heal_interval:
+			heal(self_heal)
+			time_since_last_self_heal = 0
+		else:
+			time_since_last_self_heal += delta
 
 func damage(amount: int):
 	health -= amount
@@ -37,3 +52,4 @@ func heal(amount: int):
 func reset_health():
 	health = max_health
 	healthchanged.emit()
+	revive.emit()

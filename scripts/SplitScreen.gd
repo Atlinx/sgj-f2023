@@ -26,6 +26,10 @@ func _ready():
 		remote_transform.remote_path = node.camera.get_path()
 		node.player.add_child(remote_transform)
 	players["1"].player.get_node("Health").death.connect(_on_player_1_death)
+	players["1"].player.get_node("Health").revive.connect(_on_player_1_revive)
 	
 func _on_player_1_death():
-	players["1"].camera.enable = false
+	players["1"].camera.enabled = false
+
+func _on_player_1_revive():
+	players["1"].camera.enabled = true

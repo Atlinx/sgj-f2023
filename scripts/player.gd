@@ -1,9 +1,7 @@
 extends CharacterBody2D
 class_name Shooter
 
-@export var health: Health
-@export var self_heal_interval : float = 0
-@export var self_heal : int = 0
+
 @export var fire_sound : AudioStreamPlayer
 @export var my_bullet_prefab: PackedScene
 @export var speed: float = 300.0
@@ -14,20 +12,14 @@ class_name Shooter
 @export var revive_timer : float
 
 var has_teammate_bullet : bool = false
-var time_since_last_self_heal : float = 0
+
 
 
 func _process(delta):
 
-
 	if has_shot:
 		has_my_shot_color.show()
-		
-	if time_since_last_self_heal >= self_heal_interval:
-		health.heal(self_heal)
-		time_since_last_self_heal = 0
-	else:
-		time_since_last_self_heal += delta
+
 	
 	
 	if has_shot and Input.is_action_just_pressed("p1_fire"):

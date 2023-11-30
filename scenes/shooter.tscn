@@ -37,13 +37,10 @@ radius = 8.0
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -2.40338, 0.0, 0, 0]
 point_count = 2
 
-[node name="Shooter" type="CharacterBody2D" node_paths=PackedStringArray("health", "fire_sound", "player_animation_tree", "has_my_shot_color", "item_collector") groups=["player", "player1", "shooter"]]
+[node name="Shooter" type="CharacterBody2D" node_paths=PackedStringArray("fire_sound", "player_animation_tree", "has_my_shot_color", "item_collector") groups=["player", "player1", "shooter"]]
 collision_layer = 32
 collision_mask = 16
 script = ExtResource("1_co7fm")
-health = NodePath("Health")
-self_heal_interval = 10.0
-self_heal = 10
 fire_sound = NodePath("FireSound")
 my_bullet_prefab = ExtResource("2_age5k")
 speed = 128.0
@@ -64,7 +61,7 @@ script = ExtResource("3_grg05")
 health = NodePath("../Health")
 
 [node name="Visuals" type="Node2D" parent="."]
-position = Vector2(0, -0.00176839)
+position = Vector2(0, -0.99135)
 
 [node name="Sprite2D" type="Sprite2D" parent="Visuals"]
 material = SubResource("ShaderMaterial_jki3l")
@@ -85,6 +82,8 @@ player = NodePath("..")
 
 [node name="Health" type="Node" parent="."]
 script = ExtResource("3_f1j7r")
+self_heal_interval = 1.0
+self_heal = 1
 health = 300
 max_health = 300
 
