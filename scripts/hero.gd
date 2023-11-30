@@ -8,16 +8,18 @@ class_name hero
 @export var player_animation_tree: AnimationTree
 @export var has_teammate_bullet_color : ColorRect
 @export var right_sword : PackedScene
-@export var fire_interval = 0
+@export var fire_interval = 0.0
 @export var cd_color : ColorRect
 @export var left_sword : PackedScene
-var fire_timer = 0
+var fire_timer = 0.0
 var right_sword_instance
 var left_sword_instance
 @export var rotation_speed: float = 360.0 # 旋转速度（每秒度数）
 @export var total_rotation: float = 360.0 # 总旋转角度
 @export var revive_timer : float
 signal revive(revive_timer)
+signal sword_cd(cd)
+
 var deadth : bool = false
 var has_teammate_bullet : bool = false
 var in_hand : String = "my_bullet"
@@ -26,7 +28,6 @@ var time_since_last_self_heal : float = 0
 
 
 func _process(delta):
-
 
 	if has_teammate_bullet:
 		has_teammate_bullet_color.show()
@@ -47,6 +48,7 @@ func _process(delta):
 	if Input.is_action_just_pressed("p2_right_fire"):
 		if fire_timer <= 0:
 			fire_timer = fire_interval
+			sword_cd.emit(fire_interval)
 			right_sword_instance = right_sword.instantiate()
 			add_child(right_sword_instance)
 			await get_tree().create_timer(0.5).timeout
@@ -55,6 +57,7 @@ func _process(delta):
 	if Input.is_action_just_pressed("p2_left_fire"): 
 		if fire_timer <= 0:
 			fire_timer = fire_interval
+			sword_cd.emit(fire_interval)
 			left_sword_instance = left_sword.instantiate()
 			add_child(left_sword_instance)
 			await get_tree().create_timer(0.5).timeout

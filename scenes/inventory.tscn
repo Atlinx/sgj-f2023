@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://cgokel7vn646l"]
 
-[ext_resource type="PackedScene" uid="uid://csntnfh6j6y2r" path="res://scenes/slot.tscn" id="2_tx8ai"]
+[ext_resource type="PackedScene" uid="uid://dls488dai5v42" path="res://scenes/cd_ui.tscn" id="1_0ca3l"]
 
 [node name="Inventory" type="Control"]
 layout_mode = 3
@@ -8,23 +8,12 @@ anchors_preset = 0
 
 [node name="GridContainer" type="GridContainer" parent="."]
 layout_mode = 0
-offset_left = 11.0
-offset_top = 28.0
-offset_right = 127.0
-offset_bottom = 56.0
+offset_left = 22.0
+offset_top = 48.0
+offset_right = 72.0
+offset_bottom = 163.0
+scale = Vector2(0.5, 0.5)
 columns = 5
 
-[node name="Slot" parent="GridContainer" instance=ExtResource("2_tx8ai")]
-layout_mode = 2
-
-[node name="Slot2" parent="GridContainer" instance=ExtResource("2_tx8ai")]
-layout_mode = 2
-
-[node name="Slot3" parent="GridContainer" instance=ExtResource("2_tx8ai")]
-layout_mode = 2
-
-[node name="Slot4" parent="GridContainer" instance=ExtResource("2_tx8ai")]
-layout_mode = 2
-
-[node name="Slot5" parent="GridContainer" instance=ExtResource("2_tx8ai")]
+[node name="CDUI" parent="GridContainer" instance=ExtResource("1_0ca3l")]
 layout_mode = 2

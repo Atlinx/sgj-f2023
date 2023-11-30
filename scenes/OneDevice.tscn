@@ -96,12 +96,6 @@ label_1 = NodePath("HealthUI/HealthShow")
 health_bar_2 = NodePath("HealthUI2/HealthBarUI")
 label_2 = NodePath("HealthUI2/HealthShow")
 
-[node name="Skill" parent="UI" instance=ExtResource("3_acuek")]
-offset_left = 6.0
-offset_top = 26.0
-offset_right = 6.0
-offset_bottom = 26.0
-
 [node name="HealthUI" type="Control" parent="UI"]
 self_modulate = Color(0.27451, 0.992157, 0.0313726, 1)
 layout_mode = 3
@@ -155,3 +149,5 @@ offset_right = 292.0
 offset_bottom = 49.0
 value = 100.0
 show_percentage = false
+
+[node name="Inventory" parent="UI" instance=ExtResource("3_acuek")]
