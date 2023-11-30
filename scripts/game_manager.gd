@@ -2,6 +2,8 @@ extends Node
 class_name GameManager
 
 @export var spawn_location_1 : Node2D
+@export var spawn_location_2 : Node2D
+
 @onready var player_1 = get_tree().get_first_node_in_group("player1")
 @onready var health_1 = player_1.get_node("Health")
 @onready var player_2 = get_tree().get_first_node_in_group("player2")
@@ -9,7 +11,7 @@ class_name GameManager
 
 func _ready():
 	health_1.death.connect(_revive_player_1)
-	health_2.death.connect(_revive)
+	health_2.death.connect(_revive_player_2)
 
 func _process(_delta):
 	if Input.is_key_pressed(KEY_BACKSPACE):
@@ -25,7 +27,10 @@ func _revive_player_1():
 	player_1.global_position = spawn_location_1.global_position
 
 
-func _revive():
-	pass
-	
+func _revive_player_2():
+	var revive_time = player_2.revive_timer
+	await get_tree().create_timer(revive_time).timeout
+	health_2.reset_health()
+	player_2.global_position = spawn_location_2.global_position
+
 

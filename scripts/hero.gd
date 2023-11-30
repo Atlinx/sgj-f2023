@@ -1,9 +1,7 @@
 extends CharacterBody2D
 class_name hero
 
-@export var health: Health 
-@export var self_heal_interval : float = 0
-@export var self_heal : int = 0
+
 @export var fire_sound : AudioStreamPlayer
 @export var teammate_bullet_prefab: PackedScene
 @export var speed: float = 300.0
@@ -66,11 +64,7 @@ func _process(delta):
 	if has_teammate_bullet:
 		has_teammate_bullet_color.show()
 		
-	if time_since_last_self_heal >= self_heal_interval:
-		health.health += self_heal
-		time_since_last_self_heal = 0
-	else:
-		time_since_last_self_heal += delta
+
 
 func fire():
 	var teammate_bullet_inst: PlayerBullet = teammate_bullet_prefab.instantiate()

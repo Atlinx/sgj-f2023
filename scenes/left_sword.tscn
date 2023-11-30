@@ -6,6 +6,7 @@
 
 [node name="Sprite2D" parent="." index="0"]
 position = Vector2(-5, -3.5)
+scale = Vector2(30, 30)
 
 [node name="CollsionShape" parent="." index="1"]
 position = Vector2(-5.25, -5.75)

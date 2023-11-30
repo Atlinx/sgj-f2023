@@ -12,7 +12,7 @@ shader_parameter/bullet_color = Color(0.0784314, 1, 0, 1)
 [node name="SpecialSlime1" instance=ExtResource("1_0kj5y")]
 
 [node name="Visuals" parent="." index="1"]
-position = Vector2(0, -0.951056)
+position = Vector2(0, -0.918706)
 
 [node name="Sprite2D" parent="Visuals" index="0"]
 scale = Vector2(1.5, 1.5)
@@ -24,8 +24,6 @@ position = Vector2(1, 0)
 script = ExtResource("2_7a5d3")
 
 [node name="AIMovement" parent="." index="9"]
-speed = 64.0
-update_position_interval = 1.0
 fire_interval = 1
 
 [node name="Sprite2D" parent="DroppedItem" index="0"]
