@@ -52,7 +52,6 @@ script = ExtResource("1_26omq")
 enemy_prefabs = Array[PackedScene]([ExtResource("2_okusv"), ExtResource("2_okusv")])
 tile_map = NodePath("../World/Level")
 game_manager = NodePath("../GameManager")
-intial_enemy_amount = 100
 
 [node name="GameManager" type="Node" parent="." node_paths=PackedStringArray("spawn_location_1", "spawn_location_2")]
 script = ExtResource("9_tdvt1")

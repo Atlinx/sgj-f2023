@@ -28,17 +28,12 @@ func construct(_entity_owner: Node, initial_position: Vector2, direction: Vector
 		set_collision_layer_value(1,false)
 		add_to_group("PassingBullet")
 
-#func _process(delta):
-#	if is_in_group("PassingBullet"):
-#		var shooter = get_tree().get_first_node_in_group("shooter")
-#		if shooter != null:
-#			var direction = (shooter.global_position - global_position).normalized()
-#			var velocity = direction * speed * delta
-#			move_and_slide()
-	
-
 
 func _physics_process(delta):
+	var shooter = get_tree().get_first_node_in_group("shooter")
+	if is_in_group("PassingBullet"):
+		global_position = global_position.move_toward(shooter.global_position, delta*speed)
+	
 	var collision: KinematicCollision2D = move_and_collide(_direction * speed * delta)
 	if collision != null:
 		_on_collision(collision)
