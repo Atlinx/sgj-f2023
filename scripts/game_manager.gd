@@ -3,11 +3,13 @@ class_name GameManager
 
 @export var spawn_location_1 : Node2D
 @export var spawn_location_2 : Node2D
-
 @onready var player_1 = get_tree().get_first_node_in_group("player1")
 @onready var health_1 = player_1.get_node("Health")
 @onready var player_2 = get_tree().get_first_node_in_group("player2")
 @onready var health_2 = player_2.get_node("Health")
+var gold : int
+@export var base_health : int
+
 
 func _ready():
 	health_1.death.connect(_revive_player_1)
@@ -16,9 +18,9 @@ func _ready():
 func _process(_delta):
 	if Input.is_key_pressed(KEY_BACKSPACE):
 		get_tree().reload_current_scene()
+	if base_health <= 0:
+		print("gameover")
 
-func on_enemy_death():
-	pass
 
 func _revive_player_1():
 	var revive_time = player_1.revive_timer
@@ -34,3 +36,5 @@ func _revive_player_2():
 	player_2.global_position = spawn_location_2.global_position
 
 
+func _on_base_base_attacked():
+	base_health -= 1

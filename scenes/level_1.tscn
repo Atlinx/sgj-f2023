@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bb3i3r7einpnp"]
+[gd_scene load_steps=13 format=3 uid="uid://bb3i3r7einpnp"]
 
 [ext_resource type="Script" path="res://scripts/IntialEnemyCreater.gd" id="1_26omq"]
 [ext_resource type="PackedScene" uid="uid://cdpn5s43qjbwg" path="res://scenes/slime.tscn" id="2_okusv"]
@@ -8,8 +8,11 @@
 [ext_resource type="PackedScene" uid="uid://ci8yj0nmd1i13" path="res://scenes/shooter.tscn" id="7_3pekr"]
 [ext_resource type="PackedScene" uid="uid://fcltcmlr1x4q" path="res://scenes/hero.tscn" id="8_kojmd"]
 [ext_resource type="Script" path="res://scripts/game_manager.gd" id="9_tdvt1"]
-[ext_resource type="PackedScene" uid="uid://ba0qcvf4s15ye" path="res://path/path.tscn" id="10_hp0j7"]
+[ext_resource type="Script" path="res://scenes/base.gd" id="10_cgyxs"]
+[ext_resource type="Texture2D" uid="uid://d12dfsl6wteg2" path="res://icon.svg" id="10_qwavt"]
 [ext_resource type="Script" path="res://scripts/Slime_spawner.gd" id="10_unoas"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_umusl"]
 
 [node name="Level1" type="Node" groups=["level"]]
 
@@ -43,6 +46,7 @@ script = ExtResource("6_e6x4p")
 
 [node name="Shooter" parent="World/Level" instance=ExtResource("7_3pekr")]
 position = Vector2(2709, -784)
+collision_layer = 0
 
 [node name="Hero" parent="World/Level" instance=ExtResource("8_kojmd")]
 position = Vector2(2277, -377)
@@ -58,6 +62,7 @@ game_manager = NodePath("../GameManager")
 script = ExtResource("9_tdvt1")
 spawn_location_1 = NodePath("../SpawnLocations/0")
 spawn_location_2 = NodePath("../SpawnLocations/1")
+base_health = 1
 
 [node name="SlimeSpawner" type="Node" parent="." node_paths=PackedStringArray("tile_map", "game_manager")]
 script = ExtResource("10_unoas")
@@ -66,4 +71,21 @@ enemy_amount = Vector2i(0, 0)
 tile_map = NodePath("../World/Level")
 game_manager = NodePath("../GameManager")
 
-[node name="Path2D2" parent="." instance=ExtResource("10_hp0j7")]
+[node name="Base" type="Area2D" parent="." groups=["base"]]
+position = Vector2(2387, -321)
+scale = Vector2(3, 3)
+script = ExtResource("10_cgyxs")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Base"]
+shape = SubResource("CircleShape2D_umusl")
+
+[node name="Sprite2D" type="Sprite2D" parent="Base"]
+position = Vector2(1, 1)
+scale = Vector2(0.0839844, 0.111328)
+texture = ExtResource("10_qwavt")
+
+[node name="Slime" parent="." instance=ExtResource("2_okusv")]
+position = Vector2(2719, -673)
+
+[connection signal="base_attacked" from="Base" to="GameManager" method="_on_base_base_attacked"]
+[connection signal="body_entered" from="Base" to="Base" method="_on_body_entered"]
