@@ -1,6 +1,7 @@
-[gd_scene load_steps=24 format=3 uid="uid://cdpn5s43qjbwg"]
+[gd_scene load_steps=25 format=3 uid="uid://cdpn5s43qjbwg"]
 
 [ext_resource type="Script" path="res://scripts/healthbar.gd" id="1_bgety"]
+[ext_resource type="Script" path="res://scenes/slime.gd" id="1_gekkp"]
 [ext_resource type="Texture2D" uid="uid://g1bx6y7c5y75" path="res://sprites/slime.png" id="1_hx314"]
 [ext_resource type="Script" path="res://scripts/health.gd" id="2_jg8ob"]
 [ext_resource type="Script" path="res://scripts/team.gd" id="3_uwcyq"]
@@ -38,8 +39,10 @@ shader_parameter/bullet_color = Color(0.0784314, 1, 0, 1)
 [sub_resource type="CircleShape2D" id="CircleShape2D_j6s7h"]
 radius = 6.08276
 
-[node name="Slime" type="CharacterBody2D" groups=["enemy"]]
+[node name="Slime" type="CharacterBody2D" node_paths=PackedStringArray("ai") groups=["enemy"]]
 collision_mask = 17
+script = ExtResource("1_gekkp")
+ai = NodePath("AIMovement")
 
 [node name="SlimeHealthBar" type="ProgressBar" parent="." node_paths=PackedStringArray("health")]
 self_modulate = Color(0.984314, 0.0196078, 0.0196078, 1)
@@ -53,7 +56,7 @@ script = ExtResource("1_bgety")
 health = NodePath("../Health")
 
 [node name="Visuals" type="Node2D" parent="."]
-position = Vector2(0, -0.999442)
+position = Vector2(0, -0.00587567)
 
 [node name="Sprite2D" type="Sprite2D" parent="Visuals"]
 position = Vector2(0, -4)

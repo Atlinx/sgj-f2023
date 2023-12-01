@@ -24,10 +24,13 @@ var deadth : bool = false
 var has_teammate_bullet : bool = false
 var in_hand : String = "my_bullet"
 var time_since_last_self_heal : float = 0
-
+var alive : bool = true
 
 
 func _process(delta):
+
+	if alive == false:
+		return
 
 	if has_teammate_bullet:
 		has_teammate_bullet_color.show()
@@ -106,4 +109,8 @@ func _on_health_death_position(death_position):
 		has_teammate_bullet = false
 		var bullet_instance = dropped_bullet.instantiate()
 		call_deferred("_deferred_bullet_addition", bullet_instance, death_position)
+	alive = false
 	revive.emit(revive_timer)
+	await get_tree().create_timer(revive_timer).timeout
+	alive = true
+

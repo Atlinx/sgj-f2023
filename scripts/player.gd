@@ -1,7 +1,7 @@
 extends CharacterBody2D
 class_name Shooter
 
-
+signal revive(revive_timer)
 @export var fire_sound : AudioStreamPlayer
 @export var my_bullet_prefab: PackedScene
 @export var speed: float = 300.0
@@ -10,12 +10,15 @@ class_name Shooter
 @export var has_my_shot_color : ColorRect
 @export var item_collector : Node2D
 @export var revive_timer : float
-
+var alive : bool = true
 var has_teammate_bullet : bool = false
 
 
 
 func _process(delta):
+	if alive == false:
+		return
+
 
 	if has_shot:
 		has_my_shot_color.show()
@@ -49,3 +52,19 @@ func _physics_process(_delta):
 
 	move_and_slide()
 
+func _deferred_bullet_addition(bullet_instance, death_position):
+	bullet_instance.global_position = death_position
+	bullet_instance.enabled = true
+	var level = get_tree().get_first_node_in_group("level")
+	level.add_child(bullet_instance)
+
+
+func _on_health_death_position(death_position):
+#	if has_teammate_bullet == true:
+#		has_teammate_bullet = false
+#		var bullet_instance = dropped_bullet.instantiate()
+#		call_deferred("_deferred_bullet_addition", bullet_instance, death_position)
+	alive = false
+	revive.emit(revive_timer)
+	await get_tree().create_timer(revive_timer).timeout
+	alive = true
