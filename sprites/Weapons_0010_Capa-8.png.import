@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://sv4yd7mmgq2"
-path="res://.godot/imported/hp_segment.png-9b53f373a178ee70dd2c186fe2ecefc7.ctex"
+uid="uid://dbj846wen20"
+path="res://.godot/imported/Weapons_0010_Capa-8.png-84c92ff5c21c7f1ce31f29e27861b11e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://hp_segment.png"
-dest_files=["res://.godot/imported/hp_segment.png-9b53f373a178ee70dd2c186fe2ecefc7.ctex"]
+source_file="res://sprites/Weapons_0010_Capa-8.png"
+dest_files=["res://.godot/imported/Weapons_0010_Capa-8.png-84c92ff5c21c7f1ce31f29e27861b11e.ctex"]
 
 [params]
 

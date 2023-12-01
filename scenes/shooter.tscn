@@ -61,7 +61,7 @@ script = ExtResource("3_grg05")
 health = NodePath("../Health")
 
 [node name="Visuals" type="Node2D" parent="."]
-position = Vector2(0, -0.809419)
+position = Vector2(0, -0.00318784)
 
 [node name="Sprite2D" type="Sprite2D" parent="Visuals"]
 material = SubResource("ShaderMaterial_jki3l")
@@ -87,6 +87,7 @@ self_heal = 1
 
 [node name="Team" type="Node" parent="."]
 script = ExtResource("4_s4p3p")
+team = 1
 
 [node name="DeathFx" parent="." instance=ExtResource("6_0krtd")]
 

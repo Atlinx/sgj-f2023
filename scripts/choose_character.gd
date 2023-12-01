@@ -16,8 +16,8 @@ func _process(delta):
 func _on_single_player_button_down():
 	var scene = load("res://scenes/single_player_main.tscn").instantiate()
 	var shooter = load("res://scenes/single_player_main.tscn").instantiate()
+	scene.get_node("tilemap").add_child(shooter)
 	get_tree().root.add_child(scene)
-	scene.add_child(shooter)
 	self.hide()
 
 
@@ -25,5 +25,5 @@ func _on_multiplayer_button_down():
 	var scene = load("res://scenes/single_player_main.tscn").instantiate()
 	var hero = load("res://scenes/hero.tscn").instantiate()
 	get_tree().root.add_child(scene)
-	scene.add_child(hero)
+	scene.get_tree().root.add_child(hero)
 	self.hide()

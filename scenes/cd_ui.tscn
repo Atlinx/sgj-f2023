@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://dls488dai5v42"]
 
 [ext_resource type="Script" path="res://scenes/cd_ui.gd" id="1_31r2k"]
-[ext_resource type="Texture2D" uid="uid://dbj846wen20" path="res://Weapons_0010_Capa-8.png" id="1_vuewq"]
+[ext_resource type="Texture2D" uid="uid://dbj846wen20" path="res://sprites/Weapons_0010_Capa-8.png" id="1_vuewq"]
 
 [node name="CDUI" type="TextureButton" node_paths=PackedStringArray("texture_progress")]
 offset_right = 50.0

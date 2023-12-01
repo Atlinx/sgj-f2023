@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://di45hf0lq0e23"]
 
 [ext_resource type="Script" path="res://scripts/sword.gd" id="1_lj03g"]
-[ext_resource type="Texture2D" uid="uid://dbj846wen20" path="res://Weapons_0010_Capa-8.png" id="2_32uyv"]
+[ext_resource type="Texture2D" uid="uid://dbj846wen20" path="res://sprites/Weapons_0010_Capa-8.png" id="2_32uyv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ollyw"]
 size = Vector2(26.6667, 73.3333)
