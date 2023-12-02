@@ -10,7 +10,7 @@ extends Node
 @export var animation_tree: AnimationTree
 @export var dropped_heart : DroppedItem
 
-
+var base_position
 var _fire_timer: float
 
 var _update_position_timer: float = 0
@@ -21,10 +21,12 @@ func _ready():
 	detection_area.body_entered.connect(_on_body_entered)
 	detection_area.body_exited.connect(_on_body_exited)
 	dropped_heart.visible = false
+	base_position = get_tree().get_first_node_in_group("base").global_position
 	call_deferred("_delayed_navigation_setup")
 
 func _delayed_navigation_setup():
-	navigation_agent.target_position = get_tree().get_first_node_in_group("base").global_position
+	navigation_agent.target_position = base_position
+	
 
 func _on_body_entered(body: Node2D):
 	var team = body.get_node_or_null("Team")
@@ -35,7 +37,8 @@ func _on_body_entered(body: Node2D):
 func _on_body_exited(body: Node2D):
 	if body == _player:
 		_player = null
-		navigation_agent.target_position = get_tree().get_first_node_in_group("base").global_position
+		navigation_agent.target_position = base_position
+
 
 func _process(delta):
 	if _player != null:

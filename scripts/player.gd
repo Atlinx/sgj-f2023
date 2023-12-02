@@ -22,9 +22,6 @@ func _process(delta):
 
 	if has_shot:
 		has_my_shot_color.show()
-
-	
-	
 	if has_shot and Input.is_action_just_pressed("p1_fire"):
 		fire()
 

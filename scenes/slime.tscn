@@ -56,7 +56,7 @@ script = ExtResource("1_bgety")
 health = NodePath("../Health")
 
 [node name="Visuals" type="Node2D" parent="."]
-position = Vector2(0, -0.955314)
+position = Vector2(0, -0.0178175)
 
 [node name="Sprite2D" type="Sprite2D" parent="Visuals"]
 position = Vector2(0, -4)

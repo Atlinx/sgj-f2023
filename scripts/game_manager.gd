@@ -38,3 +38,4 @@ func _revive_player_2():
 
 func _on_base_base_attacked():
 	base_health -= 1
+	print(base_health)
