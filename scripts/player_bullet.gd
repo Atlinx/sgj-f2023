@@ -9,10 +9,10 @@ signal death()
 @export var team: Team.TeamType
 var damaged_entity: bool = false
 var entity_owner: Node
+var enter_high_land : bool = false
 
 var _direction: Vector2
 var _life_timer: float = 0
-
 
 func construct(_entity_owner: Node, initial_position: Vector2, direction: Vector2):
 	entity_owner = _entity_owner
@@ -31,6 +31,7 @@ func construct(_entity_owner: Node, initial_position: Vector2, direction: Vector
 
 func _physics_process(delta):
 	var shooter = get_tree().get_first_node_in_group("shooter")
+	
 	if is_in_group("PassingBullet"):
 		global_position = global_position.move_toward(shooter.global_position, delta*speed)
 	
@@ -54,7 +55,7 @@ func _on_collision(collision: KinematicCollision2D):
 	elif body.is_in_group("wall"):
 		global_position = collision.get_position()
 		_on_death(false)
-		print("wall")
+
 
 
 func _on_hitbox_hit(body: Node2D):
@@ -75,3 +76,18 @@ func _on_death(_damaged_entity: bool):
 	queue_free()
 
 
+
+
+
+
+
+func _on_area_2d_area_entered(area):
+	var tilemap = get_tree().get_first_node_in_group("tilemap")
+	var cell_coordinates = tilemap.local_to_map(global_position)
+	var cell_data = tilemap.get_cell_tile_data(0,cell_coordinates)
+	print(cell_data)
+	enter_high_land = cell_data.get_custom_data("bullet_enter")
+	print(enter_high_land)
+	if enter_high_land == false:
+		await get_tree().create_timer(0.5).timeout
+		set_collision_mask_value(3,true)

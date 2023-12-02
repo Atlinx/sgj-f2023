@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://ci276fgn23rcd"]
+[gd_scene load_steps=8 format=3 uid="uid://ci276fgn23rcd"]
 
 [ext_resource type="PackedScene" uid="uid://cmfu0ybbkg7tn" path="res://scenes/bullet.tscn" id="1_gbrce"]
 [ext_resource type="PackedScene" uid="uid://d2lulf6teg15y" path="res://scenes/dropped_item.tscn" id="2_6ehoh"]
@@ -7,10 +7,11 @@
 [ext_resource type="Script" path="res://scripts/player_bullet_dropper.gd" id="3_7uj5k"]
 [ext_resource type="PackedScene" uid="uid://booa6u2jw1mxr" path="res://scenes/death_fx.tscn" id="3_qny05"]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_08trx"]
+radius = 5.33333
+
 [node name="PlayerBullet" instance=ExtResource("1_gbrce")]
 scale = Vector2(0.75, 0.75)
-collision_layer = 513
-collision_mask = 530
 script = ExtResource("2_52ntb")
 damage = 25
 
@@ -32,4 +33,11 @@ item = NodePath("DroppedBullet")
 [node name="Glow" parent="." index="4"]
 self_modulate = Color(0.0784314, 1, 0, 1)
 
+[node name="Area2D" type="Area2D" parent="." index="5"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" index="0"]
+shape = SubResource("CircleShape2D_08trx")
+
 [connection signal="death" from="." to="DeathFx" method="on_death"]
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="area_exited" from="Area2D" to="." method="_on_area_2d_area_exited"]

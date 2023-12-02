@@ -10,13 +10,14 @@ extends Node
 
 var _spawn_timer: float = 0
 var _spawnable_cells: Array[Vector2i] = []
-
+const WATER_LAYER : int = 2
 const WALL_TERRAIN_ID: int = 0
+var spawnable_id :int = -1
 
 func _ready():
 	for cell in tile_map.get_used_cells(0):
 		var tile_data = tile_map.get_cell_tile_data(0, cell)
-		if tile_data.terrain != WALL_TERRAIN_ID:
+		if tile_data.terrain == spawnable_id:
 			_spawnable_cells.append(cell)
 	set_process(false)
 	await get_tree().create_timer(start_spawn_delay).timeout

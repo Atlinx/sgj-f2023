@@ -51,7 +51,7 @@ _data = {
 [node name="Hero" type="CharacterBody2D" node_paths=PackedStringArray("fire_sound", "player_animation_tree", "has_teammate_bullet_color", "cd_color") groups=["hero", "player", "player2"]]
 position = Vector2(-485, 22)
 collision_layer = 32
-collision_mask = 48
+collision_mask = 20
 script = ExtResource("1_3em0b")
 dropped_bullet = ExtResource("2_yywug")
 fire_sound = NodePath("FireSound")
@@ -77,7 +77,7 @@ script = ExtResource("2_0lx5u")
 health = NodePath("../Health")
 
 [node name="Visuals" type="Node2D" parent="."]
-position = Vector2(0, -0.0533217)
+position = Vector2(0, -0.159305)
 
 [node name="Sprite2D" type="Sprite2D" parent="Visuals"]
 material = SubResource("ShaderMaterial_jki3l")
