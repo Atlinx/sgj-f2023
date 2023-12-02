@@ -8,12 +8,15 @@ class_name GameManager
 @onready var player_2 = get_tree().get_first_node_in_group("player2")
 @onready var health_2 = player_2.get_node("Health")
 var gold : int
-@export var base_health : int
-
+@export var base_max_health : int
+var base_health
+signal base
 
 func _ready():
 	health_1.death.connect(_revive_player_1)
 	health_2.death.connect(_revive_player_2)
+	base_health = base_max_health
+	base.emit()
 
 func _process(_delta):
 	if Input.is_key_pressed(KEY_BACKSPACE):
@@ -38,4 +41,4 @@ func _revive_player_2():
 
 func _on_base_base_attacked():
 	base_health -= 1
-	print(base_health)
+	base.emit()

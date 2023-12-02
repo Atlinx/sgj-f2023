@@ -3,13 +3,15 @@
 [ext_resource type="PackedScene" uid="uid://di45hf0lq0e23" path="res://scenes/right_sword.tscn" id="1_bqrac"]
 
 [node name="LeftSword" instance=ExtResource("1_bqrac")]
+scale = Vector2(0.2, 0.2)
 
 [node name="Sprite2D" parent="." index="0"]
 position = Vector2(-5, -3.5)
-scale = Vector2(30, 30)
+scale = Vector2(2, 2)
 
 [node name="CollsionShape" parent="." index="1"]
-position = Vector2(-5.25, -5.75)
+position = Vector2(-5, -33)
+scale = Vector2(2, 2)
 
 [node name="AnimationPlayer" parent="." index="2"]
 autoplay = "left_sword"

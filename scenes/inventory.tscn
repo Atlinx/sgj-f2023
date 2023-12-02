@@ -8,12 +8,13 @@ anchors_preset = 0
 
 [node name="GridContainer" type="GridContainer" parent="."]
 layout_mode = 0
-offset_left = 22.0
-offset_top = 48.0
-offset_right = 72.0
-offset_bottom = 163.0
+offset_left = 1058.0
+offset_top = 101.0
+offset_right = 1108.0
+offset_bottom = 216.0
 scale = Vector2(0.5, 0.5)
 columns = 5
 
 [node name="CDUI" parent="GridContainer" instance=ExtResource("1_0ca3l")]
 layout_mode = 2
+size_flags_horizontal = 8

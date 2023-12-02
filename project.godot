@@ -97,7 +97,7 @@ portal={
 
 2d_physics/layer_1="entity"
 2d_physics/layer_2="hitbox"
-2d_physics/layer_3="water"
+2d_physics/layer_3="highland"
 2d_physics/layer_4="lava"
 2d_physics/layer_5="wall"
 2d_physics/layer_6="hero"

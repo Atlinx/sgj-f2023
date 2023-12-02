@@ -57,10 +57,6 @@ func _deferred_bullet_addition(bullet_instance, death_position):
 
 
 func _on_health_death_position(death_position):
-#	if has_teammate_bullet == true:
-#		has_teammate_bullet = false
-#		var bullet_instance = dropped_bullet.instantiate()
-#		call_deferred("_deferred_bullet_addition", bullet_instance, death_position)
 	alive = false
 	revive.emit(revive_timer)
 	await get_tree().create_timer(revive_timer).timeout

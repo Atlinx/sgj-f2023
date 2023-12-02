@@ -29,6 +29,8 @@ func _ready():
 	players["2"].player.get_node("Health").death.connect(_on_player_2_death)
 	players["2"].player.get_node("Health").revive.connect(_on_player_2_revive)
 
+
+
 func _on_player_1_death():
 	players["1"].camera.enabled = false
 

@@ -18,13 +18,14 @@ script/source = "extends CanvasLayer
 @export var health_bar_2 : ProgressBar
 @export var label_2 : Label
 
-
+@onready var base = get_tree().get_first_node_in_group(\"game_manager\")
+@export var base_label : Label
 
 func _ready():
 	health_1.healthchanged.connect(_health_update)
 	health_2.healthchanged.connect(_health_update)
 	_health_update()
-	
+	base.base.connect(_base_update)
 
 func _health_update():
 	if is_instance_valid(health_1):
@@ -36,8 +37,8 @@ func _health_update():
 		label_2.text = str(health_2.health) +\"/\"+ str(health_2.max_health)
 
 
-func _skill_update():
-	pass
+func _base_update():
+	base_label.text = str(base.base_health) +\"/\"+ str(base.base_max_health)
 "
 
 [node name="SinglePlayerMain" type="Node"]
@@ -68,7 +69,7 @@ stretch = true
 
 [node name="Player1Viewport" type="SubViewport" parent="SplitScreen/GridContainer/SubViewportContainer"]
 handle_input_locally = false
-size = Vector2i(2, 2)
+size = Vector2i(574, 648)
 render_target_update_mode = 4
 
 [node name="Level1" parent="SplitScreen/GridContainer/SubViewportContainer/Player1Viewport" instance=ExtResource("1_oxki8")]
@@ -83,18 +84,19 @@ stretch = true
 
 [node name="Player2Viewport" type="SubViewport" parent="SplitScreen/GridContainer/SubViewportContainer2"]
 handle_input_locally = false
-size = Vector2i(2, 2)
+size = Vector2i(574, 648)
 render_target_update_mode = 4
 
 [node name="Camera2D" type="Camera2D" parent="SplitScreen/GridContainer/SubViewportContainer2/Player2Viewport"]
 position = Vector2(578, 0)
 
-[node name="UI" type="CanvasLayer" parent="." node_paths=PackedStringArray("health_bar_1", "label_1", "health_bar_2", "label_2")]
+[node name="UI" type="CanvasLayer" parent="." node_paths=PackedStringArray("health_bar_1", "label_1", "health_bar_2", "label_2", "base_label")]
 script = SubResource("GDScript_acf85")
 health_bar_1 = NodePath("HealthUI/HealthBarUI")
 label_1 = NodePath("HealthUI/HealthShow")
 health_bar_2 = NodePath("HealthUI2/HealthBarUI")
 label_2 = NodePath("HealthUI2/HealthShow")
+base_label = NodePath("Label")
 
 [node name="HealthUI" type="Control" parent="UI"]
 self_modulate = Color(0.27451, 0.992157, 0.0313726, 1)
@@ -151,3 +153,10 @@ value = 100.0
 show_percentage = false
 
 [node name="Inventory" parent="UI" instance=ExtResource("3_acuek")]
+
+[node name="Label" type="Label" parent="UI"]
+offset_left = 22.0
+offset_top = 60.0
+offset_right = 129.0
+offset_bottom = 112.0
+text = "base health:"
