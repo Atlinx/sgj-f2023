@@ -1,6 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://cgokel7vn646l"]
+[gd_scene load_steps=5 format=3 uid="uid://cgokel7vn646l"]
 
 [ext_resource type="PackedScene" uid="uid://dls488dai5v42" path="res://scenes/cd_ui.tscn" id="1_0ca3l"]
+[ext_resource type="Texture2D" uid="uid://c05kv56i0tvmq" path="res://sprites/bullet.png" id="2_stifa"]
+[ext_resource type="Material" uid="uid://duq16u675oqot" path="res://materials/player_bullet.tres" id="2_uf8be"]
+[ext_resource type="Texture2D" uid="uid://ds8oe1j4v5amr" path="res://sprites/heart.png" id="4_stwg6"]
 
 [node name="Inventory" type="Control"]
 layout_mode = 3
@@ -8,13 +11,25 @@ anchors_preset = 0
 
 [node name="GridContainer" type="GridContainer" parent="."]
 layout_mode = 0
-offset_left = 1058.0
-offset_top = 101.0
-offset_right = 1108.0
-offset_bottom = 216.0
+offset_left = 1062.0
+offset_top = 115.0
+offset_right = 1112.0
+offset_bottom = 230.0
 scale = Vector2(0.5, 0.5)
 columns = 5
 
 [node name="CDUI" parent="GridContainer" instance=ExtResource("1_0ca3l")]
 layout_mode = 2
 size_flags_horizontal = 8
+
+[node name="Sprite2D" type="Sprite2D" parent="GridContainer"]
+self_modulate = Color(0.286275, 0.815686, 0.117647, 1)
+material = ExtResource("2_uf8be")
+position = Vector2(-1488, -162)
+scale = Vector2(6, 6)
+texture = ExtResource("2_stifa")
+
+[node name="Sprite2D2" type="Sprite2D" parent="GridContainer"]
+position = Vector2(-532, -162)
+scale = Vector2(6, 5.4375)
+texture = ExtResource("4_stwg6")

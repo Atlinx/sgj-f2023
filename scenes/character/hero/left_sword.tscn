@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://b7u1tpdioefes"]
 
-[ext_resource type="PackedScene" uid="uid://di45hf0lq0e23" path="res://scenes/right_sword.tscn" id="1_bqrac"]
+[ext_resource type="PackedScene" uid="uid://di45hf0lq0e23" path="res://scenes/character/hero/right_sword.tscn" id="1_bqrac"]
 
 [node name="LeftSword" instance=ExtResource("1_bqrac")]
 scale = Vector2(0.2, 0.2)

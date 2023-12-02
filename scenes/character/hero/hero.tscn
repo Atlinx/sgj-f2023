@@ -2,13 +2,13 @@
 
 [ext_resource type="Script" path="res://scripts/hero.gd" id="1_3em0b"]
 [ext_resource type="Script" path="res://scripts/healthbar.gd" id="2_0lx5u"]
-[ext_resource type="PackedScene" uid="uid://ci276fgn23rcd" path="res://scenes/player_bullet.tscn" id="2_xvfdh"]
-[ext_resource type="PackedScene" uid="uid://d2lulf6teg15y" path="res://scenes/dropped_item.tscn" id="2_yywug"]
+[ext_resource type="PackedScene" uid="uid://d2lulf6teg15y" path="res://scenes/character/shooter/dropped_bullet.tscn" id="2_cc60o"]
 [ext_resource type="Shader" path="res://materials/shaders/entity.gdshader" id="3_5mpf0"]
-[ext_resource type="PackedScene" uid="uid://di45hf0lq0e23" path="res://scenes/right_sword.tscn" id="3_dqtxn"]
+[ext_resource type="PackedScene" uid="uid://ci276fgn23rcd" path="res://scenes/character/shooter/player_bullet.tscn" id="3_w2qrk"]
 [ext_resource type="Texture2D" uid="uid://cee6d7cbam6pj" path="res://sprites/player.png" id="4_7rcgy"]
-[ext_resource type="PackedScene" uid="uid://b7u1tpdioefes" path="res://scenes/left_sword.tscn" id="4_eeae6"]
+[ext_resource type="PackedScene" uid="uid://di45hf0lq0e23" path="res://scenes/character/hero/right_sword.tscn" id="4_g4h2g"]
 [ext_resource type="Script" path="res://scripts/player_camera.gd" id="5_kqgjr"]
+[ext_resource type="PackedScene" uid="uid://b7u1tpdioefes" path="res://scenes/character/hero/left_sword.tscn" id="5_symwi"]
 [ext_resource type="Script" path="res://scripts/health.gd" id="6_1ojsw"]
 [ext_resource type="Script" path="res://scripts/team.gd" id="7_rlgqx"]
 [ext_resource type="PackedScene" uid="uid://booa6u2jw1mxr" path="res://scenes/death_fx.tscn" id="8_5piuf"]
@@ -53,15 +53,15 @@ position = Vector2(-485, 22)
 collision_layer = 32
 collision_mask = 20
 script = ExtResource("1_3em0b")
-dropped_bullet = ExtResource("2_yywug")
+dropped_bullet = ExtResource("2_cc60o")
 fire_sound = NodePath("FireSound")
-teammate_bullet_prefab = ExtResource("2_xvfdh")
+teammate_bullet_prefab = ExtResource("3_w2qrk")
 player_animation_tree = NodePath("AnimationTree")
 has_teammate_bullet_color = NodePath("BulletColorRect")
-right_sword = ExtResource("3_dqtxn")
+right_sword = ExtResource("4_g4h2g")
 fire_interval = 1.5
 cd_color = NodePath("CDColorRect2")
-left_sword = ExtResource("4_eeae6")
+left_sword = ExtResource("5_symwi")
 rotation_speed = 720.0
 revive_timer = 3.0
 
@@ -153,7 +153,6 @@ libraries = {
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = ExtResource("14_to0vj")
 anim_player = NodePath("../AnimationPlayer")
-active = true
 script = ExtResource("15_peqsa")
 
 [node name="FireSound" type="AudioStreamPlayer" parent="."]

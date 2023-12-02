@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://4t16hws81g83"]
 
 [ext_resource type="Script" path="res://scripts/SplitScreen.gd" id="1_kjhmp"]
-[ext_resource type="PackedScene" uid="uid://bb3i3r7einpnp" path="res://scenes/level_1.tscn" id="1_oxki8"]
+[ext_resource type="PackedScene" uid="uid://bb3i3r7einpnp" path="res://scenes/level/level_1.tscn" id="1_oxki8"]
 [ext_resource type="PackedScene" uid="uid://cgokel7vn646l" path="res://scenes/inventory.tscn" id="3_acuek"]
 
 [sub_resource type="GDScript" id="GDScript_acf85"]
@@ -18,14 +18,18 @@ script/source = "extends CanvasLayer
 @export var health_bar_2 : ProgressBar
 @export var label_2 : Label
 
-@onready var base = get_tree().get_first_node_in_group(\"game_manager\")
+@onready var game_manager = get_tree().get_first_node_in_group(\"game_manager\")
 @export var base_label : Label
+@export var gold_label : Label
 
 func _ready():
 	health_1.healthchanged.connect(_health_update)
 	health_2.healthchanged.connect(_health_update)
+	game_manager.base.connect(_base_update)
+	game_manager.gold_change.connect(_gold_update)
 	_health_update()
-	base.base.connect(_base_update)
+	_base_update()
+	_gold_update()
 
 func _health_update():
 	if is_instance_valid(health_1):
@@ -38,7 +42,10 @@ func _health_update():
 
 
 func _base_update():
-	base_label.text = str(base.base_health) +\"/\"+ str(base.base_max_health)
+	base_label.text = \"base health:\" + str(game_manager.base_health) +\"/\"+ str(game_manager.base_max_health)
+
+func _gold_update():
+	gold_label.text = \"gold:\" + str(game_manager.gold)
 "
 
 [node name="SinglePlayerMain" type="Node"]
@@ -90,13 +97,14 @@ render_target_update_mode = 4
 [node name="Camera2D" type="Camera2D" parent="SplitScreen/GridContainer/SubViewportContainer2/Player2Viewport"]
 position = Vector2(578, 0)
 
-[node name="UI" type="CanvasLayer" parent="." node_paths=PackedStringArray("health_bar_1", "label_1", "health_bar_2", "label_2", "base_label")]
+[node name="UI" type="CanvasLayer" parent="." node_paths=PackedStringArray("health_bar_1", "label_1", "health_bar_2", "label_2", "base_label", "gold_label")]
 script = SubResource("GDScript_acf85")
 health_bar_1 = NodePath("HealthUI/HealthBarUI")
 label_1 = NodePath("HealthUI/HealthShow")
 health_bar_2 = NodePath("HealthUI2/HealthBarUI")
 label_2 = NodePath("HealthUI2/HealthShow")
-base_label = NodePath("Label")
+base_label = NodePath("Base")
+gold_label = NodePath("Gold")
 
 [node name="HealthUI" type="Control" parent="UI"]
 self_modulate = Color(0.27451, 0.992157, 0.0313726, 1)
@@ -154,9 +162,50 @@ show_percentage = false
 
 [node name="Inventory" parent="UI" instance=ExtResource("3_acuek")]
 
-[node name="Label" type="Label" parent="UI"]
+[node name="Label" type="Label" parent="UI/Inventory"]
+layout_mode = 0
+offset_left = 312.0
+offset_top = 24.0
+offset_right = 352.0
+offset_bottom = 50.0
+text = "Q"
+
+[node name="Label2" type="Label" parent="UI/Inventory"]
+layout_mode = 0
+offset_left = 792.0
+offset_top = 25.0
+offset_right = 832.0
+offset_bottom = 51.0
+text = "P"
+
+[node name="Label3" type="Label" parent="UI/Inventory"]
+layout_mode = 0
+offset_left = 788.0
+offset_top = 61.0
+offset_right = 828.0
+offset_bottom = 87.0
+text = "5
+"
+
+[node name="Label4" type="Label" parent="UI/Inventory"]
+layout_mode = 0
+offset_left = 305.0
+offset_top = 58.0
+offset_right = 345.0
+offset_bottom = 110.0
+text = "10
+
+"
+
+[node name="Base" type="Label" parent="UI"]
 offset_left = 22.0
 offset_top = 60.0
 offset_right = 129.0
 offset_bottom = 112.0
 text = "base health:"
+
+[node name="Gold" type="Label" parent="UI"]
+offset_left = 28.0
+offset_top = 93.0
+offset_right = 54.0
+offset_bottom = 116.0

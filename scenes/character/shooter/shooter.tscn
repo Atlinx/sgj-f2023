@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_co7fm"]
 [ext_resource type="Shader" path="res://materials/shaders/entity.gdshader" id="1_rgjpx"]
-[ext_resource type="PackedScene" uid="uid://ci276fgn23rcd" path="res://scenes/player_bullet.tscn" id="2_age5k"]
+[ext_resource type="PackedScene" uid="uid://ci276fgn23rcd" path="res://scenes/character/shooter/player_bullet.tscn" id="2_cwjou"]
 [ext_resource type="Texture2D" uid="uid://cee6d7cbam6pj" path="res://sprites/player.png" id="3_78r3x"]
 [ext_resource type="Script" path="res://scripts/health.gd" id="3_f1j7r"]
 [ext_resource type="Script" path="res://scripts/healthbar.gd" id="3_grg05"]
@@ -42,7 +42,7 @@ collision_layer = 65
 collision_mask = 20
 script = ExtResource("1_co7fm")
 fire_sound = NodePath("FireSound")
-my_bullet_prefab = ExtResource("2_age5k")
+my_bullet_prefab = ExtResource("2_cwjou")
 speed = 128.0
 player_animation_tree = NodePath("AnimationTree")
 has_my_shot_color = NodePath("ColorRect")
@@ -135,7 +135,6 @@ libraries = {
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = ExtResource("14_5pjci")
 anim_player = NodePath("../AnimationPlayer")
-active = true
 script = ExtResource("14_148l1")
 
 [node name="FireSound" type="AudioStreamPlayer" parent="."]

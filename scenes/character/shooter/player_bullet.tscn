@@ -1,35 +1,35 @@
 [gd_scene load_steps=8 format=3 uid="uid://ci276fgn23rcd"]
 
-[ext_resource type="PackedScene" uid="uid://cmfu0ybbkg7tn" path="res://scenes/bullet.tscn" id="1_gbrce"]
-[ext_resource type="PackedScene" uid="uid://d2lulf6teg15y" path="res://scenes/dropped_item.tscn" id="2_6ehoh"]
-[ext_resource type="Script" path="res://scripts/player_bullet.gd" id="2_52ntb"]
-[ext_resource type="Material" uid="uid://duq16u675oqot" path="res://materials/player_bullet.tres" id="2_bc2y2"]
-[ext_resource type="Script" path="res://scripts/player_bullet_dropper.gd" id="3_7uj5k"]
-[ext_resource type="PackedScene" uid="uid://booa6u2jw1mxr" path="res://scenes/death_fx.tscn" id="3_qny05"]
+[ext_resource type="PackedScene" uid="uid://cmfu0ybbkg7tn" path="res://scenes/bullet.tscn" id="1_nyn3t"]
+[ext_resource type="Script" path="res://scripts/player_bullet.gd" id="2_kitdy"]
+[ext_resource type="Material" uid="uid://duq16u675oqot" path="res://materials/player_bullet.tres" id="3_o5khn"]
+[ext_resource type="PackedScene" uid="uid://booa6u2jw1mxr" path="res://scenes/death_fx.tscn" id="4_naw35"]
+[ext_resource type="Script" path="res://scripts/player_bullet_dropper.gd" id="5_4lnaw"]
+[ext_resource type="PackedScene" uid="uid://d2lulf6teg15y" path="res://scenes/character/shooter/dropped_bullet.tscn" id="6_bjnvt"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_08trx"]
 radius = 5.33333
 
-[node name="PlayerBullet" instance=ExtResource("1_gbrce")]
+[node name="PlayerBullet" instance=ExtResource("1_nyn3t")]
 scale = Vector2(0.75, 0.75)
 collision_mask = 82
-script = ExtResource("2_52ntb")
+script = ExtResource("2_kitdy")
 damage = 25
 
 [node name="Sprite2D" parent="." index="0"]
 self_modulate = Color(0.145098, 0.992157, 0.0235294, 1)
-material = ExtResource("2_bc2y2")
+material = ExtResource("3_o5khn")
 region_rect = Rect2(208, 32, 16, 16)
 
-[node name="DeathFx" parent="." index="2" instance=ExtResource("3_qny05")]
+[node name="DeathFx" parent="." index="2" instance=ExtResource("4_naw35")]
 
 [node name="PlayerBulletDropper" type="Node2D" parent="." index="3" node_paths=PackedStringArray("bullet", "item")]
 visible = false
-script = ExtResource("3_7uj5k")
+script = ExtResource("5_4lnaw")
 bullet = NodePath("..")
 item = NodePath("DroppedBullet")
 
-[node name="DroppedBullet" parent="PlayerBulletDropper" index="0" instance=ExtResource("2_6ehoh")]
+[node name="DroppedBullet" parent="PlayerBulletDropper" index="0" instance=ExtResource("6_bjnvt")]
 
 [node name="Glow" parent="." index="4"]
 self_modulate = Color(0.0784314, 1, 0, 1)

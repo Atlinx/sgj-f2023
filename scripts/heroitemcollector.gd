@@ -4,6 +4,7 @@ extends Node2D
 @export var health : Health
 @export var player: CharacterBody2D
 @export var collector_area: Area2D
+signal get_gold
 
 func _ready():
 	collector_area.area_entered.connect(_on_collector_area_entered)
@@ -16,5 +17,5 @@ func _on_collector_area_entered(area: Area2D):
 			player.has_teammate_bullet = true
 			dropped_item.collect()
 		if dropped_item.item_type == DroppedItem.ItemType.HEART:
-			health.heal(20)
+			get_gold.emit()
 			dropped_item.collect()

@@ -7,22 +7,28 @@ class_name GameManager
 @onready var health_1 = player_1.get_node("Health")
 @onready var player_2 = get_tree().get_first_node_in_group("player2")
 @onready var health_2 = player_2.get_node("Health")
-var gold : int
+@export var gold : int = 0
 @export var base_max_health : int
 var base_health
 signal base
+signal gold_change
 
 func _ready():
 	health_1.death.connect(_revive_player_1)
 	health_2.death.connect(_revive_player_2)
+	player_2.get_node("ItemCollector").get_gold.connect(on_get_gold)
 	base_health = base_max_health
 	base.emit()
 
 func _process(_delta):
-	if Input.is_key_pressed(KEY_BACKSPACE):
-		get_tree().reload_current_scene()
-	if base_health <= 0:
-		print("gameover")
+	if Input.is_key_pressed(KEY_Q) and gold >= 10:
+		player_1.has_shot = true
+		gold -= 10
+		gold_change.emit()
+	if Input.is_key_pressed(KEY_P) and gold >= 5:
+		health_2.heal(30)
+		gold -= 5
+		gold_change.emit()
 
 
 func _revive_player_1():
@@ -42,3 +48,8 @@ func _revive_player_2():
 func _on_base_base_attacked():
 	base_health -= 1
 	base.emit()
+
+func on_get_gold():
+	gold += 1
+	gold_change.emit()
+
