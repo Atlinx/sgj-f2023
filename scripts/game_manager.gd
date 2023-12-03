@@ -36,13 +36,8 @@ func _process(_delta):
 			gold_change.emit()
 	if Input.is_action_just_pressed("flash") and gold >=5:
 		if player_1.alive == true:
-#		var tilemap = get_tree().get_first_node_in_group("tilemap")
 			var mouse_position = player_1.get_global_mouse_position()
-#		var tile_coordinate = tilemap.local_to_map(mouse_position)
-#		var cell_data = tilemap.get_cell_tile_data(0,tile_coordinate)
-#		var flashable : String = cell_data.get_custom_data("flashable")
-#		print(flashable)
-#		if flashable == "yes":
+			
 			player_1.global_position = mouse_position
 			gold -= 5
 			gold_change.emit()

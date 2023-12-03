@@ -43,7 +43,6 @@ collision_mask = 28
 script = ExtResource("1_co7fm")
 fire_sound = NodePath("FireSound")
 my_bullet_prefab = ExtResource("2_cwjou")
-speed = 128.0
 player_animation_tree = NodePath("AnimationTree")
 has_my_shot_color = NodePath("ColorRect")
 item_collector = NodePath("ItemCollector")
@@ -92,15 +91,14 @@ script = ExtResource("4_s4p3p")
 [node name="DeathFx" parent="." instance=ExtResource("6_0krtd")]
 
 [node name="ItemCollector" type="Node2D" parent="." node_paths=PackedStringArray("health", "player", "collector_area")]
-visible = false
 script = ExtResource("7_6gi8v")
 health = NodePath("../Health")
 player = NodePath("..")
 collector_area = NodePath("Area2D")
 
 [node name="Area2D" type="Area2D" parent="ItemCollector"]
-collision_layer = 513
-collision_mask = 513
+collision_layer = 65
+collision_mask = 65
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ItemCollector/Area2D"]
 shape = SubResource("CircleShape2D_euncd")

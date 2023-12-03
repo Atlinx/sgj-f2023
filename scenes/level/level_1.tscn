@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://bb3i3r7einpnp"]
+[gd_scene load_steps=14 format=3 uid="uid://bb3i3r7einpnp"]
 
 [ext_resource type="AudioStream" uid="uid://dy58atrg72ubh" path="res://scenes/Background Music 2.mp3" id="1_0cf8h"]
 [ext_resource type="TileSet" uid="uid://da4oraw1aomg7" path="res://sprites/tiles.tres" id="2_bu12m"]
@@ -14,6 +14,9 @@
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_umusl"]
 radius = 6.00925
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0qc63"]
+size = Vector2(160.013, 15.8872)
 
 [node name="Level1" type="Node" groups=["level"]]
 
@@ -59,20 +62,21 @@ script = ExtResource("6_b1eqf")
 enemy_prefabs = Array[PackedScene]([ExtResource("7_uw0bx"), ExtResource("7_uw0bx")])
 tile_map = NodePath("../World/Level")
 game_manager = NodePath("../GameManager")
-intial_enemy_amount = 10
+intial_enemy_amount = 20
 wave_time = 90.0
 
 [node name="GameManager" type="Node" parent="." node_paths=PackedStringArray("spawn_location_1", "spawn_location_2") groups=["game_manager"]]
 script = ExtResource("8_dbn5u")
 spawn_location_1 = NodePath("../SpawnLocations/0")
 spawn_location_2 = NodePath("../SpawnLocations/1")
+gold = 10000
 base_max_health = 10
 max_progress = 50
 
 [node name="SlimeSpawner" type="Node" parent="." node_paths=PackedStringArray("tile_map", "game_manager")]
 script = ExtResource("9_r48e0")
 enemy_prefabs = Array[PackedScene]([ExtResource("7_uw0bx")])
-enemy_amount = Vector2i(1, 2)
+enemy_amount = Vector2i(1, 1)
 tile_map = NodePath("../World/Level")
 game_manager = NodePath("../GameManager")
 
@@ -91,6 +95,31 @@ texture = ExtResource("11_gi3b7")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Base/Base"]
 shape = SubResource("CircleShape2D_umusl")
+
+[node name="Highland" type="Area2D" parent="." groups=["highland"]]
+position = Vector2(2187, -488)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Highland"]
+position = Vector2(13, 2)
+shape = SubResource("RectangleShape2D_0qc63")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Highland"]
+position = Vector2(13, 338)
+shape = SubResource("RectangleShape2D_0qc63")
+
+[node name="Highland2" type="Area2D" parent="." groups=["highland"]]
+position = Vector2(2036, -319)
+rotation = -1.57248
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Highland2"]
+position = Vector2(-0.986542, -3.92371)
+scale = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_0qc63")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Highland2"]
+position = Vector2(-1.55859, 331.998)
+scale = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_0qc63")
 
 [connection signal="base_attacked" from="Base/Base" to="GameManager" method="_on_base_base_attacked"]
 [connection signal="body_entered" from="Base/Base" to="Base/Base" method="_on_body_entered"]

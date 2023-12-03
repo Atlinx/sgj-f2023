@@ -15,7 +15,9 @@ func _ready():
 		var tile_data = tile_map.get_cell_tile_data(0, cell)
 		if tile_data.terrain != WALL_TERRAIN_ID:
 			_spawnable_cells.append(cell)
-
+	set_process(false)
+	await get_tree().create_timer(wave_time).timeout
+	set_process(true)
 
 func _get_random_cells(amount: int) -> Array[Vector2i]:
 	var temp_spawnable_cells = _spawnable_cells.duplicate() 
@@ -34,8 +36,8 @@ func _on_enemy_death():
 
 func _process(_delta):
 	# 获取 "MySceneGroup" 组的所有实例
+	print(has_executed_code)
 	if has_executed_code == false:
-		await get_tree().create_timer(wave_time).timeout
 		game_manager.slime_wave()
 		var cells_intial = _get_random_cells(intial_enemy_amount)
 		for i in range(intial_enemy_amount):

@@ -87,6 +87,7 @@ shape = SubResource("CircleShape2D_0vhpe")
 
 [node name="Hitbox" type="Area2D" parent="." groups=["hitbox"]]
 position = Vector2(0, -4)
+scale = Vector2(1.2, 1.2)
 collision_layer = 2
 script = ExtResource("7_tva5n")
 
