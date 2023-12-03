@@ -146,5 +146,9 @@ offset_right = -8.0
 offset_bottom = -17.0
 color = Color(0.207843, 0.988235, 0.0196078, 1)
 
+[node name="FlashTimer" type="Timer" parent="."]
+wait_time = 2.0
+
 [connection signal="death" from="Health" to="DeathFx" method="on_death"]
 [connection signal="death_position" from="Health" to="." method="_on_health_death_position"]
+[connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
