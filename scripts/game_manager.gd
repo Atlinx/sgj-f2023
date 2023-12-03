@@ -12,6 +12,8 @@ class_name GameManager
 @export var max_progress : int
 var progress : int = 0
 var base_health
+signal wave_comming
+signal win
 signal base
 signal gold_change
 
@@ -28,15 +30,25 @@ func _process(_delta):
 		gold -= 10
 		gold_change.emit()
 	if Input.is_action_just_pressed("heal") and gold >= 5:
-		health_2.heal(30)
-		gold -= 5
-		gold_change.emit()
+		if player_2.alive == true:
+			health_2.heal(30)
+			gold -= 5
+			gold_change.emit()
 	if Input.is_action_just_pressed("flash") and gold >=5:
-		player_1.global_position = player_1.get_global_mouse_position()
-		gold -= 5
-		gold_change.emit()
+		if player_1.alive == true:
+#		var tilemap = get_tree().get_first_node_in_group("tilemap")
+			var mouse_position = player_1.get_global_mouse_position()
+#		var tile_coordinate = tilemap.local_to_map(mouse_position)
+#		var cell_data = tilemap.get_cell_tile_data(0,tile_coordinate)
+#		var flashable : String = cell_data.get_custom_data("flashable")
+#		print(flashable)
+#		if flashable == "yes":
+			player_1.global_position = mouse_position
+			gold -= 5
+			gold_change.emit()
 	if progress == max_progress:
-		win()
+		win.emit()
+		
 
 
 func _revive_player_1():
@@ -64,5 +76,5 @@ func on_get_gold():
 func on_enemy_death():
 	progress += 1
 
-func win():
-	pass
+func slime_wave():
+	wave_comming.emit()

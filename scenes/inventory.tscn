@@ -36,6 +36,7 @@ scale = Vector2(6, 5.4375)
 texture = ExtResource("4_stwg6")
 
 [node name="Sprite2D3" type="Sprite2D" parent="GridContainer"]
+self_modulate = Color(0.396078, 0.964706, 0.376471, 1)
 position = Vector2(-1350, -158)
 scale = Vector2(2.33333, 4.625)
 texture = ExtResource("5_8u1xk")

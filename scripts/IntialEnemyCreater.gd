@@ -4,7 +4,7 @@ extends Node
 @export var tile_map: TileMap
 @export var game_manager: GameManager
 @export var intial_enemy_amount : int = 0
-
+@export var wave_time : float
 var has_executed_code = false
 var _spawnable_cells: Array[Vector2i] = []
 
@@ -35,6 +35,8 @@ func _on_enemy_death():
 func _process(_delta):
 	# 获取 "MySceneGroup" 组的所有实例
 	if has_executed_code == false:
+		await get_tree().create_timer(wave_time).timeout
+		game_manager.slime_wave()
 		var cells_intial = _get_random_cells(intial_enemy_amount)
 		for i in range(intial_enemy_amount):
 			var enemy_index = randi() % enemy_prefabs.size()
