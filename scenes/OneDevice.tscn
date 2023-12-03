@@ -170,6 +170,14 @@ offset_right = 352.0
 offset_bottom = 50.0
 text = "Q"
 
+[node name="Label6" type="Label" parent="UI/Inventory"]
+layout_mode = 0
+offset_left = 373.0
+offset_top = 1.0
+offset_right = 413.0
+offset_bottom = 27.0
+text = "W"
+
 [node name="Label2" type="Label" parent="UI/Inventory"]
 layout_mode = 0
 offset_left = 792.0
@@ -184,6 +192,15 @@ offset_left = 788.0
 offset_top = 61.0
 offset_right = 828.0
 offset_bottom = 87.0
+text = "5
+"
+
+[node name="Label5" type="Label" parent="UI/Inventory"]
+layout_mode = 0
+offset_left = 369.0
+offset_top = 59.0
+offset_right = 409.0
+offset_bottom = 85.0
 text = "5
 "
 

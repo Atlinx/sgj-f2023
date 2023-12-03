@@ -9,6 +9,8 @@ class_name GameManager
 @onready var health_2 = player_2.get_node("Health")
 @export var gold : int = 0
 @export var base_max_health : int
+@export var max_progress : int
+var progress : int = 0
 var base_health
 signal base
 signal gold_change
@@ -21,14 +23,20 @@ func _ready():
 	base.emit()
 
 func _process(_delta):
-	if Input.is_key_pressed(KEY_Q) and gold >= 10:
+	if Input.is_action_just_pressed("get_bullet") and gold >= 10:
 		player_1.has_shot = true
 		gold -= 10
 		gold_change.emit()
-	if Input.is_key_pressed(KEY_P) and gold >= 5:
+	if Input.is_action_just_pressed("heal") and gold >= 5:
 		health_2.heal(30)
 		gold -= 5
 		gold_change.emit()
+	if Input.is_action_just_pressed("flash") and gold >=5:
+		player_1.global_position = player_1.get_global_mouse_position()
+		gold -= 5
+		gold_change.emit()
+	if progress == max_progress:
+		win()
 
 
 func _revive_player_1():
@@ -53,3 +61,8 @@ func on_get_gold():
 	gold += 1
 	gold_change.emit()
 
+func on_enemy_death():
+	progress += 1
+
+func win():
+	pass

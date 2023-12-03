@@ -85,9 +85,10 @@ func _on_area_2d_area_entered(area):
 	var tilemap = get_tree().get_first_node_in_group("tilemap")
 	var cell_coordinates = tilemap.local_to_map(global_position)
 	var cell_data = tilemap.get_cell_tile_data(0,cell_coordinates)
-	print(cell_data)
-	enter_high_land = cell_data.get_custom_data("bullet_enter")
-	print(enter_high_land)
+	if cell_data != null:
+		enter_high_land = cell_data.get_custom_data("bullet_enter")
+	else :
+		print("cell_data_is_null !")
 	if enter_high_land == false:
-		await get_tree().create_timer(0.5).timeout
+		await get_tree().create_timer(0.2).timeout
 		set_collision_mask_value(3,true)

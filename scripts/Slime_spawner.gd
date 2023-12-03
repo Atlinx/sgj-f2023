@@ -56,5 +56,4 @@ func _process(delta):
 
 
 func _on_enemy_death():
-	pass
-#	game_manager.on_enemy_death()
+	game_manager.on_enemy_death()

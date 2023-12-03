@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://cgokel7vn646l"]
+[gd_scene load_steps=6 format=3 uid="uid://cgokel7vn646l"]
 
 [ext_resource type="PackedScene" uid="uid://dls488dai5v42" path="res://scenes/cd_ui.tscn" id="1_0ca3l"]
 [ext_resource type="Texture2D" uid="uid://c05kv56i0tvmq" path="res://sprites/bullet.png" id="2_stifa"]
 [ext_resource type="Material" uid="uid://duq16u675oqot" path="res://materials/player_bullet.tres" id="2_uf8be"]
 [ext_resource type="Texture2D" uid="uid://ds8oe1j4v5amr" path="res://sprites/heart.png" id="4_stwg6"]
+[ext_resource type="Texture2D" uid="uid://c8w4kokvrt8un" path="res://sprites/dust.png" id="5_8u1xk"]
 
 [node name="Inventory" type="Control"]
 layout_mode = 3
@@ -33,3 +34,8 @@ texture = ExtResource("2_stifa")
 position = Vector2(-532, -162)
 scale = Vector2(6, 5.4375)
 texture = ExtResource("4_stwg6")
+
+[node name="Sprite2D3" type="Sprite2D" parent="GridContainer"]
+position = Vector2(-1350, -158)
+scale = Vector2(2.33333, 4.625)
+texture = ExtResource("5_8u1xk")

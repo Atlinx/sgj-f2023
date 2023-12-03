@@ -12,7 +12,6 @@ radius = 5.33333
 
 [node name="PlayerBullet" instance=ExtResource("1_nyn3t")]
 scale = Vector2(0.75, 0.75)
-collision_mask = 82
 script = ExtResource("2_kitdy")
 damage = 25
 
