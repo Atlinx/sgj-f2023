@@ -25,6 +25,9 @@ func _on_collector_area_entered(area: Area2D):
 			
 func _on_collector_bullet_entered(bullet: CharacterBody2D):
 	if bullet.is_in_group("PassingBullet"):
-		player.has_shot = true
-		get_tree().get_first_node_in_group("PassingBullet").queue_free()
+		if player.has_shot == false:
+			player.has_shot = true
+			get_tree().get_first_node_in_group("PassingBullet").queue_free()
+		elif player.has_shot == true:
+			bullet.lifetime = 0.0
 

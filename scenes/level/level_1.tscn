@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://bb3i3r7einpnp"]
+[gd_scene load_steps=19 format=3 uid="uid://bb3i3r7einpnp"]
 
 [ext_resource type="AudioStream" uid="uid://dy58atrg72ubh" path="res://scenes/Background Music 2.mp3" id="1_0cf8h"]
 [ext_resource type="TileSet" uid="uid://da4oraw1aomg7" path="res://sprites/tiles.tres" id="2_bu12m"]
@@ -10,8 +10,10 @@
 [ext_resource type="Script" path="res://scripts/game_manager.gd" id="8_dbn5u"]
 [ext_resource type="Script" path="res://scripts/Slime_spawner.gd" id="9_r48e0"]
 [ext_resource type="Script" path="res://scripts/base.gd" id="10_q775w"]
+[ext_resource type="Script" path="res://scenes/level/SneakSpawner.gd" id="11_4xf1m"]
 [ext_resource type="Texture2D" uid="uid://d12dfsl6wteg2" path="res://icon.svg" id="11_gi3b7"]
 [ext_resource type="PackedScene" uid="uid://c6y66da26sajq" path="res://scenes/slime/slime_hero.tscn" id="12_5ut7b"]
+[ext_resource type="PackedScene" uid="uid://cd6wc1bsepvd5" path="res://scenes/slime/slime_hero_sneak.tscn" id="12_k5rlr"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_umusl"]
 radius = 6.00925
@@ -82,14 +84,18 @@ max_progress = 50
 
 [node name="SlimeSpawner" type="Node" parent="." node_paths=PackedStringArray("tile_map", "game_manager")]
 script = ExtResource("9_r48e0")
-sneak_slime = Array[PackedScene]([ExtResource("12_5ut7b")])
 enemy_prefabs = Array[PackedScene]([ExtResource("7_uw0bx"), ExtResource("12_5ut7b")])
-enemy_amount = Vector2i(1, 1)
-sneak_amount = Vector2i(1, 1)
-sneak_interval = Vector2i(1, 1)
+enemy_amount = Vector2i(0, 0)
 tile_map = NodePath("../World/Level")
 game_manager = NodePath("../GameManager")
-sneak_radius = 0.01
+
+[node name="SneakSpawner" type="Node" parent="." node_paths=PackedStringArray("tile_map", "game_manager")]
+script = ExtResource("11_4xf1m")
+sneak_slime = Array[PackedScene]([ExtResource("12_k5rlr")])
+sneak_interval = Vector2i(5, 5)
+tile_map = NodePath("../World/Level")
+game_manager = NodePath("../GameManager")
+imposible_sneak_time = 1.0
 
 [node name="Terrien" type="Node2D" parent="."]
 
@@ -114,8 +120,6 @@ shape = SubResource("CircleShape2D_umusl")
 [node name="portal1" type="Area2D" parent="Terrien/Portal" groups=["portal1"]]
 position = Vector2(2316, -534)
 rotation = -0.00314523
-collision_layer = 97
-collision_mask = 97
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Terrien/Portal/portal1"]
 position = Vector2(17, 0.0534668)
@@ -125,8 +129,6 @@ shape = SubResource("RectangleShape2D_itdfd")
 [node name="portal2" type="Area2D" parent="Terrien/Portal" groups=["portal2"]]
 position = Vector2(2455, -392)
 rotation = -0.00314523
-collision_layer = 97
-collision_mask = 97
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Terrien/Portal/portal2"]
 position = Vector2(1.05981, -18.9966)
@@ -136,8 +138,6 @@ shape = SubResource("RectangleShape2D_a1cre")
 [node name="portal3" type="Area2D" parent="Terrien/Portal" groups=["portal3"]]
 position = Vector2(2455, -257)
 rotation = -0.00314523
-collision_layer = 97
-collision_mask = 97
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Terrien/Portal/portal3"]
 position = Vector2(1.95605, 14.0061)
@@ -225,5 +225,6 @@ position = Vector2(-1.55859, 331.998)
 shape = SubResource("RectangleShape2D_0qc63")
 
 [connection signal="win" from="GameManager" to="SlimeSpawner" method="_on_game_manager_win"]
+[connection signal="win" from="GameManager" to="SneakSpawner" method="_on_game_manager_win"]
 [connection signal="base_attacked" from="Terrien/Base/Base" to="GameManager" method="_on_base_base_attacked"]
 [connection signal="body_entered" from="Terrien/Base/Base" to="Terrien/Base/Base" method="_on_body_entered"]

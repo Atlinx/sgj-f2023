@@ -7,13 +7,13 @@ extends Node
 @export var wave_time : float
 var has_executed_code = false
 var _spawnable_cells: Array[Vector2i] = []
-
+var spawnable_id :int = -1
 const WALL_TERRAIN_ID: int = 0
 
 func _ready():
 	for cell in tile_map.get_used_cells(0):
 		var tile_data = tile_map.get_cell_tile_data(0, cell)
-		if tile_data.terrain != WALL_TERRAIN_ID:
+		if tile_data.terrain == spawnable_id:
 			_spawnable_cells.append(cell)
 	set_process(false)
 	await get_tree().create_timer(wave_time).timeout

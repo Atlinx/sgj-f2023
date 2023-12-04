@@ -23,15 +23,9 @@ func _ready():
 	detection_area.body_entered.connect(_on_body_entered)
 	detection_area.body_exited.connect(_on_body_exited)
 	dropped_gold.visible = false
-	base_position = get_tree().get_first_node_in_group("base").global_position
-	call_deferred("_delayed_navigation_setup")
 
-func _delayed_navigation_setup():
-	navigation_agent.target_position = base_position
-	
 
 func _on_body_entered(body: Node2D):
-	print(body)
 	var team = body.get_node_or_null("Team")
 	if team != null and team.team == Team.TeamType.PLAYER:
 		_player = body
@@ -40,14 +34,16 @@ func _on_body_entered(body: Node2D):
 func _on_body_exited(body: Node2D):
 	if body == _player:
 		_player = null
-		navigation_agent.target_position = base_position
+		pass
 
 
 func _process(delta):
 	if _player != null:
+		print("ok")
 		_update_position_timer += delta
 		if _update_position_timer > update_position_interval:
 			navigation_agent.target_position = _player.global_position
+			print(navigation_agent.target_position)
 			_update_position_timer -= update_position_interval
 		if _fire_timer <= 0 and _player.global_position.x > get_parent().global_position.x:
 			var right_sword_instance = right_sword.instantiate()
@@ -78,4 +74,6 @@ func _on_health_death():
 	var root = get_tree().get_first_node_in_group("level")
 	dropped_gold.call_deferred("reparent",root)
 	dropped_gold.enabled = true
+
+
 
