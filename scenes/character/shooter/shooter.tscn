@@ -31,7 +31,7 @@ height = 12.0
 radius = 16.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_u7yjf"]
-radius = 8.0
+radius = 6.0
 
 [sub_resource type="Curve" id="Curve_k2jw1"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -2.40338, 0.0, 0, 0]

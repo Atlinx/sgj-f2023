@@ -64,26 +64,19 @@ func _on_health_death_position(death_position):
 
 
 func _on_hitbox_area_entered(area):
-	var last_portal_index = 0
-	var can_teleport = true
-	for i in range(1, 9):
-		var portal_group_name = "portal" + str(i)
-		if area.is_in_group(portal_group_name):
-			print(portal_group_name)
-			var target_portal_group_name = "portal" + str((i % 8) + 1)
-			
-			# 检查当前传送门是否与上一个传送门相邻
-			if abs(i - last_portal_index) == 1 or abs(i - last_portal_index) == 7:
-				if can_teleport:
-					var target_portal = get_tree().get_first_node_in_group(target_portal_group_name)
-					if target_portal:
-						global_position = target_portal.global_position
-						print("Teleporting to", target_portal_group_name, "at position:", global_position)
-						
-						# 记录当前传送门索引
-						last_portal_index = i
-						# 设置 can_teleport 为 false，以防止在短时间内多次触发传送
-						can_teleport = false
-						# 启动一个计时器，一段时间后将 can_teleport 重新设置为 true
-						$FlashTimer.start()
-						break
+	if area.is_in_group("portal1"):
+		global_position = get_tree().get_first_node_in_group("portal2").global_position
+	if area.is_in_group("portal2"):
+		global_position = get_tree().get_first_node_in_group("portal1").global_position
+	if area.is_in_group("portal3"):
+		global_position = get_tree().get_first_node_in_group("portal4").global_position
+	if area.is_in_group("portal4"):
+		global_position = get_tree().get_first_node_in_group("portal3").global_position
+	if area.is_in_group("portal5"):
+		global_position = get_tree().get_first_node_in_group("portal6").global_position
+	if area.is_in_group("portal6"):
+		global_position = get_tree().get_first_node_in_group("portal5").global_position
+	if area.is_in_group("portal7"):
+		global_position = get_tree().get_first_node_in_group("portal8").global_position
+	if area.is_in_group("portal8"):
+		global_position = get_tree().get_first_node_in_group("portal7").global_position
