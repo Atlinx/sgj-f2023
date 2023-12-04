@@ -1,14 +1,16 @@
 extends Node
 
+
 @export var entity_body: CharacterBody2D
 @export var detection_area: Area2D
 @export var navigation_agent: NavigationAgent2D
 @export var speed: float = 64
 @export var update_position_interval: float = 1
-@export var bullet_prefab: PackedScene
-@export var fire_interval = 1
+@export var left_sword : PackedScene
+@export var right_sword : PackedScene
+@export var fire_interval : float
 @export var animation_tree: AnimationTree
-@export var dropped_heart : DroppedItem
+@export var dropped_gold : DroppedItem
 
 var base_position
 var _fire_timer: float
@@ -20,10 +22,9 @@ func _ready():
 	_fire_timer = fire_interval
 	detection_area.body_entered.connect(_on_body_entered)
 	detection_area.body_exited.connect(_on_body_exited)
-	dropped_heart.visible = false
+	dropped_gold.visible = false
 	base_position = get_tree().get_first_node_in_group("base").global_position
 	call_deferred("_delayed_navigation_setup")
-
 
 func _delayed_navigation_setup():
 	navigation_agent.target_position = base_position
@@ -47,12 +48,18 @@ func _process(delta):
 		if _update_position_timer > update_position_interval:
 			navigation_agent.target_position = _player.global_position
 			_update_position_timer -= update_position_interval
-		if _fire_timer <= 0:
-			var bullet_inst: Bullet = bullet_prefab.instantiate()
-			get_tree().get_first_node_in_group("level").add_child(bullet_inst)
-			var direction = (_player.global_position - entity_body.global_position).normalized()
-			bullet_inst.construct(entity_body, entity_body.global_position, direction)
+		if _fire_timer <= 0 and _player.global_position.x > get_parent().global_position.x:
+			var right_sword_instance = right_sword.instantiate()
+			get_parent().add_child(right_sword_instance)
 			_fire_timer = fire_interval
+			await get_tree().create_timer(0.2).timeout
+			right_sword_instance.queue_free()
+		elif _fire_timer <= 0 and _player.global_position.x <= get_parent().global_position.x:
+			var left_sword_instance = left_sword.instantiate()
+			get_parent().add_child(left_sword_instance)
+			_fire_timer = fire_interval
+			await get_tree().create_timer(0.2).timeout
+			left_sword_instance.queue_free()
 		else:
 			_fire_timer -= delta
 
@@ -68,6 +75,6 @@ func _physics_process(_delta):
 
 func _on_health_death():
 	var root = get_tree().get_first_node_in_group("level")
-	dropped_heart.call_deferred("reparent",root)
-	dropped_heart.enabled = true
+	dropped_gold.call_deferred("reparent",root)
+	dropped_gold.enabled = true
 

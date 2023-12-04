@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://bb3i3r7einpnp"]
+[gd_scene load_steps=17 format=3 uid="uid://bb3i3r7einpnp"]
 
 [ext_resource type="AudioStream" uid="uid://dy58atrg72ubh" path="res://scenes/Background Music 2.mp3" id="1_0cf8h"]
 [ext_resource type="TileSet" uid="uid://da4oraw1aomg7" path="res://sprites/tiles.tres" id="2_bu12m"]
@@ -11,6 +11,7 @@
 [ext_resource type="Script" path="res://scripts/Slime_spawner.gd" id="9_r48e0"]
 [ext_resource type="Script" path="res://scripts/base.gd" id="10_q775w"]
 [ext_resource type="Texture2D" uid="uid://d12dfsl6wteg2" path="res://icon.svg" id="11_gi3b7"]
+[ext_resource type="PackedScene" uid="uid://c6y66da26sajq" path="res://scenes/slime/slime_hero.tscn" id="12_5ut7b"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_umusl"]
 radius = 6.00925
@@ -68,7 +69,7 @@ script = ExtResource("6_b1eqf")
 enemy_prefabs = Array[PackedScene]([ExtResource("7_uw0bx"), ExtResource("7_uw0bx")])
 tile_map = NodePath("../World/Level")
 game_manager = NodePath("../GameManager")
-intial_enemy_amount = 20
+intial_enemy_amount = 10
 wave_time = 90.0
 
 [node name="GameManager" type="Node" parent="." node_paths=PackedStringArray("spawn_location_1", "spawn_location_2") groups=["game_manager"]]
@@ -81,10 +82,14 @@ max_progress = 50
 
 [node name="SlimeSpawner" type="Node" parent="." node_paths=PackedStringArray("tile_map", "game_manager")]
 script = ExtResource("9_r48e0")
-enemy_prefabs = Array[PackedScene]([ExtResource("7_uw0bx")])
+sneak_slime = Array[PackedScene]([ExtResource("12_5ut7b")])
+enemy_prefabs = Array[PackedScene]([ExtResource("7_uw0bx"), ExtResource("12_5ut7b")])
 enemy_amount = Vector2i(1, 1)
+sneak_amount = Vector2i(1, 1)
+sneak_interval = Vector2i(1, 1)
 tile_map = NodePath("../World/Level")
 game_manager = NodePath("../GameManager")
+sneak_radius = 0.01
 
 [node name="Terrien" type="Node2D" parent="."]
 

@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://b4eo8ws2aakgh"]
+
+[ext_resource type="PackedScene" uid="uid://di45hf0lq0e23" path="res://scenes/character/hero/right_sword.tscn" id="1_717fx"]
+
+[node name="SlimeRightSword" instance=ExtResource("1_717fx")]
+damage = 10
+team = 1
