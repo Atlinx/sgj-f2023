@@ -17,7 +17,7 @@
 [ext_resource type="AnimationLibrary" uid="uid://c37cmbh7l1rgo" path="res://animations/entity_anim_lib.tres" id="15_aeu6o"]
 [ext_resource type="Script" path="res://scripts/dropped_item.gd" id="16_6vjlh"]
 [ext_resource type="Shader" path="res://materials/shaders/bullet.gdshader" id="17_csj0y"]
-[ext_resource type="Texture2D" uid="uid://ds8oe1j4v5amr" path="res://sprites/heart.png" id="18_l70p4"]
+[ext_resource type="Texture2D" uid="uid://k28yn5phd0se" path="res://scenes/character/hero/coin 2.png" id="18_x8n12"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_h8j63"]
 radius = 256.0
@@ -153,7 +153,7 @@ item_type = 2
 self_modulate = Color(0.827451, 0.827451, 0.827451, 1)
 material = SubResource("ShaderMaterial_mnqkv")
 scale = Vector2(0.5, 0.5)
-texture = ExtResource("18_l70p4")
+texture = ExtResource("18_x8n12")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DroppedItem"]
 shape = SubResource("CircleShape2D_j6s7h")

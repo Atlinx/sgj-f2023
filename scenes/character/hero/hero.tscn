@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://fcltcmlr1x4q"]
+[gd_scene load_steps=29 format=3 uid="uid://fcltcmlr1x4q"]
 
 [ext_resource type="Script" path="res://scripts/hero.gd" id="1_3em0b"]
 [ext_resource type="Script" path="res://scripts/healthbar.gd" id="2_0lx5u"]
@@ -17,6 +17,7 @@
 [ext_resource type="Script" path="res://scripts/heroitemcollector.gd" id="11_s2fay"]
 [ext_resource type="Script" path="res://scripts/hit_fx.gd" id="12_qhybd"]
 [ext_resource type="AnimationLibrary" uid="uid://c37cmbh7l1rgo" path="res://animations/entity_anim_lib.tres" id="13_3r6kl"]
+[ext_resource type="Texture2D" uid="uid://ddkd5dp5f6mrs" path="res://sprites/glow.png" id="14_n0ume"]
 [ext_resource type="AnimationNodeStateMachine" uid="uid://q81ouwttk58h" path="res://animations/entity_anim_tree.tres" id="14_to0vj"]
 [ext_resource type="Script" path="res://scripts/entity_animation_tree.gd" id="15_peqsa"]
 [ext_resource type="AudioStream" uid="uid://yvuw5bxumh15" path="res://scenes/37161__volivieri__soccer-stomp-edited.wav" id="16_v7r4y"]
@@ -59,7 +60,7 @@ teammate_bullet_prefab = ExtResource("3_w2qrk")
 player_animation_tree = NodePath("AnimationTree")
 has_teammate_bullet_color = NodePath("BulletColorRect")
 right_sword = ExtResource("4_g4h2g")
-fire_interval = 1.5
+fire_interval = 0.5
 cd_color = NodePath("CDColorRect2")
 left_sword = ExtResource("5_symwi")
 rotation_speed = 720.0
@@ -121,6 +122,11 @@ collector_area = NodePath("Area2D")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ItemCollector/Area2D"]
 shape = SubResource("CircleShape2D_euncd")
 debug_color = Color(0.121569, 0.701961, 0, 0.419608)
+
+[node name="Sprite2D" type="Sprite2D" parent="ItemCollector/Area2D"]
+self_modulate = Color(0.976471, 0.929412, 0.0705882, 0.501961)
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("14_n0ume")
 
 [node name="Hitbox" type="Area2D" parent="." groups=["hitbox"]]
 position = Vector2(0, -5)

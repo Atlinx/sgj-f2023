@@ -36,9 +36,9 @@ func _on_enemy_death():
 
 func _process(_delta):
 	# 获取 "MySceneGroup" 组的所有实例
-	print(has_executed_code)
 	if has_executed_code == false:
 		game_manager.slime_wave()
+		await get_tree().create_timer(3).timeout 
 		var cells_intial = _get_random_cells(intial_enemy_amount)
 		for i in range(intial_enemy_amount):
 			var enemy_index = randi() % enemy_prefabs.size()

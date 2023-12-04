@@ -135,7 +135,7 @@ collision_layer = 97
 collision_mask = 97
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Terrien/Portal/portal3"]
-position = Vector2(1.94922, 16.0061)
+position = Vector2(1.95605, 14.0061)
 rotation = 1.5708
 shape = SubResource("RectangleShape2D_a1cre")
 
@@ -219,5 +219,6 @@ shape = SubResource("RectangleShape2D_0qc63")
 position = Vector2(-1.55859, 331.998)
 shape = SubResource("RectangleShape2D_0qc63")
 
+[connection signal="win" from="GameManager" to="SlimeSpawner" method="_on_game_manager_win"]
 [connection signal="base_attacked" from="Terrien/Base/Base" to="GameManager" method="_on_base_base_attacked"]
 [connection signal="body_entered" from="Terrien/Base/Base" to="Terrien/Base/Base" method="_on_body_entered"]

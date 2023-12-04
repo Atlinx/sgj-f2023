@@ -57,3 +57,7 @@ func _process(delta):
 
 func _on_enemy_death():
 	game_manager.on_enemy_death()
+
+
+func _on_game_manager_win():
+	set_process(false)

@@ -34,22 +34,23 @@ func _process(_delta):
 			health_2.heal(30)
 			gold -= 5
 			gold_change.emit()
-#	if Input.is_action_just_pressed("flash") and gold >=5:
-#		if player_1.alive == true:
-#			var tilemap = get_tree().get_first_node_in_group("tilemap")
-#			var mouse_position = player_1.get_global_mouse_position()
-#			var tile_coordinate = tilemap.local_to_map(mouse_position)
-#			var cell_data =tilemap.get_cell_tile_data(0,tile_coordinate)
-#			var flashable
-#			if cell_data != null:
-#				flashable = cell_data.get_custom_data("flashable")
-#			if flashable == true:
-#				player_1.global_position = mouse_position
-#				gold -= 5
-#				gold_change.emit()
 	if progress == max_progress:
 		win.emit()
-		
+	if Input.is_action_just_pressed("upgrade_collection"): 
+		var collector = player_2.get_node("ItemCollector")
+		if collector.scale < Vector2(4,4) and gold>=10:
+			collector.scale *= 1.2
+			print(player_2.get_node("ItemCollector").scale)
+			collector.show()
+			await get_tree().create_timer(1).timeout
+			collector.hide()
+			gold -= 10
+			gold_change.emit()
+		else:
+			collector.show()
+			await get_tree().create_timer(1).timeout
+			collector.hide()
+
 
 
 func _revive_player_1():
