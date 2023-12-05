@@ -4,7 +4,7 @@ const WALL_TERRAIN_ID: int = 0
 const WALKABLE_TERRAIN_ID: int = 3
 const TILE_LAYER: int = 0
 const NAV_LAYER: int = 1
-const WATER_LAYER : int = 2
+const WATER_LAYER : int = 1
 
 func _ready():
 	var air_cells: Array[Vector2i] = []

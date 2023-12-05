@@ -50,8 +50,8 @@ func _process(_delta):
 			collector.show()
 			await get_tree().create_timer(1).timeout
 			collector.hide()
-	if Input.is_action_just_pressed("upgrade_defense"):
-		health_2.defense += 5
+#	if Input.is_action_just_pressed("upgrade_defense"):
+#		health_2.defense += 5
 
 
 func _revive_player_1():

@@ -172,3 +172,4 @@ color = Color(0.92549, 0.988235, 0.0196078, 1)
 
 [connection signal="death" from="Health" to="DeathFx" method="on_death"]
 [connection signal="death_position" from="Health" to="." method="_on_health_death_position"]
+[connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]

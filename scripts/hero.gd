@@ -105,9 +105,10 @@ func _deferred_bullet_addition(bullet_instance, death_position):
 #应该改成有几个掉落几个
 func _on_health_death_position(death_position):
 	if has_teammate_bullet > 0:
+		for amount in range(has_teammate_bullet):
+			var bullet_instance = dropped_bullet.instantiate()
+			call_deferred("_deferred_bullet_addition", bullet_instance, death_position)
 		has_teammate_bullet = 0
-		var bullet_instance = dropped_bullet.instantiate()
-		call_deferred("_deferred_bullet_addition", bullet_instance, death_position)
 	alive = false
 	revive.emit(revive_timer)
 	await get_tree().create_timer(revive_timer).timeout

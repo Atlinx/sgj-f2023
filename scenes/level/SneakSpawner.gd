@@ -19,9 +19,8 @@ func _ready():
 	shooter = get_tree().get_first_node_in_group("shooter")
 	for cell in tile_map.get_used_cells(0):
 		var tile_data = tile_map.get_cell_tile_data(0, cell)
-		if tile_data.terrain != 0 and 2:
-			if tile_data.terrain == 3:
-				_spawnable_cells.append(cell)
+		if tile_data.terrain == 4:
+			_spawnable_cells.append(cell)
 	set_process(false)
 	await get_tree().create_timer(imposible_sneak_time).timeout
 	set_process(true)
@@ -68,8 +67,30 @@ func _on_game_manager_win():
 
 func get_nearby_player_position():
 	var player_position = get_tree().get_first_node_in_group("shooter").global_position
-	var angle = randf_range(0, 2 * PI)
-	var distance = randf_range(0, sneak_radius)
-	var offset = Vector2(cos(angle), sin(angle)) * distance
-	return player_position + offset
-#估计还是要独立出来因为一般来说史莱姆只能生成在-1地形中
+
+	# 最大尝试次数，以防找不到有效位置
+	var max_attempts = 10
+	var attempt = 0
+
+	while attempt < max_attempts:
+		var angle = randf_range(0, 2 * PI)
+		var distance = randf_range(0, sneak_radius)
+		var offset = Vector2(cos(angle), sin(angle)) * distance
+		var spawn_position = player_position + offset
+
+		# 将生成位置转换为地图单元格坐标
+		var cell_coords = tile_map.local_to_map(spawn_position)
+
+		# 获取单元格的地形数据
+		var tile_data = tile_map.get_cell_tile_data(0, cell_coords)
+
+		# 检查地形是否符合要求
+		if tile_data.terrain == 4:
+			print("Spawn Position:", spawn_position, "Terrain ID:", tile_data.terrain)
+			return spawn_position
+
+		attempt += 1
+
+	# 如果达到最大尝试次数仍然找不到有效位置，输出错误信息并返回 Vector2.ZERO
+	print("Failed to find a valid spawn position after", max_attempts, "attempts.")
+

@@ -107,7 +107,7 @@ detection_area = NodePath("../PlayerDetectionArea2D")
 navigation_agent = NodePath("../NavigationAgent2D")
 left_sword = ExtResource("9_7y3pi")
 right_sword = ExtResource("10_wqktq")
-fire_interval = 0.2
+fire_interval = 1.0
 animation_tree = NodePath("../AnimationTree")
 dropped_gold = NodePath("../DroppedItem")
 
