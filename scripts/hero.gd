@@ -21,8 +21,7 @@ signal revive(revive_timer)
 signal sword_cd(cd)
 
 var deadth : bool = false
-var has_teammate_bullet : bool = false
-var in_hand : String = "my_bullet"
+var has_teammate_bullet : int = 0
 var time_since_last_self_heal : float = 0
 var alive : bool = true
 
@@ -32,7 +31,7 @@ func _process(delta):
 	if alive == false:
 		return
 
-	if has_teammate_bullet:
+	if has_teammate_bullet > 0:
 		has_teammate_bullet_color.show()
 	else:
 		has_teammate_bullet_color.hide()
@@ -80,7 +79,7 @@ func fire():
 	var traget_position = get_tree().get_first_node_in_group("shooter").global_position
 	var direction = ( traget_position - global_position).normalized()
 	teammate_bullet_inst.construct(self, global_position, direction)
-	has_teammate_bullet = false
+	has_teammate_bullet -= 1
 	has_teammate_bullet_color.hide()
 	fire_sound.play()
 
@@ -103,10 +102,10 @@ func _deferred_bullet_addition(bullet_instance, death_position):
 	var level = get_tree().get_first_node_in_group("level")
 	level.add_child(bullet_instance)
 
-
+#应该改成有几个掉落几个
 func _on_health_death_position(death_position):
-	if has_teammate_bullet == true:
-		has_teammate_bullet = false
+	if has_teammate_bullet > 0:
+		has_teammate_bullet = 0
 		var bullet_instance = dropped_bullet.instantiate()
 		call_deferred("_deferred_bullet_addition", bullet_instance, death_position)
 	alive = false

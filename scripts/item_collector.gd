@@ -13,11 +13,7 @@ func _on_collector_area_entered(area: Area2D):
 	if area.is_in_group("dropped_item"):
 		var dropped_item :DroppedItem = area
 		if dropped_item.item_type == DroppedItem.ItemType.PLAYERBULLET1:
-			if player.has_shot == false:
-				player.has_shot = true
-				dropped_item.collect()
-		elif dropped_item.item_type == DroppedItem.ItemType.PLAYERBULLET2:
-			player.has_teammate_bullet = true
+			player.has_shot += 1
 			dropped_item.collect()
 		elif dropped_item.item_type == DroppedItem.ItemType.HEART:
 			health.heal(20)
@@ -25,9 +21,7 @@ func _on_collector_area_entered(area: Area2D):
 			
 func _on_collector_bullet_entered(bullet: CharacterBody2D):
 	if bullet.is_in_group("PassingBullet"):
-		if player.has_shot == false:
-			player.has_shot = true
+			player.has_shot += 1
 			get_tree().get_first_node_in_group("PassingBullet").queue_free()
-		elif player.has_shot == true:
-			bullet.lifetime = 0.0
+
 

@@ -14,7 +14,7 @@ func _on_collector_area_entered(area: Area2D):
 	if area.is_in_group("dropped_item"):
 		var dropped_item :DroppedItem = area
 		if dropped_item.item_type == DroppedItem.ItemType.PLAYERBULLET1:
-			player.has_teammate_bullet = true
+			player.has_teammate_bullet += 1
 			dropped_item.collect()
 		if dropped_item.item_type == DroppedItem.ItemType.HEART:
 			get_gold.emit()

@@ -190,6 +190,7 @@ layout_mode = 3
 anchors_preset = 0
 
 [node name="Label" type="Label" parent="UI/Inventory"]
+visible = false
 self_modulate = Color(0.0235294, 0.0235294, 0.0235294, 1)
 layout_mode = 2
 offset_left = 617.0
@@ -199,6 +200,7 @@ offset_bottom = 167.0
 text = "1"
 
 [node name="Label6" type="Label" parent="UI/Inventory"]
+visible = false
 self_modulate = Color(0.027451, 0.027451, 0.027451, 1)
 layout_mode = 2
 offset_left = 617.0
@@ -216,10 +218,55 @@ offset_right = 1108.0
 offset_bottom = 206.0
 size_flags_horizontal = 8
 
-[node name="GridContainer" type="GridContainer" parent="UI/Inventory"]
+[node name="Label2" type="Label" parent="UI/Inventory"]
+visible = false
 layout_mode = 0
+offset_left = 797.0
+offset_top = 43.0
+offset_right = 837.0
+offset_bottom = 69.0
+text = "P"
+
+[node name="Label3" type="Label" parent="UI/Inventory"]
+visible = false
+layout_mode = 0
+offset_left = 792.0
+offset_top = 9.0
+offset_right = 832.0
+offset_bottom = 35.0
+text = "5
+"
+
+[node name="Label5" type="Label" parent="UI/Inventory"]
+visible = false
+layout_mode = 0
+offset_left = 358.0
+offset_top = 46.0
+offset_right = 398.0
+offset_bottom = 72.0
+text = "5
+"
+
+[node name="Label4" type="Label" parent="UI/Inventory"]
+visible = false
+layout_mode = 0
+offset_left = 306.0
+offset_top = 152.0
+offset_right = 346.0
+offset_bottom = 204.0
+text = "10
+
+"
+
+[node name="GridContainer" type="VBoxContainer" parent="UI/Inventory"]
+visible = false
+layout_mode = 0
+offset_left = 351.0
+offset_top = 60.0
+offset_right = 713.0
+offset_bottom = 606.0
 scale = Vector2(0.5, 0.5)
-columns = 4
+focus_neighbor_left = NodePath("../../HealthUI")
 
 [node name="bullet" type="Sprite2D" parent="UI/Inventory/GridContainer"]
 self_modulate = Color(0.286275, 0.815686, 0.117647, 1)
@@ -239,42 +286,6 @@ texture = ExtResource("7_nwd8j")
 [node name="heal2" type="Sprite2D" parent="UI/Inventory/GridContainer"]
 scale = Vector2(6, 5.4375)
 texture = ExtResource("6_141tk")
-
-[node name="Label2" type="Label" parent="UI/Inventory"]
-layout_mode = 0
-offset_left = 797.0
-offset_top = 43.0
-offset_right = 837.0
-offset_bottom = 69.0
-text = "P"
-
-[node name="Label3" type="Label" parent="UI/Inventory"]
-layout_mode = 0
-offset_left = 792.0
-offset_top = 9.0
-offset_right = 832.0
-offset_bottom = 35.0
-text = "5
-"
-
-[node name="Label5" type="Label" parent="UI/Inventory"]
-layout_mode = 0
-offset_left = 358.0
-offset_top = 46.0
-offset_right = 398.0
-offset_bottom = 72.0
-text = "5
-"
-
-[node name="Label4" type="Label" parent="UI/Inventory"]
-layout_mode = 0
-offset_left = 306.0
-offset_top = 152.0
-offset_right = 346.0
-offset_bottom = 204.0
-text = "10
-
-"
 
 [node name="Base" type="Label" parent="UI"]
 offset_left = 22.0

@@ -5,7 +5,7 @@ signal revive(revive_timer)
 @export var fire_sound : AudioStreamPlayer
 @export var my_bullet_prefab: PackedScene
 @export var speed: float = 300.0
-@export var has_shot: bool = true
+@export var has_shot: int = 1
 @export var player_animation_tree: AnimationTree
 @export var has_my_shot_color : ColorRect
 @export var item_collector : Node2D
@@ -20,9 +20,11 @@ func _process(delta):
 		return
 
 
-	if has_shot:
+	if has_shot > 0:
 		has_my_shot_color.show()
-	if has_shot and Input.is_action_just_pressed("p1_fire"):
+	else:
+		has_my_shot_color.hide()
+	if has_shot >0 and Input.is_action_just_pressed("p1_fire"):
 		fire()
 
 
@@ -34,8 +36,7 @@ func fire():
 	var spawn_offset = player_to_mouse * 5  # 根据需要调整偏移距离
 	var initial_position = global_position + spawn_offset
 	my_bullet_inst.construct(self, initial_position, player_to_mouse)
-	has_shot = false
-	has_my_shot_color.hide()
+	has_shot -= 1
 	fire_sound.play()
 
 

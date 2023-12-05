@@ -1,0 +1,174 @@
+[gd_scene load_steps=26 format=3 uid="uid://dlowxy20fgx2j"]
+
+[ext_resource type="Script" path="res://scripts/player.gd" id="1_pcl32"]
+[ext_resource type="PackedScene" uid="uid://ci276fgn23rcd" path="res://scenes/character/shooter/player_bullet.tscn" id="2_8wfnk"]
+[ext_resource type="Script" path="res://scripts/healthbar.gd" id="6_b06d8"]
+[ext_resource type="Shader" path="res://materials/shaders/entity.gdshader" id="7_dbi1h"]
+[ext_resource type="Texture2D" uid="uid://cee6d7cbam6pj" path="res://sprites/player.png" id="8_771k5"]
+[ext_resource type="Script" path="res://scripts/player_camera.gd" id="9_jd5rw"]
+[ext_resource type="Script" path="res://scripts/item_collector.gd" id="9_r83ex"]
+[ext_resource type="Script" path="res://scripts/health.gd" id="10_3kf2b"]
+[ext_resource type="Script" path="res://scripts/team.gd" id="11_4j04t"]
+[ext_resource type="PackedScene" uid="uid://booa6u2jw1mxr" path="res://scenes/death_fx.tscn" id="12_vdta7"]
+[ext_resource type="Texture2D" uid="uid://ddkd5dp5f6mrs" path="res://sprites/glow.png" id="14_hnw27"]
+[ext_resource type="Script" path="res://scripts/hitbox.gd" id="15_kwxoo"]
+[ext_resource type="Texture2D" uid="uid://chb2gw0u5bwmx" path="res://sprites/shadow.png" id="16_51u7y"]
+[ext_resource type="Script" path="res://scripts/hit_fx.gd" id="17_e0qnw"]
+[ext_resource type="AnimationLibrary" uid="uid://c37cmbh7l1rgo" path="res://animations/entity_anim_lib.tres" id="18_gin14"]
+[ext_resource type="AnimationNodeStateMachine" uid="uid://q81ouwttk58h" path="res://animations/entity_anim_tree.tres" id="19_dbad4"]
+[ext_resource type="Script" path="res://scripts/entity_animation_tree.gd" id="20_c8sv8"]
+[ext_resource type="AudioStream" uid="uid://yvuw5bxumh15" path="res://scenes/37161__volivieri__soccer-stomp-edited.wav" id="21_1rdvo"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jki3l"]
+shader = ExtResource("7_dbi1h")
+shader_parameter/flash_amount = 0.0
+shader_parameter/flash_color = Color(1, 1, 1, 1)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0rqyo"]
+radius = 2.0
+height = 12.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_euncd"]
+radius = 16.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_u7yjf"]
+radius = 8.0
+
+[sub_resource type="Curve" id="Curve_k2jw1"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -2.40338, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Animation" id="Animation_qx7yn"]
+length = 0.001
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qo17c"]
+_data = {
+"RESET": SubResource("Animation_qx7yn")
+}
+
+[node name="Remake" type="CharacterBody2D" node_paths=PackedStringArray("fire_sound", "player_animation_tree", "has_my_shot_color", "item_collector") groups=["player", "player1", "shooter"]]
+position = Vector2(-485, 22)
+collision_layer = 64
+collision_mask = 28
+script = ExtResource("1_pcl32")
+fire_sound = NodePath("FireSound")
+my_bullet_prefab = ExtResource("2_8wfnk")
+player_animation_tree = NodePath("AnimationTree")
+has_my_shot_color = NodePath("BulletColorRect")
+item_collector = NodePath("ItemCollector")
+
+[node name="SlimeHealthBar" type="ProgressBar" parent="." node_paths=PackedStringArray("health")]
+self_modulate = Color(0.0705882, 0.984314, 0.0196078, 1)
+offset_left = -11.0
+offset_top = -16.0
+offset_right = 11.0
+offset_bottom = -12.0
+value = 100.0
+show_percentage = false
+script = ExtResource("6_b06d8")
+health = NodePath("../Health")
+
+[node name="Visuals" type="Node2D" parent="."]
+position = Vector2(0, -0.0103547)
+
+[node name="Sprite2D" type="Sprite2D" parent="Visuals"]
+material = SubResource("ShaderMaterial_jki3l")
+position = Vector2(0, -3.99713)
+texture = ExtResource("8_771k5")
+region_rect = Rect2(208, 0, 16, 16)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_0rqyo")
+
+[node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("player")]
+enabled = false
+zoom = Vector2(2, 2)
+position_smoothing_enabled = true
+script = ExtResource("9_jd5rw")
+player = NodePath("..")
+
+[node name="Health" type="Node" parent="."]
+script = ExtResource("10_3kf2b")
+self_heal_interval = 2.0
+self_heal = 2
+health = 100
+max_health = 100
+
+[node name="Team" type="Node" parent="."]
+script = ExtResource("11_4j04t")
+
+[node name="DeathFx" parent="." node_paths=PackedStringArray("fx_nodes") instance=ExtResource("12_vdta7")]
+fx_nodes = [null]
+
+[node name="ItemCollector" type="Node2D" parent="." node_paths=PackedStringArray("health", "player", "collector_area")]
+visible = false
+script = ExtResource("9_r83ex")
+health = NodePath("../Health")
+player = NodePath("..")
+collector_area = NodePath("Area2D")
+
+[node name="Area2D" type="Area2D" parent="ItemCollector"]
+collision_mask = 65
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ItemCollector/Area2D"]
+shape = SubResource("CircleShape2D_euncd")
+debug_color = Color(0.121569, 0.701961, 0, 0.419608)
+
+[node name="Sprite2D" type="Sprite2D" parent="ItemCollector/Area2D"]
+self_modulate = Color(0.976471, 0.929412, 0.0705882, 0.501961)
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("14_hnw27")
+
+[node name="Hitbox" type="Area2D" parent="." groups=["hitbox"]]
+position = Vector2(0, -5)
+script = ExtResource("15_kwxoo")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("CircleShape2D_u7yjf")
+
+[node name="Shadow" type="Sprite2D" parent="."]
+self_modulate = Color(0, 0, 0, 0.494118)
+z_index = -3
+z_as_relative = false
+position = Vector2(0, 3)
+scale = Vector2(0.6, 0.666667)
+texture = ExtResource("16_51u7y")
+
+[node name="HitFx" type="Node" parent="." node_paths=PackedStringArray("health", "sprites")]
+script = ExtResource("17_e0qnw")
+health = NodePath("../Health")
+sprites = [NodePath("../Visuals/Sprite2D")]
+flash_curve = SubResource("Curve_k2jw1")
+flash_duration = 0.5
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_qo17c"),
+"entity_anim_lib": ExtResource("18_gin14")
+}
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = ExtResource("19_dbad4")
+anim_player = NodePath("../AnimationPlayer")
+script = ExtResource("20_c8sv8")
+
+[node name="FireSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("21_1rdvo")
+
+[node name="BulletColorRect" type="ColorRect" parent="."]
+offset_left = -10.0
+offset_top = -19.0
+offset_right = -8.0
+offset_bottom = -17.0
+color = Color(0.207843, 0.988235, 0.0196078, 1)
+
+[node name="CDColorRect2" type="ColorRect" parent="." groups=["player"]]
+offset_left = -7.0
+offset_top = -19.0
+offset_right = -5.0
+offset_bottom = -17.0
+color = Color(0.92549, 0.988235, 0.0196078, 1)
+
+[connection signal="death" from="Health" to="DeathFx" method="on_death"]
+[connection signal="death_position" from="Health" to="." method="_on_health_death_position"]

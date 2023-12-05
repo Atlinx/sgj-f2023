@@ -3,8 +3,8 @@
 [ext_resource type="AudioStream" uid="uid://dy58atrg72ubh" path="res://scenes/Background Music 2.mp3" id="1_0cf8h"]
 [ext_resource type="TileSet" uid="uid://da4oraw1aomg7" path="res://sprites/tiles.tres" id="2_bu12m"]
 [ext_resource type="Script" path="res://scripts/level.gd" id="3_jaseo"]
-[ext_resource type="PackedScene" uid="uid://ci8yj0nmd1i13" path="res://scenes/character/shooter/shooter.tscn" id="4_0khcb"]
 [ext_resource type="PackedScene" uid="uid://fcltcmlr1x4q" path="res://scenes/character/hero/hero.tscn" id="5_d5045"]
+[ext_resource type="PackedScene" uid="uid://dlowxy20fgx2j" path="res://scenes/character/shooter/remake_shooter.tscn" id="5_hm331"]
 [ext_resource type="Script" path="res://scripts/IntialEnemyCreater.gd" id="6_b1eqf"]
 [ext_resource type="PackedScene" uid="uid://cdpn5s43qjbwg" path="res://scenes/slime/slime.tscn" id="7_uw0bx"]
 [ext_resource type="Script" path="res://scripts/game_manager.gd" id="8_dbn5u"]
@@ -62,9 +62,8 @@ script = ExtResource("3_jaseo")
 position = Vector2(2191, -411)
 speed = 180.0
 
-[node name="Shooter" parent="World/Level" instance=ExtResource("4_0khcb")]
-position = Vector2(2237, -564)
-collision_layer = 0
+[node name="Remake" parent="World/Level" instance=ExtResource("5_hm331")]
+position = Vector2(2250, -557)
 
 [node name="EnemyWaveCreater" type="Node" parent="." node_paths=PackedStringArray("tile_map", "game_manager")]
 script = ExtResource("6_b1eqf")
@@ -95,7 +94,7 @@ sneak_slime = Array[PackedScene]([ExtResource("12_k5rlr")])
 sneak_interval = Vector2i(5, 5)
 tile_map = NodePath("../World/Level")
 game_manager = NodePath("../GameManager")
-imposible_sneak_time = 1.0
+imposible_sneak_time = 90.0
 
 [node name="Terrien" type="Node2D" parent="."]
 

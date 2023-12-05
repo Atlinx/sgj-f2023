@@ -26,7 +26,7 @@ func _ready():
 
 func _process(_delta):
 	if Input.is_action_just_pressed("get_bullet") and gold >= 10:
-		player_1.has_shot = true
+		player_1.has_shot += 1
 		gold -= 10
 		gold_change.emit()
 	if Input.is_action_just_pressed("heal") and gold >= 5:
@@ -50,7 +50,8 @@ func _process(_delta):
 			collector.show()
 			await get_tree().create_timer(1).timeout
 			collector.hide()
-
+	if Input.is_action_just_pressed("upgrade_defense"):
+		health_2.defense += 5
 
 
 func _revive_player_1():
