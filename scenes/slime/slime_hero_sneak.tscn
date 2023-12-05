@@ -74,7 +74,7 @@ team = 1
 
 [node name="PlayerDetectionArea2D" type="Area2D" parent="."]
 scale = Vector2(2, 2)
-collision_mask = 65
+collision_mask = 97
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetectionArea2D"]
 scale = Vector2(0.5, 0.5)

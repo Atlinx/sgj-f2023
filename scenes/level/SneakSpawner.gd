@@ -13,9 +13,10 @@ var _spawnable_cells: Array[Vector2i] = []
 const WATER_LAYER : int = 2
 const WALL_TERRAIN_ID: int = 0
 var _sneak_timer: float = 0
-
+var shooter
 
 func _ready():
+	shooter = get_tree().get_first_node_in_group("shooter")
 	for cell in tile_map.get_used_cells(0):
 		var tile_data = tile_map.get_cell_tile_data(0, cell)
 		if tile_data.terrain != 0 and 2:
@@ -39,7 +40,7 @@ func _get_random_cells(amount: int) -> Array[Vector2i]:
 func _process(delta):
 
 
-	if _sneak_timer <= 0:
+	if _sneak_timer <= 0 and shooter.alive == true:
 		_sneak_timer = randf_range(sneak_interval.x, sneak_interval.y)
 		var enemy_count = randi_range(sneak_amount.x, sneak_amount.y)
 

@@ -1,8 +1,12 @@
-[gd_scene load_steps=5 format=3 uid="uid://4t16hws81g83"]
+[gd_scene load_steps=10 format=3 uid="uid://4t16hws81g83"]
 
 [ext_resource type="Script" path="res://scripts/SplitScreen.gd" id="1_kjhmp"]
 [ext_resource type="PackedScene" uid="uid://bb3i3r7einpnp" path="res://scenes/level/level_1.tscn" id="1_oxki8"]
-[ext_resource type="PackedScene" uid="uid://cgokel7vn646l" path="res://scenes/inventory.tscn" id="3_acuek"]
+[ext_resource type="PackedScene" uid="uid://dls488dai5v42" path="res://scenes/cd_ui.tscn" id="3_eiekt"]
+[ext_resource type="Shader" path="res://materials/shaders/bullet.gdshader" id="4_cy7np"]
+[ext_resource type="Texture2D" uid="uid://c05kv56i0tvmq" path="res://sprites/bullet.png" id="5_jhkvv"]
+[ext_resource type="Texture2D" uid="uid://ds8oe1j4v5amr" path="res://sprites/heart.png" id="6_141tk"]
+[ext_resource type="Texture2D" uid="uid://ddkd5dp5f6mrs" path="res://sprites/glow.png" id="7_nwd8j"]
 
 [sub_resource type="GDScript" id="GDScript_acf85"]
 script/source = "extends CanvasLayer
@@ -61,6 +65,11 @@ func _on_slime_wave():
 	await get_tree().create_timer(5).timeout
 	wave_label.hide()
 "
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_u0qra"]
+resource_local_to_scene = true
+shader = ExtResource("4_cy7np")
+shader_parameter/bullet_color = Color(0.0784314, 1, 0, 1)
 
 [node name="SinglePlayerMain" type="Node"]
 
@@ -176,59 +185,93 @@ offset_bottom = 49.0
 value = 100.0
 show_percentage = false
 
-[node name="Inventory" parent="UI" instance=ExtResource("3_acuek")]
+[node name="Inventory" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 0
 
 [node name="Label" type="Label" parent="UI/Inventory"]
 self_modulate = Color(0.0235294, 0.0235294, 0.0235294, 1)
-layout_mode = 0
-offset_left = 312.0
-offset_top = 24.0
-offset_right = 352.0
-offset_bottom = 50.0
+layout_mode = 2
+offset_left = 617.0
+offset_top = 141.0
+offset_right = 627.0
+offset_bottom = 167.0
 text = "1"
 
 [node name="Label6" type="Label" parent="UI/Inventory"]
 self_modulate = Color(0.027451, 0.027451, 0.027451, 1)
-layout_mode = 0
-offset_left = 375.0
-offset_top = 3.0
-offset_right = 415.0
-offset_bottom = 29.0
+layout_mode = 2
+offset_left = 617.0
+offset_top = 141.0
+offset_right = 627.0
+offset_bottom = 167.0
 text = "2
 "
 
+[node name="CDUI" parent="UI/Inventory" instance=ExtResource("3_eiekt")]
+layout_mode = 2
+offset_left = 1058.0
+offset_top = 91.0
+offset_right = 1108.0
+offset_bottom = 206.0
+size_flags_horizontal = 8
+
+[node name="GridContainer" type="GridContainer" parent="UI/Inventory"]
+layout_mode = 0
+scale = Vector2(0.5, 0.5)
+columns = 4
+
+[node name="bullet" type="Sprite2D" parent="UI/Inventory/GridContainer"]
+self_modulate = Color(0.286275, 0.815686, 0.117647, 1)
+material = SubResource("ShaderMaterial_u0qra")
+scale = Vector2(6, 6)
+texture = ExtResource("5_jhkvv")
+
+[node name="heal" type="Sprite2D" parent="UI/Inventory/GridContainer"]
+scale = Vector2(6, 5.4375)
+texture = ExtResource("6_141tk")
+
+[node name="collector" type="Sprite2D" parent="UI/Inventory/GridContainer"]
+self_modulate = Color(0.992157, 0.870588, 0.203922, 1)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("7_nwd8j")
+
+[node name="heal2" type="Sprite2D" parent="UI/Inventory/GridContainer"]
+scale = Vector2(6, 5.4375)
+texture = ExtResource("6_141tk")
+
 [node name="Label2" type="Label" parent="UI/Inventory"]
 layout_mode = 0
-offset_left = 792.0
-offset_top = 25.0
-offset_right = 832.0
-offset_bottom = 51.0
+offset_left = 797.0
+offset_top = 43.0
+offset_right = 837.0
+offset_bottom = 69.0
 text = "P"
 
 [node name="Label3" type="Label" parent="UI/Inventory"]
 layout_mode = 0
-offset_left = 788.0
-offset_top = 61.0
-offset_right = 828.0
-offset_bottom = 87.0
+offset_left = 792.0
+offset_top = 9.0
+offset_right = 832.0
+offset_bottom = 35.0
 text = "5
 "
 
 [node name="Label5" type="Label" parent="UI/Inventory"]
 layout_mode = 0
-offset_left = 369.0
-offset_top = 59.0
-offset_right = 409.0
-offset_bottom = 85.0
+offset_left = 358.0
+offset_top = 46.0
+offset_right = 398.0
+offset_bottom = 72.0
 text = "5
 "
 
 [node name="Label4" type="Label" parent="UI/Inventory"]
 layout_mode = 0
-offset_left = 305.0
-offset_top = 58.0
-offset_right = 345.0
-offset_bottom = 110.0
+offset_left = 306.0
+offset_top = 152.0
+offset_right = 346.0
+offset_bottom = 204.0
 text = "10
 
 "
@@ -277,12 +320,3 @@ grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(2, 2)
 text = "史莱姆大军已被击败啦！"
-
-[node name="Label" type="Label" parent="UI"]
-offset_left = 684.0
-offset_top = 21.0
-offset_right = 780.0
-offset_bottom = 100.0
-text = "按O
-够十块钱花就
-增加收集范围"

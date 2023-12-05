@@ -63,7 +63,7 @@ position = Vector2(2191, -411)
 speed = 180.0
 
 [node name="Shooter" parent="World/Level" instance=ExtResource("4_0khcb")]
-position = Vector2(2259, -547)
+position = Vector2(2237, -564)
 collision_layer = 0
 
 [node name="EnemyWaveCreater" type="Node" parent="." node_paths=PackedStringArray("tile_map", "game_manager")]

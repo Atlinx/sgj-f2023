@@ -15,6 +15,7 @@ signal damaged(amount: int)
 signal healed(amount: int)
 signal healthchanged
 
+@export var defense : int = 0
 @export var health: int = 1
 @export var max_health: int = 1
 
@@ -32,8 +33,8 @@ func _process(delta):
 			time_since_last_self_heal += delta
 
 func damage(amount: int):
-	health -= amount
-	damaged.emit(amount)
+	health -= amount - defense
+	damaged.emit(amount - defense)
 	healthchanged.emit()
 	if health <= 0:
 		death.emit()
