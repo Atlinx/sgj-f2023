@@ -13,7 +13,7 @@ func _ready():
 func _on_bullet_death():
 	if bullet.damaged_entity:
 		if bullet.entity_owner.is_in_group("player"):
-			bullet.entity_owner.has_shot = true
+			bullet.entity_owner.has_shot += 1
 		else: print("had free")
 	else:
 		var grand_parent = get_parent().get_parent()

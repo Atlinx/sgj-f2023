@@ -46,7 +46,7 @@ _data = {
 "RESET": SubResource("Animation_qx7yn")
 }
 
-[node name="Remake" type="CharacterBody2D" node_paths=PackedStringArray("fire_sound", "player_animation_tree", "has_my_shot_color", "item_collector") groups=["player", "player1", "shooter"]]
+[node name="RemakeShooter" type="CharacterBody2D" node_paths=PackedStringArray("fire_sound", "player_animation_tree", "has_my_shot_color", "item_collector") groups=["player", "player1", "shooter"]]
 position = Vector2(-485, 22)
 collision_layer = 64
 collision_mask = 28

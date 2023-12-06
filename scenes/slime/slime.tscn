@@ -43,7 +43,7 @@ radius = 6.08276
 collision_mask = 21
 script = ExtResource("1_ppjgb")
 ai = NodePath("AIMovement")
-debug_speed = 30.0
+debug_speed = 2.08165e-12
 
 [node name="SlimeHealthBar" type="ProgressBar" parent="." node_paths=PackedStringArray("health")]
 self_modulate = Color(0.984314, 0.0196078, 0.0196078, 1)
@@ -73,7 +73,7 @@ team = 1
 
 [node name="PlayerDetectionArea2D" type="Area2D" parent="."]
 visible = false
-scale = Vector2(0.7, 0.7)
+scale = Vector2(1e-05, 1e-05)
 collision_mask = 33
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetectionArea2D"]
@@ -106,7 +106,6 @@ entity_body = NodePath("..")
 detection_area = NodePath("../PlayerDetectionArea2D")
 navigation_agent = NodePath("../NavigationAgent2D")
 bullet_prefab = ExtResource("9_a6ejc")
-fire_interval = 2
 animation_tree = NodePath("../AnimationTree")
 dropped_heart = NodePath("../DroppedItem")
 

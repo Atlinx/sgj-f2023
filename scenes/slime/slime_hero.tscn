@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://c6y66da26sajq"]
+[gd_scene load_steps=24 format=3 uid="uid://c6y66da26sajq"]
 
 [ext_resource type="Script" path="res://scripts/slime.gd" id="1_maj28"]
 [ext_resource type="Script" path="res://scripts/healthbar.gd" id="2_e3kki"]
@@ -17,7 +17,6 @@
 [ext_resource type="Script" path="res://scripts/entity_animation_tree.gd" id="14_dr7ds"]
 [ext_resource type="AnimationLibrary" uid="uid://c37cmbh7l1rgo" path="res://animations/entity_anim_lib.tres" id="15_u3tey"]
 [ext_resource type="Script" path="res://scripts/dropped_item.gd" id="16_ut2f8"]
-[ext_resource type="Shader" path="res://materials/shaders/bullet.gdshader" id="17_jgsw2"]
 [ext_resource type="Texture2D" uid="uid://k28yn5phd0se" path="res://scenes/character/hero/coin 2.png" id="18_8x0bm"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_h8j63"]
@@ -31,11 +30,6 @@ radius = 8.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_08h8o"]
 radius = 8.0
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_mnqkv"]
-resource_local_to_scene = true
-shader = ExtResource("17_jgsw2")
-shader_parameter/bullet_color = Color(0.0784314, 1, 0, 1)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_j6s7h"]
 radius = 6.08276
@@ -156,7 +150,6 @@ item_type = 2
 
 [node name="Sprite2D" type="Sprite2D" parent="DroppedItem"]
 self_modulate = Color(0.827451, 0.827451, 0.827451, 1)
-material = SubResource("ShaderMaterial_mnqkv")
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("18_8x0bm")
 

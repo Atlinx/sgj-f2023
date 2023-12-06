@@ -27,7 +27,7 @@ func _ready():
 
 func _delayed_navigation_setup():
 	navigation_agent.target_position = base_position
-	
+
 
 func _on_body_entered(body: Node2D):
 	var team = body.get_node_or_null("Team")

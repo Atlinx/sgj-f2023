@@ -31,7 +31,6 @@ func _delayed_navigation_setup():
 	
 
 func _on_body_entered(body: Node2D):
-	print(body)
 	var team = body.get_node_or_null("Team")
 	if team != null and team.team == Team.TeamType.PLAYER:
 		_player = body

@@ -10,7 +10,7 @@ signal death()
 var damaged_entity: bool = false
 var entity_owner: Node
 var enter_high_land : bool = false
-
+var _is_dead : bool = false
 var _direction: Vector2
 var _life_timer: float = 0
 
@@ -48,11 +48,10 @@ func _physics_process(delta):
 
 
 func _on_collision(collision: KinematicCollision2D):
+	if _is_dead:
+		return
 	var body = collision.get_collider()
-	if body.is_in_group("hitbox"):
-		print("hitbox")
-		_on_hitbox_hit(body.get_parent())
-	elif body.is_in_group("wall"):
+	if body.is_in_group("wall"):
 		global_position = collision.get_position()
 		_on_death(false)
 
@@ -74,7 +73,7 @@ func _on_death(_damaged_entity: bool):
 	damaged_entity = _damaged_entity
 	death.emit()
 	queue_free()
-
+	_is_dead = true
 
 func _on_area_2d_area_exited(area):
 	if area.is_in_group("highland"):
