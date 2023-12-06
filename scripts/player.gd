@@ -15,7 +15,7 @@ var has_teammate_bullet : bool = false
 
 
 
-func _process(delta):
+func _process(_delta):
 	if alive == false:
 		return
 
@@ -57,7 +57,7 @@ func _deferred_bullet_addition(bullet_instance, death_position):
 	level.add_child(bullet_instance)
 
 
-func _on_health_death_position(death_position):
+func _on_health_death_position(_death_position):
 	alive = false
 	revive.emit(revive_timer)
 	await get_tree().create_timer(revive_timer).timeout

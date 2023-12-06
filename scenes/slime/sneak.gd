@@ -39,11 +39,9 @@ func _on_body_exited(body: Node2D):
 
 func _process(delta):
 	if _player != null:
-		print("ok")
 		_update_position_timer += delta
 		if _update_position_timer > update_position_interval:
 			navigation_agent.target_position = _player.global_position
-			print(navigation_agent.target_position)
 			_update_position_timer -= update_position_interval
 		if _fire_timer <= 0 and _player.global_position.x > get_parent().global_position.x:
 			var right_sword_instance = right_sword.instantiate()
@@ -59,8 +57,14 @@ func _process(delta):
 			left_sword_instance.queue_free()
 		else:
 			_fire_timer -= delta
-
-
+#	var tilemap = get_tree().get_first_node_in_group("tilemap")
+#	var cell_data = tilemap.get_cell_tile_data(0, get_parent().global_position)
+#	if cell_data != null:
+#		print("cell_data")
+#		if cell_data.terrain != 4:
+#			var detecetion = get_parent().get_node("PlayerDectectionArea2D")
+#			detecetion.set_collision_mask_value(7,false)
+#			detecetion.set_collision_mask_value(6,true)
 
 func _physics_process(_delta):
 	animation_tree.walking = not navigation_agent.is_navigation_finished()

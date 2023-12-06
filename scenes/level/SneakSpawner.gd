@@ -6,7 +6,7 @@ extends Node
 @export var sneak_interval = Vector2i(10, 20)
 @export var tile_map: TileMap
 @export var game_manager: GameManager
-@export var sneak_radius : float = 200
+@export var sneak_radius : float = 150
 @export var imposible_sneak_time : float = 45
 var _spawn_timer: float = 0
 var _spawnable_cells: Array[Vector2i] = []
@@ -17,23 +17,9 @@ var shooter
 
 func _ready():
 	shooter = get_tree().get_first_node_in_group("shooter")
-	for cell in tile_map.get_used_cells(0):
-		var tile_data = tile_map.get_cell_tile_data(0, cell)
-		if tile_data.terrain == 4:
-			_spawnable_cells.append(cell)
 	set_process(false)
 	await get_tree().create_timer(imposible_sneak_time).timeout
 	set_process(true)
-
-
-func _get_random_cells(amount: int) -> Array[Vector2i]:
-	var temp_spawnable_cells = _spawnable_cells.duplicate() 
-	var valid_cells: Array[Vector2i] = []
-	for i in amount:
-		var valid_cell_index = randi() % temp_spawnable_cells.size()
-		valid_cells.append(temp_spawnable_cells[valid_cell_index])
-		temp_spawnable_cells.remove_at(valid_cell_index)
-	return valid_cells
 
 
 func _process(delta):
@@ -44,16 +30,20 @@ func _process(delta):
 		var enemy_count = randi_range(sneak_amount.x, sneak_amount.y)
 
 	# normal slime
-		var random_cells_normal = _get_random_cells(enemy_count)
+
 		for i in range(enemy_count):
 			var enemy_index = randi() % sneak_slime.size()
 			var enemy = sneak_slime[enemy_index]
 			var enemy_inst: Node2D = enemy.instantiate()
 			var spawn_position = get_nearby_player_position()
-			enemy_inst.global_position = spawn_position
-			add_child(enemy_inst)
-			var enemy_health = enemy_inst.get_node("Health")
-			enemy_health.death.connect(_on_enemy_death)
+			if spawn_position != Vector2.ZERO:
+				enemy_inst.global_position = spawn_position
+				var cell_coords = tile_map.local_to_map(spawn_position)
+				var tile_data = tile_map.get_cell_tile_data(0, cell_coords)
+				if tile_data.terrain == 4:
+					add_child(enemy_inst)
+					var enemy_health = enemy_inst.get_node("Health")
+					enemy_health.death.connect(_on_enemy_death)
 
 	else:
 		_sneak_timer -= delta
@@ -65,6 +55,7 @@ func _on_enemy_death():
 func _on_game_manager_win():
 	set_process(false)
 
+#很容易生成在墙里面，得隔开
 func get_nearby_player_position():
 	var player_position = get_tree().get_first_node_in_group("shooter").global_position
 
@@ -79,18 +70,18 @@ func get_nearby_player_position():
 		var spawn_position = player_position + offset
 
 		# 将生成位置转换为地图单元格坐标
-		var cell_coords = tile_map.local_to_map(spawn_position)
+		var cell_coords = tile_map.local_to_map(tile_map.to_local(spawn_position))
 
 		# 获取单元格的地形数据
 		var tile_data = tile_map.get_cell_tile_data(0, cell_coords)
-
+		if tile_data == null:
+			return Vector2.ZERO
+			print("tile data is null ")
 		# 检查地形是否符合要求
 		if tile_data.terrain == 4:
 			print("Spawn Position:", spawn_position, "Terrain ID:", tile_data.terrain)
 			return spawn_position
-
 		attempt += 1
-
+	return Vector2.ZERO
 	# 如果达到最大尝试次数仍然找不到有效位置，输出错误信息并返回 Vector2.ZERO
 	print("Failed to find a valid spawn position after", max_attempts, "attempts.")
-

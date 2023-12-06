@@ -51,7 +51,7 @@ _data = {
 
 [node name="Hero" type="CharacterBody2D" node_paths=PackedStringArray("fire_sound", "player_animation_tree", "has_teammate_bullet_color", "cd_color") groups=["hero", "player", "player2"]]
 position = Vector2(-485, 22)
-collision_layer = 0
+collision_layer = 32
 collision_mask = 28
 script = ExtResource("1_3em0b")
 dropped_bullet = ExtResource("2_cc60o")
