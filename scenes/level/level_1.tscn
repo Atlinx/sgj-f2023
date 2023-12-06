@@ -25,16 +25,16 @@ size = Vector2(64.5565, 13.0579)
 size = Vector2(11.9999, 98.5727)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0qc63"]
-size = Vector2(224.375, 18.4859)
+size = Vector2(228, 18.4859)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xgehq"]
-size = Vector2(223, 17)
+size = Vector2(229, 18)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_27mxd"]
-size = Vector2(221.969, 18.3737)
+size = Vector2(230.001, 18.3737)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_x2y7h"]
-size = Vector2(225.021, 15.8097)
+size = Vector2(228.001, 17.9986)
 
 [node name="Level1" type="Node" groups=["level"]]
 
@@ -93,6 +93,7 @@ max_progress = 50
 [node name="SlimeSpawner" type="Node" parent="." node_paths=PackedStringArray("tile_map", "game_manager")]
 script = ExtResource("9_r48e0")
 enemy_prefabs = Array[PackedScene]([ExtResource("7_uw0bx"), ExtResource("12_5ut7b")])
+enemy_amount = Vector2i(0, 0)
 tile_map = NodePath("../World/Level")
 game_manager = NodePath("../GameManager")
 
@@ -210,11 +211,11 @@ shape = SubResource("RectangleShape2D_itdfd")
 position = Vector2(2180, -483)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Terrien/Highland/Highland_1"]
-position = Vector2(8.8125, -39.2429)
+position = Vector2(9, -39.2429)
 shape = SubResource("RectangleShape2D_0qc63")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Terrien/Highland/Highland_1"]
-position = Vector2(9.5, 361.5)
+position = Vector2(8.5, 361)
 shape = SubResource("RectangleShape2D_xgehq")
 
 [node name="Highland_2" type="Area2D" parent="Terrien/Highland" groups=["highland"]]
@@ -222,15 +223,12 @@ position = Vector2(2067, -327)
 rotation = -1.57248
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Terrien/Highland/Highland_2"]
-position = Vector2(-5.87036, -77.01)
+position = Vector2(-3.87122, -77.0099)
 shape = SubResource("RectangleShape2D_27mxd")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Terrien/Highland/Highland_2"]
-position = Vector2(-6.04141, 323.085)
+position = Vector2(-5.54306, 321.99)
 shape = SubResource("RectangleShape2D_x2y7h")
-
-[node name="SlimeShooter" parent="." instance=ExtResource("7_uw0bx")]
-position = Vector2(2368, -368)
 
 [connection signal="win" from="GameManager" to="SlimeSpawner" method="_on_game_manager_win"]
 [connection signal="win" from="GameManager" to="SneakSpawner" method="_on_game_manager_win"]

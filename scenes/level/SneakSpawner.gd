@@ -6,7 +6,7 @@ extends Node
 @export var sneak_interval = Vector2i(10, 20)
 @export var tile_map: TileMap
 @export var game_manager: GameManager
-@export var sneak_radius : float = 150
+@export var sneak_radius : float = 200
 @export var imposible_sneak_time : float = 45
 var _spawn_timer: float = 0
 var _spawnable_cells: Array[Vector2i] = []
@@ -40,10 +40,9 @@ func _process(delta):
 				enemy_inst.global_position = spawn_position
 				var cell_coords = tile_map.local_to_map(spawn_position)
 				var tile_data = tile_map.get_cell_tile_data(0, cell_coords)
-				if tile_data.terrain == 4:
-					add_child(enemy_inst)
-					var enemy_health = enemy_inst.get_node("Health")
-					enemy_health.death.connect(_on_enemy_death)
+				add_child(enemy_inst)
+				var enemy_health = enemy_inst.get_node("Health")
+				enemy_health.death.connect(_on_enemy_death)
 
 	else:
 		_sneak_timer -= delta
@@ -76,12 +75,10 @@ func get_nearby_player_position():
 		var tile_data = tile_map.get_cell_tile_data(0, cell_coords)
 		if tile_data == null:
 			return Vector2.ZERO
-			print("tile data is null ")
+
 		# 检查地形是否符合要求
 		if tile_data.terrain == 4:
-			print("Spawn Position:", spawn_position, "Terrain ID:", tile_data.terrain)
 			return spawn_position
 		attempt += 1
 	return Vector2.ZERO
-	# 如果达到最大尝试次数仍然找不到有效位置，输出错误信息并返回 Vector2.ZERO
-	print("Failed to find a valid spawn position after", max_attempts, "attempts.")
+
