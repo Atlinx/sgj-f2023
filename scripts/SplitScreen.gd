@@ -28,7 +28,7 @@ func _ready():
 	players["1"].player.get_node("Health").revive.connect(_on_player_1_revive)
 	players["2"].player.get_node("Health").death.connect(_on_player_2_death)
 	players["2"].player.get_node("Health").revive.connect(_on_player_2_revive)
-
+	get_tree().get_first_node_in_group("game_manager").win.connect(_on_win)
 
 
 func _on_player_1_death():
@@ -42,3 +42,9 @@ func _on_player_2_death():
 
 func _on_player_2_revive():
 	players["2"].camera.enabled = true
+
+func _on_win():
+	var current_scene_file = get_tree().current_scene.scene_file_path
+	var next_level_number = current_scene_file.to_int()+1
+	var next_level_path = "res://scenes/level/split_" + str(next_level_number) + ".tscn"
+	get_tree().change_scene_to_file(next_level_path)

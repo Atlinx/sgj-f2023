@@ -61,6 +61,5 @@ func _on_enemy_death():
 	game_manager.on_enemy_death()
 
 
-func _on_game_manager_win():
+func _on_game_manager_stop_spawning():
 	set_process(false)
-

@@ -12,9 +12,10 @@ class_name GameManager
 @export var level_timer : float
 var base_health
 signal wave_comming
-signal win
+signal stop_spawning
 signal base
 signal gold_change
+signal win
 
 func _ready():
 	health_1.death.connect(_revive_player_1)
@@ -24,7 +25,7 @@ func _ready():
 	base.emit()
 
 func _process(_delta):
-	if level_timer >= 0:
+	if level_timer > 0:
 		level_timer -= _delta
 	if Input.is_action_just_pressed("get_bullet") and gold >= 10:
 		player_1.has_shot += 1
@@ -40,8 +41,12 @@ func _process(_delta):
 			health_1.heal(30)
 			gold -= 5
 			gold_change.emit()
-	if level_timer == 0:
-		win.emit()
+	if level_timer <= 0:
+		stop_spawning.emit()
+		var enemies = get_tree().get_nodes_in_group("enemy")
+		if enemies.size() == 0:
+			win.emit()
+
 	if Input.is_action_just_pressed("upgrade_collection"): 
 		var collector = player_2.get_node("ItemCollector")
 		if collector.scale < Vector2(4,4) and gold>=10:

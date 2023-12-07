@@ -51,9 +51,6 @@ func _on_enemy_death():
 	game_manager.on_enemy_death()
 
 
-func _on_game_manager_win():
-	set_process(false)
-
 #很容易生成在墙里面，得隔开
 func get_nearby_player_position():
 	var player_position = get_tree().get_first_node_in_group("shooter").global_position
@@ -82,3 +79,7 @@ func get_nearby_player_position():
 		attempt += 1
 	return Vector2.ZERO
 
+
+
+func _on_game_manager_stop_spawning():
+	set_process(false)

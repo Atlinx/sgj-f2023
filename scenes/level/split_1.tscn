@@ -1,10 +1,10 @@
 [gd_scene load_steps=7 format=3 uid="uid://4t16hws81g83"]
 
-[ext_resource type="Script" path="res://scripts/SplitScreen.gd" id="1_kjhmp"]
-[ext_resource type="PackedScene" uid="uid://bb3i3r7einpnp" path="res://scenes/level/level_1.tscn" id="1_oxki8"]
-[ext_resource type="PackedScene" uid="uid://dls488dai5v42" path="res://scenes/Skill/sword.tscn" id="3_eiekt"]
-[ext_resource type="PackedScene" uid="uid://bw4vh7j8g3fm7" path="res://scenes/Skill/more_bullet.tscn" id="3_g24x1"]
-[ext_resource type="PackedScene" uid="uid://ekcl454jyl6p" path="res://scenes/Skill/collector_up.tscn" id="4_f6rcr"]
+[ext_resource type="Script" path="res://scripts/SplitScreen.gd" id="1_ng7vn"]
+[ext_resource type="PackedScene" uid="uid://bb3i3r7einpnp" path="res://scenes/level/level_1.tscn" id="3_g37fl"]
+[ext_resource type="PackedScene" uid="uid://bw4vh7j8g3fm7" path="res://scenes/Skill/more_bullet.tscn" id="4_y8s0s"]
+[ext_resource type="PackedScene" uid="uid://dls488dai5v42" path="res://scenes/Skill/sword.tscn" id="5_q8l2j"]
+[ext_resource type="PackedScene" uid="uid://ekcl454jyl6p" path="res://scenes/Skill/collector_up.tscn" id="6_qtgsk"]
 
 [sub_resource type="GDScript" id="GDScript_acf85"]
 script/source = "extends CanvasLayer
@@ -64,7 +64,7 @@ func _on_slime_wave():
 	wave_label.hide()
 "
 
-[node name="SinglePlayerMain" type="Node"]
+[node name="Main_1" type="Node"]
 
 [node name="SplitScreen" type="Control" parent="."]
 layout_mode = 3
@@ -73,7 +73,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_kjhmp")
+script = ExtResource("1_ng7vn")
 
 [node name="GridContainer" type="GridContainer" parent="SplitScreen"]
 layout_mode = 1
@@ -92,12 +92,12 @@ stretch = true
 
 [node name="Player1Viewport" type="SubViewport" parent="SplitScreen/GridContainer/SubViewportContainer"]
 handle_input_locally = false
-size = Vector2i(2, 2)
+size = Vector2i(574, 648)
 render_target_update_mode = 4
 
-[node name="Level1" parent="SplitScreen/GridContainer/SubViewportContainer/Player1Viewport" instance=ExtResource("1_oxki8")]
-
 [node name="Camera2D" type="Camera2D" parent="SplitScreen/GridContainer/SubViewportContainer/Player1Viewport"]
+
+[node name="Level1" parent="SplitScreen/GridContainer/SubViewportContainer/Player1Viewport" instance=ExtResource("3_g37fl")]
 
 [node name="SubViewportContainer2" type="SubViewportContainer" parent="SplitScreen/GridContainer"]
 layout_mode = 2
@@ -107,7 +107,7 @@ stretch = true
 
 [node name="Player2Viewport" type="SubViewport" parent="SplitScreen/GridContainer/SubViewportContainer2"]
 handle_input_locally = false
-size = Vector2i(2, 2)
+size = Vector2i(574, 648)
 render_target_update_mode = 4
 
 [node name="Camera2D" type="Camera2D" parent="SplitScreen/GridContainer/SubViewportContainer2/Player2Viewport"]
@@ -223,7 +223,7 @@ size_flags_vertical = 8
 text = "1
 "
 
-[node name="VBoxContainer" parent="UI/Player 1 ui/Skills/VBoxContainer" instance=ExtResource("3_g24x1")]
+[node name="VBoxContainer" parent="UI/Player 1 ui/Skills/VBoxContainer" instance=ExtResource("4_y8s0s")]
 layout_mode = 2
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="UI/Player 1 ui/Skills"]
@@ -288,7 +288,7 @@ size_flags_horizontal = 4
 size_flags_vertical = 8
 text = "z/x"
 
-[node name="VBoxContainer" parent="UI/Player 2 ui/Skills/VBoxContainer" instance=ExtResource("3_eiekt")]
+[node name="VBoxContainer" parent="UI/Player 2 ui/Skills/VBoxContainer" instance=ExtResource("5_q8l2j")]
 layout_mode = 2
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="UI/Player 2 ui/Skills"]
@@ -300,5 +300,5 @@ size_flags_horizontal = 4
 size_flags_vertical = 8
 text = "z/x"
 
-[node name="VBoxContainer" parent="UI/Player 2 ui/Skills/VBoxContainer2" instance=ExtResource("4_f6rcr")]
+[node name="VBoxContainer" parent="UI/Player 2 ui/Skills/VBoxContainer2" instance=ExtResource("6_qtgsk")]
 layout_mode = 2
