@@ -53,7 +53,7 @@ func _process(delta):
 			sword_cd.emit(fire_interval)
 			right_sword_instance = right_sword.instantiate()
 			add_child(right_sword_instance)
-			await get_tree().create_timer(0.5).timeout
+			await get_tree().create_timer(0.2).timeout
 			right_sword_instance.queue_free()
 
 	if Input.is_action_just_pressed("p2_left_fire"): 
@@ -62,7 +62,7 @@ func _process(delta):
 			sword_cd.emit(fire_interval)
 			left_sword_instance = left_sword.instantiate()
 			add_child(left_sword_instance)
-			await get_tree().create_timer(0.5).timeout
+			await get_tree().create_timer(0.2).timeout
 			left_sword_instance.queue_free()
 
 

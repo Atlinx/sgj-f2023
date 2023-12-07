@@ -85,8 +85,8 @@ wave_time = 90.0
 
 [node name="GameManager" type="Node" parent="." node_paths=PackedStringArray("spawn_location_1", "spawn_location_2") groups=["game_manager"]]
 script = ExtResource("8_dbn5u")
-spawn_location_1 = NodePath("")
-spawn_location_2 = NodePath("")
+spawn_location_1 = NodePath("../SpawnLocations/0")
+spawn_location_2 = NodePath("../SpawnLocations/1")
 gold = 10000
 base_max_health = 10
 level_timer = 130.0
