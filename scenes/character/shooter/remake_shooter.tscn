@@ -163,13 +163,6 @@ offset_right = -8.0
 offset_bottom = -17.0
 color = Color(0.207843, 0.988235, 0.0196078, 1)
 
-[node name="CDColorRect2" type="ColorRect" parent="." groups=["player"]]
-offset_left = -7.0
-offset_top = -19.0
-offset_right = -5.0
-offset_bottom = -17.0
-color = Color(0.92549, 0.988235, 0.0196078, 1)
-
 [connection signal="death" from="Health" to="DeathFx" method="on_death"]
 [connection signal="death_position" from="Health" to="." method="_on_health_death_position"]
 [connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]

@@ -1,0 +1,32 @@
+[gd_scene load_steps=3 format=3 uid="uid://c4pivsee1h5rl"]
+
+[ext_resource type="Material" uid="uid://duq16u675oqot" path="res://materials/player_bullet.tres" id="1_tx245"]
+[ext_resource type="Texture2D" uid="uid://c05kv56i0tvmq" path="res://sprites/bullet.png" id="2_67nm3"]
+
+[node name="VBoxContainer" type="VBoxContainer"]
+offset_right = 50.0
+offset_bottom = 163.0
+
+[node name="CDUI" type="TextureButton" parent="."]
+material = ExtResource("1_tx245")
+custom_minimum_size = Vector2(50, 120)
+layout_mode = 2
+texture_normal = ExtResource("2_67nm3")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="CDUI"]
+self_modulate = Color(0.113725, 0.113725, 0.113725, 0.917647)
+layout_mode = 2
+offset_right = 50.0
+offset_bottom = 120.0
+grow_horizontal = 2
+grow_vertical = 2
+fill_mode = 3
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 26
+text = "0"

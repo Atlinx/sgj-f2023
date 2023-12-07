@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://cgokel7vn646l"]
 
-[ext_resource type="PackedScene" uid="uid://dls488dai5v42" path="res://scenes/cd_ui.tscn" id="1_0ca3l"]
+[ext_resource type="PackedScene" uid="uid://dls488dai5v42" path="res://scenes/Skill/sword.tscn" id="1_0ca3l"]
 [ext_resource type="Texture2D" uid="uid://c05kv56i0tvmq" path="res://sprites/bullet.png" id="2_stifa"]
 [ext_resource type="Material" uid="uid://duq16u675oqot" path="res://materials/player_bullet.tres" id="2_uf8be"]
 [ext_resource type="Texture2D" uid="uid://ds8oe1j4v5amr" path="res://sprites/heart.png" id="4_stwg6"]

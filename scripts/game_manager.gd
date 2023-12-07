@@ -9,8 +9,7 @@ class_name GameManager
 @onready var health_2 = player_2.get_node("Health")
 @export var gold : int = 0
 @export var base_max_health : int
-@export var max_progress : int
-var progress : int = 0
+@export var level_timer : float
 var base_health
 signal wave_comming
 signal win
@@ -25,16 +24,23 @@ func _ready():
 	base.emit()
 
 func _process(_delta):
+	if level_timer >= 0:
+		level_timer -= _delta
 	if Input.is_action_just_pressed("get_bullet") and gold >= 10:
 		player_1.has_shot += 1
 		gold -= 10
 		gold_change.emit()
-	if Input.is_action_just_pressed("heal") and gold >= 5:
+	if Input.is_action_just_pressed("hero_heal") and gold >= 5:
 		if player_2.alive == true:
 			health_2.heal(30)
 			gold -= 5
 			gold_change.emit()
-	if progress == max_progress:
+	if Input.is_action_just_pressed("shooter_heal") and gold >= 5:
+		if player_1.alive == true:
+			health_1.heal(30)
+			gold -= 5
+			gold_change.emit()
+	if level_timer == 0:
 		win.emit()
 	if Input.is_action_just_pressed("upgrade_collection"): 
 		var collector = player_2.get_node("ItemCollector")
@@ -77,7 +83,7 @@ func on_get_gold():
 	gold_change.emit()
 
 func on_enemy_death():
-	progress += 1
+	pass
 
 func slime_wave():
 	wave_comming.emit()

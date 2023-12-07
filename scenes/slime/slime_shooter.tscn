@@ -1,23 +1,23 @@
 [gd_scene load_steps=25 format=3 uid="uid://cdpn5s43qjbwg"]
 
-[ext_resource type="Script" path="res://scripts/slime.gd" id="1_ppjgb"]
-[ext_resource type="Script" path="res://scripts/healthbar.gd" id="2_etgsg"]
-[ext_resource type="Texture2D" uid="uid://g1bx6y7c5y75" path="res://sprites/slime.png" id="3_510ho"]
-[ext_resource type="Script" path="res://scripts/health.gd" id="4_4nek8"]
-[ext_resource type="Script" path="res://scripts/team.gd" id="5_tms7g"]
-[ext_resource type="PackedScene" uid="uid://booa6u2jw1mxr" path="res://scenes/death_fx.tscn" id="6_o4uqr"]
-[ext_resource type="Script" path="res://scripts/hitbox.gd" id="7_tva5n"]
-[ext_resource type="Script" path="res://scripts/ai_movement.gd" id="8_26v4n"]
-[ext_resource type="PackedScene" uid="uid://speau1r0vvfs" path="res://scenes/slime/slime_bullet.tscn" id="9_a6ejc"]
-[ext_resource type="Texture2D" uid="uid://chb2gw0u5bwmx" path="res://sprites/shadow.png" id="10_pgeww"]
-[ext_resource type="Texture2D" uid="uid://ddkd5dp5f6mrs" path="res://sprites/glow.png" id="11_msnvl"]
-[ext_resource type="Script" path="res://scripts/damage_box.gd" id="12_56oyi"]
-[ext_resource type="AnimationNodeStateMachine" uid="uid://q81ouwttk58h" path="res://animations/entity_anim_tree.tres" id="13_m5ebo"]
-[ext_resource type="Script" path="res://scripts/entity_animation_tree.gd" id="14_ind8x"]
-[ext_resource type="AnimationLibrary" uid="uid://c37cmbh7l1rgo" path="res://animations/entity_anim_lib.tres" id="15_aeu6o"]
-[ext_resource type="Script" path="res://scripts/dropped_item.gd" id="16_6vjlh"]
-[ext_resource type="Shader" path="res://materials/shaders/bullet.gdshader" id="17_csj0y"]
-[ext_resource type="Texture2D" uid="uid://k28yn5phd0se" path="res://scenes/character/hero/coin 2.png" id="18_x8n12"]
+[ext_resource type="Script" path="res://scripts/slime.gd" id="1_gl0r4"]
+[ext_resource type="Script" path="res://scripts/healthbar.gd" id="2_tm6c4"]
+[ext_resource type="Texture2D" uid="uid://g1bx6y7c5y75" path="res://sprites/slime.png" id="3_xdxsk"]
+[ext_resource type="Script" path="res://scripts/health.gd" id="4_hfvj1"]
+[ext_resource type="Script" path="res://scripts/team.gd" id="5_epl67"]
+[ext_resource type="PackedScene" uid="uid://booa6u2jw1mxr" path="res://scenes/death_fx.tscn" id="6_ff3my"]
+[ext_resource type="Script" path="res://scripts/hitbox.gd" id="7_rb65x"]
+[ext_resource type="Script" path="res://scripts/ai_movement.gd" id="8_4s06a"]
+[ext_resource type="PackedScene" uid="uid://speau1r0vvfs" path="res://scenes/slime/slime_bullet.tscn" id="9_sl24g"]
+[ext_resource type="Texture2D" uid="uid://chb2gw0u5bwmx" path="res://sprites/shadow.png" id="10_t4edh"]
+[ext_resource type="Texture2D" uid="uid://ddkd5dp5f6mrs" path="res://sprites/glow.png" id="11_7ako4"]
+[ext_resource type="Script" path="res://scripts/damage_box.gd" id="12_d01t2"]
+[ext_resource type="AnimationNodeStateMachine" uid="uid://q81ouwttk58h" path="res://animations/entity_anim_tree.tres" id="13_dyqav"]
+[ext_resource type="Script" path="res://scripts/entity_animation_tree.gd" id="14_iv6sd"]
+[ext_resource type="AnimationLibrary" uid="uid://c37cmbh7l1rgo" path="res://animations/entity_anim_lib.tres" id="15_vvqcd"]
+[ext_resource type="Script" path="res://scripts/dropped_item.gd" id="16_a1hmb"]
+[ext_resource type="Shader" path="res://materials/shaders/bullet.gdshader" id="17_uo8wo"]
+[ext_resource type="Texture2D" uid="uid://k28yn5phd0se" path="res://scenes/character/hero/coin 2.png" id="18_1kg4n"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_h8j63"]
 radius = 256.0
@@ -33,7 +33,7 @@ radius = 8.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_mnqkv"]
 resource_local_to_scene = true
-shader = ExtResource("17_csj0y")
+shader = ExtResource("17_uo8wo")
 shader_parameter/bullet_color = Color(0.0784314, 1, 0, 1)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_j6s7h"]
@@ -41,7 +41,7 @@ radius = 6.08276
 
 [node name="SlimeShooter" type="CharacterBody2D" node_paths=PackedStringArray("ai") groups=["enemy"]]
 collision_mask = 21
-script = ExtResource("1_ppjgb")
+script = ExtResource("1_gl0r4")
 ai = NodePath("AIMovement")
 debug_speed = 30.0
 
@@ -53,27 +53,26 @@ offset_right = 12.0
 offset_bottom = -9.0
 value = 100.0
 show_percentage = false
-script = ExtResource("2_etgsg")
+script = ExtResource("2_tm6c4")
 health = NodePath("../Health")
 
 [node name="Visuals" type="Node2D" parent="."]
 
 [node name="Sprite2D" type="Sprite2D" parent="Visuals"]
 position = Vector2(0, -4)
-texture = ExtResource("3_510ho")
+texture = ExtResource("3_xdxsk")
 
 [node name="Health" type="Node" parent="."]
-script = ExtResource("4_4nek8")
+script = ExtResource("4_hfvj1")
 health = 25
 max_health = 25
 
 [node name="Team" type="Node" parent="."]
-script = ExtResource("5_tms7g")
+script = ExtResource("5_epl67")
 team = 1
 
 [node name="PlayerDetectionArea2D" type="Area2D" parent="."]
 visible = false
-scale = Vector2(1e-05, 1e-05)
 collision_mask = 33
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetectionArea2D"]
@@ -81,7 +80,7 @@ scale = Vector2(0.5, 0.5)
 shape = SubResource("CircleShape2D_h8j63")
 debug_color = Color(0.701961, 0, 0, 0.419608)
 
-[node name="DeathFx" parent="." instance=ExtResource("6_o4uqr")]
+[node name="DeathFx" parent="." instance=ExtResource("6_ff3my")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_0vhpe")
@@ -91,7 +90,7 @@ visible = false
 position = Vector2(0, -4)
 scale = Vector2(1.2, 1.2)
 collision_layer = 2
-script = ExtResource("7_tva5n")
+script = ExtResource("7_rb65x")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 shape = SubResource("CircleShape2D_n4oyw")
@@ -101,11 +100,11 @@ path_desired_distance = 2.0
 target_desired_distance = 2.0
 
 [node name="AIMovement" type="Node" parent="." node_paths=PackedStringArray("entity_body", "detection_area", "navigation_agent", "animation_tree", "dropped_heart")]
-script = ExtResource("8_26v4n")
+script = ExtResource("8_4s06a")
 entity_body = NodePath("..")
 detection_area = NodePath("../PlayerDetectionArea2D")
 navigation_agent = NodePath("../NavigationAgent2D")
-bullet_prefab = ExtResource("9_a6ejc")
+bullet_prefab = ExtResource("9_sl24g")
 animation_tree = NodePath("../AnimationTree")
 dropped_heart = NodePath("../DroppedItem")
 
@@ -115,19 +114,19 @@ z_index = -3
 z_as_relative = false
 position = Vector2(0, 3)
 scale = Vector2(0.9, 1)
-texture = ExtResource("10_pgeww")
+texture = ExtResource("10_t4edh")
 
 [node name="Glow" type="Sprite2D" parent="."]
 self_modulate = Color(0.894118, 0.231373, 0.266667, 1)
 z_index = -2
 scale = Vector2(0.075, 0.075)
-texture = ExtResource("11_msnvl")
+texture = ExtResource("11_7ako4")
 
 [node name="DamageBox" type="Area2D" parent="." node_paths=PackedStringArray("entity_owner")]
 visible = false
 position = Vector2(0, -4)
 collision_layer = 0
-script = ExtResource("12_56oyi")
+script = ExtResource("12_d01t2")
 damage = 20
 team = 1
 entity_owner = NodePath("..")
@@ -137,18 +136,18 @@ damage_interval = 0.2
 shape = SubResource("CircleShape2D_08h8o")
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
-tree_root = ExtResource("13_m5ebo")
+tree_root = ExtResource("13_dyqav")
 anim_player = NodePath("../AnimationPlayer")
-script = ExtResource("14_ind8x")
+script = ExtResource("14_iv6sd")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"entity_anim_lib": ExtResource("15_aeu6o")
+"entity_anim_lib": ExtResource("15_vvqcd")
 }
 
 [node name="DroppedItem" type="Area2D" parent="." node_paths=PackedStringArray("collision_shape") groups=["dropped_item"]]
 visible = false
-script = ExtResource("16_6vjlh")
+script = ExtResource("16_a1hmb")
 collision_shape = NodePath("CollisionShape2D")
 item_type = 2
 
@@ -156,14 +155,14 @@ item_type = 2
 self_modulate = Color(0.827451, 0.827451, 0.827451, 1)
 material = SubResource("ShaderMaterial_mnqkv")
 scale = Vector2(0.5, 0.5)
-texture = ExtResource("18_x8n12")
+texture = ExtResource("18_1kg4n")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DroppedItem"]
 shape = SubResource("CircleShape2D_j6s7h")
 
 [node name="Bullet" type="Node" parent="DroppedItem" groups=["enemy"]]
 
-[node name="DeathFx" parent="DroppedItem" instance=ExtResource("6_o4uqr")]
+[node name="DeathFx" parent="DroppedItem" instance=ExtResource("6_ff3my")]
 
 [connection signal="death" from="Health" to="DeathFx" method="on_death"]
 [connection signal="death" from="Health" to="AIMovement" method="_on_health_death"]
