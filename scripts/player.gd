@@ -31,7 +31,7 @@ func _process(_delta):
 	var overlap_area = hitbox.get_overlapping_areas().filter(func(area: Area2D) -> bool:
 		return area.is_in_group("portal"))
 
-	if not Input.is_action_pressed("portal") or overlap_area.size() == 0:
+	if not Input.is_action_just_pressed("portal") or overlap_area.size() == 0:
 		return
 
 	var portal_area = overlap_area[0]  # 选择数组中的第一个元素

@@ -18,10 +18,10 @@
 radius = 6.00925
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_itdfd"]
-size = Vector2(64.5565, 13.0579)
+size = Vector2(96.8733, 13.0579)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_a1cre"]
-size = Vector2(11.9999, 98.5727)
+size = Vector2(11.9999, 114.002)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0qc63"]
 size = Vector2(228, 18.4859)
@@ -124,84 +124,84 @@ shape = SubResource("CircleShape2D_umusl")
 [node name="Portal" type="Node2D" parent="Terrien"]
 
 [node name="portal1" type="Area2D" parent="Terrien/Portal" groups=["portal", "portal1"]]
-position = Vector2(2305, -577)
+position = Vector2(2313, -573)
 rotation = -0.00314523
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Terrien/Portal/portal1"]
-position = Vector2(16.9998, 0.0534668)
+position = Vector2(8.99976, 2.46838)
 rotation = 1.5708
 shape = SubResource("RectangleShape2D_itdfd")
 
 [node name="portal2" type="Area2D" parent="Terrien/Portal" groups=["portal", "portal2"]]
-position = Vector2(2446, -433)
+position = Vector2(2445, -448)
 rotation = -0.00314523
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Terrien/Portal/portal2"]
-position = Vector2(1.05981, -18.9966)
+position = Vector2(0.0236816, -7.00296)
 rotation = 1.5708
 shape = SubResource("RectangleShape2D_a1cre")
 
 [node name="portal3" type="Area2D" parent="Terrien/Portal" groups=["portal", "portal3"]]
-position = Vector2(2446, -205)
+position = Vector2(2447, -197)
 rotation = -0.00314523
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Terrien/Portal/portal3"]
-position = Vector2(1.95605, 14.0061)
+position = Vector2(-0.0251465, 8)
 rotation = 1.5708
 shape = SubResource("RectangleShape2D_a1cre")
 
 [node name="portal4" type="Area2D" parent="Terrien/Portal" groups=["portal", "portal4"]]
-position = Vector2(2303, -63)
+position = Vector2(2314, -63)
 rotation = -0.00314523
 collision_layer = 97
 collision_mask = 97
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Terrien/Portal/portal4"]
-position = Vector2(19, 0.0598145)
+position = Vector2(8, -1.72405)
 rotation = 1.5708
 shape = SubResource("RectangleShape2D_itdfd")
 
 [node name="portal5" type="Area2D" parent="Terrien/Portal" groups=["portal", "portal5"]]
-position = Vector2(2076, -64)
+position = Vector2(2065, -65)
 rotation = -0.00314523
 collision_layer = 97
 collision_mask = 97
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Terrien/Portal/portal5"]
-position = Vector2(-20.9998, -0.06604)
+position = Vector2(-9.00391, -1.52987)
 rotation = 1.5708
 shape = SubResource("RectangleShape2D_itdfd")
 
 [node name="portal6" type="Area2D" parent="Terrien/Portal" groups=["portal", "portal6"]]
-position = Vector2(1918, -205)
+position = Vector2(1921, -198)
 rotation = -0.00314523
 collision_layer = 97
 collision_mask = 97
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Terrien/Portal/portal6"]
-position = Vector2(2.94641, 17.0094)
+position = Vector2(2.97156, 7.9937)
 rotation = 1.5708
 shape = SubResource("RectangleShape2D_a1cre")
 
 [node name="portal7" type="Area2D" parent="Terrien/Portal" groups=["portal", "portal7"]]
-position = Vector2(1918, -433)
+position = Vector2(1924, -448)
 rotation = -0.00314523
 collision_layer = 97
 collision_mask = 97
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Terrien/Portal/portal7"]
-position = Vector2(4.06274, -19.9873)
+position = Vector2(2.01892, -5.99377)
 rotation = 1.5708
 shape = SubResource("RectangleShape2D_a1cre")
 
 [node name="portal8" type="Area2D" parent="Terrien/Portal" groups=["portal", "portal8"]]
-position = Vector2(2079, -573)
+position = Vector2(2062, -570)
 rotation = -0.00314523
 collision_layer = 97
 collision_mask = 97
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Terrien/Portal/portal8"]
-position = Vector2(-18.0029, 0.943237)
+position = Vector2(-4.9939, -2.01575)
 rotation = 1.5708
 shape = SubResource("RectangleShape2D_itdfd")
 
