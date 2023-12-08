@@ -10,6 +10,7 @@ signal revive(revive_timer)
 @export var has_my_shot_color : ColorRect
 @export var item_collector : Node2D
 @export var revive_timer : float
+@export var hitbox : Area2D
 var alive : bool = true
 var has_teammate_bullet : bool = false
 
@@ -19,13 +20,40 @@ func _process(_delta):
 	if alive == false:
 		return
 
-
 	if has_shot > 0:
 		has_my_shot_color.show()
 	else:
 		has_my_shot_color.hide()
-	if has_shot >0 and Input.is_action_just_pressed("p1_fire"):
+	
+	if has_shot > 0 and Input.is_action_just_pressed("p1_fire"):
 		fire()
+
+	var overlap_area = hitbox.get_overlapping_areas().filter(func(area: Area2D) -> bool:
+		return area.is_in_group("portal"))
+
+	if not Input.is_action_pressed("portal") or overlap_area.size() == 0:
+		return
+
+	var portal_area = overlap_area[0]  # 选择数组中的第一个元素
+
+	if portal_area.is_in_group("portal1"):
+		global_position = get_tree().get_first_node_in_group("portal2").global_position
+	elif portal_area.is_in_group("portal2"):
+		global_position = get_tree().get_first_node_in_group("portal1").global_position
+	elif portal_area.is_in_group("portal3"):
+		global_position = get_tree().get_first_node_in_group("portal4").global_position
+	elif portal_area.is_in_group("portal4"):
+		global_position = get_tree().get_first_node_in_group("portal3").global_position
+	elif portal_area.is_in_group("portal5"):
+		global_position = get_tree().get_first_node_in_group("portal6").global_position
+	elif portal_area.is_in_group("portal6"):
+		global_position = get_tree().get_first_node_in_group("portal5").global_position
+	elif portal_area.is_in_group("portal7"):
+		global_position = get_tree().get_first_node_in_group("portal8").global_position
+	elif portal_area.is_in_group("portal8"):
+		global_position = get_tree().get_first_node_in_group("portal7").global_position
+
+
 
 
 func fire():
@@ -63,21 +91,5 @@ func _on_health_death_position(_death_position):
 	await get_tree().create_timer(revive_timer).timeout
 	alive = true
 
-
-func _on_hitbox_area_entered(area):
-	if area.is_in_group("portal1"):
-		global_position = get_tree().get_first_node_in_group("portal2").global_position
-	if area.is_in_group("portal2"):
-		global_position = get_tree().get_first_node_in_group("portal1").global_position
-	if area.is_in_group("portal3"):
-		global_position = get_tree().get_first_node_in_group("portal4").global_position
-	if area.is_in_group("portal4"):
-		global_position = get_tree().get_first_node_in_group("portal3").global_position
-	if area.is_in_group("portal5"):
-		global_position = get_tree().get_first_node_in_group("portal6").global_position
-	if area.is_in_group("portal6"):
-		global_position = get_tree().get_first_node_in_group("portal5").global_position
-	if area.is_in_group("portal7"):
-		global_position = get_tree().get_first_node_in_group("portal8").global_position
-	if area.is_in_group("portal8"):
-		global_position = get_tree().get_first_node_in_group("portal7").global_position
+func _on_portal():
+	pass

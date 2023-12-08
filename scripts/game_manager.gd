@@ -75,7 +75,7 @@ func _process(_delta):
 		if collector.scale < Vector2(4,4) and gold >= 10:
 			gold -= 10
 			gold_change.emit()
-			collector.scale *= 1.2
+			collector.scale *= 1.5
 			print(player_2.get_node("ItemCollector").scale)
 			collector.show()
 			await get_tree().create_timer(1).timeout
