@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://e5s01miflmqr"]
+
+[ext_resource type="Script" path="res://scripts/dropped_item.gd" id="1_rdm4e"]
+[ext_resource type="Texture2D" uid="uid://k28yn5phd0se" path="res://scenes/character/hero/coin 2.png" id="2_jowt8"]
+[ext_resource type="PackedScene" uid="uid://booa6u2jw1mxr" path="res://scenes/death_fx.tscn" id="3_hurje"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_j6s7h"]
+radius = 6.08276
+
+[node name="DroppedItem" type="Area2D" node_paths=PackedStringArray("collision_shape") groups=["dropped_item"]]
+script = ExtResource("1_rdm4e")
+collision_shape = NodePath("CollisionShape2D")
+item_type = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+self_modulate = Color(0.827451, 0.827451, 0.827451, 1)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_jowt8")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_j6s7h")
+
+[node name="Bullet" type="Node" parent="." groups=["enemy"]]
+
+[node name="DeathFx" parent="." node_paths=PackedStringArray("fx_nodes") instance=ExtResource("3_hurje")]
+fx_nodes = [null]
+
+[connection signal="collected" from="." to="DeathFx" method="on_death"]

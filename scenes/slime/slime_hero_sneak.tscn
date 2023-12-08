@@ -65,8 +65,8 @@ texture = ExtResource("3_l6v6h")
 
 [node name="Health" type="Node" parent="."]
 script = ExtResource("4_8sv1a")
-health = 25
-max_health = 25
+health = 100
+max_health = 100
 
 [node name="Team" type="Node" parent="."]
 script = ExtResource("5_fq30e")

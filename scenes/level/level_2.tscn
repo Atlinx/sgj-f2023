@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://bjuku1j7twctf"]
+[gd_scene load_steps=22 format=3 uid="uid://bjuku1j7twctf"]
 
 [ext_resource type="AudioStream" uid="uid://dy58atrg72ubh" path="res://scenes/Background Music 2.mp3" id="1_nipua"]
 [ext_resource type="TileSet" uid="uid://da4oraw1aomg7" path="res://sprites/tiles.tres" id="2_rlikg"]
@@ -7,7 +7,6 @@
 [ext_resource type="PackedScene" uid="uid://dlowxy20fgx2j" path="res://scenes/character/shooter/remake_shooter.tscn" id="5_7blej"]
 [ext_resource type="Script" path="res://scripts/IntialEnemyCreater.gd" id="6_yk5fn"]
 [ext_resource type="PackedScene" uid="uid://cdpn5s43qjbwg" path="res://scenes/slime/slime_shooter.tscn" id="7_8hppt"]
-[ext_resource type="PackedScene" uid="uid://chfmqkp0y8qax" path="res://scenes/slime/slime_shooter_elit.tscn" id="8_jx2b0"]
 [ext_resource type="Script" path="res://scripts/game_manager.gd" id="9_eyqki"]
 [ext_resource type="Script" path="res://scripts/Slime_spawner.gd" id="10_jgcca"]
 [ext_resource type="PackedScene" uid="uid://c6y66da26sajq" path="res://scenes/slime/slime_hero.tscn" id="11_arsng"]
@@ -77,7 +76,7 @@ position = Vector2(2621, -437)
 
 [node name="EnemyWaveCreater" type="Node" parent="." node_paths=PackedStringArray("tile_map", "game_manager")]
 script = ExtResource("6_yk5fn")
-enemy_prefabs = Array[PackedScene]([ExtResource("7_8hppt"), ExtResource("7_8hppt"), ExtResource("8_jx2b0")])
+enemy_prefabs = Array[PackedScene]([ExtResource("7_8hppt"), ExtResource("11_arsng")])
 tile_map = NodePath("../World/Level")
 game_manager = NodePath("../GameManager")
 intial_enemy_amount = 10
@@ -88,11 +87,11 @@ script = ExtResource("9_eyqki")
 spawn_location_1 = NodePath("../SpawnLocations/0")
 spawn_location_2 = NodePath("../SpawnLocations/1")
 base_max_health = 10
-level_timer = 130.0
+level_timer = 1.0
 
 [node name="SlimeSpawner" type="Node" parent="." node_paths=PackedStringArray("tile_map", "game_manager")]
 script = ExtResource("10_jgcca")
-enemy_prefabs = Array[PackedScene]([ExtResource("11_arsng")])
+enemy_prefabs = Array[PackedScene]([ExtResource("11_arsng"), ExtResource("7_8hppt")])
 tile_map = NodePath("../World/Level")
 game_manager = NodePath("../GameManager")
 

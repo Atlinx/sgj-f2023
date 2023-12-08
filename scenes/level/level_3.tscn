@@ -37,7 +37,7 @@ size = Vector2(230.001, 18.3737)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_x2y7h"]
 size = Vector2(228.001, 17.9986)
 
-[node name="Level2" type="Node" groups=["level"]]
+[node name="Level3" type="Node" groups=["level"]]
 
 [node name="SpawnLocations" type="Node2D" parent="."]
 

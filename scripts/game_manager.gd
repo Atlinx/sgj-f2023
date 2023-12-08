@@ -44,6 +44,7 @@ func _process(_delta):
 	if level_timer <= 0:
 		stop_spawning.emit()
 		var enemies = get_tree().get_nodes_in_group("enemy")
+		print(enemies.size())
 		if enemies.size() == 0:
 			win.emit()
 

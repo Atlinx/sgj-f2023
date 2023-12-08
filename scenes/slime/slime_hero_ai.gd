@@ -78,3 +78,4 @@ func _on_health_death():
 	dropped_gold.call_deferred("reparent",root)
 	dropped_gold.enabled = true
 
+

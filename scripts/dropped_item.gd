@@ -26,7 +26,6 @@ func _update_enabled(_value):
 	visible = enabled
 	collision_shape.disabled = not enabled
 
-
 func _ready():
 	_update_enabled(enabled)
 
@@ -34,5 +33,4 @@ func _ready():
 func collect():
 	collected.emit()
 	queue_free()
-
 
