@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://e5s01miflmqr"]
 
 [ext_resource type="Script" path="res://scripts/dropped_item.gd" id="1_rdm4e"]
-[ext_resource type="Texture2D" uid="uid://k28yn5phd0se" path="res://scenes/character/hero/coin 2.png" id="2_jowt8"]
+[ext_resource type="Texture2D" uid="uid://k28yn5phd0se" path="res://sprites/coin 2.png" id="2_jowt8"]
 [ext_resource type="PackedScene" uid="uid://booa6u2jw1mxr" path="res://scenes/death_fx.tscn" id="3_hurje"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_j6s7h"]

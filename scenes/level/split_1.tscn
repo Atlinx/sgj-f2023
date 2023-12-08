@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://4t16hws81g83"]
+[gd_scene load_steps=9 format=3 uid="uid://4t16hws81g83"]
 
 [ext_resource type="Script" path="res://scripts/SplitScreen.gd" id="1_ng7vn"]
 [ext_resource type="PackedScene" uid="uid://bb3i3r7einpnp" path="res://scenes/level/level_1.tscn" id="3_g37fl"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://bw4vh7j8g3fm7" path="res://scenes/Skill/more_bullet.tscn" id="4_y8s0s"]
 [ext_resource type="PackedScene" uid="uid://dls488dai5v42" path="res://scenes/Skill/sword.tscn" id="5_q8l2j"]
 [ext_resource type="PackedScene" uid="uid://ekcl454jyl6p" path="res://scenes/Skill/collector_up.tscn" id="6_qtgsk"]
+[ext_resource type="PackedScene" uid="uid://h7e751usjlnc" path="res://scenes/Skill/defense_up.tscn" id="7_e2ukq"]
 
 [sub_resource type="GDScript" id="GDScript_acf85"]
 script/source = "extends CanvasLayer
@@ -312,7 +313,8 @@ layout_mode = 2
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
-text = "o"
+text = "i
+"
 
 [node name="VBoxContainer" parent="UI/Player 2 ui/Skills/VBoxContainer2" instance=ExtResource("6_qtgsk")]
 layout_mode = 2
@@ -324,7 +326,19 @@ layout_mode = 2
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
-text = "p"
+text = "o"
 
 [node name="VBoxContainer" parent="UI/Player 2 ui/Skills/VBoxContainer3" instance=ExtResource("4_op4k1")]
+layout_mode = 2
+
+[node name="VBoxContainer4" type="VBoxContainer" parent="UI/Player 2 ui/Skills"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="UI/Player 2 ui/Skills/VBoxContainer4"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+text = "p"
+
+[node name="VBoxContainer" parent="UI/Player 2 ui/Skills/VBoxContainer4" instance=ExtResource("7_e2ukq")]
 layout_mode = 2

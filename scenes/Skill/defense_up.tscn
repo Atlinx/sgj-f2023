@@ -1,0 +1,31 @@
+[gd_scene load_steps=2 format=3 uid="uid://h7e751usjlnc"]
+
+[ext_resource type="Texture2D" uid="uid://dysgjlsxkkhoe" path="res://sprites/shield.png" id="1_qkaum"]
+
+[node name="VBoxContainer" type="VBoxContainer"]
+offset_right = 50.0
+offset_bottom = 163.0
+
+[node name="CDUI" type="TextureButton" parent="."]
+custom_minimum_size = Vector2(50, 120)
+layout_mode = 2
+texture_normal = ExtResource("1_qkaum")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="CDUI"]
+self_modulate = Color(0.113725, 0.113725, 0.113725, 0.917647)
+layout_mode = 2
+offset_right = 50.0
+offset_bottom = 120.0
+grow_horizontal = 2
+grow_vertical = 2
+fill_mode = 3
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 26
+text = "5
+"

@@ -9,7 +9,7 @@ shader = ExtResource("2_t1cg4")
 shader_parameter/bullet_color = Color(1, 0, 0, 1)
 
 [node name="SlimeBullet" instance=ExtResource("1_hgevk")]
-damage = 10
+damage = 20
 speed = 200.0
 team = 1
 

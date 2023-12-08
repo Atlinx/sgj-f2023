@@ -101,7 +101,7 @@ position = Vector2(7, -6)
 scale = Vector2(0.15, 0.15)
 collision_mask = 2
 script = ExtResource("1_el3jh")
-damage = 10
+damage = 20
 team = 1
 animation_player = NodePath("AnimationPlayer")
 

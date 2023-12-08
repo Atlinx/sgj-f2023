@@ -1,10 +1,12 @@
-[gd_scene load_steps=7 format=3 uid="uid://cy8s44ttr33oq"]
+[gd_scene load_steps=9 format=3 uid="uid://bafs8xqs4kblk"]
 
-[ext_resource type="Script" path="res://scripts/SplitScreen.gd" id="1_5oax7"]
-[ext_resource type="PackedScene" uid="uid://c6fh6obbmkxob" path="res://scenes/level/level_3.tscn" id="2_4vytq"]
-[ext_resource type="PackedScene" uid="uid://bw4vh7j8g3fm7" path="res://scenes/Skill/more_bullet.tscn" id="3_ebuxu"]
-[ext_resource type="PackedScene" uid="uid://dls488dai5v42" path="res://scenes/Skill/sword.tscn" id="4_7sact"]
-[ext_resource type="PackedScene" uid="uid://ekcl454jyl6p" path="res://scenes/Skill/collector_up.tscn" id="5_41hwy"]
+[ext_resource type="Script" path="res://scripts/SplitScreen.gd" id="1_r087b"]
+[ext_resource type="PackedScene" uid="uid://c6fh6obbmkxob" path="res://scenes/level/level_3.tscn" id="2_a3s06"]
+[ext_resource type="PackedScene" uid="uid://bw4vh7j8g3fm7" path="res://scenes/Skill/more_bullet.tscn" id="3_7e8l8"]
+[ext_resource type="PackedScene" uid="uid://c4pivsee1h5rl" path="res://scenes/Skill/heal.tscn" id="4_kuwpt"]
+[ext_resource type="PackedScene" uid="uid://dls488dai5v42" path="res://scenes/Skill/sword.tscn" id="5_cbscq"]
+[ext_resource type="PackedScene" uid="uid://ekcl454jyl6p" path="res://scenes/Skill/collector_up.tscn" id="6_3yo4v"]
+[ext_resource type="PackedScene" uid="uid://h7e751usjlnc" path="res://scenes/Skill/defense_up.tscn" id="7_jjixk"]
 
 [sub_resource type="GDScript" id="GDScript_acf85"]
 script/source = "extends CanvasLayer
@@ -25,6 +27,7 @@ script/source = "extends CanvasLayer
 @export var gold_label : Label
 @export var win_label : Label
 @export var wave_label : Label
+@export var level_label : Label
 
 func _ready():
 	health_1.healthchanged.connect(_health_update)
@@ -36,6 +39,7 @@ func _ready():
 	_health_update()
 	_base_update()
 	_gold_update()
+	level_label.text = \"level:\" + str(get_tree().current_scene.scene_file_path.to_int())
 
 func _health_update():
 	if is_instance_valid(health_1):
@@ -64,7 +68,7 @@ func _on_slime_wave():
 	wave_label.hide()
 "
 
-[node name="Main_2" type="Node"]
+[node name="Main_1" type="Node"]
 
 [node name="SplitScreen" type="Control" parent="."]
 layout_mode = 3
@@ -73,7 +77,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_5oax7")
+script = ExtResource("1_r087b")
 
 [node name="GridContainer" type="GridContainer" parent="SplitScreen"]
 layout_mode = 1
@@ -95,7 +99,7 @@ handle_input_locally = false
 size = Vector2i(574, 648)
 render_target_update_mode = 4
 
-[node name="Level3" parent="SplitScreen/GridContainer/SubViewportContainer/Player1Viewport" instance=ExtResource("2_4vytq")]
+[node name="Level3" parent="SplitScreen/GridContainer/SubViewportContainer/Player1Viewport" instance=ExtResource("2_a3s06")]
 
 [node name="Camera2D" type="Camera2D" parent="SplitScreen/GridContainer/SubViewportContainer/Player1Viewport"]
 
@@ -113,7 +117,7 @@ render_target_update_mode = 4
 [node name="Camera2D" type="Camera2D" parent="SplitScreen/GridContainer/SubViewportContainer2/Player2Viewport"]
 position = Vector2(578, 0)
 
-[node name="UI" type="CanvasLayer" parent="." node_paths=PackedStringArray("health_bar_1", "label_1", "health_bar_2", "label_2", "base_label", "gold_label", "win_label", "wave_label")]
+[node name="UI" type="CanvasLayer" parent="." node_paths=PackedStringArray("health_bar_1", "label_1", "health_bar_2", "label_2", "base_label", "gold_label", "win_label", "wave_label", "level_label")]
 script = SubResource("GDScript_acf85")
 health_bar_1 = NodePath("Player 1 ui/HealthUI/HealthBarUI")
 label_1 = NodePath("Player 1 ui/HealthUI/HealthShow")
@@ -123,20 +127,28 @@ base_label = NodePath("Base")
 gold_label = NodePath("Gold")
 win_label = NodePath("Win")
 wave_label = NodePath("WaveComming")
+level_label = NodePath("Level")
 
 [node name="Base" type="Label" parent="UI"]
-offset_left = 424.0
-offset_top = 9.0
-offset_right = 531.0
-offset_bottom = 61.0
+offset_left = 379.0
+offset_top = 10.0
+offset_right = 486.0
+offset_bottom = 62.0
 text = "base health:"
 
 [node name="Gold" type="Label" parent="UI"]
-offset_left = 643.0
-offset_top = 10.0
-offset_right = 679.0
-offset_bottom = 36.0
+offset_left = 699.0
+offset_top = 12.0
+offset_right = 735.0
+offset_bottom = 38.0
 text = "Gold"
+
+[node name="Level" type="Label" parent="UI"]
+offset_left = 546.0
+offset_top = 10.0
+offset_right = 623.0
+offset_bottom = 46.0
+text = "level"
 
 [node name="WaveComming" type="Label" parent="UI"]
 visible = false
@@ -223,18 +235,21 @@ size_flags_vertical = 8
 text = "1
 "
 
-[node name="VBoxContainer" parent="UI/Player 1 ui/Skills/VBoxContainer" instance=ExtResource("3_ebuxu")]
+[node name="VBoxContainer" parent="UI/Player 1 ui/Skills/VBoxContainer" instance=ExtResource("3_7e8l8")]
 layout_mode = 2
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="UI/Player 1 ui/Skills"]
-visible = false
 layout_mode = 2
 
 [node name="Label" type="Label" parent="UI/Player 1 ui/Skills/VBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
-text = "z/x"
+text = "2
+"
+
+[node name="VBoxContainer" parent="UI/Player 1 ui/Skills/VBoxContainer2" instance=ExtResource("4_kuwpt")]
+layout_mode = 2
 
 [node name="Player 2 ui" type="Control" parent="UI"]
 layout_mode = 3
@@ -288,7 +303,7 @@ size_flags_horizontal = 4
 size_flags_vertical = 8
 text = "z/x"
 
-[node name="VBoxContainer" parent="UI/Player 2 ui/Skills/VBoxContainer" instance=ExtResource("4_7sact")]
+[node name="VBoxContainer" parent="UI/Player 2 ui/Skills/VBoxContainer" instance=ExtResource("5_cbscq")]
 layout_mode = 2
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="UI/Player 2 ui/Skills"]
@@ -298,7 +313,32 @@ layout_mode = 2
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
-text = "z/x"
+text = "i
+"
 
-[node name="VBoxContainer" parent="UI/Player 2 ui/Skills/VBoxContainer2" instance=ExtResource("5_41hwy")]
+[node name="VBoxContainer" parent="UI/Player 2 ui/Skills/VBoxContainer2" instance=ExtResource("6_3yo4v")]
+layout_mode = 2
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="UI/Player 2 ui/Skills"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="UI/Player 2 ui/Skills/VBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+text = "o"
+
+[node name="VBoxContainer" parent="UI/Player 2 ui/Skills/VBoxContainer3" instance=ExtResource("4_kuwpt")]
+layout_mode = 2
+
+[node name="VBoxContainer4" type="VBoxContainer" parent="UI/Player 2 ui/Skills"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="UI/Player 2 ui/Skills/VBoxContainer4"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+text = "p"
+
+[node name="VBoxContainer" parent="UI/Player 2 ui/Skills/VBoxContainer4" instance=ExtResource("7_jjixk")]
 layout_mode = 2
