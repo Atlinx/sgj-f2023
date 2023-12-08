@@ -31,45 +31,56 @@ func _ready():
 func _process(_delta):
 	if level_timer > 0:
 		level_timer -= _delta
+
+
 	if Input.is_action_just_pressed("get_bullet") and gold >= 10:
-		player_1.has_shot += 1
 		gold -= 10
 		gold_change.emit()
+		player_1.has_shot += 1
+
+
+
 	if Input.is_action_just_pressed("hero_heal") and gold >= 5:
 		if player_2.alive == true:
 			health_2.heal(30)
 			gold -= 5
 			gold_change.emit()
+
+
 	if Input.is_action_just_pressed("shooter_heal") and gold >= 5:
 		if player_1.alive == true:
 			health_1.heal(30)
 			gold -= 5
 			gold_change.emit()
+
+
 	if level_timer <= 0:
 		stop_spawning.emit()
 		var enemies = get_tree().get_nodes_in_group("enemy")
 		if enemies.size() == 0:
 			win.emit()
-	if Input.is_key_pressed(KEY_0):
-		player_2.speed = 0
+
+	if player_2.velocity == Vector2.ZERO :
 		time += _delta
 		if time >= 3:
 			time = 0
-			gold += 1
+			gold += 2
 			gold_change.emit()
 	else:
 		player_2.speed = original_speed
 
+
 	if Input.is_action_just_pressed("upgrade_collection"): 
 		var collector = player_2.get_node("ItemCollector")
-		if collector.scale < Vector2(4,4) and gold>=10:
+		if collector.scale < Vector2(4,4) and gold >= 10:
+			gold -= 10
+			gold_change.emit()
 			collector.scale *= 1.2
 			print(player_2.get_node("ItemCollector").scale)
 			collector.show()
 			await get_tree().create_timer(1).timeout
 			collector.hide()
-			gold -= 10
-			gold_change.emit()
+
 		else:
 			collector.show()
 			await get_tree().create_timer(1).timeout
@@ -97,7 +108,7 @@ func _on_base_base_attacked():
 	base.emit()
 
 func on_get_gold():
-	gold += 1
+	gold += 5
 	gold_change.emit()
 
 func on_enemy_death():

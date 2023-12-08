@@ -160,8 +160,6 @@ texture = ExtResource("18_1kg4n")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DroppedItem"]
 shape = SubResource("CircleShape2D_j6s7h")
 
-[node name="Bullet" type="Node" parent="DroppedItem" groups=["enemy"]]
-
 [node name="DeathFx" parent="DroppedItem" instance=ExtResource("6_ff3my")]
 
 [connection signal="death" from="Health" to="DeathFx" method="on_death"]
