@@ -71,7 +71,7 @@ script = ExtResource("6_b06d8")
 health = NodePath("../Health")
 
 [node name="Visuals" type="Node2D" parent="."]
-position = Vector2(0, -0.0103547)
+position = Vector2(0, -0.995043)
 
 [node name="Sprite2D" type="Sprite2D" parent="Visuals"]
 material = SubResource("ShaderMaterial_jki3l")
@@ -153,6 +153,7 @@ libraries = {
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = ExtResource("19_dbad4")
 anim_player = NodePath("../AnimationPlayer")
+active = true
 script = ExtResource("20_c8sv8")
 
 [node name="FireSound" type="AudioStreamPlayer" parent="."]

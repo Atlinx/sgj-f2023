@@ -1,6 +1,6 @@
 extends Node2D
 
-
+signal get_gold
 @export var health : Health
 @export var player: CharacterBody2D
 @export var collector_area: Area2D
@@ -16,9 +16,9 @@ func _on_collector_area_entered(area: Area2D):
 			player.has_shot += 1
 			dropped_item.collect()
 		elif dropped_item.item_type == DroppedItem.ItemType.HEART:
-			health.heal(20)
+			get_gold.emit()
 			dropped_item.collect()
-			
+
 func _on_collector_bullet_entered(bullet: CharacterBody2D):
 	if bullet.is_in_group("PassingBullet"):
 			player.has_shot += 1

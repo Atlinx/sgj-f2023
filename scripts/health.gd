@@ -33,8 +33,10 @@ func _process(delta):
 			time_since_last_self_heal += delta
 
 func damage(amount: int):
-	health -= amount - defense
-	damaged.emit(amount - defense)
+	var healh_decrease = amount - defense
+	if healh_decrease <= 0:
+		healh_decrease = 1
+	health -= healh_decrease
 	healthchanged.emit()
 	if health <= 0:
 		death.emit()

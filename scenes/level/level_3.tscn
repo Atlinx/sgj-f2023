@@ -70,7 +70,6 @@ script = ExtResource("3_3qgiu")
 
 [node name="Hero" parent="World/Level" instance=ExtResource("4_cxk2x")]
 position = Vector2(2191, -411)
-speed = 180.0
 
 [node name="Shooter" parent="World/Level" instance=ExtResource("5_f5m5f")]
 position = Vector2(2621, -437)
@@ -83,11 +82,20 @@ game_manager = NodePath("../GameManager")
 intial_enemy_amount = 10
 wave_time = 90.0
 
+[node name="EnemyWaveCreater2" type="Node" parent="." node_paths=PackedStringArray("tile_map", "game_manager")]
+script = ExtResource("6_p03q3")
+enemy_prefabs = Array[PackedScene]([ExtResource("7_erl1c"), ExtResource("7_erl1c"), ExtResource("8_b7ie2")])
+tile_map = NodePath("../World/Level")
+game_manager = NodePath("../GameManager")
+intial_enemy_amount = 10
+wave_time = 180.0
+
 [node name="GameManager" type="Node" parent="." node_paths=PackedStringArray("spawn_location_1", "spawn_location_2") groups=["game_manager"]]
 script = ExtResource("9_m6mk0")
 spawn_location_1 = NodePath("../SpawnLocations/0")
 spawn_location_2 = NodePath("../SpawnLocations/1")
 base_max_health = 10
+level_timer = 200.0
 
 [node name="SlimeSpawner" type="Node" parent="." node_paths=PackedStringArray("tile_map", "game_manager")]
 script = ExtResource("10_gh40t")

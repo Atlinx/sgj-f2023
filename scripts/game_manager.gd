@@ -23,6 +23,7 @@ var time : float = 0
 func _ready():
 	health_1.death.connect(_revive_player_1)
 	health_2.death.connect(_revive_player_2)
+	player_1.get_node("ItemCollector").get_gold.connect(on_get_gold)
 	player_2.get_node("ItemCollector").get_gold.connect(on_get_gold)
 	base_health = base_max_health
 	base.emit()
