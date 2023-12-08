@@ -54,7 +54,8 @@ func _process(delta):
 			right_sword_instance = right_sword.instantiate()
 			add_child(right_sword_instance)
 			await get_tree().create_timer(0.2).timeout
-			right_sword_instance.queue_free()
+			if right_sword_instance != null:
+				right_sword_instance.queue_free()
 
 	if Input.is_action_just_pressed("p2_left_fire"): 
 		if fire_timer <= 0:

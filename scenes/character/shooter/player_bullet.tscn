@@ -15,7 +15,7 @@ scale = Vector2(0.75, 0.75)
 collision_layer = 65
 collision_mask = 26
 script = ExtResource("2_kitdy")
-damage = 50
+damage = 100
 speed = 1000.0
 
 [node name="Sprite2D" parent="." index="0"]

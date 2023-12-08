@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://4t16hws81g83"]
+[gd_scene load_steps=8 format=3 uid="uid://4t16hws81g83"]
 
 [ext_resource type="Script" path="res://scripts/SplitScreen.gd" id="1_ng7vn"]
 [ext_resource type="PackedScene" uid="uid://bb3i3r7einpnp" path="res://scenes/level/level_1.tscn" id="3_g37fl"]
+[ext_resource type="PackedScene" uid="uid://c4pivsee1h5rl" path="res://scenes/Skill/heal.tscn" id="4_op4k1"]
 [ext_resource type="PackedScene" uid="uid://bw4vh7j8g3fm7" path="res://scenes/Skill/more_bullet.tscn" id="4_y8s0s"]
 [ext_resource type="PackedScene" uid="uid://dls488dai5v42" path="res://scenes/Skill/sword.tscn" id="5_q8l2j"]
 [ext_resource type="PackedScene" uid="uid://ekcl454jyl6p" path="res://scenes/Skill/collector_up.tscn" id="6_qtgsk"]
@@ -25,6 +26,7 @@ script/source = "extends CanvasLayer
 @export var gold_label : Label
 @export var win_label : Label
 @export var wave_label : Label
+@export var level_label : Label
 
 func _ready():
 	health_1.healthchanged.connect(_health_update)
@@ -36,6 +38,7 @@ func _ready():
 	_health_update()
 	_base_update()
 	_gold_update()
+	level_label.text = \"level:\" + str(get_tree().current_scene.scene_file_path.to_int())
 
 func _health_update():
 	if is_instance_valid(health_1):
@@ -113,7 +116,7 @@ render_target_update_mode = 4
 [node name="Camera2D" type="Camera2D" parent="SplitScreen/GridContainer/SubViewportContainer2/Player2Viewport"]
 position = Vector2(578, 0)
 
-[node name="UI" type="CanvasLayer" parent="." node_paths=PackedStringArray("health_bar_1", "label_1", "health_bar_2", "label_2", "base_label", "gold_label", "win_label", "wave_label")]
+[node name="UI" type="CanvasLayer" parent="." node_paths=PackedStringArray("health_bar_1", "label_1", "health_bar_2", "label_2", "base_label", "gold_label", "win_label", "wave_label", "level_label")]
 script = SubResource("GDScript_acf85")
 health_bar_1 = NodePath("Player 1 ui/HealthUI/HealthBarUI")
 label_1 = NodePath("Player 1 ui/HealthUI/HealthShow")
@@ -123,20 +126,28 @@ base_label = NodePath("Base")
 gold_label = NodePath("Gold")
 win_label = NodePath("Win")
 wave_label = NodePath("WaveComming")
+level_label = NodePath("Level")
 
 [node name="Base" type="Label" parent="UI"]
-offset_left = 424.0
-offset_top = 9.0
-offset_right = 531.0
-offset_bottom = 61.0
+offset_left = 379.0
+offset_top = 10.0
+offset_right = 486.0
+offset_bottom = 62.0
 text = "base health:"
 
 [node name="Gold" type="Label" parent="UI"]
-offset_left = 643.0
-offset_top = 10.0
-offset_right = 679.0
-offset_bottom = 36.0
+offset_left = 699.0
+offset_top = 12.0
+offset_right = 735.0
+offset_bottom = 38.0
 text = "Gold"
+
+[node name="Level" type="Label" parent="UI"]
+offset_left = 546.0
+offset_top = 10.0
+offset_right = 623.0
+offset_bottom = 46.0
+text = "level"
 
 [node name="WaveComming" type="Label" parent="UI"]
 visible = false
@@ -227,14 +238,17 @@ text = "1
 layout_mode = 2
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="UI/Player 1 ui/Skills"]
-visible = false
 layout_mode = 2
 
 [node name="Label" type="Label" parent="UI/Player 1 ui/Skills/VBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
-text = "z/x"
+text = "2
+"
+
+[node name="VBoxContainer" parent="UI/Player 1 ui/Skills/VBoxContainer2" instance=ExtResource("4_op4k1")]
+layout_mode = 2
 
 [node name="Player 2 ui" type="Control" parent="UI"]
 layout_mode = 3
@@ -298,7 +312,19 @@ layout_mode = 2
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
-text = "z/x"
+text = "o"
 
 [node name="VBoxContainer" parent="UI/Player 2 ui/Skills/VBoxContainer2" instance=ExtResource("6_qtgsk")]
+layout_mode = 2
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="UI/Player 2 ui/Skills"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="UI/Player 2 ui/Skills/VBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+text = "p"
+
+[node name="VBoxContainer" parent="UI/Player 2 ui/Skills/VBoxContainer3" instance=ExtResource("4_op4k1")]
 layout_mode = 2

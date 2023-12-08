@@ -10,12 +10,15 @@ class_name GameManager
 @export var gold : int = 0
 @export var base_max_health : int
 @export var level_timer : float
+@onready var original_speed = player_2.speed
 var base_health
 signal wave_comming
 signal stop_spawning
 signal base
 signal gold_change
 signal win
+#给hero找钱用的
+var time : float = 0
 
 func _ready():
 	health_1.death.connect(_revive_player_1)
@@ -23,6 +26,7 @@ func _ready():
 	player_2.get_node("ItemCollector").get_gold.connect(on_get_gold)
 	base_health = base_max_health
 	base.emit()
+	
 
 func _process(_delta):
 	if level_timer > 0:
@@ -44,9 +48,17 @@ func _process(_delta):
 	if level_timer <= 0:
 		stop_spawning.emit()
 		var enemies = get_tree().get_nodes_in_group("enemy")
-		print(enemies.size())
 		if enemies.size() == 0:
 			win.emit()
+	if Input.is_key_pressed(KEY_0):
+		player_2.speed = 0
+		time += _delta
+		if time >= 3:
+			time = 0
+			gold += 1
+			gold_change.emit()
+	else:
+		player_2.speed = original_speed
 
 	if Input.is_action_just_pressed("upgrade_collection"): 
 		var collector = player_2.get_node("ItemCollector")
