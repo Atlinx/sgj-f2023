@@ -71,7 +71,7 @@ position = Vector2(2191, -411)
 speed = 180.0
 
 [node name="Shooter" parent="World/Level" instance=ExtResource("5_hm331")]
-position = Vector2(2120, -438)
+position = Vector2(2122, -436)
 
 [node name="GameManager" type="Node" parent="." node_paths=PackedStringArray("spawn_location_1", "spawn_location_2") groups=["game_manager"]]
 script = ExtResource("8_dbn5u")

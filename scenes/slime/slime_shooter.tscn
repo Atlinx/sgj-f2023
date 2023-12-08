@@ -40,7 +40,7 @@ shader_parameter/bullet_color = Color(0.0784314, 1, 0, 1)
 radius = 6.08276
 
 [node name="SlimeShooter" type="CharacterBody2D" node_paths=PackedStringArray("ai") groups=["enemy"]]
-collision_mask = 21
+collision_mask = 20
 script = ExtResource("1_gl0r4")
 ai = NodePath("AIMovement")
 debug_speed = 30.0
@@ -64,8 +64,8 @@ texture = ExtResource("3_xdxsk")
 
 [node name="Health" type="Node" parent="."]
 script = ExtResource("4_hfvj1")
-health = 80
-max_health = 80
+health = 200
+max_health = 200
 
 [node name="Team" type="Node" parent="."]
 script = ExtResource("5_epl67")

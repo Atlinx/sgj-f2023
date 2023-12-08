@@ -64,7 +64,8 @@ func _process(delta):
 			left_sword_instance = left_sword.instantiate()
 			add_child(left_sword_instance)
 			await get_tree().create_timer(0.2).timeout
-			left_sword_instance.queue_free()
+			if left_sword_instance != null:
+				left_sword_instance.queue_free()
 
 
 
