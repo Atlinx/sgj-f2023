@@ -88,7 +88,6 @@ script = ExtResource("9_m6mk0")
 spawn_location_1 = NodePath("../SpawnLocations/0")
 spawn_location_2 = NodePath("../SpawnLocations/1")
 base_max_health = 10
-level_timer = 130.0
 
 [node name="SlimeSpawner" type="Node" parent="." node_paths=PackedStringArray("tile_map", "game_manager")]
 script = ExtResource("10_gh40t")

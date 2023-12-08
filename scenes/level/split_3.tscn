@@ -59,8 +59,6 @@ func _gold_update():
 
 func _on_win():
 	win_label.show()
-	await get_tree().create_timer(20).timeout
-	win_label.hide()
 
 func _on_slime_wave():
 	wave_label.show()

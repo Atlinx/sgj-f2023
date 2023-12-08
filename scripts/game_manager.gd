@@ -85,7 +85,9 @@ func _process(_delta):
 			collector.show()
 			await get_tree().create_timer(1).timeout
 			collector.hide()
-	if Input.is_action_just_pressed("upgrade_defense"):
+	if Input.is_action_just_pressed("upgrade_defense") and gold>10:
+		gold -= 10
+		gold_change.emit()
 		health_2.defense += 5
 
 

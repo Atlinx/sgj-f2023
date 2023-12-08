@@ -17,7 +17,7 @@
 [ext_resource type="Script" path="res://scripts/entity_animation_tree.gd" id="14_dr7ds"]
 [ext_resource type="AnimationLibrary" uid="uid://c37cmbh7l1rgo" path="res://animations/entity_anim_lib.tres" id="15_u3tey"]
 [ext_resource type="Script" path="res://scripts/dropped_item.gd" id="16_ut2f8"]
-[ext_resource type="Texture2D" uid="uid://k28yn5phd0se" path="res://scenes/character/hero/coin 2.png" id="18_8x0bm"]
+[ext_resource type="Texture2D" uid="uid://k28yn5phd0se" path="res://sprites/coin 2.png" id="18_8x0bm"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_h8j63"]
 radius = 256.0
