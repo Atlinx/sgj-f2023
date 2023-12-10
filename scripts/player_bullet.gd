@@ -27,7 +27,8 @@ func construct(_entity_owner: Node, initial_position: Vector2, direction: Vector
 		set_collision_mask_value(2,false)
 		set_collision_layer_value(1,false)
 		add_to_group("PassingBullet")
-
+	if entity_owner.on_terrain == 1:
+		set_collision_mask_value(3,true)
 
 func _physics_process(delta):
 	var shooter = get_tree().get_first_node_in_group("shooter")
