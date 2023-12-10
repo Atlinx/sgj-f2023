@@ -19,6 +19,10 @@ signal gold_change
 signal win
 #给hero找钱用的
 var time : float = 0
+var high_land : int = 100
+
+
+
 
 func _ready():
 	health_1.death.connect(_revive_player_1)
@@ -30,6 +34,35 @@ func _ready():
 	
 
 func _process(_delta):
+	if Input.is_key_pressed(KEY_6):
+		var tile_map = get_tree().get_first_node_in_group("tilemap")
+		var global_mouse_position = tile_map.get_global_mouse_position()
+		var cell_coords = tile_map.local_to_map(tile_map.to_local(global_mouse_position))
+		
+		# 设置当前单元
+		tile_map.set_cell(0, cell_coords, 0, Vector2i(12, 2), 0)
+
+		# 设置周围非terrain4的单元
+		var radius = 1  # 可以调整半径大小
+		for x in range(cell_coords.x - radius, cell_coords.x + radius + 1):
+			for y in range(cell_coords.y - radius, cell_coords.y + radius + 1):
+				var current_cell = Vector2i(x, y)
+				
+				# 检查单元是否在地图范围内
+#				if tile_map.get_cell_item(0, current_cell) != -1:
+					
+					# 获取单元的图块索引
+				var tile_data = tile_map.get_cell_tile_data(0, current_cell)
+				if tile_data != null :
+				# 检查图块索引是否不是terrain4
+					if tile_data.terrain != 4:
+						# 设置非terrain4的单元
+						tile_map.set_cell(0, current_cell, 0, Vector2i(8, 4), 0)
+
+
+	
+	
+	
 	if level_timer > 0:
 		level_timer -= _delta
 
