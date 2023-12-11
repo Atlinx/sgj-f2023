@@ -62,10 +62,9 @@ func _process(_delta):
 				var tile_data = tile_map.get_cell_tile_data(0, current_cell)
 				if tile_data != null :
 				# 检查图块索引是否不是terrain4
-					print(tile_data.terrain)
 					if tile_data.terrain != 4:
 						# 设置非terrain4的单元
-						tile_map.set_cell(0, current_cell, 0, Vector2i(0, 0), 0)
+						tile_map.set_cell(0, current_cell, 0, Vector2i(8, 4), 0)
 
 
 	
