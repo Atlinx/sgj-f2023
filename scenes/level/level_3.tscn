@@ -116,7 +116,7 @@ game_manager = NodePath("../GameManager")
 [node name="Terrien" type="Node2D" parent="."]
 
 [node name="Base" type="Node2D" parent="Terrien" groups=["base"]]
-position = Vector2(2198, -325)
+position = Vector2(2189, -325)
 
 [node name="Base" type="Area2D" parent="Terrien/Base"]
 position = Vector2(-2, -1)

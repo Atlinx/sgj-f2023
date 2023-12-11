@@ -64,8 +64,8 @@ func _process(_delta):
 				# 检查图块索引是否不是terrain4
 					if tile_data.terrain != 4:
 						# 设置非terrain4的单元
-						tile_map.set_cell(0, current_cell, 0, Vector2i(8, 4), 0)
-
+						tile_map.set_cell(0, current_cell, 0, Vector2i(0, 4), 0)
+						tile_map.set_cell(1, current_cell, 0, Vector2i(0, 0), -1)
 
 	
 	
