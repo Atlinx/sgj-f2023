@@ -10,18 +10,25 @@ class_name GameManager
 @export var gold : int = 0
 @export var base_max_health : int
 @export var level_timer : float
+@export var tile_map : TileMap
 @onready var original_speed = player_2.speed
 var base_health
+
 signal wave_comming
 signal stop_spawning
 signal base
 signal gold_change
 signal win
+
 #给hero找钱用的
 var time : float = 0
 var high_land : int = 100
 
-
+const TILE_LAYER: int = 0
+const NAV_LAYER: int = 1
+const WALL_TERRAIN_ID: int = 0
+const WALKABLE_TERRAIN_ID: int = 3
+const HIGH_WALL_TERRAIN_ID : int = 1
 
 
 func _ready():
@@ -35,7 +42,6 @@ func _ready():
 
 func _process(_delta):
 	if Input.is_key_pressed(KEY_6):
-		var tile_map = get_tree().get_first_node_in_group("tilemap")
 		var global_mouse_position = tile_map.get_global_mouse_position()
 		var cell_coords = tile_map.local_to_map(tile_map.to_local(global_mouse_position))
 		
@@ -44,6 +50,7 @@ func _process(_delta):
 
 		# 设置周围非terrain4的单元
 		var radius = 1  # 可以调整半径大小
+		var air_cells: Array[Vector2i] = []
 		for x in range(cell_coords.x - radius, cell_coords.x + radius + 1):
 			for y in range(cell_coords.y - radius, cell_coords.y + radius + 1):
 				var current_cell = Vector2i(x, y)
@@ -55,9 +62,10 @@ func _process(_delta):
 				var tile_data = tile_map.get_cell_tile_data(0, current_cell)
 				if tile_data != null :
 				# 检查图块索引是否不是terrain4
+					print(tile_data.terrain)
 					if tile_data.terrain != 4:
 						# 设置非terrain4的单元
-						tile_map.set_cell(0, current_cell, 0, Vector2i(8, 4), 0)
+						tile_map.set_cell(0, current_cell, 0, Vector2i(0, 0), 0)
 
 
 	
@@ -152,3 +160,5 @@ func on_enemy_death():
 
 func slime_wave():
 	wave_comming.emit()
+
+

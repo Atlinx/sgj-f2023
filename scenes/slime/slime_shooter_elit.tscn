@@ -17,7 +17,7 @@
 [ext_resource type="AnimationLibrary" uid="uid://c37cmbh7l1rgo" path="res://animations/entity_anim_lib.tres" id="15_t3jnp"]
 [ext_resource type="Script" path="res://scripts/dropped_item.gd" id="16_yi1fp"]
 [ext_resource type="Shader" path="res://materials/shaders/bullet.gdshader" id="17_b1kug"]
-[ext_resource type="Texture2D" uid="uid://k28yn5phd0se" path="res://scenes/character/hero/coin 2.png" id="18_l73if"]
+[ext_resource type="Texture2D" uid="uid://k28yn5phd0se" path="res://sprites/coin 2.png" id="18_l73if"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_h8j63"]
 radius = 256.0
@@ -41,6 +41,8 @@ radius = 6.08276
 
 [node name="SlimeShooter" type="CharacterBody2D" node_paths=PackedStringArray("ai") groups=["enemy"]]
 collision_mask = 20
+motion_mode = 1
+wall_min_slide_angle = 0.0
 script = ExtResource("1_0hw5q")
 ai = NodePath("AIMovement")
 debug_speed = 30.0

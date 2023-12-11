@@ -18,10 +18,13 @@ var on_terrain : int
 
 func _process(_delta):
 
+
 	var tile_map = get_tree().get_first_node_in_group("tilemap")
 	# 获取单元格的地形数据
 	var cell_coords = tile_map.local_to_map(tile_map.to_local(global_position))
 	var tile_data = tile_map.get_cell_tile_data(0, cell_coords)
+	if tile_data != null:
+		on_terrain = tile_data.terrain
 	if Input.is_action_pressed("change_terrain"):
 		set_collision_mask_value(3,false)
 	else: 

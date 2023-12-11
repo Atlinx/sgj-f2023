@@ -36,6 +36,8 @@ radius = 6.08276
 
 [node name="SlimeHero" type="CharacterBody2D" node_paths=PackedStringArray("ai") groups=["enemy"]]
 collision_mask = 20
+motion_mode = 1
+wall_min_slide_angle = 0.0
 script = ExtResource("1_maj28")
 ai = NodePath("AIMovement")
 debug_speed = 30.0
@@ -91,8 +93,8 @@ script = ExtResource("7_ey02n")
 shape = SubResource("CircleShape2D_n4oyw")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
-path_desired_distance = 2.0
-target_desired_distance = 2.0
+path_desired_distance = 1.0
+target_desired_distance = 1.0
 debug_enabled = true
 
 [node name="AIMovement" type="Node" parent="." node_paths=PackedStringArray("entity_body", "detection_area", "navigation_agent", "animation_tree", "dropped_gold")]

@@ -41,6 +41,8 @@ radius = 6.08276
 
 [node name="SlimeShooter" type="CharacterBody2D" node_paths=PackedStringArray("ai") groups=["enemy"]]
 collision_mask = 20
+motion_mode = 1
+wall_min_slide_angle = 0.0
 script = ExtResource("1_gl0r4")
 ai = NodePath("AIMovement")
 debug_speed = 30.0
