@@ -34,10 +34,10 @@ func _process(delta):
 	var tile_data = tile_map.get_cell_tile_data(0, cell_coords)
 	if tile_data != null:
 		terrain = tile_data.terrain
-	if Input.is_action_pressed("change_terrain"):
-		set_collision_mask_value(3,false)
-	else: 
-		set_collision_mask_value(3,true)
+#	if Input.is_action_pressed("change_terrain"):
+#		set_collision_mask_value(3,false)
+#	else: 
+#		set_collision_mask_value(3,true)
 		
 	if terrain == 4:
 		set_collision_layer_value(7,true)
