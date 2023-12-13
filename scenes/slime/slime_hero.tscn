@@ -54,6 +54,7 @@ script = ExtResource("2_e3kki")
 health = NodePath("../Health")
 
 [node name="Visuals" type="Node2D" parent="."]
+position = Vector2(0, -0.0515512)
 
 [node name="Sprite2D" type="Sprite2D" parent="Visuals"]
 position = Vector2(0, -4)
@@ -96,7 +97,6 @@ shape = SubResource("CircleShape2D_n4oyw")
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 path_desired_distance = 1.0
 target_desired_distance = 1.0
-debug_enabled = true
 
 [node name="AIMovement" type="Node" parent="." node_paths=PackedStringArray("entity_body", "detection_area", "navigation_agent", "animation_tree", "dropped_gold")]
 script = ExtResource("8_mq31u")
@@ -139,6 +139,7 @@ shape = SubResource("CircleShape2D_08h8o")
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = ExtResource("13_xg8b5")
 anim_player = NodePath("../AnimationPlayer")
+active = true
 script = ExtResource("14_dr7ds")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

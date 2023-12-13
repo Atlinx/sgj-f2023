@@ -301,7 +301,7 @@ layout_mode = 2
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
-text = "z/x"
+text = "</>"
 
 [node name="VBoxContainer" parent="UI/Player 2 ui/Skills/VBoxContainer" instance=ExtResource("5_q8l2j")]
 layout_mode = 2

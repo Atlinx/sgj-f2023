@@ -73,12 +73,13 @@ speed = 180.0
 [node name="Shooter" parent="World/Level" instance=ExtResource("5_hm331")]
 position = Vector2(2122, -436)
 
-[node name="GameManager" type="Node" parent="." node_paths=PackedStringArray("spawn_location_1", "spawn_location_2") groups=["game_manager"]]
+[node name="GameManager" type="Node" parent="." node_paths=PackedStringArray("spawn_location_1", "spawn_location_2", "tile_map") groups=["game_manager"]]
 script = ExtResource("8_dbn5u")
 spawn_location_1 = NodePath("../SpawnLocations/0")
 spawn_location_2 = NodePath("../SpawnLocations/1")
 base_max_health = 10
 level_timer = 120.0
+tile_map = NodePath("../World/Level")
 
 [node name="EnemyWaveCreater" type="Node" parent="." node_paths=PackedStringArray("tile_map", "game_manager")]
 script = ExtResource("6_b1eqf")
