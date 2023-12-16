@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://c6y66da26sajq"]
+[gd_scene load_steps=25 format=3 uid="uid://c6y66da26sajq"]
 
 [ext_resource type="Script" path="res://scripts/slime.gd" id="1_maj28"]
 [ext_resource type="Script" path="res://scripts/healthbar.gd" id="2_e3kki"]
@@ -19,11 +19,11 @@
 [ext_resource type="Script" path="res://scripts/dropped_item.gd" id="16_ut2f8"]
 [ext_resource type="Texture2D" uid="uid://k28yn5phd0se" path="res://sprites/coin 2.png" id="18_8x0bm"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_h8j63"]
-radius = 256.0
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_gum1p"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_0vhpe"]
-radius = 1.0
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_761cr"]
+radius = 9.7357
+height = 19.4714
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_n4oyw"]
 radius = 8.0
@@ -34,13 +34,17 @@ radius = 8.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_j6s7h"]
 radius = 6.08276
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_3ys86"]
+radius = 5.0
+
 [node name="SlimeHero" type="CharacterBody2D" node_paths=PackedStringArray("ai") groups=["enemy"]]
-collision_mask = 20
+position = Vector2(0, -1)
+collision_mask = 0
 motion_mode = 1
 wall_min_slide_angle = 0.0
 script = ExtResource("1_maj28")
 ai = NodePath("AIMovement")
-debug_speed = 30.0
+debug_speed = 100.0
 
 [node name="SlimeHealthBar" type="ProgressBar" parent="." node_paths=PackedStringArray("health")]
 self_modulate = Color(0.984314, 0.0196078, 0.0196078, 1)
@@ -54,7 +58,7 @@ script = ExtResource("2_e3kki")
 health = NodePath("../Health")
 
 [node name="Visuals" type="Node2D" parent="."]
-position = Vector2(0, -0.0515512)
+position = Vector2(0, -0.0630102)
 
 [node name="Sprite2D" type="Sprite2D" parent="Visuals"]
 position = Vector2(0, -4)
@@ -76,13 +80,15 @@ collision_mask = 33
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetectionArea2D"]
 scale = Vector2(0.5, 0.5)
-shape = SubResource("CircleShape2D_h8j63")
+shape = SubResource("CapsuleShape2D_gum1p")
 debug_color = Color(0.701961, 0, 0, 0.419608)
 
 [node name="DeathFx" parent="." instance=ExtResource("6_sy1jn")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_0vhpe")
+position = Vector2(0, -1)
+scale = Vector2(0.444109, 0.20543)
+shape = SubResource("CapsuleShape2D_761cr")
 
 [node name="Hitbox" type="Area2D" parent="." groups=["hitbox"]]
 visible = false
@@ -97,6 +103,7 @@ shape = SubResource("CircleShape2D_n4oyw")
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 path_desired_distance = 1.0
 target_desired_distance = 1.0
+debug_enabled = true
 
 [node name="AIMovement" type="Node" parent="." node_paths=PackedStringArray("entity_body", "detection_area", "navigation_agent", "animation_tree", "dropped_gold")]
 script = ExtResource("8_mq31u")
@@ -148,6 +155,7 @@ libraries = {
 }
 
 [node name="DroppedItem" type="Area2D" parent="." node_paths=PackedStringArray("collision_shape") groups=["dropped_item"]]
+visible = false
 script = ExtResource("16_ut2f8")
 collision_shape = NodePath("CollisionShape2D")
 item_type = 2
@@ -165,6 +173,15 @@ shape = SubResource("CircleShape2D_j6s7h")
 [node name="DeathFx" parent="DroppedItem" node_paths=PackedStringArray("fx_nodes") instance=ExtResource("6_sy1jn")]
 fx_nodes = [null]
 
+[node name="Area2D" type="Area2D" parent="."]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, -2)
+shape = SubResource("CircleShape2D_3ys86")
+
 [connection signal="death" from="Health" to="DeathFx" method="on_death"]
 [connection signal="death" from="Health" to="AIMovement" method="_on_health_death"]
 [connection signal="collected" from="DroppedItem" to="DroppedItem/DeathFx" method="on_death" flags=18]
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="area_exited" from="Area2D" to="." method="_on_area_2d_area_exited"]
