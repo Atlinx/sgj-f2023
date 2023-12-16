@@ -19,7 +19,7 @@
 [ext_resource type="Script" path="res://scripts/dropped_item.gd" id="16_ut2f8"]
 [ext_resource type="Texture2D" uid="uid://k28yn5phd0se" path="res://sprites/coin 2.png" id="18_8x0bm"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_gum1p"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_3jc82"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_761cr"]
 radius = 9.7357
@@ -44,7 +44,7 @@ motion_mode = 1
 wall_min_slide_angle = 0.0
 script = ExtResource("1_maj28")
 ai = NodePath("AIMovement")
-debug_speed = 100.0
+debug_speed = 30.0
 
 [node name="SlimeHealthBar" type="ProgressBar" parent="." node_paths=PackedStringArray("health")]
 self_modulate = Color(0.984314, 0.0196078, 0.0196078, 1)
@@ -58,7 +58,7 @@ script = ExtResource("2_e3kki")
 health = NodePath("../Health")
 
 [node name="Visuals" type="Node2D" parent="."]
-position = Vector2(0, -0.0630102)
+position = Vector2(0, -0.0308249)
 
 [node name="Sprite2D" type="Sprite2D" parent="Visuals"]
 position = Vector2(0, -4)
@@ -74,13 +74,11 @@ script = ExtResource("5_n6k6e")
 team = 1
 
 [node name="PlayerDetectionArea2D" type="Area2D" parent="."]
-visible = false
-scale = Vector2(2, 2)
+scale = Vector2(5, 5)
 collision_mask = 33
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetectionArea2D"]
-scale = Vector2(0.5, 0.5)
-shape = SubResource("CapsuleShape2D_gum1p")
+shape = SubResource("CircleShape2D_3jc82")
 debug_color = Color(0.701961, 0, 0, 0.419608)
 
 [node name="DeathFx" parent="." instance=ExtResource("6_sy1jn")]
@@ -173,15 +171,15 @@ shape = SubResource("CircleShape2D_j6s7h")
 [node name="DeathFx" parent="DroppedItem" node_paths=PackedStringArray("fx_nodes") instance=ExtResource("6_sy1jn")]
 fx_nodes = [null]
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="WallDectector" type="Area2D" parent="."]
 visible = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WallDectector"]
 position = Vector2(0, -2)
 shape = SubResource("CircleShape2D_3ys86")
 
 [connection signal="death" from="Health" to="DeathFx" method="on_death"]
 [connection signal="death" from="Health" to="AIMovement" method="_on_health_death"]
 [connection signal="collected" from="DroppedItem" to="DroppedItem/DeathFx" method="on_death" flags=18]
-[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
-[connection signal="area_exited" from="Area2D" to="." method="_on_area_2d_area_exited"]
+[connection signal="area_entered" from="WallDectector" to="." method="_on_area_2d_area_entered"]
+[connection signal="area_exited" from="WallDectector" to="." method="_on_area_2d_area_exited"]

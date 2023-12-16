@@ -94,6 +94,7 @@ wave_time = 180.0
 script = ExtResource("9_m6mk0")
 spawn_location_1 = NodePath("../SpawnLocations/0")
 spawn_location_2 = NodePath("../SpawnLocations/1")
+gold = 10000
 base_max_health = 10
 level_timer = 200.0
 tile_map = NodePath("../World/Level")

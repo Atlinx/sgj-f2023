@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://cd6wc1bsepvd5"]
+[gd_scene load_steps=27 format=3 uid="uid://cd6wc1bsepvd5"]
 
 [ext_resource type="Script" path="res://scripts/slime.gd" id="1_xn8pi"]
 [ext_resource type="Script" path="res://scripts/healthbar.gd" id="2_cuiu4"]
@@ -40,8 +40,11 @@ shader_parameter/bullet_color = Color(0.0784314, 1, 0, 1)
 [sub_resource type="CircleShape2D" id="CircleShape2D_j6s7h"]
 radius = 6.08276
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_5j20b"]
+radius = 5.0
+
 [node name="SlimeHeroSneak" type="CharacterBody2D" node_paths=PackedStringArray("ai") groups=["enemy"]]
-collision_mask = 20
+collision_mask = 0
 script = ExtResource("1_xn8pi")
 ai = NodePath("AIMovement")
 debug_speed = 30.0
@@ -165,6 +168,16 @@ shape = SubResource("CircleShape2D_j6s7h")
 
 [node name="DeathFx" parent="DroppedItem" instance=ExtResource("6_n7ov6")]
 
+[node name="WallDectector" type="Area2D" parent="."]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WallDectector"]
+position = Vector2(0, -2)
+shape = SubResource("CircleShape2D_5j20b")
+disabled = true
+
 [connection signal="death" from="Health" to="DeathFx" method="on_death"]
 [connection signal="death" from="Health" to="AIMovement" method="_on_health_death"]
 [connection signal="collected" from="DroppedItem" to="DroppedItem/DeathFx" method="on_death"]
+[connection signal="area_entered" from="WallDectector" to="." method="_on_area_2d_area_entered"]
+[connection signal="area_exited" from="WallDectector" to="." method="_on_area_2d_area_exited"]

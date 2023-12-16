@@ -16,7 +16,7 @@ func _on_bullet_death():
 			bullet.entity_owner.has_shot += 1
 			bullet_has_added = true
 		else: print("had free")
-	else:
+	elif bullet.damaged_entity == false:
 		var grand_parent = get_parent().get_parent()
 		item.call_deferred("reparent",grand_parent)
 		item.enabled = true

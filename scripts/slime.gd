@@ -4,7 +4,7 @@ extends CharacterBody2D
 @export var debug_speed : float = 64
 var on_wall : bool = false  # 用于跟踪是否与墙壁碰撞
 var collision_timer : float = 0  # 碰撞计时器
-var collision_threshold : float = 2.0  # 碰撞时间阈值
+var collision_threshold : float = 5.0  # 碰撞时间阈值
 var tile_area
 
 func _ready():
@@ -36,18 +36,29 @@ func _process(delta):
 			var tile_map = get_tree().get_first_node_in_group("tilemap")
 			var tile_position = tile_area.global_position
 			var cell_coords = tile_map.local_to_map(tile_map.to_local(tile_position))
-			
+
 			# 设置当前单元
 			tile_map.set_cell(0, cell_coords, 0, Vector2i(12, 1), 0)
-			
+
 			# 设置周围八格
+			var air_cells: Array[Vector2i] = []
 			for x in range(cell_coords.x - 1, cell_coords.x + 2):
 				for y in range(cell_coords.y - 1, cell_coords.y + 2):
 					var current_cell = Vector2i(x, y)
 					var cell_data = tile_map.get_cell_tile_data(0, current_cell)
 					if cell_data != null:
 						# 设置周围八格的单元
+#						tile_map.set_cell(1, current_cell, 0, Vector2i(12,1), 0)
 						tile_map.set_cell(0, current_cell, 0, Vector2i(12, 1), 0)
-						tile_map.set_cell(1, current_cell, 0, Vector2i(0,12), 0)
+						air_cells.append(current_cell)
 
+			tile_map.set_cells_terrain_connect(1, air_cells, 0, 3)
+			await get_tree().create_timer(0.1).timeout
+			var base = get_tree().get_first_node_in_group("base")
+			get_node("NavigationAgent2D").target_position = base.global_position
+#			call_deferred("_new_target")
+#
+#func _new_target():
+#	var base = get_tree().get_first_node_in_group("base")
+#	get_node("NavigationAgent2D").target_position = base.global_position
 

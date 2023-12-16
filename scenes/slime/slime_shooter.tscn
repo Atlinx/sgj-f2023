@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://cdpn5s43qjbwg"]
+[gd_scene load_steps=26 format=3 uid="uid://cdpn5s43qjbwg"]
 
 [ext_resource type="Script" path="res://scripts/slime.gd" id="1_gl0r4"]
 [ext_resource type="Script" path="res://scripts/healthbar.gd" id="2_tm6c4"]
@@ -23,7 +23,7 @@
 radius = 256.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_0vhpe"]
-radius = 3.0
+radius = 1.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_n4oyw"]
 radius = 8.0
@@ -39,8 +39,11 @@ shader_parameter/bullet_color = Color(0.0784314, 1, 0, 1)
 [sub_resource type="CircleShape2D" id="CircleShape2D_j6s7h"]
 radius = 6.08276
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_jq4pj"]
+radius = 5.0
+
 [node name="SlimeShooter" type="CharacterBody2D" node_paths=PackedStringArray("ai") groups=["enemy"]]
-collision_mask = 20
+collision_mask = 0
 motion_mode = 1
 wall_min_slide_angle = 0.0
 script = ExtResource("1_gl0r4")
@@ -164,6 +167,15 @@ shape = SubResource("CircleShape2D_j6s7h")
 
 [node name="DeathFx" parent="DroppedItem" instance=ExtResource("6_ff3my")]
 
+[node name="WallDectector" type="Area2D" parent="."]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WallDectector"]
+position = Vector2(0, -2)
+shape = SubResource("CircleShape2D_jq4pj")
+
 [connection signal="death" from="Health" to="DeathFx" method="on_death"]
 [connection signal="death" from="Health" to="AIMovement" method="_on_health_death"]
 [connection signal="collected" from="DroppedItem" to="DroppedItem/DeathFx" method="on_death"]
+[connection signal="area_entered" from="WallDectector" to="." method="_on_area_2d_area_entered"]
+[connection signal="area_exited" from="WallDectector" to="." method="_on_area_2d_area_exited"]
